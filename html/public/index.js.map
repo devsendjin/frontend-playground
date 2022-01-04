@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sources":["../src/index.js"],"sourcesContent":["import './index.scss';\n\nconsole.log('index');\n\nfunction some() {\n  console.log('index');\n}\n"],"names":[],"mappings":";;;EAEA,OAAO,CAAC,GAAG,CAAC,OAAO,CAAC;;;;;;"}
