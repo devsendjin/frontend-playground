@@ -18,8 +18,6 @@ const publicDir = 'public';
 
 console.log({ __PROD__, MODE });
 
-const globals = { react: 'React', 'react-dom': 'ReactDOM' };
-
 export default defineConfig({
   input: 'src/index.js',
 

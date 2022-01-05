@@ -8,26 +8,31 @@
     "build": "npm run build:rollup -- --environment NODE_ENV:production",
     "build:watch": "rollup -c \"./rollup.config.js\" -w",
     "build:rollup": "rollup -c \"./rollup.config.js\"",
-    "prettier": "prettier       --config \"../prettier.config.js\"       --write \"./public/index.html\" \"./src/**/*\"",
+    "prettier": "prettier --config \"../prettier.config.js\" --write \"./public/index.html\" \"./src/**/*\"",
     "server": "browser-sync start --server \"./public\" --files \"./**/*.(html|css|js)\" --port 4000 --open --no-notify",
-    "json5": "json5 --validate \"./package.json5\" && json5 --space 2 --out-file \"./package.json\" \"./package.json5\""
+    "json5": "json5 --validate \"./package.json5\" && json5 --space 2 --out-file \"./package.json\" \"./package.json5\"",
   },
   "keywords": [],
   "author": "Anatoliy Skichko",
   "license": "ISC",
   "devDependencies": {
+    // rollup
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.1.2",
     "@rollup/plugin-replace": "^3.0.1",
     "rollup": "^2.63.0",
-    "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-postcss": "^4.0.2", // css
+    "rollup-plugin-terser": "^7.0.2", // js
+
+    // styles
     "sass": "^1.45.2",
     "postcss-preset-env": "^7.2.0",
     "autoprefixer": "^10.4.1",
+
+    // utils
     "browser-sync": "^2.27.7",
     "npm-run-all": "^4.1.5",
-    "prettier": "2.5.1"
+    "prettier": "2.5.1",
   },
   "browserslist": [
     "defaults"
