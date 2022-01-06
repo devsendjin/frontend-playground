@@ -1,3 +1,3 @@
 import './typescript.scss';
 
-console.log('typescript');
+// console.log('typescript');
