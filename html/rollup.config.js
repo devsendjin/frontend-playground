@@ -5,6 +5,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
 
+import typescript from 'rollup-plugin-typescript2';
 import { terser } from "rollup-plugin-terser";
 import postcss from 'rollup-plugin-postcss';
 import postcssPresetEnv from 'postcss-preset-env';
@@ -18,23 +19,15 @@ const publicDir = 'public';
 
 console.log({ __PROD__, MODE });
 
-export default defineConfig({
-  input: 'src/index.js',
-
-  output: [
-    {
-      file: `${publicDir}/index.js`,
-      format: 'iife',
-      sourcemap: true,
-    },
-  ],
-
+const createConfigOptions = ({
+  useTypescript = false,
+  cssFileName = 'index.css',
+}) => ({
   watch: {
     clearScreen: true,
     exclude: 'node_modules/**',
     include: ['src/**', '../shared/styles/**'],
   },
-
   plugins: [
     replace({
       "process.env.NODE_ENV": JSON.stringify(MODE),
@@ -46,8 +39,16 @@ export default defineConfig({
     commonjs({
       sourceMap: true,
     }),
+    useTypescript && typescript({
+      tsconfig: path.resolve('tsconfig.json'),
+    }),
     postcss({
-      extract: path.resolve(`${publicDir}/index.css`),
+      extract: true,
+      // extract: 'css/[name].css',
+      // extract: path.join(`css`),
+      // extract: path.join(`css/${cssFileName}`),
+      // extract: path.join(`../css/${cssFileName}`),
+      // extract: path.resolve(`public/css/${cssFileName}`),
       modules: {
         generateScopedName: __PROD__ ? '[hash:base64:6]' : '[local]--[hash:base64:5]',
       },
@@ -81,3 +82,47 @@ export default defineConfig({
     }),
   ].filter(Boolean),
 });
+
+export default defineConfig([
+  {
+    input: 'src/index.js',
+
+    output: [
+      {
+        sourcemap: true,
+        format: 'iife',
+        name: 'app',
+        assetFileNames: '[name][extname]',
+        dir: 'public/build',
+        entryFileNames: 'bundle.js'
+
+        // file: `${publicDir}/js/index.js`,
+        // format: 'iife',
+        // sourcemap: true,
+        // assetFileNames: '[name][extname]',
+      },
+    ],
+
+    ...createConfigOptions({
+      useTypescript: false,
+      cssFileName: 'index.css',
+    }),
+  },
+  {
+    input: 'src/index.ts',
+
+    output: [
+      {
+        file: `${publicDir}/js/typescript.js`,
+        format: 'iife',
+        sourcemap: true,
+        assetFileNames: '[name][extname]',
+      },
+    ],
+
+    ...createConfigOptions({
+      useTypescript: true,
+      cssFileName: 'typescript.css',
+    }),
+  }
+]);
