@@ -11,9 +11,9 @@ const MODE = process.env.NODE_ENV === 'production' ? 'production' : 'development
 const __PROD__ = MODE === 'production';
 const __DEV__ = !__PROD__;
 
+const PROJECT_ROOT = path.resolve('../');
 const APP_ROOT = path.resolve('./');
 const APP_SRC = path.join(APP_ROOT, 'src');
-const APP_PUBLIC = path.join(APP_ROOT, 'public');
 
 module.exports = {
   mode: MODE,
@@ -25,7 +25,7 @@ module.exports = {
 
   output: {
     filename: '[name].js',
-    path: path.join(APP_PUBLIC, 'js'),
+    path: path.join(APP_ROOT, 'public/js'),
   },
 
   // error stats handled by @soda/friendly-errors-webpack-plugin
@@ -33,6 +33,10 @@ module.exports = {
 
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.sass', '.scss', '.json'],
+    alias: {
+      '@': APP_SRC,
+      '@@': PROJECT_ROOT,
+    }
   },
 
   target: 'web',
@@ -114,6 +118,11 @@ module.exports = {
   } : {},
 
   plugins: [
+    new webpack.DefinePlugin({
+      __DEV__: __DEV__,
+      __PROD__: __PROD__,
+    }),
+
     new MiniCssExtractPlugin({ filename: '../css/[name].css'}),
 
     new FriendlyErrorsWebpackPlugin(),

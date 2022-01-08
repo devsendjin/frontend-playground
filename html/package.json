@@ -4,13 +4,13 @@
   "description": "",
   "main": "public/index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development run-p build:watch server",
-    "build": "cross-env NODE_ENV=production npm run build:webpack",
-    "build:watch": "webpack --config \"./webpack.config.js\" --watch",
-    "build:webpack": "webpack --config \"./webpack.config.js\"",
+    "start": "yarn run-p watch server",
+    "build": "cross-env NODE_ENV=production npm run dev:build",
+    "watch": "webpack --config \"./webpack.config.js\" --watch",
+    "dev:build": "webpack --config \"./webpack.config.js\"",
     "prettier": "prettier --config \"../prettier.config.js\" --write \"./public/index.html\" \"./src/**/*\"",
-    "server": "browser-sync start --server \"./public\" --files \"./**/*.(html|css|js)\" --port 4000 --open --no-notify",
-    "json5": "json5 --validate \"./package.json5\" && json5 --space 2 --out-file \"./package.json\" \"./package.json5\""
+    "server": "browser-sync start       --open       --no-notify       --server \"./public\"       --files \"./**/*.(html|css|js)\"       --port 4000",
+    "json": "json5 --validate \"./package.json5\" &&       json5       --space 2       --out-file \"./package.json\"       \"./package.json5\""
   },
   "keywords": [],
   "author": "Anatoliy Skichko",
@@ -27,14 +27,15 @@
     "sass-loader": "^12.4.0",
     "ts-loader": "^9.2.6",
     "sass": "^1.45.2",
+    "postcss": "^8.4.5",
     "postcss-preset-env": "^7.2.0",
     "autoprefixer": "^10.4.1",
     "postcss-flexbugs-fixes": "^5.0.2",
     "typescript": "^4.5.4",
     "json5": "^2.2.0",
     "browser-sync": "^2.27.7",
-    "npm-run-all": "^4.1.5",
     "prettier": "2.5.1",
+    "npm-run-all": "^4.1.5",
     "cross-env": "^7.0.3"
   },
   "browserslist": [
