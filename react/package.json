@@ -1,0 +1,28 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "ts": "ts-node --project \"./tsconfig.json\" \"./scripts/draft.ts\"",
+    "config:build": "yarn babel       --no-babelrc       --no-comments       --minified       --source-maps false       --out-dir \"./scripts\"       --plugins @babel/plugin-transform-modules-commonjs       \"./scripts/src/*\"",
+    "config:prettier": "prettier --config \"../prettier.config.js\" --write \"./scripts/src/*\"",
+    "config:test": "webpack configtest \"./scripts/webpack.config.js\"",
+    "json5": "json5 --validate \"./package.json5\" &&       json5       --space 2       --out-file \"./package.json\"       \"./package.json5\""
+  },
+  "keywords": [],
+  "author": "Anatoliy Skichko",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.16.7",
+    "@babel/core": "^7.16.7",
+    "@types/node": "^17.0.8",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.2",
+    "typescript": "^4.5.4",
+    "ts-node": "^10.4.0",
+    "json5": "^2.2.0",
+    "prettier": "^2.5.1"
+  }
+}

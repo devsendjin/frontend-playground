@@ -1,0 +1,3 @@
+const getPublicUrlOrPath = () => '/';
+
+export { getPublicUrlOrPath };

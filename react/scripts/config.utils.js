@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:true});exports.getPublicUrlOrPath=void 0;const getPublicUrlOrPath=()=>"/";exports.getPublicUrlOrPath=getPublicUrlOrPath;
