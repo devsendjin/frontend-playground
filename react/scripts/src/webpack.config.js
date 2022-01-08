@@ -1,8 +1,12 @@
 import path from 'path';
 import webpack from 'webpack';
+// plugins
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
+import CircularDependencyPlugin from 'circular-dependency-plugin';
+import WebpackBar from 'webpackbar';
+import FriendlyErrorsWebpackPlugin from '@soda/friendly-errors-webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import CssoWebpackPlugin from 'csso-webpack-plugin';
 
@@ -13,7 +17,9 @@ const rules = getRules(config);
 const loaders = getLoaders(config);
 
 export default {
-  entry: 'src/index.tsx',
+  mode: config.MODE,
+
+  entry: path.join(config.APP_SRC, 'index.tsx'),
 
   output: {
     filename: 'index.js',
@@ -50,9 +56,9 @@ export default {
     : {},
 
   // error stats handled by @soda/friendly-errors-webpack-plugin
-  stats: 'none', // none | detailed | verbose
+  stats: config.isServerRunning ?  'none' : 'detailed', // none | detailed | verbose
 
-  optimization: {
+  optimization: config.__PROD__ ? {
     nodeEnv: config.MODE,
     minimize: true,
     minimizer: [
@@ -85,7 +91,7 @@ export default {
         },
       }),
     ],
-  },
+  } : {},
 
   module: {
     rules: [
@@ -148,11 +154,6 @@ export default {
 
     new FriendlyErrorsWebpackPlugin(),
 
-    new ESLintPlugin({
-      extensions: ['ts', 'tsx'],
-      failOnError: true,
-    }),
-
     new WebpackBar({}),
 
     config.isServerRunning &&
@@ -165,8 +166,7 @@ export default {
         overlay: false,
       }),
 
-    config.__PROD__ &&
-      !config.isServerRunning &&
+    (config.__PROD__ || (config.__DEV__ && !config.isServerRunning)) &&
       new MiniCssExtractPlugin({ filename: `${config.paths.css}/index.css` }),
 
     config.__PROD__ && new CssoWebpackPlugin(),

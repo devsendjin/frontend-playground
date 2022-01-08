@@ -2,7 +2,35 @@
 // https://gist.github.com/KRostyslav/82a25c469ffa6652825d58537ac6bc22
 // @docs http://json.schemastore.org/tsconfig
 {
-   "compilerOptions": {
-     "esModuleInterop": false,
-   },
+  "compilerOptions": {
+    "sourceMap": true,
+    "allowJs": true,
+    "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "strict": true,
+    "noUnusedParameters": true,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "target": "es6",
+    "jsx": "react",
+    "baseUrl": "src",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["DOM", "DOM.Iterable", "ES6"],
+    "paths": {
+      "@/*": ["*"],
+      "@UI/*": ["components/UI/*"],
+      "@images/*": ["assets/images/*"],
+      "@styles/*": ["assets/styles/*"]
+    },
+    "typeRoots": [
+      "src/types",
+      "node_modules/@types"
+    ]
+  },
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+  "exclude": ["node_modules"]
 }

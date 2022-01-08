@@ -1,9 +1,9 @@
 import path from 'path';
-import { RuleSetRule } from 'webpack';
 import autoprefixer from 'autoprefixer';
 import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import Sass from 'sass';
+import Postcss from 'postcss';
 
 const getLoaders = (config) => {
   return {
@@ -12,7 +12,7 @@ const getLoaders = (config) => {
     postCss: {
       loader: 'postcss-loader',
       options: {
-        implementation: require('postcss'),
+        implementation: Postcss,
         postcssOptions: {
           plugins: [['postcss-preset-env', { stage: 2 }], postcssFlexbugsFixes, autoprefixer],
         },
@@ -23,14 +23,14 @@ const getLoaders = (config) => {
       options: {
         sourceMap: config.__DEV__,
         implementation: Sass,
-        // additionalData: `
-        //   @import "${path.join(config.PROJECT_ROOT, 'shared/abstracts/_config.scss')}";
-        // `,
-        // sassOptions: {
-        //   includePaths: [
-        //     path.join(config.PROJECT_ROOT, 'shared/abstracts/_config.scss'),
-        //   ],
-        // },
+        additionalData: `
+          @import "${path.join(config.APP_SRC, 'assets/styles/abstracts/_config.scss')}";
+        `,
+        sassOptions: {
+          includePaths: [
+            path.join(config.APP_SRC, 'assets/styles/abstracts/**/*.scss'),
+          ],
+        },
       },
     },
     css: {

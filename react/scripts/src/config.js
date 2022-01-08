@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import { getPublicUrlOrPath } from './config.utils';
 
 const MODE = process.env.NODE_ENV === 'production' ? 'production' : 'development';
@@ -20,6 +20,7 @@ const paths = {
 
 const alias = {
   '@': APP_SRC,
+  '@@': PROJECT_ROOT,
 };
 
 const config = {
@@ -40,5 +41,7 @@ const config = {
   __PROD__,
   __DEV__,
 };
+
+console.log(config);
 
 export default config;
