@@ -1,5 +1,6 @@
 const path = require('path');
 
+const webpack = require("webpack");
 const autoprefixer = require("autoprefixer");
 const postcssFlexbugsFixes = require("postcss-flexbugs-fixes");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
