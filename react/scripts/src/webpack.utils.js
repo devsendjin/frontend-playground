@@ -24,8 +24,9 @@ const getLoaders = (config) => {
         sourceMap: config.__DEV__,
         implementation: Sass,
         additionalData: `
-          @import "${path.join(config.APP_SRC, 'assets/styles/abstracts/_config.scss')}";
+          @import "src/assets/styles/abstracts/_config.scss";
         `,
+        // @import "${path.join(config.APP_SRC, 'assets/styles/abstracts/_config.scss')}";
         sassOptions: {
           includePaths: [
             path.join(config.APP_SRC, 'assets/styles/abstracts/**/*.scss'),
