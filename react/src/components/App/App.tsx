@@ -1,17 +1,20 @@
 import { BrowserRouter } from 'react-router-dom';
-import { DynamicFields } from '@/components/samples/DynamicFields';
+import { DynamicFieldsSample } from '@/components/samples/DynamicFieldsSample';
 import { Card } from '@/components/UI/Card';
+import styles from './App.module.scss';
 
 const App = () => {
   return (
     <BrowserRouter>
       <div>
         {/* <Immer /> */}
-        <DynamicFields />
+        <DynamicFieldsSample />
         {/* <DynamicStateControllerSample /> */}
-        <Card>
-          <span>Card</span>
-        </Card>
+        <section className={styles['card-list']}>
+          <Card>
+            <span>Lorem</span>
+          </Card>
+        </section>
       </div>
     </BrowserRouter>
   );
