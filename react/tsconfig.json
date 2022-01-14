@@ -15,22 +15,21 @@
     "module": "es2015",
     "moduleResolution": "node",
     "target": "es6",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "baseUrl": "src",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["DOM", "DOM.Iterable", "ES6"],
     "paths": {
       "@/*": ["*"],
-      "@UI/*": ["components/UI/*"],
-      "@images/*": ["assets/images/*"],
       "@styles/*": ["assets/styles/*"]
     },
     "typeRoots": [
       "src/types",
+      "src/global.d.ts",
       "node_modules/@types"
     ]
   },
-  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+  "include": ["./src/**/*.ts", "./src/**/*.tsx", "global.d.ts"],
   "exclude": ["node_modules"]
 }

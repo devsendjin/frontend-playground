@@ -9,7 +9,7 @@
     "watch": "webpack --config \"./webpack.config.js\" --watch",
     "dev:build": "webpack --config \"./webpack.config.js\"",
     "prettier": "prettier --config \"../prettier.config.js\" --write \"./public/index.html\" \"./src/**/*\"",
-    "server": "browser-sync start       --open       --no-notify       --server \"./public\"       --files \"./**/*.(html|css|js)\"       --port 4000",
+    "server": "browser-sync start       --open       --no-notify       --server \"./public\"       --files \"./**/*.(html|css|js)\"       --port 4003",
     "json": "json5 --validate \"./package.json5\" &&       json5       --space 2       --out-file \"./package.json\"       \"./package.json5\""
   },
   "keywords": [],

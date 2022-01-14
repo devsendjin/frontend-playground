@@ -18,9 +18,11 @@ const paths = {
   svg: '../images/icon', // relative to js
 };
 
+// change here + tsconfig.json (+ jest.config.js)
 const alias = {
   '@': APP_SRC,
   '@@': PROJECT_ROOT,
+  '@styles': path.resolve(APP_SRC, 'assets/styles'),
 };
 
 const config = {
@@ -33,7 +35,7 @@ const config = {
 
   // webpack configs
   alias,
-  port: 3333,
+  port: 4004,
   isServerRunning,
 
   // other

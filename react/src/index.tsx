@@ -1,10 +1,6 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
-import '@/assets/styles/index.scss';
-
-const App: React.FC = () => {
-  return <div>App</div>
-};
+import '@styles/index.scss';
+import { App } from '@/components/App';
 
 document.addEventListener('DOMContentLoaded', () => {
   const root: HTMLElement | null = document.getElementById('app');

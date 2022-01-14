@@ -16,7 +16,7 @@
       --no-notify \
       --server \"./public\" \
       --files \"./**/*.(html|css|js)\" \
-      --port 4000",
+      --port 4003",
 
     "json": "json5 --validate \"./package.json5\" && \
       json5 \

@@ -26,7 +26,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _typescript_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./typescript.scss */ \"./src/typescript.scss\");\n\n// console.log('typescript');\n\n\n//# sourceURL=webpack://html/./src/index.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _typescript_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./typescript.scss */ \"./src/typescript.scss\");\n\n// console.log('typescript');\n// write safe number converter\n// suctom select component\n\n\n//# sourceURL=webpack://html/./src/index.ts?");
 
 /***/ })
 
