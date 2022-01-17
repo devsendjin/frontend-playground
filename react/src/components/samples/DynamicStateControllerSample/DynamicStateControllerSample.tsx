@@ -1,19 +1,31 @@
+import { Container, Row, Col, Form } from 'react-bootstrap';
 import { DynamicStateController } from '@/components/features/DynamicStateController';
 
-const DynamicStateControllerSample = () => {
+const DynamicStateControllerSample: React.FC = () => {
   return (
-    <div>
-      <DynamicStateController<string>
-        defaultState=""
-        render={({ state: [value, setValue] }) => (
-          <>
-            <div>Metric sample | {value}</div>
-            <input value={value} onChange={(e) => setValue(e.currentTarget.value)} />
-          </>
-        )}
-      />
-    </div>
+    <Container>
+      <Row className="justify-content-center">
+        <Col xs="4">
+          <DynamicStateController<string>
+            defaultState=""
+            render={({ state: [value, setValue] }) => (
+              <>
+                <p>DynamicStateController sample | {value}</p>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter text"
+                  value={value}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.currentTarget.value)}
+                />
+              </>
+            )}
+          />
+        </Col>
+      </Row>
+    </Container>
   );
 };
+
+DynamicStateControllerSample.displayName = 'DynamicStateControllerSample';
 
 export { DynamicStateControllerSample };

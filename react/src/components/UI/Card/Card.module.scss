@@ -1,18 +1,21 @@
 .card {
-  background-color: #111927;
-  background-image: 
-    radial-gradient(at 47% 33%, hsl(162, 77%, 40%) 0, transparent 59%),
-    radial-gradient(at 82% 65%, hsl(218, 39%, 11%) 0, transparent 55%);
+  background: #d4962d;
+  background: -webkit-linear-gradient(top, #352100, #002afd);
+  background: -moz-linear-gradient(top, #352100, #002afd);
+  background: linear-gradient(to bottom, #352100, #002afd);
   padding: 20px;
 
+  cursor: pointer;
+
   .body {
-    backdrop-filter: blur(19px) saturate(184%);
-    -webkit-backdrop-filter: blur(19px) saturate(184%);
-    background-color: rgba(17, 25, 40, 0.54);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.125);
-    padding: 30px;
-    color: #fff;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
+    border-radius: 30px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px outset rgba(191, 191, 191, 0.3);
+    box-shadow: 0px 1px 24px -1px rgba(0, 0, 0, 0.2);
+
     text-align: center;
   }
 }

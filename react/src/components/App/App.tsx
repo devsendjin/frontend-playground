@@ -1,21 +1,33 @@
-import { BrowserRouter } from 'react-router-dom';
-import { DynamicFieldsSample } from '@/components/samples/DynamicFieldsSample';
-import { Card } from '@/components/UI/Card';
-import styles from './App.module.scss';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { Button, Container, Row, Col } from 'react-bootstrap';
+import { componentMap, ROUTES } from '@/constants/routes';
+import { Samples } from '../sections/Samples';
 
 const App = () => {
   return (
     <BrowserRouter>
-      <div>
-        {/* <Immer /> */}
-        <DynamicFieldsSample />
-        {/* <DynamicStateControllerSample /> */}
-        <section className={styles['card-list']}>
-          <Card>
-            <span>Lorem</span>
-          </Card>
-        </section>
-      </div>
+      <header>
+        <Container>
+          <Row>
+            <Col>
+              <Button as="div" variant="dark" className="position-relative w-100">
+                <Link className="d-block text-white" to={ROUTES.root}>
+                  /
+                </Link>
+              </Button>
+            </Col>
+          </Row>
+        </Container>
+      </header>
+
+      <main className="mt-3">
+        <Routes>
+          <Route path={ROUTES.root} element={<Samples />} />
+          {componentMap.map(({ route, component: Component }) => (
+            <Route key={route} path={route} element={<Component />} />
+          ))}
+        </Routes>
+      </main>
     </BrowserRouter>
   );
 };

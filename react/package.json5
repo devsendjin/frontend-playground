@@ -98,7 +98,9 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "6",
-    "immer": "^9.0.12", // immutable data processing 
+    "immer": "^9.0.12", // immutable data processing
     "classnames": "^2.3.1", // handle css classes
+    "react-bootstrap": "^2.1.1",
+    "bootstrap": "^5.1.3",
   }
 }
