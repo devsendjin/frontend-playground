@@ -22,14 +22,11 @@
     "lib": ["DOM", "DOM.Iterable", "ES6"],
     "paths": {
       "@/*": ["*"],
+      "@@/*": ["../"],
       "@styles/*": ["assets/styles/*"]
     },
-    "typeRoots": [
-      "src/types",
-      "src/global.d.ts",
-      "node_modules/@types"
-    ]
+    "typeRoots": ["src/types", "src/global.d.ts", "node_modules/@types"]
   },
-  "include": ["./src/**/*.ts", "./src/**/*.tsx", "global.d.ts"],
+  "include": ["./src/**/*.ts", "./src/**/*.tsx", "global.d.ts", "../shared/**/*.ts"],
   "exclude": ["node_modules"]
 }
