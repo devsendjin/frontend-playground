@@ -110,5 +110,10 @@
     "classnames": "^2.3.1", // handle css classes
     "react-bootstrap": "^2.1.1",
     "bootstrap": "^5.1.3",
+
+    // localization
+    "i18next": "^21.6.6",
+    "i18next-browser-languagedetector": "^6.1.2",
+    "react-i18next": "^11.15.3",
   }
 }

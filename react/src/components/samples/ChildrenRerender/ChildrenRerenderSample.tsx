@@ -1,5 +1,5 @@
-import { Container, Row, Col } from 'react-bootstrap';
 import { useState } from 'react';
+import { Sample } from '@/components/layouts/Sample';
 
 const Child: React.FC = () => {
   console.log('Child render');
@@ -8,7 +8,7 @@ const Child: React.FC = () => {
 
 const ChildrenRerender: React.FC = ({ children }) => {
   const [state, setState] = useState<boolean>(false);
-  
+
   return (
     <div>
       <div>state {state}</div>
@@ -22,15 +22,11 @@ const ChildrenRerender: React.FC = ({ children }) => {
 
 const ChildrenRerenderSample: React.FC = () => {
   return (
-    <Container>
-      <Row className="justify-content-center">
-        <Col xs="4">
-          <ChildrenRerender>
-            <Child />
-          </ChildrenRerender>
-        </Col>
-      </Row>
-    </Container>
+    <Sample>
+      <ChildrenRerender>
+        <Child />
+      </ChildrenRerender>
+    </Sample>
   );
 };
 

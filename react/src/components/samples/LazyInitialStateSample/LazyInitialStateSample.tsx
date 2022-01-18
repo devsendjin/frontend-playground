@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Sample } from '@/components/layouts/Sample';
 
 const calc = (text: string) => {
   console.log(`${text} calc`);
@@ -11,25 +11,17 @@ const LazyInitialStateSample: React.FC = () => {
   const [initializedMultiple, setInitializedMultiple] = useState(calc('initializedMultiple'));
 
   return (
-    <Container>
-      <Row className="justify-content-center">
-        <Col xs="4">
-          <div>{JSON.stringify({ initializedOnce, initializedMultiple }, null, 2)}</div>
-          <div className="btn-group">
-            <button type="button" className="btn btn-primary" onClick={() => setInitializedOnce((prev) => prev + 1)}>
-              initializedOnce
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() => setInitializedMultiple((prev) => prev + 1)}
-            >
-              initializedMultiple
-            </button>
-          </div>
-        </Col>
-      </Row>
-    </Container>
+    <Sample>
+      <div>{JSON.stringify({ initializedOnce, initializedMultiple }, null, 2)}</div>
+      <div className="btn-group">
+        <button type="button" className="btn btn-primary" onClick={() => setInitializedOnce((prev) => prev + 1)}>
+          initializedOnce
+        </button>
+        <button type="button" className="btn btn-primary" onClick={() => setInitializedMultiple((prev) => prev + 1)}>
+          initializedMultiple
+        </button>
+      </div>
+    </Sample>
   );
 };
 
