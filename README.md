@@ -4,6 +4,7 @@
 
 - common
   - [ ] patch `console.log` for dev process | create cusom log
+  - [ ] run `prettier` command only for changed files (maybe implement with bash)
 - react
   - [x] component with dynamic state using generics
   - [ ] create custom select component

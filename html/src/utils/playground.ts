@@ -1,4 +1,5 @@
-export const scope = (callback, { dividerAtStart = '\n\n', name = 'Scope' } = {}) => {
+type TScope = (callback: any, options: { dividerAtStart?: boolean | string; name?: string }) => void;
+export const scope: TScope = (callback, { dividerAtStart = '\n\n', name = 'Scope' } = {}) => {
   if (dividerAtStart) console.log(dividerAtStart);
   console.group(name);
   if (callback) callback();
@@ -10,12 +11,13 @@ export const scope = (callback, { dividerAtStart = '\n\n', name = 'Scope' } = {}
  * @param {Object} obj
  * @returns [string, any]
  */
-export const l = (obj) => {
+type TL = (obj: any) => void;
+export const l: TL = (obj) => {
   if (!obj || Array.isArray(obj)) {
     return console.log(obj);
   }
 
-  const logArgs = Object.entries(obj).reduce((acc, [key, value], index) => {
+  const logArgs = Object.entries(obj).reduce((acc: any, [key, value], index) => {
     if (index === 0) {
       acc.push(`${key}: `, value);
     } else {

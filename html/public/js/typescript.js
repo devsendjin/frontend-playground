@@ -26,7 +26,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _typescript_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./typescript.scss */ \"./src/typescript.scss\");\n\n// console.log('typescript');\n// write safe number converter\n// suctom select component\n\n\n//# sourceURL=webpack://html/./src/index.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils_playground__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/utils/playground */ \"./src/utils/playground.ts\");\n/* harmony import */ var _typescript_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./typescript.scss */ \"./src/typescript.scss\");\n\n\n// console.log('typescript');\n// write safe number converter\n// suctom select component\n(0,_utils_playground__WEBPACK_IMPORTED_MODULE_0__.scope)(function () { }, { dividerAtStart: '', name: 'Draft ts' });\n\n\n//# sourceURL=webpack://html/./src/index.ts?");
+
+/***/ }),
+
+/***/ "./src/utils/playground.ts":
+/*!*********************************!*\
+  !*** ./src/utils/playground.ts ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"scope\": () => (/* binding */ scope),\n/* harmony export */   \"l\": () => (/* binding */ l)\n/* harmony export */ });\nvar scope = function (callback, _a) {\n    var _b = _a === void 0 ? {} : _a, _c = _b.dividerAtStart, dividerAtStart = _c === void 0 ? '\\n\\n' : _c, _d = _b.name, name = _d === void 0 ? 'Scope' : _d;\n    if (dividerAtStart)\n        console.log(dividerAtStart);\n    console.group(name);\n    if (callback)\n        callback();\n    console.groupEnd();\n};\nvar l = function (obj) {\n    if (!obj || Array.isArray(obj)) {\n        return console.log(obj);\n    }\n    var logArgs = Object.entries(obj).reduce(function (acc, _a, index) {\n        var key = _a[0], value = _a[1];\n        if (index === 0) {\n            acc.push(\"\".concat(key, \": \"), value);\n        }\n        else {\n            acc.push(\"\\n\".concat(key, \": \"), value);\n        }\n        return acc;\n    }, []);\n    console.log.apply(console, logArgs);\n};\n\n\n//# sourceURL=webpack://html/./src/utils/playground.ts?");
 
 /***/ })
 
@@ -57,6 +67,23 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _typ
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
