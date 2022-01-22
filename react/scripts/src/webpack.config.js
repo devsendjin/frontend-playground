@@ -169,6 +169,8 @@ export default {
     (config.__PROD__ || (config.__DEV__ && !config.isServerRunning)) &&
       new MiniCssExtractPlugin({ filename: `${config.paths.css}/index.css` }),
 
-    config.__PROD__ && new CssoWebpackPlugin(),
+    config.__PROD__ && new CssoWebpackPlugin({
+      comments: false
+    }),
   ].filter(Boolean),
 };
