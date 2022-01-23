@@ -23,9 +23,11 @@ const ChildrenRerender: React.FC = ({ children }) => {
 const ChildrenRerenderSample: React.FC = () => {
   return (
     <Sample>
-      <ChildrenRerender>
-        <Child />
-      </ChildrenRerender>
+      <Sample.Col col={5}>
+        <ChildrenRerender>
+          <Child />
+        </ChildrenRerender>
+      </Sample.Col>
     </Sample>
   );
 };

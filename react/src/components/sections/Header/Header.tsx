@@ -5,7 +5,7 @@ import { ROUTES } from '@/constants/routes';
 const Header = () => {
   return (
     <header>
-      <Container>
+      <Container fluid>
         <Row>
           <Col>
             <Button as="div" variant="dark" className="position-relative w-100">

@@ -28,7 +28,9 @@ const LocalizationSample: React.FC = () => {
   return (
     <I18nextProvider i18n={i18n}>
       <Sample>
-        <Localization />
+        <Sample.Col col={5}>
+          <Localization />
+        </Sample.Col>
       </Sample>
     </I18nextProvider>
   );

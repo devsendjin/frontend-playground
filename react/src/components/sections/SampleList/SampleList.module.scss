@@ -3,4 +3,9 @@
   grid-template-columns: repeat(auto-fill, minmax(310px, auto));
   grid-auto-rows: auto;
   grid-gap: 20px;
+  margin-top: 15px;
+}
+
+.title:not(:first-child) {
+  margin-top: 60px;
 }

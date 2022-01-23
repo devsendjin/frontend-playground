@@ -1,13 +1,19 @@
 import { Container, Row, Col } from 'react-bootstrap';
+import cn from 'classnames';
+import styles from './Sample.module.scss';
 
-const Sample: React.FC = ({ children }) => {
+const SampleCol: React.FC<{ col?: number }> = ({ children, col }) => {
+  return <Col xs={col}>{children}</Col>;
+};
+
+const Sample: React.FC & { Col: typeof SampleCol } = ({ children }) => {
   return (
-    <Container>
-      <Row className="justify-content-center">
-        <Col xs="4">{children}</Col>
-      </Row>
+    <Container className={styles['container']} fluid>
+      <Row className={cn('justify-content-center', styles['row'])}>{children}</Row>
     </Container>
   );
 };
+
+Sample.Col = SampleCol;
 
 export { Sample };

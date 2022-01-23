@@ -27,7 +27,7 @@ type IOverload = {
 // type IOverload<T, P = {}> = typeof React.forwardRef;
 
 // export const Input: IOverload = React.forwardRef<HTMLInputElement, IInput & React.InputHTMLAttributes<HTMLInputElement>>(
-export const Input: IOverload = React.forwardRef(
+const ForwardRefSample: IOverload = React.forwardRef(
   ({ styleType = 'default', error, className, withLabel = false, labelText = '', ...props }: any, ref) => {
     return withLabel ? (
       <label>
@@ -39,3 +39,5 @@ export const Input: IOverload = React.forwardRef(
     );
   }
 );
+
+export { ForwardRefSample };

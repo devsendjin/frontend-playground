@@ -1,4 +1,4 @@
-import { useFields } from '@/hooks/useFields';
+import { useFields } from '@/hooks/_draft/useFields';
 
 const fields = [{ name: 'qwe', defaultValue: 'asd' }];
 
