@@ -10,7 +10,7 @@
     "build:dev": "webpack --config \"./scripts/webpack.config.js\"",
 
     "prettier:all": "yarn prettier \"./src/**/*\"",
-    "prettier": "prettier --config \"../prettier.config.js\" --write",
+    "prettier": "prettier --config \"../prettier.config.js\" --ignore-unknown --write",
 
     // webpack configs
     "config:build": "yarn babel \

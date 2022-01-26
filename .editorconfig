@@ -1,6 +1,6 @@
 root = true
 
-[*.{css,scss,sass,js,ts,tsx}]
+[*.{pug,css,scss,sass,js,ts,tsx}]
 charset = utf-8
 end_of_line = lf
 indent_style = space
