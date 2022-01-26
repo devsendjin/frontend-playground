@@ -17,6 +17,7 @@ export const l: TL = (obj) => {
     return console.log(obj);
   }
 
+  // @ts-ignore
   const logArgs = Object.entries(obj).reduce((acc: any, [key, value], index) => {
     if (index === 0) {
       acc.push(`${key}: `, value);

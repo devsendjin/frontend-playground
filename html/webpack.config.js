@@ -1,12 +1,14 @@
 const path = require('path');
+const fs = require('fs');
 
-const webpack = require("webpack");
-const autoprefixer = require("autoprefixer");
-const postcssFlexbugsFixes = require("postcss-flexbugs-fixes");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const postcssFlexbugsFixes = require('postcss-flexbugs-fixes');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssoWebpackPlugin = require('csso-webpack-plugin').default;
 const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const MODE = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 const __PROD__ = MODE === 'production';
@@ -16,12 +18,33 @@ const PROJECT_ROOT = path.resolve('../');
 const APP_ROOT = path.resolve('./');
 const APP_SRC = path.join(APP_ROOT, 'src');
 
+const TEMPLATES_SRC = path.resolve('./src/templates');
+
+const TEMPLATES = (() => {
+  if (!fs.existsSync(TEMPLATES_SRC)) return [];
+  return fs.readdirSync(TEMPLATES_SRC).filter((fileName) => fileName.endsWith('.pug'));
+})();
+
+console.log({
+  MODE,
+  __PROD__,
+  __DEV__,
+
+  PROJECT_ROOT,
+  APP_ROOT,
+  APP_SRC,
+
+  TEMPLATES_SRC,
+
+  TEMPLATES,
+});
+
 module.exports = {
   mode: MODE,
 
   entry: {
-    index: path.join(APP_SRC, 'index.js'),
-    typescript: path.join(APP_SRC, 'index.ts'),
+    index: path.join(APP_SRC, 'ts/index.js'),
+    typescript: path.join(APP_SRC, 'ts/index.ts'),
   },
 
   output: {
@@ -37,12 +60,10 @@ module.exports = {
     alias: {
       '@': APP_SRC,
       '@@': PROJECT_ROOT,
-    }
+    },
   },
 
   target: 'web',
-
-  // stats: 'detailed', // none | detailed | verbose
 
   module: {
     rules: [
@@ -68,7 +89,7 @@ module.exports = {
             options: {
               implementation: require('postcss'),
               postcssOptions: {
-                plugins: [['postcss-preset-env', {stage: 2}], postcssFlexbugsFixes, autoprefixer],
+                plugins: [['postcss-preset-env', { stage: 2 }], postcssFlexbugsFixes, autoprefixer],
               },
             },
           },
@@ -78,45 +99,62 @@ module.exports = {
               sourceMap: __DEV__,
               implementation: require('sass'),
             },
-          }],
+          },
+        ],
+      },
+      {
+        test: /\.pug$/,
+        use: [
+          {
+            loader: 'raw-loader',
+          },
+          {
+            loader: 'pug-html-loader',
+            options: {
+              pretty: true,
+            },
+          },
+        ],
       },
     ],
   },
 
-  optimization: __PROD__ ? {
-    nodeEnv: MODE,
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        exclude: /node_modules/,
-        extractComments: false,
-        terserOptions: {
-          parse: {
-            html5_comments: false,
-          },
-          mangle: true,
-          sourceMap: false,
-          compress: {
-            defaults: true,
-            drop_console: false, // false by default. Pass true to discard calls to console.* functions.
-            keep_infinity: true, // false by default. Pass true to prevent Infinity from being compressed into 1/0, which may cause performance issues on Chrome.
-            passes: 2, // 1 by default. The maximum number of times to run compress.
-          },
-          format: {
-            comments: false, // "some" by default
-            preamble: null, // null by default. When passed it must be a string and it will be prepended to the output literally. The source map will adjust for this text. Can be used to insert a comment containing licensing information, for example.
-            quote_style: 3, // 0 by default. 3 - always use the original quotes.
-            preserve_annotations: false, // false by default.
-            ecma: 2020, // 5 by default. Desired EcmaScript standard version for output.
-          },
-          ecma: 2020, // 5 by default. Desired EcmaScript standard version for output.
-          keep_classnames: false, // undefined by default.
-          keep_fnames: false, // false by default.
-          safari10: false, // false by default.
-        },
-      }),
-    ],
-  } : {},
+  optimization: __PROD__
+    ? {
+        nodeEnv: MODE,
+        minimize: true,
+        minimizer: [
+          new TerserPlugin({
+            exclude: /node_modules/,
+            extractComments: false,
+            terserOptions: {
+              parse: {
+                html5_comments: false,
+              },
+              mangle: true,
+              sourceMap: false,
+              compress: {
+                defaults: true,
+                drop_console: false, // false by default. Pass true to discard calls to console.* functions.
+                keep_infinity: true, // false by default. Pass true to prevent Infinity from being compressed into 1/0, which may cause performance issues on Chrome.
+                passes: 2, // 1 by default. The maximum number of times to run compress.
+              },
+              format: {
+                comments: false, // "some" by default
+                preamble: null, // null by default. When passed it must be a string and it will be prepended to the output literally. The source map will adjust for this text. Can be used to insert a comment containing licensing information, for example.
+                quote_style: 3, // 0 by default. 3 - always use the original quotes.
+                preserve_annotations: false, // false by default.
+                ecma: 2020, // 5 by default. Desired EcmaScript standard version for output.
+              },
+              ecma: 2020, // 5 by default. Desired EcmaScript standard version for output.
+              keep_classnames: false, // undefined by default.
+              keep_fnames: false, // false by default.
+              safari10: false, // false by default.
+            },
+          }),
+        ],
+      }
+    : {},
 
   plugins: [
     new webpack.DefinePlugin({
@@ -124,9 +162,18 @@ module.exports = {
       __PROD__: __PROD__,
     }),
 
-    new MiniCssExtractPlugin({ filename: '../css/[name].css'}),
-
     new FriendlyErrorsWebpackPlugin(),
+
+    new MiniCssExtractPlugin({ filename: '../css/[name].css' }),
+
+    ...TEMPLATES.map(
+      (template) =>
+        new HtmlWebpackPlugin({
+          template: `${TEMPLATES_SRC}/${template}`,
+          filename: `../${template.replace(/\.pug/, '.html')}`, // relative to public/js
+          inject: false,
+        })
+    ),
 
     __PROD__ && new CssoWebpackPlugin(),
   ].filter(Boolean),

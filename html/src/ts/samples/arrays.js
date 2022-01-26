@@ -1,5 +1,5 @@
-import { chunk, replaceAt } from '@/utils';
-import { scope } from '@/utils/playground';
+import { chunk, replaceAt } from '@/ts/utils';
+import { scope } from '@/ts/utils/playground';
 
 scope(
   () => {

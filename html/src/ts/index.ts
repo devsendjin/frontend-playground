@@ -1,5 +1,5 @@
-import { scope } from '@/utils/playground';
-import './typescript.scss';
+import { scope } from '@/ts/utils/playground';
+import '@/styles/typescript.scss';
 
 // console.log('typescript');
 

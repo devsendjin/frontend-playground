@@ -9,7 +9,7 @@
     "watch": "webpack --config \"./webpack.config.js\" --watch",
     "dev:build": "webpack --config \"./webpack.config.js\"",
 
-    "prettier": "prettier --config \"../prettier.config.js\" --write \"./public/index.html\" \"./src/**/*\"",
+    "prettier": "prettier --config \"../prettier.config.js\" --ignore-unknown --write \"./public/index.html\" \"./src/**/*\"",
 
     "server": "browser-sync start \
       --open \
@@ -36,11 +36,14 @@
     "csso-webpack-plugin": "^2.0.0-beta.3",
     "terser-webpack-plugin": "^5.3.0",
     "mini-css-extract-plugin": "^2.4.6",
+    "html-webpack-plugin": "^5.5.0",
     // loaders
     "css-loader": "^6.5.1",
     "postcss-loader": "^6.2.1",
     "sass-loader": "^12.4.0",
     "ts-loader": "^9.2.6",
+    "pug-html-loader": "^1.1.5",
+    "raw-loader": "^4.0.2",
 
 
     // styles
