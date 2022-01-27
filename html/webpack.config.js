@@ -43,8 +43,7 @@ module.exports = {
   mode: MODE,
 
   entry: {
-    index: path.join(APP_SRC, 'ts/index.js'),
-    typescript: path.join(APP_SRC, 'ts/index.ts'),
+    index: path.join(APP_SRC, 'scripts/index.ts'),
   },
 
   output: {
@@ -53,7 +52,7 @@ module.exports = {
   },
 
   // error stats handled by @soda/friendly-errors-webpack-plugin
-  stats: 'none', // none | detailed | verbose
+  stats: 'normal', // none | normal | summary | minimal | verbose | errors-only | errors-warnings | detailed;
 
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.sass', '.scss', '.json'],
@@ -64,6 +63,8 @@ module.exports = {
   },
 
   target: 'web',
+
+  devtool: __DEV__ ? 'inline-source-map' : false,
 
   module: {
     rules: [
@@ -87,6 +88,7 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
+              sourceMap: __DEV__,
               implementation: require('postcss'),
               postcssOptions: {
                 plugins: [['postcss-preset-env', { stage: 2 }], postcssFlexbugsFixes, autoprefixer],

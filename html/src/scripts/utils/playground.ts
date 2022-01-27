@@ -1,11 +1,10 @@
-type TScope = (callback: any, options: { dividerAtStart?: boolean | string; name?: string }) => void;
-export const scope: TScope = (callback, { dividerAtStart = '\n\n', name = 'Scope' } = {}) => {
-  if (dividerAtStart) console.log(dividerAtStart);
-  console.group(name);
+type TScope = (callback: any, scopeName?: string, options?: { divider?: boolean | string }) => void;
+export const scope: TScope = (callback, scopeName = 'Scope', { divider = '' } = {}) => {
+  if (divider) console.log(divider);
+  console.group(scopeName);
   if (callback) callback();
   console.groupEnd();
 };
-
 /**
  * modified console.log
  * @param {Object} obj
