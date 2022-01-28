@@ -1,0 +1,13 @@
+.item {
+  outline: 1px solid #ddd;
+
+  &.is-active {
+    color: red;
+  }
+}
+
+.content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-in-out;
+}

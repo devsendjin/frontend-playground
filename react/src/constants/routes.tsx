@@ -4,6 +4,7 @@ import { ChildrenRerenderSample } from '@/components/samples/ChildrenRerenderSam
 import { DynamicStateControllerSample } from '@/components/samples/DynamicStateControllerSample';
 import { LazyInitialStateSample } from '@/components/samples/LazyInitialStateSample';
 import { LocalizationSample } from '@/components/samples/LocalizationSample';
+import { AccordionSample } from '@/components/samples/AccordionSample';
 
 // const routesArr = [
 //   'DynamicStateControllerSample',
@@ -27,6 +28,7 @@ const ROUTES = {
   ChildrenRerenderSample: `/${paramCase('ChildrenRerenderSample')}`,
   LazyInitialStateSample: `/${paramCase('LazyInitialStateSample')}`,
   LocalizationSample: `/${paramCase('LocalizationSample')}`,
+  AccordionSample: `/${paramCase('AccordionSample')}`,
 } as const;
 
 type TRouteArray = ReadonlyArray<{ route: string; component: React.FC; name: string }>;
@@ -41,6 +43,7 @@ const samplesMap: ReadonlyArray<{ category: string; routes: TRouteArray }> = [
         name: 'Dynamic state controller',
       },
       { route: ROUTES.LocalizationSample, component: LocalizationSample, name: 'Localization (i18next)' },
+      { route: ROUTES.AccordionSample, component: AccordionSample, name: 'Accordion' },
     ],
   },
   {
