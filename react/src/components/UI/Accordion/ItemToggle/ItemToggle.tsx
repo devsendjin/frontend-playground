@@ -2,15 +2,15 @@ import { useAccordionContext } from '../Accordion.context';
 import styles from '../Accordion.module.scss';
 
 interface IItemToggleProps {
-  itemIndex: number;
+  itemKey: number;
 }
 
-const ItemToggle: React.FC<IItemToggleProps> = ({ itemIndex, children }) => {
-  console.log('ItemToggle itemIndex: ', itemIndex);
+const ItemToggle: React.FC<IItemToggleProps> = ({ itemKey, children }) => {
+  // console.log('ItemToggle itemKey: ', itemKey);
   const { setActiveIndex } = useAccordionContext();
 
   const handleClick = () => {
-    setActiveIndex(itemIndex);
+    setActiveIndex(itemKey);
   };
 
   return (

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Sample } from '@/components/layouts/Sample';
 
 const Child: React.FC = () => {
   console.log('Child render');
@@ -22,13 +21,9 @@ const ChildrenRerender: React.FC = ({ children }) => {
 
 const ChildrenRerenderSample: React.FC = () => {
   return (
-    <Sample>
-      <Sample.Col col={5}>
-        <ChildrenRerender>
-          <Child />
-        </ChildrenRerender>
-      </Sample.Col>
-    </Sample>
+    <ChildrenRerender>
+      <Child />
+    </ChildrenRerender>
   );
 };
 

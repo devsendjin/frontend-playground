@@ -1,4 +1,3 @@
-import { Sample } from '@/components/layouts/Sample';
 import { Accordion } from '@/components/UI/Accordion';
 
 const content = [
@@ -18,18 +17,14 @@ const content = [
 
 const AccordionSample: React.FC = () => {
   return (
-    <Sample>
-      <Sample.Col col={5}>
-        <Accordion>
-          {content.map(({ question, answer }, index) => (
-            <Accordion.Item key={index} itemIndex={index}>
-              <Accordion.Toggle itemIndex={index}>{question}</Accordion.Toggle>
-              <Accordion.Content itemIndex={index}>{answer}</Accordion.Content>
-            </Accordion.Item>
-          ))}
-        </Accordion>
-      </Sample.Col>
-    </Sample>
+    <Accordion style={{ maxWidth: 350 }}>
+      {content.map(({ question, answer }, index) => (
+        <Accordion.Item key={index} itemKey={index}>
+          <Accordion.Toggle itemKey={index}>{question}</Accordion.Toggle>
+          <Accordion.Content itemKey={index}>{answer}</Accordion.Content>
+        </Accordion.Item>
+      ))}
+    </Accordion>
   );
 };
 

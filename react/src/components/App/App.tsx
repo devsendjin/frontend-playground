@@ -1,7 +1,8 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { componentMap, ROUTES } from '@/constants/routes';
-import { Header } from '../sections/Header';
-import { SampleList } from '../sections/SampleList';
+import { BrowserRouter } from 'react-router-dom';
+import { Aside } from '../sections/Aside';
+import { Main } from '../sections/Main';
+import styles from './App.module.scss';
+
 // import { outline } from '@@/shared/scripts/debug';
 // import { outline } from '../../../../shared/scripts/debug';
 // import styles from './App.module.scss';
@@ -12,17 +13,11 @@ const App = () => {
       {/* <button type="button" onClick={() => outline()} className={styles['debug']}>
         debug
       </button> */}
-      <Header />
+      <div className={styles['app-content']}>
+        <Aside />
 
-      <main className="mt-3">
-        <Routes>
-          <Route path={ROUTES.root} element={<SampleList />} />
-
-          {componentMap.map(({ route, component: Component }) => (
-            <Route key={route} path={route} element={<Component />} />
-          ))}
-        </Routes>
-      </main>
+        <Main />
+      </div>
     </BrowserRouter>
   );
 };

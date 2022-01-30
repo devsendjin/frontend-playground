@@ -1,5 +1,4 @@
 import { paramCase } from 'change-case';
-import { AllInOne } from '@/components/AllInOne';
 import { ChildrenRerenderSample } from '@/components/samples/ChildrenRerenderSample';
 import { DynamicStateControllerSample } from '@/components/samples/DynamicStateControllerSample';
 import { LazyInitialStateSample } from '@/components/samples/LazyInitialStateSample';
@@ -36,7 +35,7 @@ const samplesMap: ReadonlyArray<{ category: string; routes: TRouteArray }> = [
   {
     category: 'Common',
     routes: [
-      { route: ROUTES.combined, component: AllInOne, name: 'All samples' },
+      // { route: ROUTES.combined, component: AllInOne, name: 'All samples' },
       {
         route: ROUTES.DynamicStateControllerSample,
         component: DynamicStateControllerSample,

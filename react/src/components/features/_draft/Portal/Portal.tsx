@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 

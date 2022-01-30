@@ -3,3 +3,9 @@
   top: 0;
   left: 0;
 }
+
+.app-content {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  grid-gap: 20px;
+}

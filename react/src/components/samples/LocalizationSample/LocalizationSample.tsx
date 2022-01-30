@@ -1,6 +1,5 @@
 import { i18n } from './i18n';
 import { I18nextProvider, useTranslation } from 'react-i18next';
-import { Sample } from '@/components/layouts/Sample';
 
 const Localization = () => {
   const { t, i18n } = useTranslation();
@@ -27,11 +26,7 @@ const Localization = () => {
 const LocalizationSample: React.FC = () => {
   return (
     <I18nextProvider i18n={i18n}>
-      <Sample>
-        <Sample.Col col={5}>
-          <Localization />
-        </Sample.Col>
-      </Sample>
+      <Localization />
     </I18nextProvider>
   );
 };
