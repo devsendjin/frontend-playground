@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
 const calc = (text: string) => {
+  console.group('LazyInitialStateSample');
   console.log(`${text} calc`);
+  console.groupEnd();
   return 1;
 };
 

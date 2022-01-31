@@ -1,3 +1,7 @@
+// examples
+// https://www.youtube.com/watch?v=AiJ8tRRH0f8&t=148s
+// https://habr.com/ru/company/alfa/blog/647013/
+
 import cn from 'classnames';
 import { AccordionProvier, TSharedAccordionState } from './Accordion.context';
 import { Item } from './Item';

@@ -13,6 +13,7 @@ const App = () => {
       {/* <button type="button" onClick={() => outline()} className={styles['debug']}>
         debug
       </button> */}
+
       <div className={styles['app-content']}>
         <Aside />
 

@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
 const Child: React.FC = () => {
+  console.group('ChildrenRerenderSample');
   console.log('Child render');
+  console.groupEnd();
   return <div>Child</div>;
 };
 
