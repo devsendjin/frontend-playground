@@ -5,6 +5,7 @@ import { LazyInitialStateSample } from '@/components/samples/LazyInitialStateSam
 import { LocalizationSample } from '@/components/samples/LocalizationSample';
 import { AccordionSample } from '@/components/samples/AccordionSample';
 import { PortalSample } from '@/components/samples/PortalSample';
+import { TypedReduxSample } from '@/components/samples/TypedReduxSample';
 
 // const routesArr = [
 //   'DynamicStateControllerSample',
@@ -30,6 +31,7 @@ const ROUTES = {
   LocalizationSample: `/${paramCase('LocalizationSample')}`,
   AccordionSample: `/${paramCase('AccordionSample')}`,
   PortalSample: `/${paramCase('PortalSample')}`,
+  TypedReduxSample: `/${paramCase('TypedReduxSample')}`,
 } as const;
 
 type TRouteArray = ReadonlyArray<{ route: string; component: React.FC; name: string }>;
@@ -46,6 +48,7 @@ const samplesMap: ReadonlyArray<{ category: string; routes: TRouteArray }> = [
       { route: ROUTES.LocalizationSample, component: LocalizationSample, name: 'Localization (i18next)' },
       { route: ROUTES.AccordionSample, component: AccordionSample, name: 'Accordion' },
       { route: ROUTES.PortalSample, component: PortalSample, name: 'Portal' },
+      { route: ROUTES.TypedReduxSample, component: TypedReduxSample, name: 'Typed Redux' },
     ],
   },
   {

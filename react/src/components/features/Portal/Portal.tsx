@@ -14,7 +14,6 @@ interface IPortalProps {
 
 const cssPropertiesToString = (cssProperties: React.CSSProperties) => {
   return Object.entries(cssProperties).reduce((acc, [prop, value]) => {
-    console.log(acc);
     acc = acc.concat(`${prop}: ${value};`);
     return acc;
   }, '');

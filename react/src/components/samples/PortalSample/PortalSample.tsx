@@ -21,7 +21,7 @@ const PortalSample = () => {
       {toggle && (
         <Portal containerIdentifier="#portal-mount">
           {/* <Portal containerIdentifier={document.getElementById('portal')} */}
-          {console.log('sample portal reder count')}
+          {console.count('sample portal reder count')}
           <div>Portal</div>
         </Portal>
       )}

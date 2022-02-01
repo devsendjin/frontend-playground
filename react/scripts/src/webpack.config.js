@@ -74,7 +74,8 @@ export default {
               sourceMap: false,
               compress: {
                 defaults: true,
-                drop_console: false, // false by default. Pass true to discard calls to console.* functions.
+                // pure_funcs: ['console.info', 'console.debug', 'console.warn'] // ?
+                drop_console: true, // false by default. Pass true to discard calls to console.* functions.
                 keep_infinity: true, // false by default. Pass true to prevent Infinity from being compressed into 1/0, which may cause performance issues on Chrome.
                 passes: 2, // 1 by default. The maximum number of times to run compress.
               },

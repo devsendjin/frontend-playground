@@ -18,7 +18,11 @@ const AccordionProvier: React.FC<{ defaultActiveIndex?: TSharedAccordionState }>
 };
 
 const useAccordionContext = () => {
-  return useContext(AccordionContext);
+  const context = useContext(AccordionContext);
+  if (!context) {
+    throw new Error('No context found for Accordion');
+  }
+  return context;
 };
 
 export { AccordionContext, AccordionProvier, useAccordionContext };
