@@ -6,6 +6,7 @@ import { LocalizationSample } from '@/components/samples/LocalizationSample';
 import { AccordionSample } from '@/components/samples/AccordionSample';
 import { PortalSample } from '@/components/samples/PortalSample';
 import { TypedReduxSample } from '@/components/samples/TypedReduxSample';
+import { ErrorBounarySample } from '@/components/samples/ErrorBounarySample';
 
 // const routesArr = [
 //   'DynamicStateControllerSample',
@@ -32,6 +33,7 @@ const ROUTES = {
   AccordionSample: `/${paramCase('AccordionSample')}`,
   PortalSample: `/${paramCase('PortalSample')}`,
   TypedReduxSample: `/${paramCase('TypedReduxSample')}`,
+  ErrorBounarySample: `/${paramCase('ErrorBounarySample')}`,
 } as const;
 
 type TRouteArray = ReadonlyArray<{ route: string; component: React.FC; name: string }>;
@@ -49,6 +51,7 @@ const samplesMap: ReadonlyArray<{ category: string; routes: TRouteArray }> = [
       { route: ROUTES.AccordionSample, component: AccordionSample, name: 'Accordion' },
       { route: ROUTES.PortalSample, component: PortalSample, name: 'Portal' },
       { route: ROUTES.TypedReduxSample, component: TypedReduxSample, name: 'Typed Redux' },
+      { route: ROUTES.ErrorBounarySample, component: ErrorBounarySample, name: 'Error Boundary' },
     ],
   },
   {
