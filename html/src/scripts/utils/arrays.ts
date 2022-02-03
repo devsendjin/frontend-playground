@@ -14,3 +14,5 @@ export const replaceAt = (arr, atIndex, replacer) => {
   copy.splice(atIndex, 1, replacer);
   return copy;
 };
+
+export const randomItemFromArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
