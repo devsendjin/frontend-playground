@@ -52,7 +52,7 @@ const defaultFallbackRender: TFallbackRender = ({ error, resetErrorBoundary, res
 //   );
 // };
 
-const ErrorBounarySample: React.FC = () => {
+const ErrorBounarySample: React.FC = ({ children }) => {
   const [toggle, setToggle] = useState<boolean>(false);
 
   const resetState = () => {
@@ -82,6 +82,7 @@ const ErrorBounarySample: React.FC = () => {
         // }}
         // resetKeys={[toggle]}
       >
+        {children}
         {!toggle && <div>component without error</div>}
         {toggle && <ComponentThatMayError />}
       </ReactErrorBoundary>

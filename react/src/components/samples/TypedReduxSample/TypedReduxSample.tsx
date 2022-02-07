@@ -22,7 +22,7 @@ const TypedRedux: React.FC = () => {
 
       <input type="text" className="form-control" value={input} onChange={(e) => setInput(e.target.value)} />
 
-      <pre>{JSON.stringify(state, null, 2)}</pre>
+      <pre style={{ overflow: 'scroll' }}>{JSON.stringify(state, null, 2)}</pre>
       <div>state.feature.featureName: {state.feature.featureName}</div>
     </div>
   );

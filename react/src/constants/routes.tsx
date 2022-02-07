@@ -7,6 +7,8 @@ import { AccordionSample } from '@/components/samples/AccordionSample';
 import { PortalSample } from '@/components/samples/PortalSample';
 import { TypedReduxSample } from '@/components/samples/TypedReduxSample';
 import { ErrorBounarySample } from '@/components/samples/ErrorBounarySample';
+import { HookFlowSample } from '@/components/samples/HookFlowSample';
+import { Dropdown } from '@/components/UI/_draft/Dropdown';
 
 // const routesArr = [
 //   'DynamicStateControllerSample',
@@ -31,15 +33,17 @@ const ROUTES = {
   LazyInitialStateSample: `/${paramCase('LazyInitialStateSample')}`,
   LocalizationSample: `/${paramCase('LocalizationSample')}`,
   AccordionSample: `/${paramCase('AccordionSample')}`,
+  Dropdown: `/${paramCase('Dropdown')}`,
   PortalSample: `/${paramCase('PortalSample')}`,
   TypedReduxSample: `/${paramCase('TypedReduxSample')}`,
   ErrorBounarySample: `/${paramCase('ErrorBounarySample')}`,
+  HookFlowSample: `/${paramCase('HookFlowSample')}`,
 } as const;
 
-type TRouteArray = ReadonlyArray<{ route: string; component: React.FC; name: string }>;
+export type TRouteArray = ReadonlyArray<{ route: string; component: React.FC; name: string }>;
 const samplesMap: ReadonlyArray<{ category: string; routes: TRouteArray }> = [
   {
-    category: 'Common',
+    category: 'Features',
     routes: [
       // { route: ROUTES.combined, component: AllInOne, name: 'All samples' },
       {
@@ -48,11 +52,21 @@ const samplesMap: ReadonlyArray<{ category: string; routes: TRouteArray }> = [
         name: 'Dynamic state controller',
       },
       { route: ROUTES.LocalizationSample, component: LocalizationSample, name: 'Localization (i18next)' },
-      { route: ROUTES.AccordionSample, component: AccordionSample, name: 'Accordion' },
       { route: ROUTES.PortalSample, component: PortalSample, name: 'Portal' },
       { route: ROUTES.TypedReduxSample, component: TypedReduxSample, name: 'Typed Redux' },
       { route: ROUTES.ErrorBounarySample, component: ErrorBounarySample, name: 'Error Boundary' },
     ],
+  },
+  {
+    category: 'UI',
+    routes: [
+      { route: ROUTES.Dropdown, component: Dropdown, name: 'Dropdown' },
+      { route: ROUTES.AccordionSample, component: AccordionSample, name: 'Accordion' },
+    ],
+  },
+  {
+    category: 'Core knowledge',
+    routes: [{ route: ROUTES.HookFlowSample, component: HookFlowSample, name: 'Hook Flow' }],
   },
   {
     category: 'Performance',

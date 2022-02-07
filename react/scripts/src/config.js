@@ -20,6 +20,8 @@ const paths = {
 
 // change here + tsconfig.json (+ jest.config.js)
 const alias = {
+  react: path.resolve(APP_ROOT, 'node_modules/react'),
+  'react-dom': path.resolve(APP_ROOT, 'node_modules/react-dom'),
   '@': APP_SRC,
   '@@': PROJECT_ROOT,
   '@styles': path.resolve(APP_SRC, 'assets/styles'),

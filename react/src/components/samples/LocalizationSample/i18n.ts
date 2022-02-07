@@ -1,21 +1,27 @@
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
+enum ELanguages {
+  EN = 'en',
+  GER = 'ger',
+  IT = 'it',
+}
+
 i18n.use(LanguageDetector).init({
   resources: {
-    en: {
+    [ELanguages.EN]: {
       translations: {
         some: 'en <div>Introduction</div>',
         other: 'en Advantages',
       },
     },
-    ger: {
+    [ELanguages.GER]: {
       translations: {
         some: 'ger Einführung',
         other: 'ger Vorteile',
       },
     },
-    it: {
+    [ELanguages.IT]: {
       translations: {
         some: 'it some',
         other: 'it other',
@@ -37,4 +43,4 @@ i18n.use(LanguageDetector).init({
   },
 });
 
-export { i18n };
+export { i18n, ELanguages };

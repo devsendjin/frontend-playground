@@ -1,4 +1,4 @@
-import { i18n } from './i18n';
+import { ELanguages, i18n } from './i18n';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 
 const Localization = () => {
@@ -7,15 +7,24 @@ const Localization = () => {
   return (
     <div>
       <div className="btn-group">
-        <button type="button" className="btn btn-primary" onClick={() => i18n.changeLanguage('en')}>
-          en
-        </button>
+        {Object.values(ELanguages).map((langName) => (
+          <button
+            key={langName}
+            type="button"
+            className="btn btn-primary"
+            onClick={() => i18n.changeLanguage(langName)}
+          >
+            {langName}
+          </button>
+        ))}
+
+        {/*
         <button type="button" className="btn btn-primary" onClick={() => i18n.changeLanguage('ger')}>
-          get
+          ger
         </button>
         <button type="button" className="btn btn-primary" onClick={() => i18n.changeLanguage('it')}>
           it
-        </button>
+        </button> */}
       </div>
       <div>{t('some')}</div>
       <div>{t('other')}</div>

@@ -28,6 +28,11 @@ export default {
   },
 
   resolve: {
+    // modules: [
+    //   path.resolve(config.APP_ROOT, 'node_modules'),
+    //   path.resolve(config.APP_SRC),
+    //   path.resolve(config.PROJECT_ROOT, 'shared'),
+    // ],
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.sass', '.scss', '.json'],
     alias: config.alias,
   },
@@ -56,7 +61,8 @@ export default {
     : {},
 
   // error stats handled by @soda/friendly-errors-webpack-plugin
-  stats: config.isServerRunning ? 'none' : 'detailed', // none | detailed | verbose
+  // stats: config.isServerRunning ? 'none' : 'detailed', // none | detailed | verbose
+  stats: config.isServerRunning ? 'errors-warnings' : 'detailed', // none | detailed | verbose
 
   optimization: config.__PROD__
     ? {
@@ -155,7 +161,7 @@ export default {
       cwd: config.APP_ROOT,
     }),
 
-    new FriendlyErrorsWebpackPlugin(),
+    // new FriendlyErrorsWebpackPlugin(),
 
     new WebpackBar({}),
 

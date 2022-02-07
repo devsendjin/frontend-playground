@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { componentMap, ROUTES } from '@/constants/routes';
-import styles from './Main.module.scss';
 import { AllInOne } from '@/components/AllInOne';
+import styles from './Main.module.scss';
 
 const Main = () => {
   return (
