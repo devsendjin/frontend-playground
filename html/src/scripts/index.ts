@@ -5,4 +5,4 @@ import '@/styles/index.scss';
 // import './samples/regexp';
 import './current';
 
-// write safe number converter
+// write safe number converter (implemented in pug-template utils)
