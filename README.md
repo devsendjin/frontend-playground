@@ -16,4 +16,5 @@
 #### Try to use/install:
 
 - [x] [change-case](https://github.com/blakeembrey/change-case) for route paths
+- [ ] [react-mdl](https://github.com/tleunen/react-mdl)
 - [ ] [tsconfig-paths-webpack-plugin](https://github.com/dividab/tsconfig-paths-webpack-plugin)
