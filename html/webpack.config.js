@@ -18,9 +18,9 @@ const PROJECT_ROOT = path.resolve('../');
 const APP_ROOT = path.resolve('./');
 const APP_SRC = path.join(APP_ROOT, 'src');
 
-const TEMPLATES_SRC = path.resolve('./src/templates/pages');
+const PAGES_SRC = path.resolve('./src/templates/pages');
 
-const getTemplates = (templatesDir) => {
+const getSourceFiles = (templatesDir, { genarateFileNamesOnly = false } = {}) => {
   const accumulator = [];
 
   const templatesDirExists = fs.existsSync(templatesDir);
@@ -37,9 +37,13 @@ const getTemplates = (templatesDir) => {
     const isDirectory = stat && stat.isDirectory();
 
     if (isDirectory) {
-      const innerPaths = getTemplates(path.join(templatesDir, currentPath));
+      const innerPaths = getSourceFiles(path.join(templatesDir, currentPath));
       if (innerPaths.length) {
-        acc = acc.concat(innerPaths.map((innerPath) => path.join(currentPath, innerPath)));
+        if (genarateFileNamesOnly) {
+          acc = acc.concat(innerPaths);
+        } else {
+          acc = acc.concat(innerPaths.map((innerPath) => path.join(currentPath, innerPath)));
+        }
       }
     }
 
@@ -55,8 +59,14 @@ const transformFileExtension = (providedPath, extFrom, extTo) => {
   return providedPath.replace(new RegExp(`\.${extFrom}$`, 'gi'), `.${extTo}`);
 };
 
-const TEMPLATES = getTemplates(TEMPLATES_SRC);
-const HTML_TEMPLATES = TEMPLATES.map((template) => transformFileExtension(template, 'pug', 'html'));
+const PUG_FILES = getSourceFiles(PAGES_SRC).filter((template) => template.endsWith('.pug'));
+const TYPESCRIPT_FILES = getSourceFiles(PAGES_SRC, { genarateFileNamesOnly: true }).filter((template) =>
+  template.endsWith('.ts')
+);
+const STYLE_FILES = getSourceFiles(PAGES_SRC, { genarateFileNamesOnly: true }).filter(
+  (template) => template.endsWith('.scss') || template.endsWith('.css')
+);
+const HTML_FILES = PUG_FILES.map((template) => transformFileExtension(template, 'pug', 'html'));
 
 console.log({
   MODE,
@@ -67,9 +77,12 @@ console.log({
   APP_ROOT,
   APP_SRC,
 
-  TEMPLATES_SRC,
+  PAGES_SRC,
 
-  TEMPLATES,
+  PUG_FILES,
+  TYPESCRIPT_FILES,
+  STYLE_FILES,
+  HTML_FILES,
 });
 
 const webpackConfig = {
@@ -148,7 +161,7 @@ const webpackConfig = {
             options: {
               pretty: true,
               data: {
-                navigation: HTML_TEMPLATES,
+                navigation: HTML_FILES,
               },
             },
           },
@@ -210,12 +223,12 @@ if (__PROD__) {
   webpackConfig.plugins.push(new CssoWebpackPlugin());
 }
 
-if (TEMPLATES.length > 0) {
+if (PUG_FILES.length > 0) {
   webpackConfig.plugins.push(
-    ...TEMPLATES.map(
+    ...PUG_FILES.map(
       (template) =>
         new HtmlWebpackPlugin({
-          template: `${TEMPLATES_SRC}/${template}`,
+          template: `${PAGES_SRC}/${template}`,
           filename: `../${template.replace(/\.pug$/, '.html')}`, // relative to public/js
           filename: `../${transformFileExtension(template, 'pug', 'html')}`, // relative to public/js
           inject: false,
