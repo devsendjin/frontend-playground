@@ -1,0 +1,17 @@
+extends ../core/layout
+
+append config
+  -
+    pageTitle = 'Jumping-links';
+    bodyAttributes.class = 'page-jumping-links'
+
+append styles
+   +styles(['jumping-links.css'])
+
+append scripts
+   +styles(['samples/jumping-links.js'])
+
+block content
+  main.main
+    .container
+      h2 Main

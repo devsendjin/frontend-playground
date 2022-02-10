@@ -1,8 +1,8 @@
 import '@/styles/index.scss';
 
-// import './samples/numbers';
-// import './samples/arrays';
-// import './samples/regexp';
+// import './ts-samples/numbers';
+// import './ts-samples/arrays';
+// import './ts-samples/regexp';
 import './current';
 
 // write safe number converter (implemented in pug-template utils)

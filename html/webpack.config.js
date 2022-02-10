@@ -18,7 +18,7 @@ const PROJECT_ROOT = path.resolve('../');
 const APP_ROOT = path.resolve('./');
 const APP_SRC = path.join(APP_ROOT, 'src');
 
-const TEMPLATES_SRC = path.resolve('./src/templates');
+const TEMPLATES_SRC = path.resolve('./src/templates/pages');
 
 const TEMPLATES = (() => {
   if (!fs.existsSync(TEMPLATES_SRC)) return [];
