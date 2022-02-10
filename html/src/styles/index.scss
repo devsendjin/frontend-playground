@@ -1,1 +1,7 @@
 @import '@@/shared/styles';
+
+.layout-playground {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  grid-column-gap: 20px;
+}

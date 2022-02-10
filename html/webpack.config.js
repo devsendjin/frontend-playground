@@ -20,10 +20,43 @@ const APP_SRC = path.join(APP_ROOT, 'src');
 
 const TEMPLATES_SRC = path.resolve('./src/templates/pages');
 
-const TEMPLATES = (() => {
-  if (!fs.existsSync(TEMPLATES_SRC)) return [];
-  return fs.readdirSync(TEMPLATES_SRC).filter((fileName) => fileName.endsWith('.pug'));
-})();
+const getTemplates = (templatesDir) => {
+  const accumulator = [];
+
+  const templatesDirExists = fs.existsSync(templatesDir);
+
+  if (!templatesDirExists) {
+    console.error('SRC directory not found!');
+    return accumulator;
+  }
+
+  return fs.readdirSync(templatesDir).reduce((acc, currentPath) => {
+    const srcFile = path.join(`${templatesDir}/${currentPath}`);
+
+    const stat = fs.statSync(srcFile);
+    const isDirectory = stat && stat.isDirectory();
+
+    if (isDirectory) {
+      const innerPaths = getTemplates(path.join(templatesDir, currentPath));
+      if (innerPaths.length) {
+        acc = acc.concat(innerPaths.map((innerPath) => path.join(currentPath, innerPath)));
+      }
+    }
+
+    if (!isDirectory) {
+      acc.push(currentPath);
+    }
+
+    return acc;
+  }, accumulator);
+};
+
+const transformFileExtension = (providedPath, extFrom, extTo) => {
+  return providedPath.replace(new RegExp(`\.${extFrom}$`, 'gi'), `.${extTo}`);
+};
+
+const TEMPLATES = getTemplates(TEMPLATES_SRC);
+const HTML_TEMPLATES = TEMPLATES.map((template) => transformFileExtension(template, 'pug', 'html'));
 
 console.log({
   MODE,
@@ -39,7 +72,7 @@ console.log({
   TEMPLATES,
 });
 
-module.exports = {
+const webpackConfig = {
   mode: MODE,
 
   entry: {
@@ -114,6 +147,9 @@ module.exports = {
             loader: 'pug-html-loader',
             options: {
               pretty: true,
+              data: {
+                navigation: HTML_TEMPLATES,
+              },
             },
           },
         ],
@@ -167,16 +203,25 @@ module.exports = {
     new FriendlyErrorsWebpackPlugin(),
 
     new MiniCssExtractPlugin({ filename: '../css/[name].css' }),
+  ],
+};
 
+if (__PROD__) {
+  webpackConfig.plugins.push(new CssoWebpackPlugin());
+}
+
+if (TEMPLATES.length > 0) {
+  webpackConfig.plugins.push(
     ...TEMPLATES.map(
       (template) =>
         new HtmlWebpackPlugin({
           template: `${TEMPLATES_SRC}/${template}`,
-          filename: `../${template.replace(/\.pug/, '.html')}`, // relative to public/js
+          filename: `../${template.replace(/\.pug$/, '.html')}`, // relative to public/js
+          filename: `../${transformFileExtension(template, 'pug', 'html')}`, // relative to public/js
           inject: false,
         })
-    ),
+    )
+  );
+}
 
-    __PROD__ && new CssoWebpackPlugin(),
-  ].filter(Boolean),
-};
+module.exports = webpackConfig;

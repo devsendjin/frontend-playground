@@ -6,9 +6,6 @@ block config
 doctype html
 html(lang='ru')
   head
-    include ./head
-
-    head
     meta(charset='UTF-8')
     meta(http-equiv='X-UA-Compatible' content='IE=edge')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
@@ -17,14 +14,18 @@ html(lang='ru')
     link(href='https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap' rel='stylesheet')
 
     block styles
+      +styles(['index.css'])
 
     title #{pageTitle}
 
-  body&attributes(bodyAttributes)
-    block header
+  body(class="layout-playground")&attributes(bodyAttributes)
+    block aside
+      aside
+        each link in navigation
+          a(href=`/${link}`)= `/${link}`
+          br
 
-    block content
-
-    block footer
+    main.main
+      block content
 
     block scripts
