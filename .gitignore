@@ -5,4 +5,8 @@
 .idea/
 .vscode/
 node_modules/
-.yarn/
+.yarn/*
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+!.yarn/patches
