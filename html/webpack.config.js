@@ -59,14 +59,12 @@ const transformFileExtension = (providedPath, extFrom, extTo) => {
   return providedPath.replace(new RegExp(`\.${extFrom}$`, 'gi'), `.${extTo}`);
 };
 
-const PUG_FILES = getSourceFiles(PAGES_SRC).filter((template) => template.endsWith('.pug'));
-const TYPESCRIPT_FILES = getSourceFiles(PAGES_SRC, { genarateFileNamesOnly: true }).filter((template) =>
-  template.endsWith('.ts')
-);
-const STYLE_FILES = getSourceFiles(PAGES_SRC, { genarateFileNamesOnly: true }).filter(
-  (template) => template.endsWith('.scss') || template.endsWith('.css')
-);
-const HTML_FILES = PUG_FILES.map((template) => transformFileExtension(template, 'pug', 'html'));
+const SOURCE_FILES = getSourceFiles(PAGES_SRC);
+const PUG_FILES = SOURCE_FILES.filter((file) => file.endsWith('.pug'));
+const TYPESCRIPT_FILES = SOURCE_FILES.filter((file) => file.endsWith('.ts'));
+const JAVASCRIPT_FILES = TYPESCRIPT_FILES.map((file) => transformFileExtension(file, 'ts', 'js'));
+const STYLE_FILES = SOURCE_FILES.filter((file) => file.endsWith('.scss') || file.endsWith('.css'));
+const HTML_FILES = PUG_FILES.map((file) => transformFileExtension(file, 'pug', 'html'));
 
 console.log({
   MODE,
@@ -79,8 +77,10 @@ console.log({
 
   PAGES_SRC,
 
+  SOURCE_FILES,
   PUG_FILES,
   TYPESCRIPT_FILES,
+  JAVASCRIPT_FILES,
   STYLE_FILES,
   HTML_FILES,
 });
@@ -159,9 +159,12 @@ const webpackConfig = {
           {
             loader: 'pug-html-loader',
             options: {
+              basedir: path.join(APP_SRC, 'templates'),
               pretty: true,
               data: {
                 navigation: HTML_FILES,
+                scripts: JAVASCRIPT_FILES,
+                styles: STYLE_FILES,
               },
             },
           },
