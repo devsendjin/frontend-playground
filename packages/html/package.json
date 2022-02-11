@@ -1,0 +1,49 @@
+{
+  "name": "@frontend-playground/html",
+  "version": "1.0.0",
+  "description": "",
+  "main": "public/index.js",
+  "scripts": {
+    "start": "yarn run-p watch server",
+    "build": "cross-env NODE_ENV=production webpack --config \"./webpack.config.js\"",
+    "watch": "webpack --config \"./webpack.config.js\" --watch",
+    "prettier": "prettier --config \"../prettier.config.js\" --ignore-unknown --write \"./public/index.html\" \"./src/**/*\"",
+    "server": "browser-sync start --config \"./bs-config.js\"",
+    "json": "json5 --validate \"./package.json5\" &&       json5       --space 2       --out-file \"./package.json\"       \"./package.json5\""
+  },
+  "keywords": [],
+  "author": "Anatoliy Skichko",
+  "license": "ISC",
+  "devDependencies": {
+    "@soda/friendly-errors-webpack-plugin": "^1.8.1",
+    "autoprefixer": "^10.4.1",
+    "browser-sync": "^2.27.7",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.5.1",
+    "csso-webpack-plugin": "^2.0.0-beta.3",
+    "html-webpack-plugin": "^5.5.0",
+    "json5": "^2.2.0",
+    "mini-css-extract-plugin": "^2.4.6",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.5",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-loader": "^6.2.1",
+    "postcss-preset-env": "^7.2.0",
+    "prettier": "2.5.1",
+    "pug-html-loader": "^1.1.5",
+    "raw-loader": "^4.0.2",
+    "sass": "^1.45.2",
+    "sass-loader": "^12.4.0",
+    "terser-webpack-plugin": "^5.3.0",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.4",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {
+    "@frontend-playground/shared": "^1.0.0"
+  },
+  "browserslist": [
+    "defaults"
+  ]
+}

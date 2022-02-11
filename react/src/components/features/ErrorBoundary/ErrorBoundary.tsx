@@ -1,3 +1,0 @@
-const ErrorBoundary = () => {};
-
-export { ErrorBoundary };

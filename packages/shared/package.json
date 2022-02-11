@@ -1,0 +1,6 @@
+{
+  "name": "@frontend-playground/shared",
+  "version": "1.0.0",
+  "main": "scripts/index.ts",
+  "license": "MIT"
+}

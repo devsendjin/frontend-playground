@@ -1,0 +1,21 @@
+.debug {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.app-content {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  grid-gap: 20px;
+}
+
+:global {
+  #app {
+    height: 100%;
+  }
+}
+
+.app-content {
+  min-height: 100%;
+}

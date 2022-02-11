@@ -1,0 +1,12 @@
+extends /core/layout
+
+append config
+  -
+    pageTitle = 'HTML playground';
+    bodyAttributes.class = 'page-index'
+
+append scripts
+   +scripts(['index.js'])
+
+append content
+  h1 HTML playground

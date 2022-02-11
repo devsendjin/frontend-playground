@@ -1,0 +1,33 @@
+// tsconfig in details
+// https://gist.github.com/KRostyslav/82a25c469ffa6652825d58537ac6bc22
+// @docs http://json.schemastore.org/tsconfig
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "allowJs": true,
+    "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noEmitOnError": true,
+    "strict": true,
+    "noUnusedParameters": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "target": "ES5",
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["ESNext", "DOM"],
+    "paths": {
+      "@/*": ["*"],
+      "@@/*": ["../"],
+      "@styles/*": ["assets/styles/*"]
+    },
+    "typeRoots": ["src/types", "src/global.d.ts", "../../node_modules/@types"]
+  },
+  "include": ["./src/**/*.ts", "./src/**/*.tsx", "global.d.ts", "../shared/**/*.ts"],
+  "exclude": ["node_modules"]
+}
