@@ -9,6 +9,7 @@ import { TypedReduxSample } from '@/components/samples/TypedReduxSample';
 import { ErrorBounarySample } from '@/components/samples/ErrorBounarySample';
 import { HookFlowSample } from '@/components/samples/HookFlowSample';
 import { Dropdown } from '@/components/UI/_draft/Dropdown';
+import { IconsSample } from '@/components/samples/IconsSample';
 
 // const routesArr = [
 //   'DynamicStateControllerSample',
@@ -38,6 +39,7 @@ const ROUTES = {
   TypedReduxSample: `/${paramCase('TypedReduxSample')}`,
   ErrorBounarySample: `/${paramCase('ErrorBounarySample')}`,
   HookFlowSample: `/${paramCase('HookFlowSample')}`,
+  IconsSample: `/${paramCase('IconsSample')}`,
 } as const;
 
 export type TRouteArray = ReadonlyArray<{ route: string; component: React.FC; name: string }>;
@@ -62,6 +64,7 @@ const samplesMap: ReadonlyArray<{ category: string; routes: TRouteArray }> = [
     routes: [
       { route: ROUTES.Dropdown, component: Dropdown, name: 'Dropdown' },
       { route: ROUTES.AccordionSample, component: AccordionSample, name: 'Accordion' },
+      { route: ROUTES.IconsSample, component: IconsSample, name: 'Icons' },
     ],
   },
   {
