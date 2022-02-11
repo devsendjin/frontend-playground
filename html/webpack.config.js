@@ -20,7 +20,7 @@ const APP_SRC = path.join(APP_ROOT, 'src');
 
 const PAGES_SRC = path.resolve('./src/templates/pages');
 
-const getSourceFiles = (templatesDir, { genarateFileNamesOnly = false } = {}) => {
+const getSourceFiles = (templatesDir, { generateFileNamesOnly = false } = {}) => {
   const accumulator = [];
 
   const templatesDirExists = fs.existsSync(templatesDir);
@@ -39,7 +39,7 @@ const getSourceFiles = (templatesDir, { genarateFileNamesOnly = false } = {}) =>
     if (isDirectory) {
       const innerPaths = getSourceFiles(path.join(templatesDir, currentPath));
       if (innerPaths.length) {
-        if (genarateFileNamesOnly) {
+        if (generateFileNamesOnly) {
           acc = acc.concat(innerPaths);
         } else {
           acc = acc.concat(innerPaths.map((innerPath) => path.join(currentPath, innerPath)));
@@ -59,12 +59,18 @@ const transformFileExtension = (providedPath, extFrom, extTo) => {
   return providedPath.replace(new RegExp(`\.${extFrom}$`, 'gi'), `.${extTo}`);
 };
 
-const SOURCE_FILES = getSourceFiles(PAGES_SRC);
+const SOURCE_FILES = getSourceFiles(PAGES_SRC); // files from pages
 const PUG_FILES = SOURCE_FILES.filter((file) => file.endsWith('.pug'));
 const TYPESCRIPT_FILES = SOURCE_FILES.filter((file) => file.endsWith('.ts'));
 const JAVASCRIPT_FILES = TYPESCRIPT_FILES.map((file) => transformFileExtension(file, 'ts', 'js'));
 const STYLE_FILES = SOURCE_FILES.filter((file) => file.endsWith('.scss') || file.endsWith('.css'));
 const HTML_FILES = PUG_FILES.map((file) => transformFileExtension(file, 'pug', 'html'));
+
+const NAV_LINKS = HTML_FILES.map((file) => {
+  // replace 'index.html' and add '/' to the beginning of the file
+  const link = file.replace(/\/?index\.html/gi, '');
+  return `/${link}`;
+});
 
 console.log({
   MODE,
@@ -83,6 +89,7 @@ console.log({
   JAVASCRIPT_FILES,
   STYLE_FILES,
   HTML_FILES,
+  NAV_LINKS,
 });
 
 const webpackConfig = {
@@ -118,6 +125,29 @@ const webpackConfig = {
         test: /\.ts$/i,
         exclude: /node_modules/,
         use: ['ts-loader'],
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: __DEV__,
+              importLoaders: 2,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: __DEV__,
+              implementation: require('postcss'),
+              postcssOptions: {
+                plugins: [['postcss-preset-env', { stage: 2 }], postcssFlexbugsFixes, autoprefixer],
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.s[ac]ss$/i,
@@ -162,7 +192,7 @@ const webpackConfig = {
               basedir: path.join(APP_SRC, 'templates'),
               pretty: true,
               data: {
-                navigation: HTML_FILES,
+                navigation: NAV_LINKS,
                 scripts: JAVASCRIPT_FILES,
                 styles: STYLE_FILES,
               },

@@ -11,12 +11,14 @@
 
     "prettier": "prettier --config \"../prettier.config.js\" --ignore-unknown --write \"./public/index.html\" \"./src/**/*\"",
 
-    "server": "browser-sync start \
-      --open \
-      --no-notify \
-      --server \"./public\" \
-      --files \"./**/*.(html|css|js)\" \
-      --port 4003",
+    // "server": "browser-sync start \
+    //   --open \
+    //   --no-notify \
+    //   --server \"./public\" \
+    //   --files \"./**/*.(html|css|js)\" \
+    //   --port 4003",
+
+    "server": "browser-sync start --config \"./bs-config.js\"",
 
     "json": "json5 --validate \"./package.json5\" && \
       json5 \
@@ -64,9 +66,6 @@
     "prettier": "2.5.1",
     "npm-run-all": "^4.1.5",
     "cross-env": "^7.0.3",
-  },
-  "dependencies": {
-    "material-design-lite": "^1.3.0"
   },
   "browserslist": [
     "defaults"
