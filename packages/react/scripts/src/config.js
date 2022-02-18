@@ -1,5 +1,6 @@
 import path from 'path';
-import { resolvePath } from '@frontend-playground/shared/config';
+import { resolvePath } from '@frontend-playground/config';
+// import { resolvePath } from '../../../shared/config';
 import { getPublicUrlOrPath } from './config.utils';
 
 const MODE = process.env.NODE_ENV === 'production' ? 'production' : 'development';

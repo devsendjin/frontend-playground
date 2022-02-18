@@ -4,9 +4,10 @@ module.exports = {
   server: './public',
   files: ['./**/*.(html|css|js)'],
   notify: false,
-  open: false,
+  open: true,
   port: 4003,
   ui: false,
+  browser: ["google chrome"],
   // middleware: function (req, _res, next) {
   //   // strip slash at the end
   //   const url = req.url;

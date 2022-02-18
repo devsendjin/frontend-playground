@@ -1,8 +1,28 @@
 {
   "name": "frontend-playground",
+  "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "packages/*"
+  "description": "Playground for ideas",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "start": "pnpm run start --parallel"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devsendjin/frontend-playground.git"
+  },
+  "keywords": [
+    "playground",
+    "html",
+    "typescript",
+    "react"
   ],
-  "packageManager": "yarn@3.1.1"
+  "author": "Anatoliy Skichko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devsendjin/frontend-playground/issues"
+  },
+  "homepage": "https://github.com/devsendjin/frontend-playground#readme"
 }

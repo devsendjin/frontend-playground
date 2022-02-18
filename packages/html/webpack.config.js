@@ -9,7 +9,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CssoWebpackPlugin = require('csso-webpack-plugin').default;
 const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { resolvePath, transformFileExtension } = require('@frontend-playground/shared/config');
+const { resolvePath, transformFileExtension } = require('@frontend-playground/config');
 
 const MODE = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 const __PROD__ = MODE === 'production';
