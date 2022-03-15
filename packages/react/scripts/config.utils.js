@@ -1,1 +1,0 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:true});exports.getPublicUrlOrPath=void 0;var getPublicUrlOrPath=function getPublicUrlOrPath(){return"/"};exports.getPublicUrlOrPath=getPublicUrlOrPath;

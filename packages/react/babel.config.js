@@ -1,7 +1,7 @@
-const config = require('./scripts/config.js');
+const config = require('./scripts/config.shared');
 
 module.exports = (api) => {
-  api.cache.forever();
+  api.cache(true);
 
   const babelConfig = {
     presets: [
@@ -15,15 +15,9 @@ module.exports = (api) => {
           modules: 'auto',
           useBuiltIns: false,
         },
-      ]
-    ],
-    plugins: [
-      ["@babel/plugin-transform-runtime",
-        {
-          "regenerator": true
-        }
       ],
     ],
+    plugins: [],
   };
 
   if (config.isServerRunning) {

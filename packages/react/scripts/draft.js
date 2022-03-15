@@ -1,1 +1,0 @@
-"use strict";var _interopRequireDefault=require("@babel/runtime/helpers/interopRequireDefault");var _path=_interopRequireDefault(require("path"));var PROJECT_ROOT=_path["default"].resolve("../");console.log(PROJECT_ROOT);

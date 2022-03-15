@@ -6,6 +6,7 @@
     "sourceMap": true,
     "allowJs": true,
     "noImplicitAny": true,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "noImplicitReturns": true,
@@ -13,14 +14,14 @@
     "noEmitOnError": true,
     "strict": true,
     "noUnusedParameters": true,
+    "resolveJsonModule": true,
     "module": "ESNext",
     "moduleResolution": "node",
-    "target": "ES5",
+    "target": "ES6",
     "jsx": "react-jsx",
     "baseUrl": "src",
-    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["ESNext", "DOM"],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "paths": {
       "@/*": ["*"],
       "@@/*": ["../"],
@@ -29,5 +30,12 @@
     "typeRoots": ["src/types", "src/global.d.ts", "../../node_modules/@types"]
   },
   "include": ["./src/**/*.ts", "./src/**/*.tsx", "global.d.ts", "../shared/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS",
+      "target": "es5",
+      "baseUrl": "scripts"
+    }
+  }
 }
