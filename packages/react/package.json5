@@ -9,20 +9,10 @@
 
     "watch": "webpack --config \"./scripts/webpack.config.ts\" --watch --progress",
 
+    "prettier:src": "pnpm prettier \"./src/**/*\"",
     "prettier": "prettier --config \"../prettier.config.js\" --ignore-unknown --write",
-    "prettier:all": "pnpm prettier \"./src/**/*\"",
 
-    // webpack configs
-    "config:build": "pnpm babel \
-      --no-babelrc \
-      --no-comments \
-      --minified \
-      --source-maps false \
-      --out-dir \"./scripts\" \
-      --plugins @babel/plugin-transform-modules-commonjs \
-      \"./scripts/src/*\"",
-    "config:prettier": "prettier --config \"../prettier.config.js\" --write \"./scripts/src/*\"",
-    "config:test": "webpack configtest \"./scripts/webpack.config.js\"",
+    "config:test": "webpack configtest \"./scripts/webpack.config.ts\"",
 
     // utils
     "json": "json5 --validate \"./package.json5\" && \
@@ -36,22 +26,19 @@
   "license": "ISC",
   "devDependencies": {
     // js (transformers)
-    "@babel/cli": "^7.16.8", // for config:build command
-    "@babel/core": "^7.16.7",
-    '@babel/register': '^7.17.0',
+    "@babel/cli": "^7.17.6", // for config:build command
+    "@babel/core": "^7.17.7",
     "@babel/preset-env": "^7.16.8",
     "@babel/preset-react": "^7.16.7",
-    "@babel/plugin-transform-runtime": "^7.17.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.16.8", // for config:build command
 
     // types
-    "@types/react": "^17.0.39",
-    "@types/react-dom": "^17.0.11",
-    "@types/node": "^17.0.14",
+    "@types/react": "^17.0.40",
+    "@types/react-dom": "^17.0.13",
+    "@types/node": "^17.0.21",
 
 
     // webpack
-    "webpack": "^5.68.0",
+    "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.4",
     // plugins
@@ -59,31 +46,31 @@
     "circular-dependency-plugin": "^5.2.2",
     "csso-webpack-plugin": "^2.0.0-beta.3",
     "html-webpack-plugin": "^5.5.0",
-    "mini-css-extract-plugin": "^2.5.3",
+    "mini-css-extract-plugin": "^2.6.0",
     "terser-webpack-plugin": "^5.3.1",
     // loaders
     "style-loader": "^3.3.1", // css
-    "css-loader": "^6.6.0", // css
+    "css-loader": "^6.7.1", // css
     "postcss-loader": "^6.2.1", // css
-    "sass-loader": "^12.4.0",
+    "sass-loader": "^12.6.0",
     "babel-loader": "^8.2.3", // js
-    "ts-loader": "^9.2.6",
+    "ts-loader": "^9.2.8",
     "@svgr/webpack": "^6.2.1",
     "url-loader": "^4.1.1",
     "file-loader": "^6.2.0",
 
 
     // scss / css
-    "sass": "^1.49.7",
-    "postcss": "^8.4.6",
-    "postcss-preset-env": "^7.3.1",
+    "sass": "^1.49.9",
+    "postcss": "^8.4.11",
+    "postcss-preset-env": "^7.4.2",
     "postcss-flexbugs-fixes": "^5.0.2",
-    "autoprefixer": "^10.4.1",
+    "autoprefixer": "^10.4.3",
 
 
     // typescript
-    "typescript": "^4.5.5",
-    "ts-node": "^10.4.0",
+    "typescript": "^4.6.2",
+    "ts-node": "^10.7.0",
 
 
     // utils
@@ -102,23 +89,23 @@
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "6",
+    "react-router-dom": "6.2.2",
     "immer": "^9.0.12", // immutable data processing
     "classnames": "^2.3.1", // handle css classes
-    "react-bootstrap": "^2.1.2",
+    "react-bootstrap": "^2.2.1",
     "bootstrap": "^5.1.3",
     "gsap": "^3.9.1",
 
     "change-case": "^4.1.2",
 
     // localization
-    "i18next": "^21.6.10",
+    "i18next": "^21.6.14",
     "i18next-browser-languagedetector": "^6.1.3",
-    "react-i18next": "^11.15.3",
+    "react-i18next": "^11.15.7",
 
     // redux
     "redux": "^4.1.2",
-    "redux-devtools-extension": "^2.13.9",
+    '@redux-devtools/extension': '^3.2.2',
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-thunk": "^2.4.1",
     "react-redux": "^7.2.6",
