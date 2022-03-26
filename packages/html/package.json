@@ -4,9 +4,10 @@
   "description": "",
   "main": "public/index.js",
   "scripts": {
-    "start": "pnpm run-p watch server",
-    "build": "cross-env NODE_ENV=production webpack --config \"./webpack.config.js\"",
-    "watch": "webpack --config \"./webpack.config.js\" --watch",
+    "start": "pnpm run-p webpack:watch server",
+    "build": "cross-env NODE_ENV=production pnpm webpack",
+    "webpack": "webpack --config \"./webpack.config.js\" --progress",
+    "webpack:watch": "pnpm webpack -- --watch",
     "prettier": "prettier --config \"../prettier.config.js\" --ignore-unknown --write \"./public/index.html\" \"./src/**/*\"",
     "server": "browser-sync start --config \"./bs-config.js\"",
     "json": "json5 --validate \"./package.json5\" &&       json5       --space 2       --out-file \"./package.json\"       \"./package.json5\""

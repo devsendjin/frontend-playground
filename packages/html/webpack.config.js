@@ -69,6 +69,13 @@ const NAV_LINKS = HTML_FILES.map((file) => {
   return `/${link}`;
 });
 
+const pugData = {
+  links: NAV_LINKS,
+  scripts: JAVASCRIPT_FILES,
+  styles: STYLE_FILES,
+  _meta: { __DEV__, __PROD__ },
+};
+
 console.log({
   MODE,
   __PROD__,
@@ -87,6 +94,8 @@ console.log({
   STYLE_FILES,
   HTML_FILES,
   NAV_LINKS,
+
+  pugData,
 });
 
 const webpackConfig = {
@@ -131,6 +140,7 @@ const webpackConfig = {
             loader: 'css-loader',
             options: {
               sourceMap: __DEV__,
+              url: false,
               importLoaders: 2,
             },
           },
@@ -155,6 +165,7 @@ const webpackConfig = {
             loader: 'css-loader',
             options: {
               sourceMap: __DEV__,
+              url: false,
               importLoaders: 2,
             },
           },
@@ -188,11 +199,7 @@ const webpackConfig = {
             options: {
               basedir: path.join(APP_SRC, 'templates'),
               pretty: true,
-              data: {
-                navigation: NAV_LINKS,
-                scripts: JAVASCRIPT_FILES,
-                styles: STYLE_FILES,
-              },
+              data: pugData,
             },
           },
         ],

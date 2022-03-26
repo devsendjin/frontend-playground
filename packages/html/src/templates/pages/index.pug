@@ -2,8 +2,9 @@ extends /core/layout
 
 append config
   -
-    pageTitle = 'HTML playground';
-    bodyAttributes.class = 'page-index'
+    _site.title = 'Jumping-links';
+    _site.bodyAttributes.class = 'page-index';
+
 
 append scripts
    +scripts(['index.js'])

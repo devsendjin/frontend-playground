@@ -15,14 +15,14 @@ html(lang='ru')
     link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
 
     block styles
-      +styles(['index.css'])
+      +styles(['bundle.css'])
 
-    title #{pageTitle}
+    title #{_site.title}
 
-  body(class="layout-playground")&attributes(bodyAttributes)
+  body(class="layout-playground")&attributes(_site.bodyAttributes)
     block aside
       aside.aside
-        each link in navigation
+        each link in links
           a(href=link, style='min-width: 80px; display: block;')= link
 
     main.main
