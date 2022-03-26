@@ -1,8 +1,12 @@
-// @include font-face(
-// 	$name: 'Test font',
-// 	$locals: ('Font name', 'Another font name'),
-// 	$path: '../fonts/test_font/TestFont',
-// 	$weight: 400,
-// 	$style: normal,
-// 	$exts: eot woff2 woff ttf svg otf
-// );
+// $weights: (100, 200, 300, 400, 500, 600, 700, 800, 900);
+
+// @each $weight in $weights {
+//   @include font-face(
+//     $name: 'Test font',
+//     $locals: ('Font name', 'Another font name'),
+//     $path: '/fonts/Nunito/Nunito',
+//     $weight: $weight,
+//     $style: normal,
+//     $exts: eot woff2 woff ttf svg otf
+//   );
+// }
