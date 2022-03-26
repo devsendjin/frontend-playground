@@ -4,7 +4,7 @@ type TScaffoldContext = {};
 
 const ScaffoldContext = React.createContext(null as unknown as TScaffoldContext);
 
-const ScaffoldProvier: React.FC = ({ children }) => {
+const ScaffoldProvider: React.FC = ({ children }) => {
   return <ScaffoldContext.Provider value={{}}>{children}</ScaffoldContext.Provider>;
 };
 
@@ -16,4 +16,4 @@ const useScaffoldContext = () => {
   return context;
 };
 
-export { ScaffoldContext, ScaffoldProvier, useScaffoldContext };
+export { ScaffoldContext, ScaffoldProvider, useScaffoldContext };
