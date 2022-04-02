@@ -1,0 +1,31 @@
+// tsconfig in details
+// https://gist.github.com/KRostyslav/82a25c469ffa6652825d58537ac6bc22
+// https://basarat.gitbook.io/typescript/project/compilation-context/tsconfig
+// @docs http://json.schemastore.org/tsconfig
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ES6",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "moduleResolution": "node",
+    "declaration": false,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
+    "noEmitOnError": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowJs": true,
+    "noImplicitReturns": true,
+    "suppressImplicitAnyIndexErrors": false,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "importHelpers": true
+  }
+}
