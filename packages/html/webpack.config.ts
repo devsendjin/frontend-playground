@@ -1,28 +1,41 @@
-const path = require('path');
-const fs = require('fs');
+import path from 'path';
+import fs from 'fs';
 
-const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
-const postcssFlexbugsFixes = require('postcss-flexbugs-fixes');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const CssoWebpackPlugin = require('csso-webpack-plugin').default;
-const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { resolvePath, transformFileExtension } = require('@frontend-playground/config');
+import webpack, { Configuration } from 'webpack';
+import postcss from 'postcss';
+import sass from 'sass';
+import autoprefixer from 'autoprefixer';
+import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
+import CssoWebpackPlugin from 'csso-webpack-plugin';
+// import FriendlyErrorsWebpackPlugin from '@soda/friendly-errors-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { resolvePath, transformFileExtension } from '@frontend-playground/config';
 
 const MODE = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 const __PROD__ = MODE === 'production';
 const __DEV__ = !__PROD__;
 
+// @ts-ignore
 const PROJECT_ROOT = resolvePath({ folderToLookup: 'packages' });
 const APP_ROOT = path.resolve('./');
 const APP_SRC = path.join(APP_ROOT, 'src');
 
 const PAGES_SRC = path.resolve('./src/templates/pages');
 
-const getSourceFiles = (templatesDir, { generateFileNamesOnly = false } = {}) => {
-  const accumulator = [];
+const renamePathTo = (filePath: string, renameTo: string) => {
+  if (filePath.length === 1) return path.join('/', filePath, renameTo);
+  if (filePath.length < 1) return `/${renameTo}`;
+
+  const correctPath = filePath.replace(/([A-Za-z0-9-_]+)+\.(html|pug)$/gim, 'index.html');
+
+  return path.join(correctPath);
+};
+
+const getSourceFiles = (templatesDir: string, options: { generateFileNamesOnly?: boolean } = {}) => {
+  const { generateFileNamesOnly = false } = options;
+  const accumulator: string[] = [];
 
   const templatesDirExists = fs.existsSync(templatesDir);
 
@@ -31,7 +44,7 @@ const getSourceFiles = (templatesDir, { generateFileNamesOnly = false } = {}) =>
     return accumulator;
   }
 
-  return fs.readdirSync(templatesDir).reduce((acc, currentPath) => {
+  return fs.readdirSync(templatesDir).reduce<string[]>((acc, currentPath) => {
     const srcFile = path.join(`${templatesDir}/${currentPath}`);
 
     const stat = fs.statSync(srcFile);
@@ -61,12 +74,15 @@ const PUG_FILES = SOURCE_FILES.filter((file) => file.endsWith('.pug'));
 const TYPESCRIPT_FILES = SOURCE_FILES.filter((file) => file.endsWith('.ts'));
 const JAVASCRIPT_FILES = TYPESCRIPT_FILES.map((file) => transformFileExtension(file, 'ts', 'js'));
 const STYLE_FILES = SOURCE_FILES.filter((file) => file.endsWith('.scss') || file.endsWith('.css'));
+// const HTML_FILES = PUG_FILES.map((file) => renamePathTo(file, 'index.html'));
 const HTML_FILES = PUG_FILES.map((file) => transformFileExtension(file, 'pug', 'html'));
 
 const NAV_LINKS = HTML_FILES.map((file) => {
-  // replace 'index.html' and add '/' to the beginning of the file
-  const link = file.replace(/\/?index\.html/gi, '');
-  return `/${link}`;
+  // replace 'index.html' || 'index.pug'
+  const index = file.lastIndexOf('/');
+
+  if (index === -1) return '/';
+  return file.substring(0, index + 1);
 });
 
 const pugData = {
@@ -98,16 +114,36 @@ console.log({
   pugData,
 });
 
-const webpackConfig = {
+console.log(
+  "JAVASCRIPT_FILES.map((file) => ({ [file]: path.join(APP_SRC, transformFileExtension(file, 'ts', 'js')) }))",
+  JAVASCRIPT_FILES.reduce<{ [key: string]: string }>((acc, file) => {
+    acc[file] = path.join(APP_SRC, transformFileExtension(file, 'js', 'ts'));
+    return acc;
+  }, {})
+);
+
+const webpackConfig: Configuration = {
   mode: MODE,
 
   entry: {
-    index: path.join(APP_SRC, 'scripts/index.ts'),
+    'scripts/index.ts': path.join(APP_SRC, 'scripts/index.ts'),
+    // 'samples/jumping-links/jumping-links.js':
+    //   '/Users/devsendjin/Projects/frontend-playground/packages/html/src/templates/pages/samples/jumping-links/jumping-links.ts',
+    // ...JAVASCRIPT_FILES.reduce<{ [key: string]: string }>((acc, file) => {
+    //   acc[file] = path.join(APP_SRC, transformFileExtension(file, 'js', 'ts'));
+    //   return acc;
+    // }, {}),
   },
 
   output: {
-    filename: '[name].js',
-    path: path.join(APP_ROOT, 'public/js'),
+    // filename: '[name].js',
+    filename: (pathData) => {
+      // console.log({ pathData });
+      return pathData.runtime as string;
+      // return '[name].js';
+    },
+    path: path.join(APP_ROOT, 'public'),
+    // path: path.join(APP_ROOT, 'public'),
   },
 
   // error stats handled by @soda/friendly-errors-webpack-plugin
@@ -148,7 +184,7 @@ const webpackConfig = {
             loader: 'postcss-loader',
             options: {
               sourceMap: __DEV__,
-              implementation: require('postcss'),
+              implementation: postcss,
               postcssOptions: {
                 plugins: [['postcss-preset-env', { stage: 2 }], postcssFlexbugsFixes, autoprefixer],
               },
@@ -173,7 +209,7 @@ const webpackConfig = {
             loader: 'postcss-loader',
             options: {
               sourceMap: __DEV__,
-              implementation: require('postcss'),
+              implementation: postcss,
               postcssOptions: {
                 plugins: [['postcss-preset-env', { stage: 2 }], postcssFlexbugsFixes, autoprefixer],
               },
@@ -183,7 +219,7 @@ const webpackConfig = {
             loader: 'sass-loader',
             options: {
               sourceMap: __DEV__,
-              implementation: require('sass'),
+              implementation: sass,
             },
           },
         ],
@@ -229,7 +265,7 @@ const webpackConfig = {
               },
               format: {
                 comments: false, // "some" by default
-                preamble: null, // null by default. When passed it must be a string and it will be prepended to the output literally. The source map will adjust for this text. Can be used to insert a comment containing licensing information, for example.
+                preamble: '', // null by default. When passed it must be a string and it will be prepended to the output literally. The source map will adjust for this text. Can be used to insert a comment containing licensing information, for example.
                 quote_style: 3, // 0 by default. 3 - always use the original quotes.
                 preserve_annotations: false, // false by default.
                 ecma: 2020, // 5 by default. Desired EcmaScript standard version for output.
@@ -250,27 +286,26 @@ const webpackConfig = {
       __PROD__: __PROD__,
     }),
 
-    new FriendlyErrorsWebpackPlugin(),
+    // new FriendlyErrorsWebpackPlugin(),
 
     new MiniCssExtractPlugin({ filename: '../css/[name].css' }),
   ],
 };
 
 if (__PROD__) {
-  webpackConfig.plugins.push(new CssoWebpackPlugin());
+  webpackConfig.plugins!.push(new CssoWebpackPlugin());
 }
 
 if (PUG_FILES.length > 0) {
-  webpackConfig.plugins.push(
-    ...PUG_FILES.map(
-      (template) =>
-        new HtmlWebpackPlugin({
-          template: `${PAGES_SRC}/${template}`,
-          filename: `../${template.replace(/\.pug$/, '.html')}`, // relative to public/js
-          filename: `../${transformFileExtension(template, 'pug', 'html')}`, // relative to public/js
-          inject: false,
-        })
-    )
+  webpackConfig.plugins!.push(
+    ...PUG_FILES.map((template) => {
+      return new HtmlWebpackPlugin({
+        template: `${PAGES_SRC}/${template}`,
+        // filename: `../${transformFileExtension(template, 'pug', 'html')}`, // relative to public
+        filename: `${renamePathTo(template, 'index.html')}`, // relative to public
+        inject: false,
+      });
+    })
   );
 }
 

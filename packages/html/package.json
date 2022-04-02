@@ -6,7 +6,7 @@
   "scripts": {
     "start": "pnpm run-p webpack:watch server",
     "build": "cross-env NODE_ENV=production pnpm webpack",
-    "webpack": "webpack --config \"./webpack.config.js\" --progress",
+    "webpack": "webpack --config \"./webpack.config.ts\" --progress",
     "webpack:watch": "pnpm webpack -- --watch",
     "prettier": "prettier --config \"../prettier.config.js\" --ignore-unknown --write \"./public/index.html\" \"./src/**/*\"",
     "server": "browser-sync start --config \"./bs-config.js\"",
@@ -16,6 +16,7 @@
   "author": "Anatoliy Skichko",
   "license": "ISC",
   "devDependencies": {
+    "@types/postcss-flexbugs-fixes": "^4.2.1",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
     "@soda/friendly-errors-webpack-plugin": "^1.8.1",
@@ -35,11 +36,13 @@
     "autoprefixer": "^10.4.1",
     "postcss-flexbugs-fixes": "^5.0.2",
     "typescript": "^4.5.4",
+    "ts-node": "^10.7.0",
     "json5": "^2.2.0",
     "browser-sync": "^2.27.7",
     "prettier": "2.5.1",
     "npm-run-all": "^4.1.5",
     "cross-env": "^7.0.3",
+    "shx": "^0.3.4",
     "@frontend-playground/config": "workspace:^1.0.0"
   },
   "dependencies": {
