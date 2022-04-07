@@ -47,8 +47,8 @@
 // =========================================
 // svg background
 // =========================================
-@mixin svgbg($width: 0, $height: 0, $url: '') {
-  content: '';
+@mixin svgbg($width: 0, $height: 0, $url: "") {
+  content: "";
   display: block;
   position: absolute;
   width: $width;
@@ -62,17 +62,24 @@
 // =========================================
 // Font Face
 // =========================================
-@mixin font-face($name, $path, $locals: null, $weight: null, $style: null, $exts: eot woff2 woff ttf svg otf) {
+@mixin font-face(
+  $name,
+  $path,
+  $locals: null,
+  $weight: null,
+  $style: null,
+  $exts: eot woff2 woff ttf svg otf
+) {
   $src: null;
 
   $extmods: (
-    eot: '?',
-    svg: '#' + str-replace($name, ' ', '_'),
+    eot: "?",
+    svg: "#" + str-replace($name, " ", "_"),
   );
 
   $formats: (
-    otf: 'opentype',
-    ttf: 'truetype',
+    otf: "opentype",
+    ttf: "truetype",
   );
 
   @if ($locals != null) {
@@ -82,9 +89,17 @@
   }
 
   @each $ext in $exts {
-    $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+    $extmod: if(
+      map-has-key($extmods, $ext),
+      $ext + map-get($extmods, $ext),
+      $ext
+    );
     $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
-    $src: append($src, url(quote($path + '.' + $extmod)) format(quote($format)), comma);
+    $src: append(
+      $src,
+      url(quote($path + "." + $extmod)) format(quote($format)),
+      comma
+    );
   }
 
   @font-face {
@@ -99,7 +114,11 @@
 // =========================================
 // gradient background-image
 // =========================================
-@mixin bgi($color: #000000, $height: 1px, $bottom: 0) {
+@mixin bgi(
+  $color: #000,
+  $height: 1px,
+  $bottom: 0 // in px (padding required for working)
+) {
   background-image: linear-gradient(
     to top,
     transparent $bottom,
@@ -296,7 +315,7 @@
 * }
 */
 @mixin triangle($direction, $sizeH, $sizeV, $color) {
-  content: '';
+  content: "";
   display: block;
   width: 0;
   height: 0;
@@ -358,9 +377,15 @@
  * margin-right: $gutter;   or   margin-left: $gutter;
  */
 
-@function calcWidth($num, $gutterShift: 0px, $columns: $columns, $gutter: $gutter) {
+@function calcWidth(
+  $num,
+  $gutterShift: 0px,
+  $columns: $columns,
+  $gutter: $gutter
+) {
   @return calc(
-    ((100% - (#{$gutter} * (#{$columns} - 1))) / #{$columns}) * #{$num} + #{$gutter} * (#{$num} - 1) + #{$gutterShift}
+    ((100% - (#{$gutter} * (#{$columns} - 1))) / #{$columns}) * #{$num} + #{$gutter} *
+      (#{$num} - 1) + #{$gutterShift}
   );
 }
 
@@ -371,13 +396,25 @@
 
 //$property - задаём или margin или padding, по умолчанию margin
 // добавляем отступ слева
-@mixin pullLeft($num, $gutterShift: 0px, $property: margin, $columns: $columns, $gutter: $gutter) {
+@mixin pullLeft(
+  $num,
+  $gutterShift: 0px,
+  $property: margin,
+  $columns: $columns,
+  $gutter: $gutter
+) {
   #{$property}-left: calcWidth($num, $gutterShift, $columns, $gutter);
 }
 
 //$property - задаём или margin или padding, по умолчанию margin
 // добавляем отступ справа
-@mixin pullRight($num, $gutterShift: 0px, $property: margin, $columns: $columns, $gutter: $gutter) {
+@mixin pullRight(
+  $num,
+  $gutterShift: 0px,
+  $property: margin,
+  $columns: $columns,
+  $gutter: $gutter
+) {
   #{$property}-right: calcWidth($num, $gutterShift, $columns, $gutter);
 }
 
@@ -404,7 +441,8 @@
 // detect IE10 and above
 // =========================================
 @mixin IE10up() {
-  @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+  @media screen and (-ms-high-contrast: active),
+    screen and (-ms-high-contrast: none) {
     @content;
   }
 }
@@ -412,17 +450,42 @@
 // =========================================
 // centering
 // =========================================
-@mixin center($axis: 'xy') {
+@mixin center($axis: "xy") {
   position: absolute;
-  @if $axis == 'xy' {
+  @if $axis == "xy" {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  } @else if $axis == 'y' {
+  } @else if $axis == "y" {
     top: 50%;
     transform: translateY(-50%);
-  } @else if $axis == 'x' {
+  } @else if $axis == "x" {
     left: 50%;
     transform: translateX(-50%);
+  }
+}
+
+@mixin underline($behavior: null, $args...) {
+  @if $behavior == "remove-on-hover" {
+    @include underline-start-state(
+      $color: #000,
+      $behavior: "remove-on-hover",
+      $bgPos: left,
+      $args...
+    );
+
+    &:hover {
+      @include underline-end-state($behavior: "remove-on-hover", $bgPos: right);
+    }
+  } @else {
+    @include underline-start-state(
+      $color: #000,
+      $bgPos: right,
+      $args...
+    );
+
+    &:hover {
+      @include underline-end-state();
+    }
   }
 }

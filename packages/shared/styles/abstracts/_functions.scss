@@ -1,10 +1,19 @@
+@use "sass:math";
+@use "sass:meta";
+
 // Removes the unit (e.g. px, em, rem) from a value, returning the number only.
 //
 // @param {Number} $num - Number to strip unit from.
 //
 // @returns {Number} The same number, sans unit.
-@function strip-unit($num) {
-  @return $num / ($num * 0 + 1);
+@function strip-unit($value) {
+  @if meta.type-of($value) != "number" {
+    @error "Invalid `#{meta.type-of($value)}` type. Choose a number type instead.";
+  } @else if meta.type-of($value) == "number" and not math.is-unitless($value) {
+    @return math.div($value, ($value * 0 + 1));
+  }
+
+  @return $value;
 }
 
 // String Replace
@@ -14,21 +23,17 @@
 // @param {String} $search - Value whitch will be replaced with.
 //
 // @returns {String} The string with replaced value.
-@function str-replace($string, $search, $replace: '') {
+@function str-replace($string, $search, $replace: "") {
   $index: str-index($string, $search);
 
   @if $index {
-    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    @return str-slice($string, 1, $index - 1) + $replace +
+      str-replace(
+        str-slice($string, $index + str-length($search)),
+        $search,
+        $replace
+      );
   }
 
   @return $string;
-}
-
-// for fancybox working
-@function max($numbers...) {
-  @return m#{a}x(#{$numbers});
-}
-
-@function min($numbers...) {
-  @return m#{i}n(#{$numbers});
 }
