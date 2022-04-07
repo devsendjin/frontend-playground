@@ -9,8 +9,9 @@
 
     "watch": "webpack --config \"./scripts/webpack.config.ts\" --watch --progress",
 
-    "prettier:src": "pnpm prettier \"./src/**/*\"",
+    // prettier
     "prettier": "prettier --config \"../prettier.config.js\" --ignore-unknown --write",
+    "prettier:src": "pnpm prettier \"./src/**/*\"",
 
     "config:test": "webpack configtest \"./scripts/webpack.config.ts\"",
 
@@ -27,22 +28,23 @@
   "devDependencies": {
     // js (transformers)
     "@babel/cli": "^7.17.6", // for config:build command
-    "@babel/core": "^7.17.7",
+    "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.8",
     "@babel/preset-react": "^7.16.7",
 
     // types
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",
-    "@types/node": "^17.0.21",
+    "@types/node": "^17.0.23",
 
 
     // webpack
-    "webpack": "^5.70.0",
+    "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4",
+    "webpack-dev-server": "^4.8.1",
     // plugins
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4", // hot-reload, requires react-refresh to be present
+    '@types/circular-dependency-plugin': '^5.0.5',
     "circular-dependency-plugin": "^5.2.2",
     "csso-webpack-plugin": "^2.0.0-beta.3",
     "html-webpack-plugin": "^5.5.0",
@@ -53,7 +55,7 @@
     "css-loader": "^6.7.1", // css
     "postcss-loader": "^6.2.1", // css
     "sass-loader": "^12.6.0",
-    "babel-loader": "^8.2.3", // js
+    "babel-loader": "^8.2.4", // js
     "ts-loader": "^9.2.8",
     "@svgr/webpack": "^6.2.1",
     "url-loader": "^4.1.1",
@@ -61,24 +63,24 @@
 
 
     // scss / css
-    "sass": "^1.49.9",
-    "postcss": "^8.4.11",
-    "postcss-preset-env": "^7.4.2",
+    "sass": "^1.50.0",
+    "postcss": "^8.4.12",
+    "postcss-preset-env": "^7.4.3",
     "postcss-flexbugs-fixes": "^5.0.2",
-    "autoprefixer": "^10.4.3",
+    "autoprefixer": "^10.4.4",
 
 
     // typescript
-    "typescript": "^4.6.2",
+    "typescript": "^4.6.3",
     "ts-node": "^10.7.0",
 
 
     // utils
-    "json5": "^2.2.0",
-    "prettier": "^2.5.1",
+    "json5": "^2.2.1",
+    "prettier": "^2.6.2",
     "cross-env": "^7.0.3",
     "npm-run-all": "^4.1.5", // run scripts sequentially or parallel
-
+    "tslib": "^2.3.1",
 
     // other
     "react-refresh": "^0.11.0",
@@ -89,26 +91,26 @@
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "6.2.2",
+    "react-router-dom": "6.3.0",
     "immer": "^9.0.12", // immutable data processing
     "classnames": "^2.3.1", // handle css classes
-    "react-bootstrap": "^2.2.1",
+    "react-bootstrap": "^2.2.3",
     "bootstrap": "^5.1.3",
-    "gsap": "^3.9.1",
+    "gsap": "^3.10.2",
 
     "change-case": "^4.1.2",
 
     // localization
     "i18next": "^21.6.14",
-    "i18next-browser-languagedetector": "^6.1.3",
-    "react-i18next": "^11.15.7",
+    "i18next-browser-languagedetector": "^6.1.4",
+    "react-i18next": "^11.16.2",
 
     // redux
     "redux": "^4.1.2",
     '@redux-devtools/extension': '^3.2.2',
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-thunk": "^2.4.1",
-    "react-redux": "^7.2.6",
+    "react-redux": "^7.2.8",
 
     // error handlers
     "react-error-boundary": "^3.1.4",
