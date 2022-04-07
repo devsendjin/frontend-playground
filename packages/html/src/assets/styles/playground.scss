@@ -1,0 +1,46 @@
+@import '@styles/abstracts';
+
+.playground-layout {
+  background-color: #4a4a4a;
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    grid-column-gap: 20px;
+  }
+
+  .aside,
+  .main {
+    color: #fff;
+    background-color: $dark;
+  }
+
+  .main {
+    padding: 20px;
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: column;
+
+    &__link {
+      padding: 5px 20px;
+      text-align: right;
+      font-size: 14px;
+      transition-property: background-color;
+      transition-duration: $transition-duration;
+
+      background-color: #3b3b3b;
+
+      &.active,
+      &:hover {
+        background-color: lighten($dark, 20%);
+      }
+
+      &--root {
+        margin-bottom: 20px;
+        text-align: left;
+      }
+    }
+  }
+}

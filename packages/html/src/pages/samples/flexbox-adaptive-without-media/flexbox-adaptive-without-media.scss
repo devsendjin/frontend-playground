@@ -1,0 +1,39 @@
+@import '@styles/abstracts';
+
+.content-flexbox-adaptive-without-media {
+  .component {
+    max-width: 500px;
+    margin: 30px auto 0;
+  }
+
+  .item {
+    border: 1px solid $white;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+
+    &:nth-last-child(n + 2) {
+      margin-bottom: 10px;
+    }
+
+    .text,
+    .date {
+      padding: 3px 5px;
+    }
+
+    .text {
+      flex-grow: 0.5;
+      margin-left: auto;
+
+      .centering {
+        display: inline-block;
+        text-align: center;
+      }
+    }
+
+    .date {
+      flex-grow: 0.5;
+      text-align: right;
+    }
+  }
+}

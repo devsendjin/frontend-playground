@@ -1,0 +1,46 @@
+@import '@styles/abstracts';
+
+.content-responsive-table {
+  .table-wrap {
+    display: inline-block;
+    width: 100%;
+  }
+
+  @media (max-width: 800px) {
+    table.table-wrap thead,
+    table.table-wrap td.total,
+    table.table-wrap .hide-on-warp {
+      display: none;
+    }
+
+    table.table-wrap tr {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    table.table-wrap td,
+    table.table-wrap tbody {
+      display: block;
+      text-align: right;
+    }
+
+    table.table-wrap td:last-child {
+      border-bottom: 0;
+    }
+
+    table.table-wrap td:before {
+      content: attr(data-label);
+      float: left;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }
+  table {
+    width: 100%;
+    border: 1px $white solid;
+  }
+  th,
+  td {
+    padding: 5px;
+  }
+}

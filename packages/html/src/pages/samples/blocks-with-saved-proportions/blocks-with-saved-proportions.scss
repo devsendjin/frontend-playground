@@ -1,0 +1,44 @@
+@import '@styles/abstracts';
+
+.content-blocks-with-saved-proportions {
+  /*
+// first solution
+.square-container {
+  display: grid;
+  grid-template-columns: repeat(4, 25vw);
+  grid-auto-rows: 25vw;
+  grid-gap: 2px;
+  background-color: gray;
+}
+
+.square {
+  background-color: lightgreen;
+} */
+
+  // second solution
+  .square-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(auto, 25%));
+    // grid-gap: 3px;
+  }
+
+  .square {
+    position: relative;
+    border: 1px solid;
+    box-sizing: border-box;
+  }
+
+  .square::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+
+  .square .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+}

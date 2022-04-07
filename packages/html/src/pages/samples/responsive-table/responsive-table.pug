@@ -1,0 +1,32 @@
+---
+tags: ["sample"]
+date: Last Modified
+title: "Responsive-table"
+---
+
+extends /playground
+
+append config
+  - config.contentAttributes = { class: 'content-responsive-table' }
+
+append content
+  table.view-table.table-wrap
+    thead
+      tr
+        th Thumbnail
+        th Model
+        th Price
+        th Size
+    tbody
+      tr
+        td.view-table-photo
+          img(alt='Product 1' src=randomImageUrl(50, 50))
+        td(data-label='Title') Товар 1
+        td(data-label='Price') 690 000
+        td(data-label='Size') 2300
+      tr
+        td.view-table-photo
+          img(alt='Product 2' src=randomImageUrl(50, 50))
+        td(data-label='Title') Товар 2
+        td(data-label='Price') 700 000
+        td(data-label='Size') 2900

@@ -4,11 +4,13 @@
     "outDir": "public",
     "baseUrl": "src",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["*"],
+      "@scripts/*": ["assets/scripts/*"],
+      "@styles/*": ["assets/styles/*"]
     },
     "typeRoots": ["node_modules/@types"]
   },
-  "include": ["src"],
+  "include": ["./src/assets/js/**/*.ts", "./scripts/**/*.ts"],
   "exclude": ["node_modules", "public"],
   "ts-node": {
     "compilerOptions": {

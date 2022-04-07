@@ -1,0 +1,23 @@
+---
+date: "2022-03-27T13:04:49.336Z"
+title: "404"
+description: "Oops, requested page not found (:"
+permalink: " /404/"
+eleventyExcludeFromCollections: true
+---
+
+extends /core/layout
+
+append config
+  - config.bodyAttributes = { class: 'not-found-page' };
+
+append scripts
+  +scripts([`${page.filePathStem}.js`])
+
+append styles
+  +styles([`${page.filePathStem}.css`])
+
+append body
+  main.main
+    h1.not-found__title Requested page not found.
+    a.not-found__link(href=_url('/'))= _site.name

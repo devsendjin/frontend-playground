@@ -1,0 +1,25 @@
+---
+tags: ["sample"]
+date: Last Modified
+title: "Flexbox adaptive without @media"
+---
+
+extends /playground
+
+append config
+  - config.contentAttributes = { class: 'content-flexbox-adaptive-without-media' }
+
+append content
+  .component
+    .item
+      .text
+        .centering Javascript is awesome! Javascript is awesome!
+      .date 14.11.2019
+    .item
+      .text
+        .centering PHP is awesome too!
+      .date 16.11.2019
+    .item
+      .text
+        .centering Learn those languages
+      .date 24.11.2019

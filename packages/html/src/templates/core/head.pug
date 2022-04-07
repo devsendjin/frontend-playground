@@ -1,0 +1,28 @@
+meta(charset='UTF-8')
+meta(http-equiv='X-UA-Compatible', content='IE=edge')
+meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
+base(href=_site.url)
+
+meta(name='author' content=_site.author)
+meta(name='description' content=description ? description : _site.description)
+
+//- if _site.__PROD__
+//- Facebook Open Graph
+if title
+  meta(property='og:title' content=title)
+meta(property='og:type' content='website')
+if page.url
+  meta(property='og:url' content=_url(page.url))
+meta(property='og:site_name' content=_site.name)
+
+//- Twitter Card
+if title
+  meta(name='twitter:title' content=title)
+meta(name='twitter:description' content=_site.description)
+if page.url
+  meta(name='twitter:url' content=_url(page.url))
+meta(name='twitter:card' content='summary')
+
+if page.url
+  link(href=_url(page.url) rel='canonical')

@@ -1,0 +1,23 @@
+@import '@styles/abstracts';
+
+.not-found-page {
+  background-color: $dark;
+
+  .main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: $white;
+  }
+
+  .not-found {
+    &__link {
+      @include underline($behavior: 'remove-on-hover', $color: $white);
+      margin-top: 50px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+}

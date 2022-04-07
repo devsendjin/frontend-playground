@@ -1,0 +1,19 @@
+---
+tags: ["sample"]
+date: Last Modified
+title: "Scaffolding"
+---
+
+extends /playground
+
+append config
+  - config.bodyAttributes = { class: 'page-scaffolding' }
+
+//- append scripts
+  +scripts([`${page.filePathStem}.js`])
+
+//- append styles
+  +styles([`${page.filePathStem}.css`])
+
+append content
+  h1 Scaffolding

@@ -1,0 +1,41 @@
+@import '@styles/abstracts';
+
+.content-flexbox-grid {
+  $columns: 12;
+  $gutter: 40px;
+  $offset: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+    @include debug(red);
+    max-width: 1000px;
+    flex-grow: 1;
+  }
+
+  .box {
+    @include debug(green);
+    @include grid-row();
+    margin-top: -20px;
+  }
+
+  .inner {
+    @include debug(#a3a3a3);
+    @include grid-col();
+    @include grid-size(4);
+    height: 70px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 992px) {
+      @include grid-size(6);
+    }
+
+    @media (max-width: 768px) {
+      @include grid-size(12);
+    }
+  }
+}

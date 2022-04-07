@@ -1,8 +1,21 @@
-//- - const siteUrl = 'http://localhost:3333/';
-
-//- page config
 -
-  const _site = {
-    title: 'HTML playground',
-    bodyAttributes: {}
+  const config = {
+    isMainPage: page && page.url.length === 1, // '/'
+
+    get bodyAttributes() {
+      return this.bodyAttrs;
+    },
+    set bodyAttributes(value) {
+      return this.bodyAttrs = _merge(this.bodyAttrs, value);
+    },
+
+    get contentAttributes() {
+      return this.contentAttrs;
+    },
+    set contentAttributes(value) {
+      return this.contentAttrs = _merge(this.contentAttrs, value);
+    },
+
+    bodyAttrs: {},
+    contentAttrs: {},
   }

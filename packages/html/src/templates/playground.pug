@@ -1,0 +1,32 @@
+extends ./core/layout
+
+append config
+  - config.bodyAttributes = { class: 'playground-layout' }
+
+//- include script depend on page url
+append scripts
+  each post in collections.all
+    if post.url === page.url
+      - const scriptsSrc = `${page.filePathStem}.js`;
+      if _fileExists(scriptsSrc)
+        script(src!=_url(scriptsSrc))
+
+//- include style link depend on page url
+append styles
+  +styles(['playground.css'])
+
+  each post in collections.all
+    if post.url === page.url
+      - const styleSrc = `${page.filePathStem}.css`;
+      if _fileExists(styleSrc)
+        link(rel='stylesheet' href!=_url(styleSrc))
+
+append body
+  aside.aside
+    nav.nav
+      a.nav__link.nav__link--root(class=`${page.url === '/' ? 'active' : ''}`, href=_url('/')) Playground
+      each post in collections.all
+        a.nav__link(class=`${post.url === page.url ? 'active': ''}`, href=_url(post.url))= post.data.title
+
+  main.main&attributes(config.contentAttrs)
+    block content

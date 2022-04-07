@@ -1,0 +1,21 @@
+---
+date: 2022-03-24
+title: "Main page"
+permalink: " /"
+eleventyExcludeFromCollections: true
+---
+
+extends /playground
+
+append config
+  - config.contentAttributes = { class: 'content-front-page' }
+
+append scripts
+  +scripts(['index.js'])
+
+append styles
+  +styles([`${page.filePathStem}.css`])
+
+
+append content
+  h1 #{_site.name}
