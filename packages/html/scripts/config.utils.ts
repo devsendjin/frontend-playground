@@ -13,7 +13,7 @@ const resolvePath = ({
   onLookupFailed?: () => string;
   recursionMaxLevel?: number;
 }): string => {
-  let directories = [];
+  let directories: string[] = [];
   let directoryDepth = 0;
   let pathToLookup = './';
 

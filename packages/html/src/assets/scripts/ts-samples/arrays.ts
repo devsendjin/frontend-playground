@@ -1,5 +1,4 @@
-import { chunk, replaceAt } from '@scripts/utils';
-import { scope } from '@scripts/utils/playground';
+import { chunk, replaceAt, scope } from '@scripts/utils';
 
 scope(() => {
   scope(() => {
@@ -16,10 +15,6 @@ scope(() => {
   scope(() => {
     const arr = Array.from({ length: 12 }, (_, index) => index);
     console.log(arr);
-
-    // arr.forEach(a => {
-    // 	console.log('a % 3   ', a % 3);
-    // })
 
     const chunked = chunk(arr, 3);
     console.log(chunked);
