@@ -3,3 +3,9 @@
 .wrapper {
   min-height: 100%;
 }
+
+.pg {
+  &-link {
+    @include underline($color: white, $behavior: 'remove-on-hover');
+  }
+}

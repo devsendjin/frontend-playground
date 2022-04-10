@@ -1,0 +1,7 @@
+.microlight {
+  font-family : monospace;
+  white-space : pre;
+}
+.microlight span:first-child, .microlight span:last-child {
+  display: none;
+}

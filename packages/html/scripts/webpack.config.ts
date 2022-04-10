@@ -17,7 +17,7 @@ import config from './config';
 type TOptions = {
   regexp?: RegExp;
   debug?: boolean;
-  additionalExcludeCondition?: (assetContent: string | Buffer) => boolean;
+  omitFileIf?: (assetContent: string | Buffer) => boolean;
 };
 const PLUGIN_NAME = 'omit-generating-files';
 // const defaultOptions: TOptions = {};
@@ -46,7 +46,7 @@ class OmitGeneratingFilesPlugin {
             assets.forEach((assetPath) => {
               if (
                 assetPath.match(this.options!.regexp as RegExp) ||
-                (this.options?.additionalExcludeCondition && this.options.additionalExcludeCondition(assetPath))
+                (this.options?.omitFileIf && this.options.omitFileIf(assetPath))
               ) {
                 compilation.deleteAsset(assetPath);
               }
@@ -56,7 +56,7 @@ class OmitGeneratingFilesPlugin {
         );
       }
 
-      if (this.options?.additionalExcludeCondition) {
+      if (this.options?.omitFileIf) {
         compilation.hooks.processAssets.tapAsync(
           {
             name: PLUGIN_NAME,
@@ -70,10 +70,7 @@ class OmitGeneratingFilesPlugin {
             }
 
             assets.forEach((assetPath) => {
-              if (
-                this.options?.additionalExcludeCondition &&
-                this.options.additionalExcludeCondition(assetsObj[assetPath].source())
-              ) {
+              if (this.options?.omitFileIf && this.options.omitFileIf(assetsObj[assetPath].source())) {
                 compilation.deleteAsset(assetPath);
               }
             });
@@ -154,7 +151,6 @@ const loaders = {
 
 const SOURCE_FILES = getSourceFiles(config.PAGES_SRC);
 const TYPESCRIPT_FILES = SOURCE_FILES.filter((file) => file.endsWith('.ts'));
-// console.log({ SOURCE_FILES });
 
 const webpackConfig: Configuration = {
   mode: config.MODE as Configuration['mode'],
@@ -162,11 +158,11 @@ const webpackConfig: Configuration = {
   entry: {
     index: path.join(config.APP_SRC, 'assets/scripts/index.ts'),
     playground: path.join(config.APP_SRC, 'assets/styles/playground.scss'),
+    ...config.vendorEntries,
     ...TYPESCRIPT_FILES.reduce<{ [key: string]: string }>((acc, filePath) => {
       acc[trimExtension(filePath)] = path.join(config.PAGES_SRC, filePath);
       return acc;
     }, {}),
-    // '404-page': [path.join(config.APP_SRC, 'assets/styles/404-page.scss')],
   },
 
   output: {
@@ -188,7 +184,6 @@ const webpackConfig: Configuration = {
   devtool: config.__DEV__ ? 'inline-source-map' : false,
 
   stats: config.__DEV__ ? 'errors-warnings' : 'none', // none | detailed | verbose
-  // stats: config.__DEV__ ? 'errors-warnings' : 'detailed', // none | detailed | verbose
 
   optimization: config.__PROD__
     ? {
@@ -274,8 +269,8 @@ const webpackConfig: Configuration = {
   // @ts-ignore
   plugins: [
     new OmitGeneratingFilesPlugin({
-      regexp: /(404|front-page|playground)\.js/gi,
-      additionalExcludeCondition: (assetContent) => assetContent === '', // filter empty js files
+      // regexp: /(404|front-page|playground)\.js/gi,
+      omitFileIf: (assetContent) => assetContent === '', // filter empty js files
       // debug: true,
     }),
 
@@ -286,7 +281,6 @@ const webpackConfig: Configuration = {
 
     new MiniCssExtractPlugin({
       filename: () => {
-        // console.log({ pathData });
         return '[name].css';
       },
     }),

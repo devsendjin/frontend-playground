@@ -3,15 +3,20 @@ extends ./core/layout
 append config
   - config.bodyAttributes = { class: 'playground-layout' }
 
-//- include script depend on page url
-append scripts
-  each post in collections.all
-    if post.url === page.url
-      - const scriptsSrc = `${page.filePathStem}.js`;
-      if _fileExists(scriptsSrc)
-        script(src!=_url(scriptsSrc))
+mixin pgNav(tag)
+  if !tag
+    p: b No tag
+  else
+    span.nav__category= tag
+    each post in collections[tag]
+      a.nav__link(class=`${post.url === page.url ? 'active': ''}`, href=_url(post.url))= post.data.title
 
 //- include style link depend on page url
+prepend styles
+  - const cssVendors = config.vendors.flatMap((vendorName) => _getVendors(vendorName, 'css'));
+  if cssVendors.length > 0
+    each cssVendorPath in cssVendors
+      link(rel='stylesheet' href!=_url(cssVendorPath))
 append styles
   +styles(['playground.css'])
 
@@ -21,12 +26,26 @@ append styles
       if _fileExists(styleSrc)
         link(rel='stylesheet' href!=_url(styleSrc))
 
+//- include script depend on page url
+prepend scripts
+  - const jsVendors = config.vendors.flatMap((vendorName) => _getVendors(vendorName, 'js'));
+  if jsVendors.length > 0
+    each jsVendorPath in jsVendors
+      script(src!=_url(jsVendorPath))
+append scripts
+  each post in collections.all
+    if post.url === page.url
+      - const scriptsSrc = `${page.filePathStem}.js`;
+      if _fileExists(scriptsSrc)
+        script(src!=_url(scriptsSrc))
+
 append body
   aside.aside
     nav.nav
-      a.nav__link.nav__link--root(class=`${page.url === '/' ? 'active' : ''}`, href=_url('/')) Playground
-      each post in collections.all
-        a.nav__link(class=`${post.url === page.url ? 'active': ''}`, href=_url(post.url))= post.data.title
+      a.nav__link.nav__link--root(class={active: page.url === '/'}, href=_url('/')) Playground
+      a.nav__link(class={active: page.url === '/current'}, href=_url('/current')) Current
+      +pgNav('samples')
+      +pgNav('tools')
 
   main.main&attributes(config.contentAttrs)
     block content

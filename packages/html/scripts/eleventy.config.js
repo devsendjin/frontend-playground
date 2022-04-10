@@ -51,6 +51,12 @@ const mergeDeep = (target, ...sources) => {
 // urls
 const urlBuilder = (url) => path.join('/', url);
 const assetUrl = (assetUrl) => urlBuilder(path.join('assets', assetUrl));
+const vendorUrl = (fileUrl) => urlBuilder(path.join(config.distVendorFolder, fileUrl));
+const fileExistsChecker = (fileUrl) => {
+  const filePath = path.join(config.APP_DIST, fileUrl);
+  const exists = fs.existsSync(filePath);
+  return exists;
+};
 
 module.exports = function (eleventyConfig) {
   // eleventy/pug filters support
@@ -63,27 +69,25 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.setDataDeepMerge(true);
 
+  // data
+  eleventyConfig.addGlobalData('_config', config);
+  // functions/utils
+  eleventyConfig.addGlobalData('_getVendors', () => (vendorName, type) => {
+    if (!config.vendors || !Array.isArray(config.vendors)) return [];
+    return config.vendors.filter((vendor) => vendor.endsWith(`.${type}`) && new RegExp(vendorName, 'gmi').test(vendor));
+  });
   eleventyConfig.addGlobalData('_log', () => util.inspect);
   eleventyConfig.addGlobalData('_merge', () => {
     return (target, ...sources) => mergeDeep(target, ...sources);
   });
   eleventyConfig.addGlobalData('_url', () => urlBuilder);
   eleventyConfig.addGlobalData('_asset', () => assetUrl);
-  eleventyConfig.addGlobalData('_fileExists', () => (url) => {
-    const filePath = path.join(config.APP_DIST, url);
-    const exists = fs.existsSync(filePath);
-    // console.log({
-    //   'path.join(config.APP_DIST, url)': filePath,
-    //   'fs.existsSync(path.join(config.APP_DIST, url))': exists,
-    // });
-    return exists;
-  });
+  eleventyConfig.addGlobalData('_fileExists', () => fileExistsChecker);
   eleventyConfig.addGlobalData('_space', () => {
     return (amount = 1) => {
       return Array.from({ length: amount }, () => '&nbsp;').join('');
     };
   });
-  // eleventyConfig.addGlobalData("_image", () => imageUrl);
 
   // folder assets with keeping the same directory structure
   eleventyConfig.addPassthroughCopy('src/pages/**/*.(jpg|jpeg|png)');

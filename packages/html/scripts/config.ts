@@ -14,6 +14,7 @@ const APP_ROOT = resolvePath({
   },
 });
 const distFolder = 'public';
+const distVendorFolder = 'vendors';
 const APP_DIST = path.join(APP_ROOT, distFolder);
 const APP_SRC = path.join(APP_ROOT, 'src');
 const PAGES_SRC = path.join(APP_SRC, 'pages');
@@ -22,12 +23,28 @@ const port = 8080;
 const siteUrl = `http://localhost:${port}`;
 // const siteUrl = __PROD__ ? `https://${siteCname}` : `http://localhost:${port}`;
 
+const vendorEntries = {
+  'vendors/microlight': path.join(APP_SRC, 'assets/vendors/microlight/microlight.ts'),
+  'vendors/prism': path.join(APP_SRC, 'assets/vendors/prism/prism.min.ts'),
+} as const;
+
+const vendors = Object.keys(vendorEntries).reduce<string[]>((acc, vendorEntry) => {
+  acc.push(`${vendorEntry}.css`);
+  acc.push(`${vendorEntry}.js`);
+  return acc;
+}, []);
+
 const config = {
   MODE,
   __PROD__,
   __DEV__,
 
   distFolder,
+  distVendorFolder,
+
+  // webpack
+  vendorEntries,
+  vendors,
 
   // paths
   APP_ROOT,

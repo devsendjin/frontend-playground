@@ -1,0 +1,13 @@
+@import '@styles/abstracts';
+
+.content-pug-tool {
+  overflow: scroll;
+
+  &__title {
+    font-weight: bold;
+  }
+
+  &__link {
+    font-size: 20px;
+  }
+}

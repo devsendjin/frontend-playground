@@ -1,0 +1,136 @@
+---
+tags: ["tools"]
+date: Last Modified
+title: "Pug"
+---
+
+extends /playground
+
+append config
+  - config.contentAttributes = { class: 'content-pug-tool' }
+  - config.vendors = ['prism']
+
+append content
+  h1 Pug examples
+
+  br
+  +link('https://runebook.dev/ru/docs/pug/-index-', 'Pug reference')(target='_blank' rel='noopener noreferrer nofollow' class='content-pug-tool__link')
+  br
+
+  br
+  span.content-pug-tool__title HTML tag with attributes:
+  +prism('pug')
+    .
+      - const attributes = {};
+      - attributes.class = ['foo', 'bar', 'baz'];
+      a(href="#" data-baz="foo")&attributes({...attributes, 'data-foo': 'bar'}).test-link#test-link tag text
+      div(data-json=`
+        {
+          "very-long": "piece of ",
+          "data": true
+        }
+      `) text
+
+  br
+  span.content-pug-tool__title mixins:
+  +prism('pug')
+    .
+      mixin link(href, name)
+        a(class!=attributes.class href=href)= name
+
+      +link('/foo', 'foo')(class="btn")
+      //- ------------------
+      mixin link(href, name)
+        a(href=href)&attributes(attributes)= name
+
+      +link('/foo', 'foo')(class="btn")
+
+  br
+  span.content-pug-tool__title short syntax:
+  +prism('pug')
+    .
+      ul
+        li: a(href="/"): span text
+      p \#[ul: li: a(href='/') text]
+
+  br
+  span.content-pug-tool__title inline tag interpolation:
+  +prism('pug')
+    .
+      p \#[b: i: ins some]
+
+  br
+  span.content-pug-tool__title Javascript:
+  +prism('pug')
+    .
+      - const randomArray = Array.from({ length: 10 }, () => index);
+
+  br
+  span.content-pug-tool__title Javascript multiline:
+  +prism('pug')
+    .
+      p paragrapth with data
+      -
+        const randomArray = Array.from({ length: 10 }, () => index);
+        console.log(randomArray);
+
+  br
+  span.content-pug-tool__title loop througn object:
+  +prism('pug')
+    .
+      .block
+        each value, key in testObj
+          .key= key + ' - ' + value
+          .value= value
+
+  br
+  span.content-pug-tool__title skip pug "#[ins: i escaping]":
+  +prism('pug')
+    .
+      - const value = 'bar';
+      p!= value
+      p \!{value}
+
+  br
+  span.content-pug-tool__title case:
+  +prism('pug')
+    .
+      - const friends = 10
+      case friends
+        when 0
+          p you have no friends
+        when 1
+          p you have a friend
+        when 2
+          - break
+        default
+          p you have \#{friends} friends
+
+  br
+  span.content-pug-tool__title space in pug:
+  +prism('pug')
+    .
+      \#{' '}
+
+  br
+  span.content-pug-tool__title custom filters:
+  +prism('pug')
+    .
+      :markdown()
+        ```javascript
+        function translit(str) {
+          const ru=("А-а-Б-б-В-в-Ґ-ґ-Г-г-Д-д-Е-е-Ё-ё-Є-є-Ж-ж-З-з-И-и-І-і-Ї-ї-Й-й-К-к-Л-л-М-м-Н-н-О-о-П-п-Р-р-С-с-Т-т-У-у-Ф-ф-Х-х-Ц-ц-Ч-ч-Ш-ш-Щ-щ-Ъ-ъ-Ы-ы-Ь-ь-Э-э-Ю-ю-Я-я").split("-")
+          var en=("A-a-B-b-V-v-G-g-G-g-D-d-E-e-E-e-E-e-ZH-zh-Z-z-I-i-I-i-I-i-J-j-K-k-L-l-M-m-N-n-O-o-P-p-R-r-S-s-T-t-U-u-F-f-H-h-TS-ts-CH-ch-SH-sh-SCH-sch-'-'-Y-y-'-'-E-e-YU-yu-YA-ya").split("-")
+          var res = '';
+          for(var i=0, l=str.length; i<l; i++)
+          {
+          var s = str.charAt(i), n = ru.indexOf(s);
+          if(n >= 0) { res += en[n]; }
+          else { res += s; }
+          }
+          return res;
+        }
+        ```
+
+      :markdown()
+        include ./demo-page.md

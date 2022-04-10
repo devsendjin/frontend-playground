@@ -1,5 +1,11 @@
 # Frontend playground for ideas
 
+#### Packages info
+
+- html
+  - [code highlight `_microlight_`](https://asvd.github.io/microlight/)
+  - [code highlight `_prismjs_`](https://prismjs.com/index.html)
+
 #### TODO:
 
 - common

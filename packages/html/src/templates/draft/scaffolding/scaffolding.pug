@@ -1,13 +1,17 @@
 ---
-tags: ["sample"]
+tags: ["sample", "tools"]
 date: Last Modified
 title: "Scaffolding"
 ---
+//- eleventyExcludeFromCollections: true
+//- permalink: false
 
 extends /playground
 
-append config
+//- append config
+  - config.contentAttributes = { class: 'content-scaffolding' }
   - config.bodyAttributes = { class: 'page-scaffolding' }
+  - config.vendors = ['prism', 'microlight']
 
 //- append scripts
   +scripts([`${page.filePathStem}.js`])

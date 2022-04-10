@@ -1,15 +1,23 @@
-mixin styles(sources = [], attrs = {})
+mixin styles(sources = [])
   if (sources.length)
     each src in sources
-      link(rel='stylesheet' href=_url(src))&attributes(attrs)
+      link(rel='stylesheet' href=_url(src))&attributes(attributes)
 
-mixin scripts(sources = [], attrs = {})
+mixin scripts(sources = [])
   if (sources.length)
     each src in sources
-      script(src=_url(src))&attributes(attrs)
+      script(src=_url(src))&attributes(attributes)
 
-mixin space
-  | #{' '}
+mixin microlight()
+  .microlight: pre: code
+    block
+
+mixin prism(lang)
+  if !lang
+    p(style='color: red;font-size: 20px;') No language specified
+  else
+    pre: code(class=`language-${lang}`)
+      block
 
 -
   const randomImageUrl = function (width = 800, height = 400, id) {
