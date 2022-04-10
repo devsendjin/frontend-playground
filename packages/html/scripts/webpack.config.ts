@@ -181,7 +181,8 @@ const webpackConfig: Configuration = {
 
   target: 'web',
 
-  devtool: config.__DEV__ ? 'inline-source-map' : false,
+  // devtool: config.__DEV__ ? 'inline-source-map' : false,
+  devtool: config.__DEV__ ? 'eval-cheap-module-source-map' : false,
 
   stats: config.__DEV__ ? 'errors-warnings' : 'none', // none | detailed | verbose
 
