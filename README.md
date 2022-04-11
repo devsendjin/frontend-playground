@@ -5,6 +5,32 @@
 - html
   - [code highlight `_microlight_`](https://asvd.github.io/microlight/)
   - [code highlight `_prismjs_`](https://prismjs.com/index.html)
+  - [prism.js](https://prismjs.com/download.html#themes=prism-twilight&languages=markup+css+clike+javascript+pug+typescript+typoscript&plugins=line-highlight+line-numbers+show-language+highlight-keywords+normalize-whitespace+toolbar+copy-to-clipboard+match-braces)
+    - theme
+      - Twilight
+    - supports
+      - Markup + HTML + XML + SVG + MathML + SSML + Atom + RSS
+      - CSS
+      - C-like
+      - JavaScript
+      - Pug
+      - TypeScript
+      - TypoScript + TSConfig
+    - plugins
+      - Line Highlight
+      - Line Numbers
+      - Show Invisibles
+      - Autolinker
+      - WebPlatform Docs
+      - Custom Class
+      - File Highlight
+      - Show Language
+      - JSONP Highlight
+      - Highlight Keywords
+      - Normalize Whitespace
+      - Toolbar
+      - Copy to Clipboard Button
+      - Match braces
 
 #### TODO:
 

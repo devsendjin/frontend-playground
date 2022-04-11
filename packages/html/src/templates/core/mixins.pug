@@ -12,11 +12,24 @@ mixin microlight()
   .microlight: pre: code
     block
 
+//- ('typescript' | 'ts')
+  || ('javascript' | 'js')
+  || 'pug'
+  || 'css'
+  || 'clike'
+  || 'markup'
+  || 'html'
+  || 'xml'
+  || 'svg'
+  || 'mathml'
+  || 'ssml'
+  || 'atom'
+  || 'rss'
 mixin prism(lang)
   if !lang
     p(style='color: red;font-size: 20px;') No language specified
   else
-    pre: code(class=`language-${lang}`)
+    pre: code(class=`language-${lang}`)&attributes(attributes)
       block
 
 -
