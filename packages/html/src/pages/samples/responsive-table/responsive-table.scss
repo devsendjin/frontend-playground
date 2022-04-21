@@ -1,6 +1,23 @@
 @import '@styles/abstracts';
 
 .content-responsive-table {
+  @keyframes responsive-table-fadein {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  img {
+    opacity: 0;
+
+    &.visible {
+      animation: responsive-table-fadein 0.3s linear forwards;
+    }
+  }
+
   .table-wrap {
     display: inline-block;
     width: 100%;

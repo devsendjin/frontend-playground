@@ -21,8 +21,8 @@
     "webpack:build:prod": "cross-env NODE_ENV=production pnpm webpack",
 
     // prettier
-    "prettier": "prettier --tab-width 2 --bracket-same-line --prose-wrap preserve --trailing-comma es5 --jsx-single-quote --print-width 120 --end-of-line lf --arrow-parens always --ignore-unknown --write \"./src/assets/styles/*.scss\" \"./src/pages/**/*.(scss|ts)\"",
-
+    "prettier": "prettier --tab-width 2 --bracket-same-line --prose-wrap preserve --trailing-comma es5 --jsx-single-quote --print-width 120 --end-of-line lf --arrow-parens always --ignore-unknown",
+    "prettier:styles-pages": "pnpm prettier -- --write \"./src/assets/styles/*.scss\" \"./src/pages/**/*.(scss|ts)\"",
 
     // other
     "serve": "browser-sync start --config \"./scripts/browsersync.config.js\"",
@@ -101,6 +101,7 @@
   "dependencies": {
     // monorepo packages
     "@frontend-playground/shared": "workspace:^1.0.0",
+    "reflect-metadata": "^0.1.13", // need for decorators sample (decorators.ts)
     // "dayjs": "^1.11.0",
     // "highlight.js": "^11.5.0",
     // "gsap": "^3.9.1",

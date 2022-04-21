@@ -12,14 +12,17 @@ append config
 append content
   .jumping-links
   div.toggle
-  a.jump(href="#") Trump Inaugural Address Generator
-  a.jump(href="#") CSS Image Effects
-  a.jump(href="#") CSS Scales
-  a.jump(href="#") Saints of the Week
-  a.jump(href="#") Clippy
-  a.jump(href="#") Gradients
-  a.jump(href="#") air2048
-  a.jump(href="#") CSSynth
-  a.jump(href="#") CSS Creatures
-  a.jump(href="#") Flexplorer
-  a.jump(href="#") Filters Playground
+  - let i = 0;
+  while i < 3
+    - i++
+    a.jump(href="#") Trump Inaugural Address Generator
+    a.jump(href="#") CSS Image Effects
+    a.jump(href="#") CSS Scales
+    a.jump(href="#") Saints of the Week
+    a.jump(href="#") Clippy
+    a.jump(href="#") Gradients
+    a.jump(href="#") air2048
+    a.jump(href="#") CSSynth
+    a.jump(href="#") CSS Creatures
+    a.jump(href="#") Flexplorer
+    a.jump(href="#") Filters Playground

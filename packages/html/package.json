@@ -15,7 +15,8 @@
     "webpack:watch": "pnpm webpack -- --watch",
     "webpack:build": "pnpm webpack",
     "webpack:build:prod": "cross-env NODE_ENV=production pnpm webpack",
-    "prettier": "prettier --tab-width 2 --bracket-same-line --prose-wrap preserve --trailing-comma es5 --jsx-single-quote --print-width 120 --end-of-line lf --arrow-parens always --ignore-unknown --write \"./src/assets/styles/*.scss\" \"./src/pages/**/*.(scss|ts)\"",
+    "prettier": "prettier --tab-width 2 --bracket-same-line --prose-wrap preserve --trailing-comma es5 --jsx-single-quote --print-width 120 --end-of-line lf --arrow-parens always --ignore-unknown",
+    "prettier:styles-pages": "pnpm prettier -- --write \"./src/assets/styles/*.scss\" \"./src/pages/**/*.(scss|ts)\"",
     "serve": "browser-sync start --config \"./scripts/browsersync.config.js\"",
     "clean": "ts-node \"./scripts/clean.ts\"",
     "json": "json5 --validate \"./package.json5\" &&       json5       --space 2       --out-file \"./package.json\"       \"./package.json5\""
@@ -64,7 +65,8 @@
     "@frontend-playground/config": "workspace:^1.0.0"
   },
   "dependencies": {
-    "@frontend-playground/shared": "workspace:^1.0.0"
+    "@frontend-playground/shared": "workspace:^1.0.0",
+    "reflect-metadata": "^0.1.13"
   },
   "browserslist": [
     "defaults"

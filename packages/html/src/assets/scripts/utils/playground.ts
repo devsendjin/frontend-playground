@@ -1,5 +1,8 @@
-type TScope = (callback: any, scopeName?: string, options?: { divider?: boolean | string }) => void;
-export const scope: TScope = (callback, scopeName = 'Scope', { divider = '' } = {}) => {
+export const scope = (
+  callback: any,
+  scopeName: string = 'Scope',
+  { divider = '' }: { divider?: boolean | string } = {}
+) => {
   if (divider) console.log(divider);
   console.group(scopeName);
   if (callback) callback();
@@ -7,17 +10,16 @@ export const scope: TScope = (callback, scopeName = 'Scope', { divider = '' } = 
 };
 /**
  * modified console.log
- * @param {Object} obj
+ * @param {Object} vards
  * @returns [string, any]
  */
-type TL = (obj: any) => void;
-export const l: TL = (obj) => {
-  if (!obj || Array.isArray(obj)) {
-    return console.log(obj);
+export const l = (vars: any): void => {
+  if (!vars || Array.isArray(vars)) {
+    return console.log(vars);
   }
 
   // @ts-ignore
-  const logArgs = Object.entries(obj).reduce((acc: any, [key, value], index) => {
+  const logArgs = Object.entries(vars).reduce((acc: any, [key, value], index) => {
     if (index === 0) {
       acc.push(`${key}: `, value);
     } else {
