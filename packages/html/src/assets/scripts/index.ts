@@ -4,7 +4,7 @@ import '@styles/index.scss';
 // import './learn/context-typing';
 // import './learn/classes';
 // import './learn/mixins';
-import './learn/decorators';
+// import './learn/decorators';
 
 // import './samples/numbers';
 // import './samples/arrays';
@@ -12,6 +12,6 @@ import './learn/decorators';
 // import './samples/objects';
 // import './samples/callbacks';
 
-// import './current';
+import './current';
 
 // write safe number converter (implemented in pug-template utils)
