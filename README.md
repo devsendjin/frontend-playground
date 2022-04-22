@@ -3,8 +3,8 @@
 #### Packages info
 
 - html
-  - [code highlight `_microlight_`](https://asvd.github.io/microlight/)
-  - [code highlight `_prismjs_`](https://prismjs.com/index.html)
+  - [code highlight `microlight`](https://asvd.github.io/microlight/)
+  - [code highlight `prismjs`](https://prismjs.com/index.html)
   - [prism.js](https://prismjs.com/download.html#themes=prism-twilight&languages=markup+css+clike+javascript+pug+typescript+typoscript&plugins=line-highlight+line-numbers+show-language+highlight-keywords+normalize-whitespace+toolbar+copy-to-clipboard+match-braces)
     - theme
       - Twilight
@@ -37,8 +37,6 @@
 - common
   - [x] run `prettier` command only for changed files (maybe implement with bash)
   - [x] patch `console.log` for dev process | create cusom log
-  - [ ] `localStorage` class
-  - [ ] `invertObject` edge cases (if value is object too) - from shared/scripts
 - react
   - [x] component with dynamic state using generics
   - [ ] create custom select component
@@ -50,3 +48,7 @@
 - [x] [change-case](https://github.com/blakeembrey/change-case) for route paths
 - [ ] [react-mdl](https://github.com/tleunen/react-mdl)
 - [ ] [tsconfig-paths-webpack-plugin](https://github.com/dividab/tsconfig-paths-webpack-plugin)
+
+#### References:
+
+- [package.json fields with description](https://github.com/stereobooster/package.json)
