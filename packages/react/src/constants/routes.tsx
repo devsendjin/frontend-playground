@@ -10,6 +10,7 @@ import { ErrorBoundarySample } from '@/components/samples/ErrorBoundarySample';
 import { HookFlowSample } from '@/components/samples/HookFlowSample';
 import { Dropdown } from '@/components/UI/_draft/Dropdown';
 import { IconsSample } from '@/components/samples/IconsSample';
+import { LocalStorageStateHook } from '@/components/hooks/LocalStorageStateHook';
 
 // const routesArr = [
 //   'DynamicStateControllerSample',
@@ -40,6 +41,7 @@ const ROUTES = {
   ErrorBoundarySample: `/${paramCase('ErrorBoundarySample')}`,
   HookFlowSample: `/${paramCase('HookFlowSample')}`,
   IconsSample: `/${paramCase('IconsSample')}`,
+  LocalStorageStateHook: `/${paramCase('LocalStorageStateHook')}`,
 } as const;
 
 export type TRouteArray = ReadonlyArray<{ route: string; component: RFC; name: string }>;
@@ -58,6 +60,10 @@ const samplesMap: ReadonlyArray<{ category: string; routes: TRouteArray }> = [
       { route: ROUTES.TypedReduxSample, component: TypedReduxSample, name: 'Typed Redux' },
       { route: ROUTES.ErrorBoundarySample, component: ErrorBoundarySample, name: 'Error Boundary' },
     ],
+  },
+  {
+    category: 'hooks',
+    routes: [{ route: ROUTES.LocalStorageStateHook, component: LocalStorageStateHook, name: 'LocalStorageStateHook' }],
   },
   {
     category: 'UI',

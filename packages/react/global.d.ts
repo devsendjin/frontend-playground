@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement, ReactNode } from 'react';
+import { PropsWithChildren, ReactElement } from 'react';
 
 declare global {
   declare const __DEV__: boolean;
@@ -73,11 +73,8 @@ declare global {
     export default classes;
   }
 
-  // declare module 'react' {
-  // type PropsWithChildren<Props> = Props & { children?: ReactNode };
   type RFC<Props = {}> = {
     (props: PropsWithChildren<Props>): ReactElement<any, any> | null;
     displayName?: string | undefined;
   };
-  // }
 }
