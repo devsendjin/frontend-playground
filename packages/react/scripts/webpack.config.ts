@@ -32,7 +32,7 @@ const webpackConfig: Configuration & { devServer: DevServerConfiguration } = {
 
   target: 'web',
 
-  devtool: config.__DEV__ ? 'inline-source-map' : false,
+  devtool: config.__DEV__ ? 'eval-cheap-module-source-map' : false,
 
   devServer: config.__DEV__
     ? {

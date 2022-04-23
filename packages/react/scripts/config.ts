@@ -14,9 +14,10 @@ const APP_ROOT: string = utils.resolvePath({
   },
 });
 const APP_SRC: string = path.resolve(APP_ROOT, 'src');
+const APP_PUBLIC: string = path.resolve(APP_ROOT, 'public')
 
 const paths = {
-  js: path.join(APP_ROOT, 'public/js'),
+  js: path.join(APP_PUBLIC, 'js'),
   css: '../css', // relative to js
   images: '../images', // relative to js
   svg: '../images/icon', // relative to js
@@ -33,6 +34,7 @@ const configuration = {
   // path
   APP_ROOT,
   APP_SRC,
+  APP_PUBLIC,
   publicUrlOrPath: utils.getPublicUrlOrPath(),
   paths,
 
