@@ -66,7 +66,7 @@ variant?: 'default' | 'plain';
 | 'menuShouldScrollIntoView'
 | 'menuIsOpen'
 */
-const Dropdown: React.FC = () => {
+const Dropdown: RFC = () => {
   return <DropdownConstructor />;
 };
 

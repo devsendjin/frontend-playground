@@ -6,7 +6,7 @@ interface IItemContentProps {
   itemKey: number;
 }
 
-const ItemContent: React.FC<IItemContentProps> = ({ itemKey, children }) => {
+const ItemContent: RFC<IItemContentProps> = ({ itemKey, children }) => {
   const { activeIndex } = useAccordionContext();
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [style, setStyle] = useState<React.CSSProperties | undefined>(undefined);

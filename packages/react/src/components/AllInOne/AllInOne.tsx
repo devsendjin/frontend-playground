@@ -2,7 +2,7 @@ import React from 'react';
 import { samplesMap } from '@/constants/routes';
 import styles from './AllInOne.module.scss';
 
-const AllInOne: React.FC = () => {
+const AllInOne: RFC = () => {
   return (
     <>
       {samplesMap.map(({ category, routes }) => (

@@ -8,7 +8,7 @@ interface ISvgIconProps extends React.SVGProps<SVGSVGElement> {
   type: keyof typeof svgIconMap;
 }
 
-const SvgIcon: React.FC<ISvgIconProps> = ({ type, ...restProps }) => {
+const SvgIcon: RFC<ISvgIconProps> = ({ type, ...restProps }) => {
   if (!type) return null;
   const Component = svgIconMap[type];
   return <Component {...restProps} />;

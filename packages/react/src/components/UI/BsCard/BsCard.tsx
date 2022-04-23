@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 
-const BsCard: React.FC<{ to?: string }> = ({ to, children }) => {
+const BsCard: RFC<{ to?: string }> = ({ to, children }) => {
   return (
     <Card bg="dark" text="white">
       {to && <Link to={to} className="stretched-link" />}

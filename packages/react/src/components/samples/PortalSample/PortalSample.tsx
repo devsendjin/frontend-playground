@@ -19,15 +19,17 @@ const PortalSample = () => {
       </div>
       <div id="portal-mount" className={styles['portal-node']} />
       {toggle && (
-        <Portal containerIdentifier="#portal-mount">
-          {/* <Portal containerIdentifier={document.getElementById('portal')} */}
-          {console.count('sample portal reder count')}
+        <Portal containerIdentifier="#portal-mount" onMount={() => console.count('sample portal render count')}>
           <div>Portal</div>
         </Portal>
       )}
       {toggleBodyPortal && (
-        <Portal id="portal-node" className="portal-node" style={{ color: 'red' }}>
-          {console.count('sample portal (mount into body) reder count')}
+        <Portal
+          id="portal-node"
+          className="portal-node"
+          style={{ color: 'red' }}
+          onMount={() => console.count('sample portal (mount into body) render count')}
+        >
           <div>Portal</div>
         </Portal>
       )}

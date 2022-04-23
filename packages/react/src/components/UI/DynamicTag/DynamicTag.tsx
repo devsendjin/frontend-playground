@@ -4,7 +4,7 @@ interface IDynamicTagNameProps {
   tagName: keyof JSX.IntrinsicElements;
 }
 
-const DynamicTag: React.FC<IDynamicTagNameProps & React.HTMLAttributes<HTMLOrSVGElement>> = ({
+const DynamicTag: RFC<IDynamicTagNameProps & React.HTMLAttributes<HTMLOrSVGElement>> = ({
   tagName,
   children,
   ...restProps

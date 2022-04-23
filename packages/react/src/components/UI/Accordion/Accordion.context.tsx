@@ -8,7 +8,7 @@ type TAccordionContext = {
 
 const AccordionContext = React.createContext(null as unknown as TAccordionContext);
 
-const AccordionProvier: React.FC<{ defaultActiveIndex?: TSharedAccordionState }> = ({
+const AccordionProvider: RFC<{ defaultActiveIndex?: TSharedAccordionState }> = ({
   defaultActiveIndex = 0,
   children,
 }) => {
@@ -25,4 +25,4 @@ const useAccordionContext = () => {
   return context;
 };
 
-export { AccordionContext, AccordionProvier, useAccordionContext };
+export { AccordionContext, AccordionProvider, useAccordionContext };

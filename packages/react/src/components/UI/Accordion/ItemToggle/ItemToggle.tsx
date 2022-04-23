@@ -5,7 +5,7 @@ interface IItemToggleProps {
   itemKey: number;
 }
 
-const ItemToggle: React.FC<IItemToggleProps> = ({ itemKey, children }) => {
+const ItemToggle: RFC<IItemToggleProps> = ({ itemKey, children }) => {
   // console.log('ItemToggle itemKey: ', itemKey);
   const { setActiveIndex } = useAccordionContext();
 

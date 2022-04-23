@@ -1,12 +1,15 @@
 import cn from 'classnames';
 import { useAccordionContext } from '../Accordion.context';
 import styles from '../Accordion.module.scss';
+import { ReactNode } from 'react';
 
 interface IItemProps {
   itemKey: number | string;
+  children?: ReactNode;
 }
 
-const Item: React.FC<IItemProps> = ({ itemKey, children }) => {
+const Item: RFC<IItemProps> = ({ itemKey, children }) => {
+  // const Item = ({ itemKey, children }: IItemProps) => {
   const { activeIndex } = useAccordionContext();
   // console.log('Item itemKey: ', itemKey, '\nactiveIndex: ', activeIndex);
 

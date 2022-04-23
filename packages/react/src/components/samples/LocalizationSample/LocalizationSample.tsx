@@ -32,7 +32,7 @@ const Localization = () => {
   );
 };
 
-const LocalizationSample: React.FC = () => {
+const LocalizationSample: RFC = () => {
   return (
     <I18nextProvider i18n={i18n}>
       <Localization />

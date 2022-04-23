@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-const Child: React.FC = () => {
+const Child: RFC = () => {
   console.group('ChildrenRerenderSample');
   console.log('Child render');
   console.groupEnd();
   return <div>Child</div>;
 };
 
-const ChildrenRerender: React.FC = ({ children }) => {
+const ChildrenRerender: RFC = ({ children }) => {
   const [state, setState] = useState<boolean>(false);
 
   return (
@@ -21,7 +21,7 @@ const ChildrenRerender: React.FC = ({ children }) => {
   );
 };
 
-const ChildrenRerenderSample: React.FC = () => {
+const ChildrenRerenderSample: RFC = () => {
   return (
     <ChildrenRerender>
       <Child />

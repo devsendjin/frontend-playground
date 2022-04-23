@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ErrorBoundary as ReactErrorBoundary, ErrorBoundaryPropsWithRender } from 'react-error-boundary';
 
 // const ErrorFallback: ErrorBoundaryPropsWithRender['fallbackRender'] = ({ error, resetErrorBoundary }) => {
@@ -11,7 +11,7 @@ import { ErrorBoundary as ReactErrorBoundary, ErrorBoundaryPropsWithRender } fro
 //   );
 // };
 
-const ComponentThatMayError: React.FC = () => {
+const ComponentThatMayError: RFC = () => {
   throw new Error('💥 CABOOM 💥');
 };
 
@@ -39,7 +39,7 @@ const defaultFallbackRender: TFallbackRender = ({ error, resetErrorBoundary, res
   );
 };
 
-// const ErrorBounary: React.FC = ({ children }) => {
+// const ErrorBounary: RFC = ({ children }) => {
 //   return (
 //     <ReactErrorBoundary
 //       fallbackRender={(fallbackData) => defaultFallbackRender({ ...fallbackData, resetState })}
@@ -52,7 +52,7 @@ const defaultFallbackRender: TFallbackRender = ({ error, resetErrorBoundary, res
 //   );
 // };
 
-const ErrorBounarySample: React.FC = ({ children }) => {
+const ErrorBoundarySample: RFC = ({ children }) => {
   const [toggle, setToggle] = useState<boolean>(false);
 
   const resetState = () => {
@@ -90,4 +90,4 @@ const ErrorBounarySample: React.FC = ({ children }) => {
   );
 };
 
-export { ErrorBounarySample };
+export { ErrorBoundarySample };

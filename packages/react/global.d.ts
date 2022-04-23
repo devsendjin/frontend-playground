@@ -1,71 +1,83 @@
-declare const __DEV__: boolean;
-declare const __PROD__: boolean;
+import { PropsWithChildren, ReactElement, ReactNode } from 'react';
 
-// for images
-declare module '*.jpeg' {
-  const content: string;
-  export default content;
-}
-declare module '*.jpg' {
-  const content: string;
-  export default content;
-}
-declare module '*.png' {
-  const content: string;
-  export default content;
-}
-declare module '*.gif' {
-  const content: any;
-  export = content;
-}
-declare module '*.webp' {
-  const content: string;
-  export default content;
-}
-declare module '*.avif' {
-  const content: string;
-  export default content;
-}
-declare module '*.bmp' {
-  const content: any;
-  export = content;
-}
-declare module '*.svg' {
-  import React from 'react';
+declare global {
+  declare const __DEV__: boolean;
+  declare const __PROD__: boolean;
 
-  export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  // for images
+  declare module '*.jpeg' {
+    const content: string;
+    export default content;
+  }
+  declare module '*.jpg' {
+    const content: string;
+    export default content;
+  }
+  declare module '*.png' {
+    const content: string;
+    export default content;
+  }
+  declare module '*.gif' {
+    const content: any;
+    export = content;
+  }
+  declare module '*.webp' {
+    const content: string;
+    export default content;
+  }
+  declare module '*.avif' {
+    const content: string;
+    export default content;
+  }
+  declare module '*.bmp' {
+    const content: any;
+    export = content;
+  }
+  declare module '*.svg' {
+    import React from 'react';
 
-  const src: string;
-  export default src;
-}
+    export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 
-// For CSS
-declare module '*.css' {
-  const classes: { readonly [key: string]: string };
-  export default classes;
-}
+    const src: string;
+    export default src;
+  }
 
-declare module '*.module.css' {
-  const classes: { readonly [key: string]: string };
-  export default classes;
-}
+  // For CSS
+  declare module '*.css' {
+    const classes: { readonly [key: string]: string };
+    export default classes;
+  }
 
-// For SCSS
-declare module '*.module.scss' {
-  const classes: { readonly [key: string]: string };
-  export default classes;
-}
-declare module '*.module.sass' {
-  const classes: { readonly [key: string]: string };
-  export default classes;
-}
+  declare module '*.module.css' {
+    const classes: { readonly [key: string]: string };
+    export default classes;
+  }
 
-// For LESS
-declare module '*.module.less' {
-  const classes: { readonly [key: string]: string };
-  export default classes;
-}
-declare module '*.less' {
-  const classes: { readonly [key: string]: string };
-  export default classes;
+  // For SCSS
+  declare module '*.module.scss' {
+    const classes: { readonly [key: string]: string };
+    export default classes;
+  }
+  declare module '*.module.sass' {
+    const classes: { readonly [key: string]: string };
+    export default classes;
+  }
+
+  // For LESS
+  declare module '*.module.less' {
+    const classes: { readonly [key: string]: string };
+    export default classes;
+  }
+  declare module '*.less' {
+    const classes: { readonly [key: string]: string };
+    export default classes;
+  }
+
+  // declare module 'react' {
+  // type PropsWithChildren<Props> = Props & { children?: ReactNode };
+  type RFC<Props = {}> = {
+    (props: PropsWithChildren<Props>): ReactElement<any, any> | null;
+    displayName?: string | undefined;
+  };
+  // }
 }

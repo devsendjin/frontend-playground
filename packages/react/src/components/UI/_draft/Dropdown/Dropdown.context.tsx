@@ -4,7 +4,7 @@ type TDropdownContext = {};
 
 const DropdownContext = React.createContext(null as unknown as TDropdownContext);
 
-const DropdownProvier: React.FC = ({ children }) => {
+const DropdownProvier: RFC = ({ children }) => {
   return <DropdownContext.Provider value={{}}>{children}</DropdownContext.Provider>;
 };
 

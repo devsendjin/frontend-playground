@@ -7,7 +7,7 @@ const calc = (text: string) => {
   return 1;
 };
 
-const LazyInitialStateSample: React.FC = () => {
+const LazyInitialStateSample: RFC = () => {
   const [initializedOnce, setInitializedOnce] = useState(() => calc('initializedOnce'));
   const [initializedMultiple, setInitializedMultiple] = useState(calc('initializedMultiple'));
 

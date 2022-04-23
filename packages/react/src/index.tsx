@@ -1,9 +1,11 @@
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { App } from '@/components/App';
 import '@styles/index.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const root: HTMLElement | null = document.getElementById('app');
+  const container = document.getElementById('app') as HTMLElement;
 
-  ReactDOM.render(<App />, root);
+  const root = createRoot(container);
+
+  root.render(<App />);
 });

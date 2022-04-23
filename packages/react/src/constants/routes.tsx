@@ -6,7 +6,7 @@ import { LocalizationSample } from '@/components/samples/LocalizationSample';
 import { AccordionSample } from '@/components/samples/AccordionSample';
 import { PortalSample } from '@/components/samples/PortalSample';
 import { TypedReduxSample } from '@/components/samples/TypedReduxSample';
-import { ErrorBounarySample } from '@/components/samples/ErrorBounarySample';
+import { ErrorBoundarySample } from '@/components/samples/ErrorBoundarySample';
 import { HookFlowSample } from '@/components/samples/HookFlowSample';
 import { Dropdown } from '@/components/UI/_draft/Dropdown';
 import { IconsSample } from '@/components/samples/IconsSample';
@@ -37,12 +37,12 @@ const ROUTES = {
   Dropdown: `/${paramCase('Dropdown')}`,
   PortalSample: `/${paramCase('PortalSample')}`,
   TypedReduxSample: `/${paramCase('TypedReduxSample')}`,
-  ErrorBounarySample: `/${paramCase('ErrorBounarySample')}`,
+  ErrorBoundarySample: `/${paramCase('ErrorBoundarySample')}`,
   HookFlowSample: `/${paramCase('HookFlowSample')}`,
   IconsSample: `/${paramCase('IconsSample')}`,
 } as const;
 
-export type TRouteArray = ReadonlyArray<{ route: string; component: React.FC; name: string }>;
+export type TRouteArray = ReadonlyArray<{ route: string; component: RFC; name: string }>;
 const samplesMap: ReadonlyArray<{ category: string; routes: TRouteArray }> = [
   {
     category: 'Features',
@@ -56,7 +56,7 @@ const samplesMap: ReadonlyArray<{ category: string; routes: TRouteArray }> = [
       { route: ROUTES.LocalizationSample, component: LocalizationSample, name: 'Localization (i18next)' },
       { route: ROUTES.PortalSample, component: PortalSample, name: 'Portal' },
       { route: ROUTES.TypedReduxSample, component: TypedReduxSample, name: 'Typed Redux' },
-      { route: ROUTES.ErrorBounarySample, component: ErrorBounarySample, name: 'Error Boundary' },
+      { route: ROUTES.ErrorBoundarySample, component: ErrorBoundarySample, name: 'Error Boundary' },
     ],
   },
   {

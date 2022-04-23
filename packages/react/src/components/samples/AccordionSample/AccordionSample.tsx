@@ -15,7 +15,7 @@ const content = [
   },
 ];
 
-const AccordionSample: React.FC = () => {
+const AccordionSample: RFC = () => {
   return (
     <Accordion style={{ maxWidth: 350 }}>
       {content.map(({ question, answer }, index) => (

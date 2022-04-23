@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import { createContext, useContext } from 'react';
 
 type TScaffoldContext = {};
 
-const ScaffoldContext = React.createContext(null as unknown as TScaffoldContext);
+const ScaffoldContext = createContext(null as unknown as TScaffoldContext);
 
-const ScaffoldProvider: React.FC = ({ children }) => {
+const ScaffoldProvider: RFC = ({ children }) => {
   return <ScaffoldContext.Provider value={{}}>{children}</ScaffoldContext.Provider>;
 };
 

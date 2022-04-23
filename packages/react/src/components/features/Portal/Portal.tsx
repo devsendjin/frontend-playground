@@ -1,6 +1,6 @@
 // sample
 // https://github.com/mui/material-ui/blob/master/packages/mui-base/src/Portal/Portal.js
-import React, { MutableRefObject, useLayoutEffect, useRef, useState } from 'react';
+import React, { MutableRefObject, PropsWithChildren, ReactPortal, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 type TPortalElement = Element;
@@ -8,6 +8,7 @@ type TPortalNode = TPortalElement | null | undefined;
 type TContainerIdentifier = string | TPortalNode;
 type TUsePortalNodeReturn = MutableRefObject<TPortalNode>;
 interface IPortalProps {
+  onMount?: () => void;
   containerIdentifier?: TContainerIdentifier;
   style?: React.CSSProperties;
   className?: string;
@@ -39,7 +40,16 @@ const usePortalNode = (containerIdentifier?: TContainerIdentifier): TUsePortalNo
   return useRef<TPortalNode>(containerIdentifier);
 };
 
-const Portal: React.FC<IPortalProps> = ({ className, id: portalId, style, containerIdentifier, children }) => {
+// type TPortalChild  = ReactNode | void
+// type TPortalChildren  = TPortalChild | TPortalChild[]
+const Portal = ({
+  className,
+  id: portalId,
+  style,
+  containerIdentifier,
+  onMount,
+  children,
+}: PropsWithChildren<IPortalProps>): ReactPortal => {
   const portalNodeRef = usePortalNode(containerIdentifier);
   const [dynamicPortalNode] = useState<TPortalElement>(document.createElement('div'));
 
@@ -55,6 +65,10 @@ const Portal: React.FC<IPortalProps> = ({ className, id: portalId, style, contai
         dynamicPortalNode.classList.add(className);
       }
       document.body.appendChild(dynamicPortalNode);
+    }
+
+    if (onMount) {
+      onMount();
     }
 
     return () => {

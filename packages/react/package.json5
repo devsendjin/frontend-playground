@@ -11,11 +11,11 @@
 
     // prettier
     "prettier": "prettier --config \"../prettier.config.js\" --ignore-unknown --write",
-    "prettier:src": "pnpm prettier \"./src/**/*\"",
+    "prettier:src": "pnpm prettier \"./src/**/*\" \"./*.ts\"",
 
     "config:test": "webpack configtest \"./scripts/webpack.config.ts\"",
 
-    "serve": "browser-sync start --config \"./scripts/browsersync.config.js\"",
+    "serve": "browser-sync start --config \"./scripts/browser-sync.config.js\"",
 
     // utils
     "json": "json5 --validate \"./package.json5\" && \
@@ -35,9 +35,9 @@
     "@babel/preset-react": "^7.16.7",
 
     // types
-    "@types/react": "^17.0.40",
-    "@types/react-dom": "^17.0.13",
-    "@types/node": "^17.0.23",
+    "@types/react": "^18.0.6",
+    "@types/react-dom": "^18.0.2",
+    "@types/node": "^17.0.25",
 
 
     // webpack
@@ -45,7 +45,7 @@
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.8.1",
     // plugins
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4", // hot-reload, requires react-refresh to be present
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5", // hot-reload, requires react-refresh to be present
     '@types/circular-dependency-plugin': '^5.0.5',
     "circular-dependency-plugin": "^5.2.2",
     "csso-webpack-plugin": "^2.0.0-beta.3",
@@ -57,7 +57,7 @@
     "css-loader": "^6.7.1", // css
     "postcss-loader": "^6.2.1", // css
     "sass-loader": "^12.6.0",
-    "babel-loader": "^8.2.4", // js
+    "babel-loader": "^8.2.5", // js
     "ts-loader": "^9.2.8",
     "@svgr/webpack": "^6.2.1",
     "url-loader": "^4.1.1",
@@ -65,7 +65,7 @@
 
 
     // scss / css
-    "sass": "^1.50.0",
+    "sass": "^1.50.1",
     "postcss": "^8.4.12",
     "postcss-preset-env": "^7.4.3",
     "postcss-flexbugs-fixes": "^5.0.2",
@@ -82,38 +82,38 @@
     "prettier": "^2.6.2",
     "cross-env": "^7.0.3",
     "npm-run-all": "^4.1.5", // run scripts sequentially or parallel
-    "tslib": "^2.3.1",
+    "tslib": "^2.4.0",
     'browser-sync': '^2.27.7',
 
     // other
-    "react-refresh": "^0.11.0",
+    "react-refresh": "^0.12.0",
 
     // monorepo packages
     "@frontend-playground/config": "workspace:^1.0.0"
   },
   "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-router-dom": "6.3.0",
     "immer": "^9.0.12", // immutable data processing
     "classnames": "^2.3.1", // handle css classes
-    "react-bootstrap": "^2.2.3",
+    "react-bootstrap": "^2.3.0",
     "bootstrap": "^5.1.3",
-    "gsap": "^3.10.2",
+    "gsap": "^3.10.4",
 
     "change-case": "^4.1.2",
 
     // localization
-    "i18next": "^21.6.14",
+    "i18next": "^21.6.16",
+    "react-i18next": "^11.16.7",
     "i18next-browser-languagedetector": "^6.1.4",
-    "react-i18next": "^11.16.2",
 
     // redux
-    "redux": "^4.1.2",
+    "redux": "^4.2.0",
     '@redux-devtools/extension': '^3.2.2',
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-thunk": "^2.4.1",
-    "react-redux": "^7.2.8",
+    "react-redux": "^8.0.1",
 
     // error handlers
     "react-error-boundary": "^3.1.4",

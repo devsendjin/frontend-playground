@@ -5,7 +5,7 @@ import { useActions } from '@/hooks/useActions';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import styles from './TypedReduxSample.module.scss';
 
-const TypedRedux: React.FC = () => {
+const TypedRedux: RFC = () => {
   const [input, setInput] = useState<string>('');
   const state = useTypedSelector((state) => state);
   console.group('TypedRedux');

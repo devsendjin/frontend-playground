@@ -1,7 +1,7 @@
 import { Form } from 'react-bootstrap';
 import { DynamicStateController } from '@/components/features/DynamicStateController';
 
-const DynamicStateControllerSample: React.FC = () => {
+const DynamicStateControllerSample: RFC = () => {
   return (
     <DynamicStateController<string>
       defaultState=""
