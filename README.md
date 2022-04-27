@@ -45,9 +45,16 @@
 
 #### Try to use/install:
 
-- [x] [change-case](https://github.com/blakeembrey/change-case) for route paths
-- [ ] [react-mdl](https://github.com/tleunen/react-mdl)
-- [ ] [tsconfig-paths-webpack-plugin](https://github.com/dividab/tsconfig-paths-webpack-plugin)
+- effects:
+  - [ ] [css black-white text v1](https://codepen.io/havardob/pen/PoPaWaE)
+  - [ ] [css black-white text v2](https://codepen.io/RickyMarou/pen/dyoMXYR)
+  - [ ] [text undeline](https://codepen.io/iam_aspencer/pen/qvNPBv)
+  - [ ] [text reveal animation](https://codepen.io/sedran/pen/GYPevV)
+  - [ ] [letters show/hide animation effect](https://codepen.io/esse/pen/qxmqPQ)
+  - [ ] [peeled text transformation](https://codepen.io/Moiety/pen/OPPKMr)
+  - [ ] [neon text hover](https://codepen.io/primaapriansyah/pen/DjEFq/)
+  - [ ] [skewed blockquote](https://codepen.io/mkstix6/pen/ERLLvb)
+  - [x] [jumping link hovers](https://codepen.io/devsendjin/pen/ExyWYwz)
 
 #### References:
 
