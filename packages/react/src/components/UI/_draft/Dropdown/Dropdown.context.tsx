@@ -4,9 +4,10 @@ type TDropdownContext = {};
 
 const DropdownContext = React.createContext(null as unknown as TDropdownContext);
 
-const DropdownProvier: RFC = ({ children }) => {
+const DropdownProvider: RFC = ({ children }) => {
   return <DropdownContext.Provider value={{}}>{children}</DropdownContext.Provider>;
 };
+DropdownProvider.displayName = DropdownProvider.name;
 
 const useDropdownContext = () => {
   const context = useContext(DropdownContext);
@@ -16,4 +17,4 @@ const useDropdownContext = () => {
   return context;
 };
 
-export { DropdownContext, DropdownProvier, useDropdownContext };
+export { DropdownContext, DropdownProvider, useDropdownContext };

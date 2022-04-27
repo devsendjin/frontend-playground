@@ -27,13 +27,15 @@ const TypedRedux: RFC = () => {
     </div>
   );
 };
+TypedRedux.displayName = TypedRedux.name;
 
-const TypedReduxSample = () => {
+const TypedReduxSample: RFC = () => {
   return (
     <Provider store={store}>
       <TypedRedux />
     </Provider>
   );
 };
+TypedReduxSample.displayName = TypedReduxSample.name;
 
 export { TypedReduxSample };

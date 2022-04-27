@@ -20,6 +20,7 @@ const ChildrenRerender: RFC = ({ children }) => {
     </div>
   );
 };
+ChildrenRerender.displayName = ChildrenRerender.name;
 
 const ChildrenRerenderSample: RFC = () => {
   return (
@@ -28,7 +29,6 @@ const ChildrenRerenderSample: RFC = () => {
     </ChildrenRerender>
   );
 };
-
 ChildrenRerenderSample.displayName = 'ChildrenRerenderSample';
 
 export { ChildrenRerenderSample };

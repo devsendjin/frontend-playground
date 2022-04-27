@@ -12,21 +12,6 @@ import { Dropdown } from '@/components/UI/_draft/Dropdown';
 import { IconsSample } from '@/components/samples/IconsSample';
 import { LocalStorageStateHook } from '@/components/hooks/LocalStorageStateHook';
 
-// const routesArr = [
-//   'DynamicStateControllerSample',
-//   'ChildrenRerenderSample',
-//   'LazyInitialStateSample',
-//   'LocalizationSample',
-// ] as const;
-// type TRoutes = typeof routesArr;
-
-// const r = routesArr.reduce((acc: any, route: string) => {
-//   acc[camelCase(route)] = paramCase(route);
-//   return acc;
-//, label: 'All samples' }, {}) as ({ [key in keyof TRoutes]: any })[];
-
-// console.log(r);
-
 const ROUTES = {
   root: '/',
   combined: '/combined',
@@ -44,52 +29,93 @@ const ROUTES = {
   LocalStorageStateHook: `/${paramCase('LocalStorageStateHook')}`,
 } as const;
 
-export type TRouteArray = ReadonlyArray<{ route: string; component: RFC; name: string }>;
-const samplesMap: ReadonlyArray<{ category: string; routes: TRouteArray }> = [
+export type Route = Readonly<{
+  url: string;
+  component: RFC;
+  name: string;
+  next?: {
+    category: string;
+    routes: Route[];
+  };
+}>;
+export type RouteMap = Readonly<{
+  category: string;
+  routes: Route[];
+}>;
+
+const routesMap: RouteMap[] = [
   {
     category: 'Features',
     routes: [
-      // { route: ROUTES.combined, component: AllInOne, name: 'All samples' },
       {
-        route: ROUTES.DynamicStateControllerSample,
+        url: ROUTES.DynamicStateControllerSample,
         component: DynamicStateControllerSample,
         name: 'Dynamic state controller',
       },
-      { route: ROUTES.LocalizationSample, component: LocalizationSample, name: 'Localization (i18next)' },
-      { route: ROUTES.PortalSample, component: PortalSample, name: 'Portal' },
-      { route: ROUTES.TypedReduxSample, component: TypedReduxSample, name: 'Typed Redux' },
-      { route: ROUTES.ErrorBoundarySample, component: ErrorBoundarySample, name: 'Error Boundary' },
+      { url: ROUTES.LocalizationSample, component: LocalizationSample, name: 'Localization (i18next)' },
+      { url: ROUTES.PortalSample, component: PortalSample, name: 'Portal' },
+      { url: ROUTES.TypedReduxSample, component: TypedReduxSample, name: 'Typed Redux' },
+      { url: ROUTES.ErrorBoundarySample, component: ErrorBoundarySample, name: 'Error Boundary' },
     ],
   },
   {
     category: 'hooks',
-    routes: [{ route: ROUTES.LocalStorageStateHook, component: LocalStorageStateHook, name: 'LocalStorageStateHook' }],
+    routes: [
+      {
+        url: ROUTES.LocalStorageStateHook,
+        component: LocalStorageStateHook,
+        name: 'LocalStorageStateHook',
+        /*next: {
+          category: 'hooks 1',
+          routes: [
+            {
+              url: ROUTES.LocalStorageStateHook,
+              component: LocalStorageStateHook,
+              name: 'category: \'hooks 1.1\', LocalStorageStateHook',
+            },
+            {
+              url: ROUTES.LocalStorageStateHook,
+              component: LocalStorageStateHook,
+              name: 'category: \'hooks 1.2\', LocalStorageStateHook',
+            },
+          ],
+        },*/
+      },
+    ],
   },
   {
     category: 'UI',
     routes: [
-      { route: ROUTES.Dropdown, component: Dropdown, name: 'Dropdown' },
-      { route: ROUTES.AccordionSample, component: AccordionSample, name: 'Accordion' },
-      { route: ROUTES.IconsSample, component: IconsSample, name: 'Icons' },
+      { url: ROUTES.Dropdown, component: Dropdown, name: 'Dropdown' },
+      { url: ROUTES.AccordionSample, component: AccordionSample, name: 'Accordion' },
+      { url: ROUTES.IconsSample, component: IconsSample, name: 'Icons' },
     ],
   },
   {
     category: 'Core knowledge',
-    routes: [{ route: ROUTES.HookFlowSample, component: HookFlowSample, name: 'Hook Flow' }],
+    routes: [{ url: ROUTES.HookFlowSample, component: HookFlowSample, name: 'Hook Flow' }],
   },
   {
     category: 'Performance',
     routes: [
-      { route: ROUTES.ChildrenRerenderSample, component: ChildrenRerenderSample, name: 'Children rerender' },
-      { route: ROUTES.LazyInitialStateSample, component: LazyInitialStateSample, name: 'Lazy initial state' },
+      { url: ROUTES.ChildrenRerenderSample, component: ChildrenRerenderSample, name: 'Children rerender' },
+      { url: ROUTES.LazyInitialStateSample, component: LazyInitialStateSample, name: 'Lazy initial state' },
     ],
   },
 ];
 
-const componentMap = samplesMap
-  .map(({ routes }) => {
-    return routes.map((route) => route);
-  })
-  .flat();
+const flatRoutes = (arr: RouteMap['routes']): Route[] => {
+  const result: Route[] = [];
+  for (const item of arr) {
+    result.push(item);
+    if (item.next?.routes) {
+      result.push(...flatRoutes(item.next.routes));
+    }
+  }
 
-export { ROUTES, samplesMap, componentMap };
+  return result;
+};
+
+const componentMap = routesMap.flatMap((route) => flatRoutes(route.routes));
+
+export { ROUTES, routesMap, componentMap };

@@ -14,6 +14,7 @@ import { ErrorBoundary as ReactErrorBoundary, ErrorBoundaryPropsWithRender } fro
 const ComponentThatMayError: RFC = () => {
   throw new Error('💥 CABOOM 💥');
 };
+ComponentThatMayError.displayName = ComponentThatMayError.name;
 
 interface FallbackProps {
   error: Error;
@@ -89,5 +90,6 @@ const ErrorBoundarySample: RFC = ({ children }) => {
     </>
   );
 };
+ErrorBoundarySample.displayName = ErrorBoundarySample.name;
 
 export { ErrorBoundarySample };

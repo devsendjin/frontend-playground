@@ -69,5 +69,6 @@ variant?: 'default' | 'plain';
 const Dropdown: RFC = () => {
   return <DropdownConstructor />;
 };
+Dropdown.displayName = Dropdown.name;
 
 export { Dropdown };

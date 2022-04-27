@@ -4,16 +4,20 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "start": "webpack serve --open-app-name 'google chrome' --config \"./scripts/webpack.config.ts\" --progress",
-    "build": "cross-env NODE_ENV=production webpack --config \"./scripts/webpack.config.ts\" --progress",
+    "start": "pnpm webpack:serve",
+    "build": "cross-env NODE_ENV=production pnpm webpack:build",
+    "watch": "pnpm webpack:watch",
 
-    "watch": "webpack --config \"./scripts/webpack.config.ts\" --watch --progress",
+    // webpack
+    "webpack": "webpack --config \"./scripts/webpack.config.ts\" --progress",
+    "webpack:serve": "webpack serve --open-app-name 'google chrome' --config \"./scripts/webpack.config.ts\" --progress",
+    "webpack:watch": "pnpm webpack -- --watch",
+    "webpack:build": "pnpm webpack",
+    "webpack:config:test": "webpack configtest \"./scripts/webpack.config.ts\"",
 
     // prettier
     "prettier": "prettier --config \"../prettier.config.js\" --ignore-unknown --write",
     "prettier:src": "pnpm prettier \"./src/**/*\" \"./*.ts\"",
-
-    "config:test": "webpack configtest \"./scripts/webpack.config.ts\"",
 
     "serve": "browser-sync start --config \"./scripts/browser-sync.config.js\"",
 
@@ -29,7 +33,7 @@
   "license": "ISC",
   "devDependencies": {
     // js (transformers)
-    "@babel/cli": "^7.17.6", // for config:build command
+    "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.8",
     "@babel/preset-react": "^7.16.7",
@@ -38,7 +42,6 @@
     "@types/react": "^18.0.6",
     "@types/react-dom": "^18.0.2",
     "@types/node": "^17.0.25",
-
 
     // webpack
     "webpack": "^5.72.0",

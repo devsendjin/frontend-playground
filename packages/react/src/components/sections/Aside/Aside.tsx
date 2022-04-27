@@ -1,157 +1,58 @@
-import React, { createRef, Ref, useEffect, useRef, useState } from 'react';
-import { NavLink, NavLinkProps } from 'react-router-dom';
-import cn from 'classnames';
-import { gsap } from 'gsap';
-import { randomItemFromArray } from '@/utils';
-import { ROUTES, samplesMap, TRouteArray } from '@/constants/routes';
+import { Route, RouteMap, ROUTES, routesMap } from '@/constants/routes';
+import { Menu, MenuItem, NestedMenu } from './NestedMenu';
+import { EnhancedNavLink } from './Link';
 import styles from './Aside.module.scss';
 
-// const colors = [
-//   '#2775fe',
-//   '#377bfe',
-//   '#4482ff',
-//   '#4f88ff',
-//   '#5a8eff',
-//   '#6495ff',
-//   '#6d9bff',
-//   '#77a2ff',
-//   '#80a8ff',
-//   '#89aeff',
-// ];
-
-const colors = ['#2196f3', '#03a9f4', '#00bcd4', '#009688'];
-
-const withActiveNavLink = (LinkComponent: typeof NavLink) => {
-  return React.forwardRef<HTMLAnchorElement, Omit<NavLinkProps, 'className'> & { className?: string }>(
-    ({ className, onMouseOver, ...rest }, ref) => {
-      const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
-
-      const handleMouseOver = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        if (onMouseOver) {
-          onMouseOver(e);
-        }
-        setIsMouseOver(true);
+const mapRoutesToNavigation = (routesMaps: RouteMap[]): Menu[] => {
+  const handler = (routes: Route[]): MenuItem[] => {
+    return routes.map<MenuItem>((route) => {
+      const base: MenuItem = {
+        url: route.url,
+        name: route.name,
       };
 
-      return (
-        <LinkComponent
-          className={({ isActive }) =>
-            cn(isActive && styles['is-active'], isMouseOver && styles['is-mouseover'], className)
-          }
-          onMouseOver={handleMouseOver}
-          ref={ref}
-          {...rest}
-        />
-      );
-    }
-  );
-};
+      if (!route.next) {
+        return base;
+      }
 
-const EnhancedNavLink = withActiveNavLink(NavLink);
-
-const routesArray: TRouteArray[] = samplesMap.reduce<TRouteArray[]>((acc, { routes }) => {
-  acc.push(routes);
-  return acc;
-}, []);
-
-const Aside = () => {
-  const $root = useRef<HTMLDivElement | null>(null);
-  const $indicator1 = useRef<HTMLDivElement | null>(null);
-  const $indicator2 = useRef<HTMLDivElement | null>(null);
-  const [active, setActive] = useState<string>('00');
-
-  const $linkRefs = useRef(
-    samplesMap.map(({ routes }) => {
-      return routes.map(() => createRef<HTMLAnchorElement>());
-    })
-  );
-
-  const animate = () => {
-    if (!$root.current) return;
-    const menuOffset = $root.current.getBoundingClientRect();
-    const activeIndexes = active.split('').map(Number);
-
-    const activeItem = $linkRefs.current[activeIndexes[0]][activeIndexes[1]].current;
-    if (!activeItem) return;
-    const { width, height, top, left } = activeItem.getBoundingClientRect();
-
-    const settings = {
-      x: left - menuOffset.x,
-      y: top - menuOffset.y,
-      width,
-      height,
-      backgroundColor: randomItemFromArray(colors),
-      ease: 'elastic.out(.7, .7)',
-      duration: 0.8,
-    };
-
-    gsap.to($indicator1.current, {
-      ...settings,
-    });
-
-    gsap.to($indicator2.current, {
-      ...settings,
-      duration: 1,
+      return {
+        ...base,
+        next: {
+          category: route.next.category,
+          items: route.next.routes ? handler(route.next.routes) : [],
+        },
+      };
     });
   };
 
-  useEffect(() => {
-    animate();
-    window.addEventListener('resize', animate);
-
-    return () => {
-      window.removeEventListener('resize', animate);
+  return routesMaps.map<Menu>((routeMap) => {
+    return {
+      category: routeMap.category,
+      items: routeMap.routes && routeMap.routes.length > 0 ? handler(routeMap.routes) : [],
     };
-  }, [active]);
+  }, []);
+};
 
+const mappedRoutes = mapRoutesToNavigation(routesMap);
+
+const Aside: RFC = () => {
   return (
     <aside className={styles['aside']}>
-      <div ref={$root} className={styles['menu']}>
-        <EnhancedNavLink to={ROUTES.root} className={cn(styles['link'], styles['top-link'])}>
+      <div className={styles['menu']}>
+        <EnhancedNavLink to={ROUTES.root} className={styles['top-link']}>
           Playground
         </EnhancedNavLink>
-
-        <EnhancedNavLink to={ROUTES.combined} className={cn(styles['link'], styles['top-link'])}>
+        <EnhancedNavLink to={ROUTES.combined} className={styles['top-link']}>
           All in one
         </EnhancedNavLink>
 
-        {samplesMap.map(({ category }, sampleIndex) => {
-          const routes = routesArray[sampleIndex];
-
-          return (
-            <React.Fragment key={category}>
-              <div>{category}</div>
-              <div className={styles['link-group']}>
-                {routes.map((route, routeIndex) => {
-                  const linkActiveIndex = `${sampleIndex}${routeIndex}`;
-
-                  return (
-                    <EnhancedNavLink
-                      key={route.name}
-                      ref={$linkRefs.current[sampleIndex][routeIndex] as Ref<HTMLAnchorElement>}
-                      to={route.route}
-                      className={cn(
-                        styles['link'],
-                        styles['link-group-item'],
-                        active === linkActiveIndex && styles['is-active-animated']
-                      )}
-                      onMouseEnter={() => {
-                        setActive(linkActiveIndex);
-                      }}
-                    >
-                      {route.name}
-                    </EnhancedNavLink>
-                  );
-                })}
-              </div>
-            </React.Fragment>
-          );
-        })}
-        <div ref={$indicator1} className={styles['indicator']} />
-        <div ref={$indicator2} className={styles['indicator']} />
+        {mappedRoutes.map((navBlock) => (
+          <NestedMenu key={navBlock.category} menu={navBlock} />
+        ))}
       </div>
     </aside>
   );
 };
+Aside.displayName = Aside.name;
 
 export { Aside };

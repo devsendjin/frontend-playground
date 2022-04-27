@@ -1,9 +1,5 @@
 const FrontView: RFC = () => {
-  return (
-    <div>
-      <div>Playground</div>
-    </div>
-  );
+  return <div>Playground</div>;
 };
 
 FrontView.displayName = FrontView.name;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card } from '@/components/UI/_draft/Card';
 
 interface IDynamicTagNameProps {
   tagName: keyof JSX.IntrinsicElements;
@@ -11,5 +12,6 @@ const DynamicTag: RFC<IDynamicTagNameProps & React.HTMLAttributes<HTMLOrSVGEleme
 }) => {
   return React.createElement(tagName, restProps, children);
 };
+Card.displayName = Card.name;
 
 export { DynamicTag };

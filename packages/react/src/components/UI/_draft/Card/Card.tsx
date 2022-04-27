@@ -9,4 +9,6 @@ const Card: RFC = ({ children }) => {
     </div>
   );
 };
+Card.displayName = Card.name;
+
 export { Card };
