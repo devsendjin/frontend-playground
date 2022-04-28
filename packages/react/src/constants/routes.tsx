@@ -11,6 +11,27 @@ import { HookFlowSample } from '@/components/samples/HookFlowSample';
 import { Dropdown } from '@/components/UI/_draft/Dropdown';
 import { IconsSample } from '@/components/samples/IconsSample';
 import { LocalStorageStateHook } from '@/components/hooks/LocalStorageStateHook';
+/*
+const components = [
+  ChildrenRerenderSample,
+  DynamicStateControllerSample,
+  LazyInitialStateSample,
+  LocalizationSample,
+  AccordionSample,
+  PortalSample,
+  TypedReduxSample,
+  ErrorBoundarySample,
+  HookFlowSample,
+  Dropdown,
+  IconsSample,
+  LocalStorageStateHook,
+] as const;
+// can't type this correctly
+const _routes = components.reduce<{ [route: string]: `/${string}` }[]>((acc, item) => {
+  acc.push({ [item.name]: `/${paramCase(item.name)}` });
+  return acc;
+}, []);
+*/
 
 const ROUTES = {
   root: '/',

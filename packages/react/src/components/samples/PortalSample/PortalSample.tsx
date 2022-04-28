@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { Portal } from '@/components/features/Portal';
 import styles from './PortalSample.module.scss';
 
-const PortalSample = () => {
+const PortalSample: RFC = () => {
   const [toggle, setToggle] = useState<boolean>(true);
   const [toggleBodyPortal, setToggleBodyPortal] = useState<boolean>(false);
 

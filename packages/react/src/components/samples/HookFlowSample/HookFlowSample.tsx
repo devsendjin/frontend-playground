@@ -1,7 +1,7 @@
 // https://github.com/kentcdodds/react-hooks/blob/main/src/examples/hook-flow.js
 import React from 'react';
 
-const Child = () => {
+const Child: RFC = () => {
   console.log('%c    Child: render start', 'color: MediumSpringGreen');
 
   const [count, setCount] = React.useState(() => {
@@ -37,7 +37,7 @@ const Child = () => {
   return element;
 };
 
-const HookFlowSample = () => {
+const HookFlowSample: RFC = () => {
   console.log('%cHookFlowSample: render start', 'color: MediumSpringGreen');
 
   const [showChild, setShowChild] = React.useState(() => {

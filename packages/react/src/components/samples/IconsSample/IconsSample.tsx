@@ -2,7 +2,7 @@ import { SvgIcon, svgIconMap } from '@/components/UI/Icons';
 import React from 'react';
 import styles from './IconsSample.module.scss';
 
-const IconsSample = () => {
+const IconsSample: RFC = () => {
   return (
     <div className={styles['icons']}>
       {/* <div>Github icons</div> */}
