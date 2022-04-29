@@ -1,8 +1,7 @@
 import { scope } from '@scripts/utils';
 
 scope(() => {
-  // @ts-ignore
-  function getProperyObj<Obj, Key extends keyof Obj>(obj: Obj, key: Key): Obj[Key] {
+  function getPropertyObj<Obj, Key extends keyof Obj>(obj: Obj, key: Key): Obj[Key] {
     return obj[key];
   }
 

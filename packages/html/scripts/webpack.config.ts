@@ -15,23 +15,28 @@ import config from './config';
 // plugin help
 // https://www.mo4tech.com/webpack-5-compilation-processassets-hook.html
 type TOptions = {
-  regexp?: RegExp;
+  deleteByAssetPath?: (assetPath: string) => boolean;
+  deleteByAssetContent?: (assetContent: string | Buffer) => boolean;
   debug?: boolean;
-  omitFileIf?: (assetContent: string | Buffer) => boolean;
 };
 const PLUGIN_NAME = 'omit-generating-files';
-// const defaultOptions: TOptions = {};
 
-// @ts-ignore
 class OmitGeneratingFilesPlugin {
   constructor(private options?: TOptions) {
-    // this.options = { ...defaultOptions, ...options };
-    this.options = options;
+    const defaultOptions: TOptions = {
+      debug: false,
+      deleteByAssetPath: () => false,
+      deleteByAssetContent: () => false,
+    }
+    this.options = {
+      ...defaultOptions,
+      ...options
+    };
   }
 
   apply = (compiler: Compiler) => {
     compiler.hooks.thisCompilation.tap(PLUGIN_NAME, (compilation) => {
-      if (this.options?.regexp) {
+      if (this.options?.deleteByAssetPath) {
         compilation.hooks.processAssets.tapAsync(
           {
             name: PLUGIN_NAME,
@@ -45,8 +50,8 @@ class OmitGeneratingFilesPlugin {
             }
             assets.forEach((assetPath) => {
               if (
-                assetPath.match(this.options!.regexp as RegExp) ||
-                (this.options?.omitFileIf && this.options.omitFileIf(assetPath))
+                (this.options?.deleteByAssetPath && this.options.deleteByAssetPath(assetPath)) ||
+                (this.options?.deleteByAssetContent && this.options.deleteByAssetContent(assetPath))
               ) {
                 compilation.deleteAsset(assetPath);
               }
@@ -56,7 +61,7 @@ class OmitGeneratingFilesPlugin {
         );
       }
 
-      if (this.options?.omitFileIf) {
+      if (this.options?.deleteByAssetContent) {
         compilation.hooks.processAssets.tapAsync(
           {
             name: PLUGIN_NAME,
@@ -70,7 +75,7 @@ class OmitGeneratingFilesPlugin {
             }
 
             assets.forEach((assetPath) => {
-              if (this.options?.omitFileIf && this.options.omitFileIf(assetsObj[assetPath].source())) {
+              if (this.options?.deleteByAssetContent && this.options.deleteByAssetContent(assetsObj[assetPath].source())) {
                 compilation.deleteAsset(assetPath);
               }
             });
@@ -270,8 +275,10 @@ const webpackConfig: Configuration = {
   // @ts-ignore
   plugins: [
     new OmitGeneratingFilesPlugin({
-      // regexp: /(404|front-page|playground)\.js/gi,
-      omitFileIf: (assetContent) => assetContent === '', // filter empty js files
+      deleteByAssetContent: (assetContent) => assetContent === '', // filter empty js files
+      // deleteByAssetPath: (assetPath) => {
+      //   return /404\.js$/gi.test(assetPath);
+      // },
       // debug: true,
     }),
 
@@ -281,9 +288,7 @@ const webpackConfig: Configuration = {
     }),
 
     new MiniCssExtractPlugin({
-      filename: () => {
-        return '[name].css';
-      },
+      filename: () => '[name].css',
     }),
 
     config.__PROD__ && new CssoWebpackPlugin({ comments: false }),

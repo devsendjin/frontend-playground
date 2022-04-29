@@ -1,10 +1,12 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "noUnusedLocals": false,
     "noImplicitAny": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "outDir": "public",
+    "types": [],
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"],
@@ -19,7 +21,8 @@
     "compilerOptions": {
       "module": "CommonJS",
       "target": "es5",
-      "baseUrl": "."
+      "baseUrl": ".",
+      "types": ["node"]
     }
   }
 }
