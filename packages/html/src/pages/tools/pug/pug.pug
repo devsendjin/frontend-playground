@@ -43,7 +43,7 @@ append content
       mixin link(href, name)
         a(href=href)&attributes(attributes)= name
 
-      +link('/foo', 'foo')(class="btn")
+      +link('/foo', 'foo')(class="btn", target='_blank', rel='noopener noreferrer nofollow')
 
   br
   span.content-pug-tool__title short syntax:

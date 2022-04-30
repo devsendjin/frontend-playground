@@ -9,7 +9,7 @@ mixin pgNav(tag)
   else
     span.nav__category= tag
     each post in collections[tag]
-      a.nav__link(class=`${post.url === page.url ? 'active': ''}`, href=_url(post.url))= post.data.title
+      a.nav__link(class={active: post.url === page.url}, href=_url(post.url))= post.data.title
 
 //- include style link depend on page url
 prepend styles

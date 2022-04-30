@@ -16,7 +16,10 @@ append scripts
 append styles
   +styles([`${page.filePathStem}.css`])
 
+mixin link(href, name)
+  a(href=href)&attributes(attributes)= name
 
 append content
   h1 #{_site.name}
   p P.S. >> open console
+  +link('/', 'to main')(target='_blank', rel='noopener noreferrer nofollow')

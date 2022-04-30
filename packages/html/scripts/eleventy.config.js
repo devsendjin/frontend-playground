@@ -20,11 +20,7 @@ const isObject = (item) => {
   return item && typeof item === 'object' && !Array.isArray(item);
 };
 
-/**
- * Deep merge two objects.
- * @param target
- * @param ...sources
- */
+// Deep merge two objects.
 const mergeDeep = (target, ...sources) => {
   if (!sources.length) return target;
   const source = sources.shift();
@@ -49,13 +45,11 @@ const mergeDeep = (target, ...sources) => {
 };
 
 // urls
-const urlBuilder = (url) => path.join('/', url);
-const assetUrl = (assetUrl) => urlBuilder(path.join('assets', assetUrl));
-const vendorUrl = (fileUrl) => urlBuilder(path.join(config.distVendorFolder, fileUrl));
+const urlBuilder = (...urls) => path.join('/', ...urls);
+const assetUrl = (...assetUrls) => urlBuilder(path.join('assets', ...assetUrls));
 const fileExistsChecker = (fileUrl) => {
   const filePath = path.join(config.APP_DIST, fileUrl);
-  const exists = fs.existsSync(filePath);
-  return exists;
+  return fs.existsSync(filePath);
 };
 
 module.exports = function (eleventyConfig) {

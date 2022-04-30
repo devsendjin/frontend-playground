@@ -15,7 +15,7 @@ div(data-json=`
 mixin link(href, name)
   a(href=href)&attributes(attributes)= name
 
-+link('/foo', 'foo')(class="btn")
++link('/foo', 'foo')(class="btn", target='_blank', rel='noopener noreferrer nofollow')
 </code></pre><br><span class="content-pug-tool__title">short syntax:</span><pre><code class="language-pug">ul
   li: a(href="/"): span text
 p #[ul: li: a(href='/') text]

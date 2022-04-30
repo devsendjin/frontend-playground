@@ -46,15 +46,17 @@
 #### Try to use/install:
 
 - effects:
-  - [ ] [css black-white text v1](https://codepen.io/havardob/pen/PoPaWaE)
-  - [ ] [css black-white text v2](https://codepen.io/RickyMarou/pen/dyoMXYR)
-  - [ ] [text undeline](https://codepen.io/iam_aspencer/pen/qvNPBv)
-  - [ ] [text reveal animation](https://codepen.io/sedran/pen/GYPevV)
-  - [ ] [letters show/hide animation effect](https://codepen.io/esse/pen/qxmqPQ)
-  - [ ] [peeled text transformation](https://codepen.io/Moiety/pen/OPPKMr)
-  - [ ] [neon text hover](https://codepen.io/primaapriansyah/pen/DjEFq/)
-  - [ ] [skewed blockquote](https://codepen.io/mkstix6/pen/ERLLvb)
-  - [x] [jumping link hovers](https://codepen.io/devsendjin/pen/ExyWYwz)
+  - html:
+    - [x] [jumping link hovers](https://codepen.io/devsendjin/pen/ExyWYwz)
+    - [ ] [floating paralax headers](https://codepen.io/amit_sheen/pen/BaJmWWj)
+    - [ ] [css black-white text v1](https://codepen.io/havardob/pen/PoPaWaE)
+    - [ ] [css black-white text v2](https://codepen.io/RickyMarou/pen/dyoMXYR)
+    - [ ] [text undeline](https://codepen.io/iam_aspencer/pen/qvNPBv)
+    - [ ] [text reveal animation](https://codepen.io/sedran/pen/GYPevV)
+    - [ ] [letters show/hide animation effect](https://codepen.io/esse/pen/qxmqPQ)
+    - [ ] [peeled text transformation](https://codepen.io/Moiety/pen/OPPKMr)
+    - [ ] [neon text hover](https://codepen.io/primaapriansyah/pen/DjEFq/)
+    - [ ] [skewed blockquote](https://codepen.io/mkstix6/pen/ERLLvb)
 
 #### References:
 
