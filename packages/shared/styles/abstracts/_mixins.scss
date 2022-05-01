@@ -1,5 +1,3 @@
-@use 'sass:math';
-
 @mixin debug($color: #ddd) {
   outline: 1px solid $color;
 }
@@ -424,13 +422,13 @@
 @mixin grid-row($offset: $offset) {
   display: flex;
   flex-wrap: wrap;
-  margin-left: math.div($offset, -2);
-  margin-right: math.div($offset, -2);
+  margin-left: div($offset, -2);
+  margin-right: div($offset, -2);
 }
 
 @mixin grid-col($offset: $offset) {
-  margin-left: math.div($offset, 2);
-  margin-right: math.div($offset, 2);
+  margin-left: div($offset, 2);
+  margin-right: div($offset, 2);
 }
 
 @mixin grid-size($n, $columns: $columns, $offset: $offset) {
