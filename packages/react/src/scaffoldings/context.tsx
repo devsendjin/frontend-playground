@@ -9,7 +9,7 @@ const ScaffoldProvider: RFC = ({ children }) => {
 };
 ScaffoldProvider.displayName = ScaffoldProvider.name;
 
-const useScaffoldContext = () => {
+const useScaffoldContext = (): TScaffoldContext => {
   const context = useContext(ScaffoldContext);
   if (!context) {
     throw new Error('No context found for Scaffold');

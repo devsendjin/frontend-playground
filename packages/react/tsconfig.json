@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "noUnusedLocals": false,
     "isolatedModules": true,
     "jsx": "react-jsx",
     "baseUrl": "src",

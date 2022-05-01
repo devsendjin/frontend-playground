@@ -1,6 +1,6 @@
 import styles from './ScaffoldComponent.module.scss';
 
-const ScaffoldComponent = () => {
+const ScaffoldComponent: RFC = () => {
   return <div className={styles['scaffold']}>ScaffoldComponent</div>;
 };
 

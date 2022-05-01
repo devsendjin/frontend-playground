@@ -18,6 +18,7 @@
     // prettier
     "prettier": "prettier --config \"../prettier.config.js\" --ignore-unknown --write",
     "prettier:src": "pnpm prettier \"./src/**/*\" \"./*.ts\"",
+    "prettier:changed": "pnpm prettier $(git status | awk -F ' {2,}' '/modified:|new file:/ {print $2}' | grep -E 'src.*\\.(ts?x|s[ac]ss)')",
 
     "serve": "browser-sync start --config \"./scripts/browser-sync.config.js\"",
 

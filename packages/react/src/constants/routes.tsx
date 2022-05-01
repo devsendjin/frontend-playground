@@ -11,6 +11,8 @@ import { HookFlowSample } from '@/components/samples/HookFlowSample';
 import { Dropdown } from '@/components/UI/_draft/Dropdown';
 import { IconsSample } from '@/components/samples/IconsSample';
 import { LocalStorageStateHook } from '@/components/hooks/LocalStorageStateHook';
+import { TicTacToe } from '@/components/samples/TicTacToeGame';
+
 /*
 const components = [
   ChildrenRerenderSample,
@@ -48,6 +50,8 @@ const ROUTES = {
   HookFlowSample: `/${paramCase('HookFlowSample')}`,
   IconsSample: `/${paramCase('IconsSample')}`,
   LocalStorageStateHook: `/${paramCase('LocalStorageStateHook')}`,
+  // games
+  TicTacToe: `/${paramCase('TicTacToe')}`,
 } as const;
 
 export type Route = Readonly<{
@@ -122,6 +126,10 @@ const routesMap: RouteMap[] = [
       { url: ROUTES.ChildrenRerenderSample, component: ChildrenRerenderSample, name: 'Children rerender' },
       { url: ROUTES.LazyInitialStateSample, component: LazyInitialStateSample, name: 'Lazy initial state' },
     ],
+  },
+  {
+    category: 'Games',
+    routes: [{ url: ROUTES.TicTacToe, component: TicTacToe, name: 'Tic-Tac-Toe' }],
   },
 ];
 

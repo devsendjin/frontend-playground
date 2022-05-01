@@ -104,7 +104,7 @@ const getLoaders: TGetLoaders = (config) => {
         importLoaders: 2,
         esModule: true,
         modules: {
-          localIdentName: config.__DEV__ ? '[local]--[hash:base64:5]' : '[hash:base64:6]',
+          localIdentName: config.__DEV__ ? "[local]--[folder]--[hash:base64:3]" : "[hash:base64:6]",
         },
         sourceMap: config.__DEV__,
       },
