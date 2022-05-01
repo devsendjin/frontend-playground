@@ -94,11 +94,13 @@ const webpackConfig: Configuration & { devServer: DevServerConfiguration } = {
 
   module: {
     rules: [
+      // ts|tsx
       {
         test: /\.ts(x?)$/i,
         exclude: /node_modules/,
         use: ['babel-loader', 'ts-loader'],
       },
+      // jsx
       {
         test: /\.jsx$/i,
         exclude: /node_modules/,
@@ -111,6 +113,7 @@ const webpackConfig: Configuration & { devServer: DevServerConfiguration } = {
           },
         ],
       },
+      // js
       {
         test: /\.js$/i,
         exclude: /node_modules/,
@@ -196,7 +199,7 @@ const webpackConfig: Configuration & { devServer: DevServerConfiguration } = {
 
     config.isServerRunning &&
       new HtmlWebpackPlugin({
-        template: path.join(config.APP_ROOT, 'public/index.html'),
+        template: path.join(config.APP_ROOT, 'public/template.html'),
       }),
 
     config.isServerRunning &&
