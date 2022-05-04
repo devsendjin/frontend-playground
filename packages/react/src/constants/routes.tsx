@@ -12,6 +12,7 @@ import { Dropdown } from '@/components/UI/_draft/Dropdown';
 import { IconsSample } from '@/components/samples/IconsSample';
 import { LocalStorageStateHook } from '@/components/hooks/LocalStorageStateHook';
 import { TicTacToe } from '@/components/samples/TicTacToeGame';
+import { UseTransitionHook } from '@/components/hooks/UseTransitionHook';
 
 /*
 const components = [
@@ -35,23 +36,42 @@ const _routes = components.reduce<{ [route: string]: `/${string}` }[]>((acc, ite
 }, []);
 */
 
-const ROUTES = {
-  root: '/',
-  combined: '/combined',
-  DynamicStateControllerSample: `/${paramCase('DynamicStateControllerSample')}`,
-  ChildrenRerenderSample: `/${paramCase('ChildrenRerenderSample')}`,
-  LazyInitialStateSample: `/${paramCase('LazyInitialStateSample')}`,
-  LocalizationSample: `/${paramCase('LocalizationSample')}`,
-  AccordionSample: `/${paramCase('AccordionSample')}`,
+const ui = {
   Dropdown: `/${paramCase('Dropdown')}`,
+  AccordionSample: `/${paramCase('AccordionSample')}`,
+  IconsSample: `/${paramCase('IconsSample')}`,
+} as const;
+const features = {
+  DynamicStateControllerSample: `/${paramCase('DynamicStateControllerSample')}`,
+  LocalizationSample: `/${paramCase('LocalizationSample')}`,
   PortalSample: `/${paramCase('PortalSample')}`,
   TypedReduxSample: `/${paramCase('TypedReduxSample')}`,
   ErrorBoundarySample: `/${paramCase('ErrorBoundarySample')}`,
-  HookFlowSample: `/${paramCase('HookFlowSample')}`,
-  IconsSample: `/${paramCase('IconsSample')}`,
+} as const;
+const hooks = {
   LocalStorageStateHook: `/${paramCase('LocalStorageStateHook')}`,
-  // games
+  UseTransitionHook: `/${paramCase('UseTransitionHook')}`,
+} as const;
+const coreKnowledge = {
+  HookFlowSample: `/${paramCase('HookFlowSample')}`,
+} as const;
+const performance = {
+  ChildrenRerenderSample: `/${paramCase('ChildrenRerenderSample')}`,
+  LazyInitialStateSample: `/${paramCase('LazyInitialStateSample')}`,
+} as const;
+const games = {
   TicTacToe: `/${paramCase('TicTacToe')}`,
+} as const;
+
+const ROUTES = {
+  root: '/',
+  combined: '/combined',
+  ...features,
+  ...hooks,
+  ...ui,
+  ...coreKnowledge,
+  ...performance,
+  ...games,
 } as const;
 
 export type Route = Readonly<{
@@ -105,6 +125,11 @@ const routesMap: RouteMap[] = [
             },
           ],
         },*/
+      },
+      {
+        url: ROUTES.UseTransitionHook,
+        component: UseTransitionHook,
+        name: 'UseTransitionHook',
       },
     ],
   },

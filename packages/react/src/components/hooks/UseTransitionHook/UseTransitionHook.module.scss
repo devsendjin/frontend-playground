@@ -1,0 +1,17 @@
+.basic-transition {
+  font-size: 3rem;
+  font-weight: 800;
+  transition: transform 0.5s, opacity 0.5s;
+  opacity: 1;
+  transform: scale(1);
+
+  &:global.preEnter,
+  &:global.exiting {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  &:global.exited {
+    display: none;
+  }
+}
