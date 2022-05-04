@@ -13,6 +13,7 @@ interface IPortalProps {
   style?: React.CSSProperties;
   className?: string;
   id?: string;
+  prependToBody?: boolean;
 }
 
 const cssPropertiesToString = (cssProperties: React.CSSProperties) => {
@@ -46,6 +47,7 @@ const Portal = ({
   className,
   id: portalId,
   style,
+  prependToBody = false,
   containerIdentifier,
   onMount,
   children,
@@ -64,7 +66,11 @@ const Portal = ({
       if (className) {
         dynamicPortalNode.classList.add(className);
       }
-      document.body.appendChild(dynamicPortalNode);
+      if (prependToBody) {
+        document.body.prepend(dynamicPortalNode);
+      } else {
+        document.body.appendChild(dynamicPortalNode);
+      }
     }
 
     if (onMount) {

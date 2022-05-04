@@ -25,6 +25,7 @@ const PortalSample: RFC = () => {
       )}
       {toggleBodyPortal && (
         <Portal
+          prependToBody
           id="portal-node"
           className="portal-node"
           style={{ color: 'red' }}
