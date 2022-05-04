@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback, MutableRefObject, Dispatch, SetStateAction } from 'react';
+import { Dispatch, MutableRefObject, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
 
 enum TransitionStates {
   'PRE_ENTER' = 0,
@@ -9,7 +9,7 @@ enum TransitionStates {
   'EXITED' = 5,
   'UNMOUNTED' = 6,
 }
-type State = 'preEnter' | 'entering' | 'entered' | 'preExit' | 'exiting' | 'exited' | 'unmounted';
+export type State = 'preEnter' | 'entering' | 'entered' | 'preExit' | 'exiting' | 'exited' | 'unmounted';
 type TimeoutId = ReturnType<typeof window.setTimeout>;
 type TimeoutIdMutable = MutableRefObject<TimeoutId | undefined>;
 interface UseTransitionImperativeParams {
@@ -31,7 +31,9 @@ interface UseTransitionImperativeReturn {
 
 const STATES: ReadonlyArray<State> = ['preEnter', 'entering', 'entered', 'preExit', 'exiting', 'exited', 'unmounted'];
 
-const startOrEnd = (unmounted: boolean) => (unmounted ? TransitionStates.UNMOUNTED : TransitionStates.EXITED);
+const startOrEnd = (unmounted: boolean): TransitionStates => {
+  return unmounted ? TransitionStates.UNMOUNTED : TransitionStates.EXITED;
+};
 
 const updateState = (
   state: TransitionStates,
@@ -50,11 +52,11 @@ const updateState = (
  *
  * @param {boolean} [enter=true] - Enable or disable enter phase transitions
  * @param {boolean} [exit=true] - Enable or disable exit phase transitions
- * @param {boolean} [preEnter=true] - Add a 'preEnter' state immediately before 'entering', which is necessary to change DOM elements from unmounted or display: none with CSS transition (not necessary for CSS animation).
+ * @param {boolean} [preEnter=unmountOnExit] - Add a 'preEnter' state immediately before 'entering', which is necessary to change DOM elements from unmounted or display: none with CSS transition (not necessary for CSS animation).
  * @param {boolean} [preExit=true] - Add a 'preExit' state immediately before 'exiting'
  * @param {number | { [enter]: number, [exit]: number }} [timeout=500] - Set timeout in ms for transitions; you can set a single value or different values for enter and exit transitions.
- * @param {boolean} [initialEntered=true] - Beginning from 'entered' state
- * @param {boolean} [mountOnEnter=false] - State will be 'unmounted' until hit enter phase for the first time. It allows you to create lazily mounted component.
+ * @param {boolean} [initialEntered=false] - Beginning from 'entered' state
+ * @param {boolean} [mountOnEnter=true] - State will be 'unmounted' until hit enter phase for the first time. It allows you to create lazily mounted component.
  * @param {boolean} [unmountOnExit=true] - State will become 'unmounted' after 'exiting' finishes. It allows you to transition component out of DOM.
  * @param {function} onChange - Event fired when state has changed. Prefer to read state from the hook function return value
  * directly unless you want to perform some side effects in response to state changes. Note: create an event handler with
@@ -68,14 +70,14 @@ const updateState = (
  * }
  */
 const useTransitionImperative = ({
+  mountOnEnter = true,
+  unmountOnExit = true,
   enter = true,
   exit = true,
-  preEnter = true,
+  preEnter = unmountOnExit,
   preExit = false,
+  initialEntered = false,
   timeout = 500,
-  initialEntered = true,
-  mountOnEnter = false,
-  unmountOnExit = true,
   onChange,
 }: UseTransitionImperativeParams = {}): UseTransitionImperativeReturn => {
   const [state, setState] = useState<TransitionStates>(
@@ -94,7 +96,7 @@ const useTransitionImperative = ({
   }
 
   const endTransition = useCallback(() => {
-    let newState;
+    let newState: TransitionStates | undefined;
     switch (latestState.current) {
       case TransitionStates.ENTERING:
       case TransitionStates.PRE_ENTER:
@@ -163,12 +165,16 @@ const useTransitionImperative = ({
 };
 
 interface UseTransitionReturn extends UseTransitionImperativeReturn {
-  isElementVisible: boolean;
-  isEnteringProcess: boolean;
-  isExitingProcess: boolean;
+  isPreEntered: boolean;
+  isEntering: boolean;
+  isEntered: boolean;
+  isExiting: boolean;
+  isExited: boolean;
+  isUnmounted: boolean;
+  isMounted: boolean;
   transitionClassname: string;
 }
-type MappedTransitionStateToClassnameKey = Exclude<State, 'unmounted'>;
+type MappedTransitionStateToClassnameKey = State;
 type MappedTransitionStateToClassname = {
   [key in MappedTransitionStateToClassnameKey]?: string;
 };
@@ -176,15 +182,13 @@ interface UseTransitionParams extends UseTransitionImperativeParams {
   customClassnames?: MappedTransitionStateToClassname;
 }
 
-const transitionClassNames = STATES.filter(
-  (state) => state !== STATES[TransitionStates.UNMOUNTED]
-).reduce<MappedTransitionStateToClassname>((acc, state) => {
-  acc[state as MappedTransitionStateToClassnameKey] = state;
+const transitionClassNames = STATES.reduce<MappedTransitionStateToClassname>((acc, state) => {
+  acc[state] = state;
   return acc;
 }, {});
 
-export const useTransition = ({ customClassnames, ...restParams }: UseTransitionParams): UseTransitionReturn => {
-  const { transitionState, ...rest } = useTransitionImperative(restParams);
+const useTransition = ({ customClassnames, ...restParams }: UseTransitionParams): UseTransitionReturn => {
+  const { transitionState, ...restTransitionValues } = useTransitionImperative(restParams);
   const transitionClassnames = useRef<MappedTransitionStateToClassname>(transitionClassNames);
 
   useEffect(() => {
@@ -197,13 +201,17 @@ export const useTransition = ({ customClassnames, ...restParams }: UseTransition
   }, []);
 
   return {
-    isElementVisible: transitionState !== STATES[TransitionStates.UNMOUNTED],
+    isPreEntered: transitionState === STATES[TransitionStates.PRE_ENTER],
+    isEntering: transitionState === STATES[TransitionStates.ENTERING],
+    isEntered: transitionState === STATES[TransitionStates.ENTERED],
+    isExiting: transitionState === STATES[TransitionStates.EXITING],
+    isExited: transitionState === STATES[TransitionStates.EXITED],
+    isUnmounted: transitionState === STATES[TransitionStates.UNMOUNTED],
+    isMounted: transitionState !== STATES[TransitionStates.UNMOUNTED],
     transitionState,
-    isEnteringProcess:
-      transitionState === STATES[TransitionStates.ENTERING] || transitionState === STATES[TransitionStates.ENTERED],
-    isExitingProcess:
-      transitionState === STATES[TransitionStates.EXITING] || transitionState === STATES[TransitionStates.EXITED],
-    transitionClassname: transitionClassnames.current[transitionState as MappedTransitionStateToClassnameKey] ?? '',
-    ...rest,
+    transitionClassname: transitionClassnames.current[transitionState] ?? '',
+    ...restTransitionValues,
   };
 };
+
+export { useTransitionImperative, useTransition };
