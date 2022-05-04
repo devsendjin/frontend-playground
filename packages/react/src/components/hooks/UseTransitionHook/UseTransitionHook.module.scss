@@ -1,17 +1,21 @@
-.basic-transition {
-  font-size: 3rem;
-  font-weight: 800;
-  transition: transform 0.5s, opacity 0.5s;
-  opacity: 1;
-  transform: scale(1);
+.use-transition-hook {
+  .transition-example {
+    --transition-duration: 0.5s;
 
-  &:global.preEnter,
-  &:global.exiting {
-    opacity: 0;
-    transform: scale(0.5);
-  }
+    font-size: 25px;
+    font-weight: 600;
+    transition: transform var(--transition-duration), opacity var(--transition-duration);
+    opacity: 1;
+    transform: translate(0, 0);
 
-  &:global.exited {
-    display: none;
+    &.preEnter,
+    &.exiting {
+      opacity: 0;
+      transform: translate(245px, 158px);
+    }
+
+    &.exited {
+      display: none;
+    }
   }
 }

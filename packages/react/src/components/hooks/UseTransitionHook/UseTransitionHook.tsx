@@ -1,31 +1,76 @@
+import { CSSProperties, useState } from 'react';
+import {ButtonGroup, FormControl, FormGroup} from 'react-bootstrap';
 import cn from 'classnames';
-import {useTransition} from "@/hooks/useTransition";
+import { useTransition } from '@/hooks/useTransition';
 import styles from './UseTransitionHook.module.scss';
 
 interface IUseTransitionHookProps {
   className?: string;
 }
 
-const UseTransitionHook: RFC<IUseTransitionHookProps> = ({className}) => {
-  const { isElementVisible,transitionState, toggleTransition } = useTransition({
-    timeout: 500,
-  })
+const defaultDelay = 1000;
+const UseTransitionHook: RFC<IUseTransitionHookProps> = ({ className }) => {
+  const [delay, setDelay] = useState<number>(defaultDelay);
+
+  const {
+    isEnteringProcess,
+    isExitingProcess,
+    isElementVisible,
+    transitionClassname,
+    transitionState,
+    endTransition,
+    toggleTransition,
+  } = useTransition({
+    timeout: delay,
+    onChange: ({ state }) => {
+      console.log('UseTransitionHook state: ', state);
+    },
+  });
 
   return (
     <div className={cn(styles['use-transition-hook'], className)}>
-      <h2>transitionState: {transitionState}</h2>
-      <div>
+      <ButtonGroup>
         <button className="btn btn-primary" onClick={() => toggleTransition()}>
-          {transitionState === "entering" || transitionState === "entered" ? "Hide" : "Show"}
+          {isEnteringProcess ? 'Hide' : 'Show'}
         </button>
-      </div>
+        <button className="btn btn-primary" onClick={() => endTransition()}>
+          endTransition (immediately remove on "exiting")
+        </button>
+        <FormGroup>
+          <FormControl
+            type="number"
+            value={delay}
+            onChange={(e) => {
+              const value = parseInt(e.target.value, 10);
+              if (value) {
+                setDelay(value);
+                return;
+              }
+              setDelay(defaultDelay);
+            }}
+          />
+        </FormGroup>
+      </ButtonGroup>
+      <pre>
+        {JSON.stringify(
+          { isEnteringProcess, isExitingProcess, isElementVisible, transitionClassname, transitionState },
+          null,
+          2
+        )}
+      </pre>
       {isElementVisible && (
-        <div className={cn(styles['basic-transition'], transitionState)}>
-          React transition state
+        <div
+          className={cn(styles['transition-example'], styles[transitionState])}
+          style={{ '--transition-duration': `${delay / 1000}s` } as CSSProperties}
+        >
+          React transition. transitionState: {transitionState}. <br />
+          Custom transition classname: {transitionClassname}.
         </div>
       )}
     </div>
   );
 };
 
-export {UseTransitionHook};
+UseTransitionHook.displayName = UseTransitionHook.name;
+
+export { UseTransitionHook };

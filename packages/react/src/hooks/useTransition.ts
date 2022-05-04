@@ -12,7 +12,7 @@ enum TransitionStates {
 type State = 'preEnter' | 'entering' | 'entered' | 'preExit' | 'exiting' | 'exited' | 'unmounted';
 type TimeoutId = ReturnType<typeof window.setTimeout>;
 type TimeoutIdMutable = MutableRefObject<TimeoutId | undefined>;
-interface UseTransitionParams {
+interface UseTransitionImperativeParams {
   enter?: boolean;
   exit?: boolean;
   preEnter?: boolean;
@@ -23,11 +23,10 @@ interface UseTransitionParams {
   unmountOnExit?: boolean;
   onChange?: (params: { state: State }) => void;
 }
-interface UseTransitionReturn {
+interface UseTransitionImperativeReturn {
   transitionState: State;
   toggleTransition: (toEnter?: boolean) => void;
   endTransition: () => void;
-  isElementVisible: boolean;
 }
 
 const STATES: ReadonlyArray<State> = ['preEnter', 'entering', 'entered', 'preExit', 'exiting', 'exited', 'unmounted'];
@@ -39,7 +38,7 @@ const updateState = (
   setState: Dispatch<SetStateAction<TransitionStates>>,
   latestState: MutableRefObject<TransitionStates>,
   timeoutId: TimeoutIdMutable,
-  onChange: UseTransitionParams['onChange']
+  onChange: UseTransitionImperativeParams['onChange']
 ) => {
   clearTimeout(timeoutId.current as TimeoutId);
   setState(state);
@@ -65,11 +64,10 @@ const updateState = (
  *     transitionState: State,
  *     toggleTransition: (toEnter?: boolean) => void,
  *     endTransition: () => void,
- *     isElementVisible: boolean,
  *   }
  * }
  */
-export const useTransition = ({
+const useTransitionImperative = ({
   enter = true,
   exit = true,
   preEnter = true,
@@ -79,7 +77,7 @@ export const useTransition = ({
   mountOnEnter = false,
   unmountOnExit = true,
   onChange,
-}: UseTransitionParams = {}): UseTransitionReturn => {
+}: UseTransitionImperativeParams = {}): UseTransitionImperativeReturn => {
   const [state, setState] = useState<TransitionStates>(
     initialEntered ? TransitionStates.ENTERED : startOrEnd(mountOnEnter)
   );
@@ -136,9 +134,9 @@ export const useTransition = ({
       };
 
       const enterStage = latestState.current <= TransitionStates.ENTERED;
-      if (typeof toEnter !== 'boolean') toEnter = !enterStage;
+      // if (typeof toEnter !== 'boolean') toEnter = !enterStage;
 
-      if (toEnter) {
+      if (toEnter ?? !enterStage) {
         if (!enterStage) {
           transitState(
             enter ? (preEnter ? TransitionStates.PRE_ENTER : TransitionStates.ENTERING) : TransitionStates.ENTERED
@@ -161,6 +159,51 @@ export const useTransition = ({
     transitionState,
     toggleTransition,
     endTransition,
-    isElementVisible: transitionState !== "unmounted",
+  };
+};
+
+interface UseTransitionReturn extends UseTransitionImperativeReturn {
+  isElementVisible: boolean;
+  isEnteringProcess: boolean;
+  isExitingProcess: boolean;
+  transitionClassname: string;
+}
+type MappedTransitionStateToClassnameKey = Exclude<State, 'unmounted'>;
+type MappedTransitionStateToClassname = {
+  [key in MappedTransitionStateToClassnameKey]?: string;
+};
+interface UseTransitionParams extends UseTransitionImperativeParams {
+  customClassnames?: MappedTransitionStateToClassname;
+}
+
+const transitionClassNames = STATES.filter(
+  (state) => state !== STATES[TransitionStates.UNMOUNTED]
+).reduce<MappedTransitionStateToClassname>((acc, state) => {
+  acc[state as MappedTransitionStateToClassnameKey] = state;
+  return acc;
+}, {});
+
+export const useTransition = ({ customClassnames, ...restParams }: UseTransitionParams): UseTransitionReturn => {
+  const { transitionState, ...rest } = useTransitionImperative(restParams);
+  const transitionClassnames = useRef<MappedTransitionStateToClassname>(transitionClassNames);
+
+  useEffect(() => {
+    if (customClassnames) {
+      transitionClassnames.current = {
+        ...transitionClassnames.current,
+        ...customClassnames,
+      };
+    }
+  }, []);
+
+  return {
+    isElementVisible: transitionState !== STATES[TransitionStates.UNMOUNTED],
+    transitionState,
+    isEnteringProcess:
+      transitionState === STATES[TransitionStates.ENTERING] || transitionState === STATES[TransitionStates.ENTERED],
+    isExitingProcess:
+      transitionState === STATES[TransitionStates.EXITING] || transitionState === STATES[TransitionStates.EXITED],
+    transitionClassname: transitionClassnames.current[transitionState as MappedTransitionStateToClassnameKey] ?? '',
+    ...rest,
   };
 };
