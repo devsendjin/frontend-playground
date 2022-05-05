@@ -10,3 +10,4 @@ node_modules/
 !.yarn/releases
 !.yarn/versions
 !.yarn/patches
+packages/react/dist/

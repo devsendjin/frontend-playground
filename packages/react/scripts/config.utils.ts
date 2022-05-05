@@ -55,8 +55,6 @@ const resolvePath: TResolvePath = ({ folderToLookup, onLookupSuccess, onLookupFa
   return resolvedPath;
 };
 
-const getPublicUrlOrPath = () => '/';
-
 type TGetLoadersReturn<TRuleSetUseItem = RuleSetUseItem> = {
   postCss: () => TRuleSetUseItem;
   sass: () => TRuleSetUseItem;
@@ -104,7 +102,7 @@ const getLoaders: TGetLoaders = (config) => {
         importLoaders: 2,
         esModule: true,
         modules: {
-          localIdentName: config.__DEV__ ? "[local]--[folder]--[hash:base64:3]" : "[hash:base64:6]",
+          localIdentName: config.__DEV__ ? '[local]--[folder]--[hash:base64:3]' : '[hash:base64:6]',
         },
         sourceMap: config.__DEV__,
       },
@@ -113,4 +111,4 @@ const getLoaders: TGetLoaders = (config) => {
   };
 };
 
-export default { getLoaders, resolvePath, getPublicUrlOrPath };
+export default { getLoaders, resolvePath };

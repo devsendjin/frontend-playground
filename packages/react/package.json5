@@ -2,23 +2,29 @@
   "name": "@frontend-playground/react",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "dist/js/index.js",
   "scripts": {
     "start": "pnpm webpack:serve",
-    "build": "cross-env NODE_ENV=production pnpm webpack:build",
+    "build": "cross-env NODE_ENV=production run-s build:public build:dist",
+    "build:public": "pnpm clean:public && pnpm webpack:build",
+    "build:dist": "pnpm clean:dist && cross-env IS_DISTRIBUTED=true pnpm webpack:build",
     "watch": "pnpm webpack:watch",
 
     // webpack
-    "webpack": "webpack --config \"./scripts/webpack.config.ts\" --progress",
+    "webpack-tool": "webpack --config \"./scripts/webpack.config.ts\" --progress",
     "webpack:serve": "webpack serve --open-app-name 'google chrome' --config \"./scripts/webpack.config.ts\" --progress",
-    "webpack:watch": "pnpm webpack -- --watch",
-    "webpack:build": "pnpm webpack",
+    "webpack:watch": "pnpm webpack-tool --watch",
+    "webpack:build": "pnpm webpack-tool",
     "webpack:config:test": "webpack configtest \"./scripts/webpack.config.ts\"",
 
     // prettier
     "prettier": "prettier --config \"../prettier.config.js\" --ignore-unknown --write",
     "prettier:src": "pnpm prettier \"./src/**/*\" \"./*.ts\"",
     "prettier:changed": "pnpm prettier $( git status | awk -F ' {2,}' '/modified:|new file:/ {print $2}' | grep -E 'src.*\\.(tsx?|s[ac]ss)')",
+
+    // clean
+    "clean:public": "rimraf \"./public/*\"",
+    "clean:dist": "rimraf \"./dist/*\"",
 
     "serve": "browser-sync start --config \"./scripts/browser-sync.config.js\"",
 
@@ -43,6 +49,7 @@
     "@types/react": "^18.0.6",
     "@types/react-dom": "^18.0.2",
     "@types/node": "^17.0.25",
+    "@types/postcss-flexbugs-fixes": "^4.2.1",
 
     // webpack
     "webpack": "^5.72.0",
@@ -50,7 +57,7 @@
     "webpack-dev-server": "^4.8.1",
     // plugins
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5", // hot-reload, requires react-refresh to be present
-    '@types/circular-dependency-plugin': '^5.0.5',
+    "@types/circular-dependency-plugin": "^5.0.5",
     "circular-dependency-plugin": "^5.2.2",
     "csso-webpack-plugin": "^2.0.0-beta.3",
     "html-webpack-plugin": "^5.5.0",
@@ -66,7 +73,7 @@
     "@svgr/webpack": "^6.2.1",
     "url-loader": "^4.1.1",
     "file-loader": "^6.2.0",
-
+    "pug-loader": "^2.4.0",
 
     // scss / css
     "sass": "^1.50.1",
@@ -75,11 +82,9 @@
     "postcss-flexbugs-fixes": "^5.0.2",
     "autoprefixer": "^10.4.4",
 
-
     // typescript
     "typescript": "^4.6.3",
     "ts-node": "^10.7.0",
-
 
     // utils
     "json5": "^2.2.1",
@@ -87,7 +92,8 @@
     "cross-env": "^7.0.3",
     "npm-run-all": "^4.1.5", // run scripts sequentially or parallel
     "tslib": "^2.4.0",
-    'browser-sync': '^2.27.7',
+    "browser-sync": "^2.27.7",
+    "rimraf": "^3.0.2",
 
     // other
     "react-refresh": "^0.12.0",
@@ -114,7 +120,7 @@
 
     // redux
     "redux": "^4.2.0",
-    '@redux-devtools/extension': '^3.2.2',
+    "@redux-devtools/extension": "^3.2.2",
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-thunk": "^2.4.1",
     "react-redux": "^8.0.1",

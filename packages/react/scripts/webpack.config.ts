@@ -17,12 +17,15 @@ const loaders = utils.getLoaders(config);
 const webpackConfig: Configuration & { devServer: DevServerConfiguration } = {
   mode: config.MODE,
 
-  entry: path.join(config.APP_SRC, 'index.tsx'),
+  entry: {
+    [`${config.paths.js}/index`]: path.join(config.APP_SRC, 'index.tsx'),
+  },
 
   output: {
-    filename: 'index.js',
-    path: config.paths.js,
+    filename: '[name].js',
+    path: config.APP_PUBLIC,
     chunkFilename: '[id].[chunkhash].js',
+    publicPath: config.publicUrlOrPath,
   },
 
   resolve: {
@@ -53,7 +56,7 @@ const webpackConfig: Configuration & { devServer: DevServerConfiguration } = {
       }
     : {},
 
-  stats: config.isServerRunning ? 'errors-warnings' : 'detailed', // none | detailed | verbose
+  stats: config.__DEV__ || config.isServerRunning ? 'errors-warnings' : 'detailed', // none | detailed | verbose
 
   optimization: config.__PROD__
     ? {
@@ -173,6 +176,16 @@ const webpackConfig: Configuration & { devServer: DevServerConfiguration } = {
           },
         ],
       },
+      {
+        test: /\.pug$/i,
+        use: {
+          loader: 'pug-loader',
+          options: {
+            pretty: config.__DEV__,
+          },
+        },
+        exclude: '/node_modules/',
+      },
     ],
   },
 
@@ -184,23 +197,21 @@ const webpackConfig: Configuration & { devServer: DevServerConfiguration } = {
     }),
 
     new CircularDependencyPlugin({
-      // exclude detection of files based on a RegExp
-      exclude: /node_modules/,
-      // include specific files based on a RegExp
-      include: /react-hook-form/,
-      // add errors to webpack instead of warnings
-      failOnError: true,
+      exclude: /node_modules/, // exclude detection of files based on a RegExp
+      include: /react-hook-form/, // include specific files based on a RegExp
+      failOnError: true, // add errors to webpack instead of warnings
+      cwd: config.APP_ROOT, // set the current working directory for displaying module paths
       // allow import cycles that include an asyncronous import,
       // e.g. via import(/* webpackMode: "weak" */ './file.js')
       allowAsyncCycles: false,
-      // set the current working directory for displaying module paths
-      cwd: config.APP_ROOT,
     }),
 
-    config.isServerRunning &&
-      new HtmlWebpackPlugin({
-        template: path.join(config.APP_ROOT, 'public/template.html'),
-      }),
+    new HtmlWebpackPlugin({
+      template: path.join(config.APP_SRC, 'index.pug'),
+      filename: path.join(config.APP_PUBLIC, 'index.html'),
+      inject: 'body',
+      minify: config.__PROD__,
+    }),
 
     config.isServerRunning &&
       new ReactRefreshWebpackPlugin({

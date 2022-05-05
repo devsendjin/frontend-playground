@@ -6,6 +6,7 @@ const MODE = sharedConfig.MODE as TMode;
 const __PROD__ = sharedConfig.__PROD__;
 const __DEV__ = sharedConfig.__DEV__;
 const isServerRunning: boolean = sharedConfig.isServerRunning;
+const isDistributed: boolean = sharedConfig.isDistributed;
 
 const APP_ROOT: string = utils.resolvePath({
   folderToLookup: 'scripts',
@@ -14,13 +15,15 @@ const APP_ROOT: string = utils.resolvePath({
   },
 });
 const APP_SRC: string = path.resolve(APP_ROOT, 'src');
-const APP_PUBLIC: string = path.resolve(APP_ROOT, 'public')
+const APP_PUBLIC: string = path.resolve(APP_ROOT, isDistributed ? 'dist/react-playground' : 'public');
+
+const publicUrlOrPath = isDistributed ? '/react-playground/' : '/';
 
 const paths = {
-  js: path.join(APP_PUBLIC, 'js'),
-  css: '../css', // relative to js
-  images: '../images', // relative to js
-  svg: '../images/icon', // relative to js
+  js: 'js',
+  css: 'css',
+  images: 'images',
+  svg: 'images/icon',
 } as const;
 
 // change here + tsconfig.json (+ jest.config.js)
@@ -35,7 +38,7 @@ const configuration = {
   APP_ROOT,
   APP_SRC,
   APP_PUBLIC,
-  publicUrlOrPath: utils.getPublicUrlOrPath(),
+  publicUrlOrPath,
   paths,
 
   // webpack configs
@@ -47,7 +50,8 @@ const configuration = {
   MODE,
   __PROD__,
   __DEV__,
-};
+  isDistributed,
+} as const;
 
 console.log(configuration);
 

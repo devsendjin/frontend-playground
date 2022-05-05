@@ -37,6 +37,8 @@
 - common
   - [x] run `prettier` command only for changed files (maybe implement with bash)
   - [x] patch `console.log` for dev process | create cusom log
+  - [ ] doodle jump
+  - [ ] nodejs online chat
 - react
   - [x] component with dynamic state using generics
   - [ ] create custom select component
