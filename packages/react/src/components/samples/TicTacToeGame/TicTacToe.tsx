@@ -35,32 +35,6 @@ const calculateNextValue = (squares: Square[]): Square => {
   return squares.filter(Boolean).length % 2 === 0 ? 'X' : 'O';
 };
 
-const calculateStatus = (winner: Square | null, squares: Square[], nextValue: Square): (() => JSX.Element) => {
-  if (winner) {
-    const Icon = squareMap[winner];
-    return () => (
-      <div className="d-flex">
-        Winner: <Icon className="ms-2" />
-      </div>
-    );
-  }
-
-  if (squares.every((v) => v === null)) {
-    return () => <span>Begin the game.</span>;
-  }
-
-  if (squares.every((v) => v !== null)) {
-    return () => <span>Standoff!</span>;
-  }
-
-  const Icon = squareMap[nextValue];
-  return () => (
-    <div className="d-flex">
-      Next player <Icon className="ms-2" />
-    </div>
-  );
-};
-
 const Cell: RFC<{ onSelect: () => void; className?: string }> = ({ onSelect, className, children }) => {
   return (
     <div className={cn(styles['cell'], className)} onClick={onSelect}>
@@ -69,7 +43,36 @@ const Cell: RFC<{ onSelect: () => void; className?: string }> = ({ onSelect, cla
   );
 };
 
-// const initialValue = (): Square[] => Array.from({ length: 9 }, (_, index) => index);
+const GameStatus: RFC<{ winner: Square | null; squares: Square[]; nextValue: Square }> = ({
+  winner,
+  squares,
+  nextValue,
+}) => {
+  if (winner) {
+    const Icon = squareMap[winner];
+    return (
+      <div className="d-flex">
+        <b>Winner:</b> <Icon className="ms-2" />
+      </div>
+    );
+  }
+
+  if (squares.every((v) => v === null)) {
+    return <span>Begin the game.</span>;
+  }
+
+  if (squares.every((v) => v !== null)) {
+    return <b>Standoff!</b>;
+  }
+
+  const Icon = squareMap[nextValue];
+  return (
+    <div className="d-flex">
+      Next player <Icon className="ms-2" />
+    </div>
+  );
+};
+
 const initialValue = (): Square[] => Array(9).fill(null);
 
 const TicTacToe: RFC = () => {
@@ -77,7 +80,6 @@ const TicTacToe: RFC = () => {
 
   const winner = calculateWinner(squares);
   const nextValue = calculateNextValue(squares);
-  const gameStatus = calculateStatus(winner, squares, nextValue);
 
   const restartGame = () => {
     setSquares(initialValue());
@@ -118,7 +120,7 @@ const TicTacToe: RFC = () => {
         </div>
         <div>
           Status: <br />
-          {gameStatus()}
+          <GameStatus winner={winner} squares={squares} nextValue={nextValue} />
         </div>
       </div>
       <button className="btn btn-dark" onClick={restartGame}>

@@ -20,7 +20,7 @@
     // prettier
     "prettier": "prettier --config \"../prettier.config.js\" --ignore-unknown --write",
     "prettier:src": "pnpm prettier \"./src/**/*\" \"./*.ts\"",
-    "prettier:changed": "pnpm prettier $( git status | awk -F ' {2,}' '/modified:|new file:/ {print $2}' | grep -E 'src.*\\.(tsx?|s[ac]ss)')",
+    "prettier:changed": "pnpm prettier $(git ls-files -m --deduplicate | grep -E 'src.*\\.(tsx?|s[ac]ss)')",
 
     // clean
     "clean:public": "rimraf \"./public/*\"",

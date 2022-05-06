@@ -61,7 +61,7 @@ const webpackConfig: Configuration & { devServer: DevServerConfiguration } = {
   ignoreWarnings: [
     {
       message: /color-adjust/, // ignore deprecated css function (appears in bootstrap)
-    }
+    },
   ],
 
   optimization: config.__PROD__
