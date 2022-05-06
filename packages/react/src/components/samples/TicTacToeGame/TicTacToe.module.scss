@@ -14,12 +14,17 @@
     border: 1px solid $black;
     width: calc(100% / 3);
     position: relative;
+    transition: background-color 0.2s;
 
     .value {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+    }
+
+    &.with-value {
+      background-color: #ddd;
     }
   }
 }

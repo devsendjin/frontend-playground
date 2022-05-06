@@ -58,6 +58,12 @@ const webpackConfig: Configuration & { devServer: DevServerConfiguration } = {
 
   stats: config.__DEV__ || config.isServerRunning ? 'errors-warnings' : 'detailed', // none | detailed | verbose
 
+  ignoreWarnings: [
+    {
+      message: /color-adjust/, // ignore deprecated css function (appears in bootstrap)
+    }
+  ],
+
   optimization: config.__PROD__
     ? {
         nodeEnv: config.MODE,

@@ -1,10 +1,16 @@
-import styles from './TicTacToe.module.scss';
-import { useState } from 'react';
+import cn from 'classnames';
 import { useLocalStorageState } from '@/hooks/useLocalStorageState';
+import { CrossIcon, CircleIcon } from './Icons';
+import styles from './TicTacToe.module.scss';
 
-type Square = 'X' | 'O' | null;
+type Square = 'X' | 'O';
 
-const calculateWinner = (squares: Square[]): Square => {
+const squareMap: { [key in Square]: typeof CrossIcon } = {
+  X: CrossIcon,
+  O: CircleIcon,
+};
+
+const calculateWinner = (squares: Square[]): Square | null => {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -29,25 +35,35 @@ const calculateNextValue = (squares: Square[]): Square => {
   return squares.filter(Boolean).length % 2 === 0 ? 'X' : 'O';
 };
 
-const calculateStatus = (winner: Square, squares: Square[], nextValue: Square): string => {
+const calculateStatus = (winner: Square | null, squares: Square[], nextValue: Square): (() => JSX.Element) => {
   if (winner) {
-    return `Winner: ${winner}`;
+    const Icon = squareMap[winner];
+    return () => (
+      <div className="d-flex">
+        Winner: <Icon className="ms-2" />
+      </div>
+    );
   }
 
   if (squares.every((v) => v === null)) {
-    return 'Begin the game.';
+    return () => <span>Begin the game.</span>;
   }
 
   if (squares.every((v) => v !== null)) {
-    return 'Standoff!';
+    return () => <span>Standoff!</span>;
   }
 
-  return `Next player ${nextValue}`;
+  const Icon = squareMap[nextValue];
+  return () => (
+    <div className="d-flex">
+      Next player <Icon className="ms-2" />
+    </div>
+  );
 };
 
-const Cell: RFC<{ onSelect: () => void }> = ({ onSelect, children }) => {
+const Cell: RFC<{ onSelect: () => void; className?: string }> = ({ onSelect, className, children }) => {
   return (
-    <div className={styles['cell']} onClick={onSelect}>
+    <div className={cn(styles['cell'], className)} onClick={onSelect}>
       {children}
     </div>
   );
@@ -77,27 +93,32 @@ const TicTacToe: RFC = () => {
     setSquares(squaresCopy);
   };
 
-  // console.log(squares);
-
   return (
     <div className={styles['game']}>
       <div className={styles['board-area']}>
         <div className={styles['board']}>
-          {squares.map((v, index) => (
-            <Cell
-              key={index}
-              onSelect={() => {
-                console.log(index);
-                selectSquare(index);
-              }}
-            >
-              <span className={styles['value']}>{v}</span>
-            </Cell>
-          ))}
+          {squares.map((squareChar, index) => {
+            const Icon = squareChar ? squareMap[squareChar] : null;
+            return (
+              <Cell
+                key={index}
+                onSelect={() => {
+                  selectSquare(index);
+                }}
+                className={cn(squareChar && styles['with-value'])}
+              >
+                {Icon && (
+                  <span className={styles['value']}>
+                    <Icon />
+                  </span>
+                )}
+              </Cell>
+            );
+          })}
         </div>
         <div>
           Status: <br />
-          {gameStatus}
+          {gameStatus()}
         </div>
       </div>
       <button className="btn btn-dark" onClick={restartGame}>
