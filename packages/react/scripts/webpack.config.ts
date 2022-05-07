@@ -18,11 +18,11 @@ const webpackConfig: Configuration & { devServer: DevServerConfiguration } = {
   mode: config.MODE,
 
   entry: {
-    [`${config.paths.js}/index`]: path.join(config.APP_SRC, 'index.tsx'),
+    [`${config.paths.js}/`]: path.join(config.APP_SRC, 'index.tsx'),
   },
 
   output: {
-    filename: '[name].js',
+    filename: '[name][contenthash].js',
     path: config.APP_PUBLIC,
     chunkFilename: '[id].[chunkhash].js',
     publicPath: config.publicUrlOrPath,
@@ -225,7 +225,8 @@ const webpackConfig: Configuration & { devServer: DevServerConfiguration } = {
       }),
 
     (config.__PROD__ || (config.__DEV__ && !config.isServerRunning)) &&
-      new MiniCssExtractPlugin({ filename: `${config.paths.css}/index.css` }),
+      new MiniCssExtractPlugin({ filename: `${config.paths.css}/[contenthash].css` }),
+    // new MiniCssExtractPlugin({ filename: `${config.paths.css}/index.css` }),
 
     config.__PROD__ &&
       new CssoWebpackPlugin({
