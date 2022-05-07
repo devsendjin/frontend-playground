@@ -11,7 +11,7 @@ import { HookFlowSample } from '@/components/samples/HookFlowSample';
 import { Dropdown } from '@/components/UI/_draft/Dropdown';
 import { IconsSample } from '@/components/samples/IconsSample';
 import { LocalStorageStateHook } from '@/components/hooks/LocalStorageStateHook';
-import { TicTacToe } from '@/components/samples/TicTacToeGame';
+import { TicTacToeGame } from '@/components/samples/TicTacToeGame';
 import { UseTransitionHook } from '@/components/hooks/UseTransitionHook';
 
 /*
@@ -60,7 +60,7 @@ const performance = {
   LazyInitialStateSample: `/${paramCase('LazyInitialStateSample')}`,
 } as const;
 const games = {
-  TicTacToe: `/${paramCase('TicTacToe')}`,
+  TicTacToeGame: `/${paramCase('TicTacToeGame')}`,
 } as const;
 
 const ROUTES = {
@@ -154,7 +154,7 @@ const routesMap: RouteMap[] = [
   },
   {
     category: 'Games',
-    routes: [{ url: ROUTES.TicTacToe, component: TicTacToe, name: 'Tic-Tac-Toe' }],
+    routes: [{ url: ROUTES.TicTacToeGame, component: TicTacToeGame, name: 'Tic Tac Toe' }],
   },
 ];
 

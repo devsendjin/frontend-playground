@@ -28,3 +28,26 @@
     }
   }
 }
+
+.game-with-history {
+  .game-panel {
+    .button {
+      @include resetBtn;
+    }
+
+    .list-group {
+      padding: 0;
+      margin: 0;
+    }
+
+    .list-group-item {
+      display: flex;
+
+      .button {
+        padding: 6px 0;
+        flex-grow: 1;
+        text-align: left;
+      }
+    }
+  }
+}

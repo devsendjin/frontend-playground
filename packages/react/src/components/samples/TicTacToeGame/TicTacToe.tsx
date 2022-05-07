@@ -2,6 +2,7 @@ import cn from 'classnames';
 import { useLocalStorageState } from '@/hooks/useLocalStorageState';
 import { CrossIcon, CircleIcon } from './Icons';
 import styles from './TicTacToe.module.scss';
+import { useState } from 'react';
 
 type Square = 'X' | 'O';
 
@@ -51,9 +52,9 @@ const GameStatus: RFC<{ winner: Square | null; squares: Square[]; nextValue: Squ
   if (winner) {
     const Icon = squareMap[winner];
     return (
-      <div className="d-flex">
-        <b>Winner:</b> <Icon className="ms-2" />
-      </div>
+      <span className="d-flex">
+        Winner <Icon className="ms-2" />
+      </span>
     );
   }
 
@@ -62,27 +63,27 @@ const GameStatus: RFC<{ winner: Square | null; squares: Square[]; nextValue: Squ
   }
 
   if (squares.every((v) => v !== null)) {
-    return <b>Standoff!</b>;
+    return <span>Standoff!</span>;
   }
 
   const Icon = squareMap[nextValue];
   return (
-    <div className="d-flex">
+    <span className="d-flex">
       Next player <Icon className="ms-2" />
-    </div>
+    </span>
   );
 };
 
-const initialValue = (): Square[] => Array(9).fill(null);
+const squaresInitial = (): Square[] => Array(9).fill(null);
 
-const TicTacToe: RFC = () => {
-  const [squares, setSquares] = useLocalStorageState<Square[]>('squares', initialValue());
+const TicTacToe: RFC<{ className?: string }> = ({ className }) => {
+  const [squares, setSquares] = useLocalStorageState<Square[]>('squares', squaresInitial());
 
   const winner = calculateWinner(squares);
   const nextValue = calculateNextValue(squares);
 
   const restartGame = () => {
-    setSquares(initialValue());
+    setSquares(squaresInitial());
   };
 
   const selectSquare = (squareIndex: number): void => {
@@ -96,7 +97,7 @@ const TicTacToe: RFC = () => {
   };
 
   return (
-    <div className={styles['game']}>
+    <div className={cn(styles['game'], className)}>
       <div className={styles['board-area']}>
         <div className={styles['board']}>
           {squares.map((squareChar, index) => {
@@ -118,16 +119,111 @@ const TicTacToe: RFC = () => {
             );
           })}
         </div>
+      </div>
+      <div>
         <div>
-          Status: <br />
+          <button className="d-block btn btn-dark" onClick={restartGame}>
+            restart game
+          </button>
+          <b className="d-block me-1">Status:</b>
           <GameStatus winner={winner} squares={squares} nextValue={nextValue} />
         </div>
       </div>
-      <button className="btn btn-dark" onClick={restartGame}>
-        restart game
-      </button>
     </div>
   );
 };
 
-export { TicTacToe };
+const TicTacToeWithHistory: RFC = () => {
+  const [history, setHistory] = useLocalStorageState<Square[][]>('TicTacToeWithHistory:squares', [squaresInitial()]);
+  const [currentStep, setCurrentStep] = useLocalStorageState<number>('TicTacToeWithHistory:step', 0);
+  const currentSquares = history[currentStep];
+
+  const winner = calculateWinner(currentSquares);
+  const nextValue = calculateNextValue(currentSquares);
+
+  const restartGame = () => {
+    setHistory([squaresInitial()]);
+    setCurrentStep(0);
+  };
+
+  const selectSquare = (squareIndex: number): void => {
+    if (winner || currentSquares[squareIndex]) {
+      return;
+    }
+
+    const newHistory = history.slice(0, currentStep + 1);
+    const squaresCopy = [...currentSquares];
+    squaresCopy[squareIndex] = nextValue;
+
+    setHistory([...newHistory, squaresCopy]);
+    setCurrentStep(newHistory.length);
+  };
+
+  const moves = history.map((_, step) => {
+    const desc = step === 0 ? 'Go to game start' : `Go to move #${step}`;
+    const isCurrentStep = step == currentStep;
+    return (
+      <li key={step} className={styles['list-group-item']}>
+        <button disabled={isCurrentStep} className={styles['button']} onClick={() => setCurrentStep(step)}>
+          <b>
+            {step + 1}. {desc} {isCurrentStep ? '(current)' : null}
+          </b>
+        </button>
+      </li>
+    );
+  });
+
+  return (
+    <div className={cn(styles['game'], styles['game-with-history'])}>
+      <div className={styles['board']}>
+        {currentSquares.map((squareChar, index) => {
+          const Icon = squareChar ? squareMap[squareChar] : null;
+          return (
+            <Cell
+              key={index}
+              onSelect={() => {
+                selectSquare(index);
+              }}
+              className={cn(squareChar && styles['with-value'])}
+            >
+              {Icon && (
+                <span className={styles['value']}>
+                  <Icon />
+                </span>
+              )}
+            </Cell>
+          );
+        })}
+      </div>
+      <div className={styles['game-panel']}>
+        <button className="btn btn-dark" onClick={restartGame}>
+          restart game
+        </button>
+        <div className={styles['game-info']}>
+          <div className="d-flex mt-2">
+            <b className="me-1">Status:</b>
+            <GameStatus winner={winner} squares={currentSquares} nextValue={nextValue} />
+          </div>
+          <ul className={cn(styles['list-group'], 'mt-2')}>{moves}</ul>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const TicTacToeGame: RFC = () => {
+  return (
+    <div className="d-flex flex-wrap">
+      <div>
+        <p className="h4">Without history</p>
+        <TicTacToe className="me-5" />
+      </div>
+      <div>
+        <p className="h4">Wth history</p>
+        <TicTacToeWithHistory />
+      </div>
+    </div>
+  );
+};
+
+export { TicTacToeGame };
