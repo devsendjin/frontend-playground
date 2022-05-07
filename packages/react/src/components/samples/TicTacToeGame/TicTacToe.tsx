@@ -215,11 +215,11 @@ const TicTacToeGame: RFC = () => {
   return (
     <div className="d-flex flex-wrap">
       <div>
-        <p className="h4">Without history</p>
+        <p className="h5">Without history</p>
         <TicTacToe className="me-5" />
       </div>
       <div>
-        <p className="h4">Wth history</p>
+        <p className="h5">With history</p>
         <TicTacToeWithHistory />
       </div>
     </div>

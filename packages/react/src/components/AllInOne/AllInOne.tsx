@@ -15,7 +15,7 @@ const AllInOne: RFC = () => {
                 return (
                   <React.Fragment key={route.name}>
                     <hr className={styles['hr']} />
-                    <h5 className="mb-3">{route.name}</h5>
+                    <h3 className="mb-3">{route.name}</h3>
                     <Component key={route.name} />
                   </React.Fragment>
                 );
