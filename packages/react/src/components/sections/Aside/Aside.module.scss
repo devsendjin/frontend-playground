@@ -20,7 +20,8 @@
   outline: 1px solid #ddd;
 
   &.is-active {
-    color: #e26352;
+    color: $orange-light;
+    font-weight: bold;
   }
 }
 
@@ -29,9 +30,6 @@
 }
 
 .menu {
-  //margin-top: 10px;
-  //margin-bottom: 40px;
-  //padding: 1px;
   padding: 10px 10px 40px 10px;
   position: relative;
   max-height: 100vh;

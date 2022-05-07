@@ -40,20 +40,7 @@ const defaultFallbackRender: TFallbackRender = ({ error, resetErrorBoundary, res
   );
 };
 
-// const ErrorBounary: RFC = ({ children }) => {
-//   return (
-//     <ReactErrorBoundary
-//       fallbackRender={(fallbackData) => defaultFallbackRender({ ...fallbackData, resetState })}
-//       onError={() => {
-
-//       }}
-//     >
-//       {children}
-//     </ReactErrorBoundary>
-//   );
-// };
-
-const ErrorBoundarySample: RFC = ({ children }) => {
+const ErrorBoundaryFirst: RFC = ({ children }) => {
   const [toggle, setToggle] = useState<boolean>(false);
 
   const resetState = () => {
@@ -61,7 +48,7 @@ const ErrorBoundarySample: RFC = ({ children }) => {
   };
 
   return (
-    <>
+    <div>
       <button
         type="button"
         className="btn btn-primary"
@@ -71,23 +58,21 @@ const ErrorBoundarySample: RFC = ({ children }) => {
       >
         Show component with error
       </button>
-      <ReactErrorBoundary
-        fallbackRender={(fallbackData) => defaultFallbackRender({ ...fallbackData, resetState })}
-
-        // fallbackRender or FallbackComponent
-
-        // FallbackComponent={ErrorFallback}
-        // onReset={() => {
-        //   console.log('ErrorBoundary onReset');
-        //   setToggle(false);
-        // }}
-        // resetKeys={[toggle]}
-      >
+      <ReactErrorBoundary fallbackRender={(fallbackData) => defaultFallbackRender({ ...fallbackData, resetState })}>
         {children}
         {!toggle && <div>component without error</div>}
         {toggle && <ComponentThatMayError />}
       </ReactErrorBoundary>
-    </>
+    </div>
+  );
+};
+ErrorBoundaryFirst.displayName = ErrorBoundaryFirst.name;
+
+const ErrorBoundarySample: RFC = () => {
+  return (
+    <div>
+      <ErrorBoundaryFirst />
+    </div>
   );
 };
 ErrorBoundarySample.displayName = ErrorBoundarySample.name;

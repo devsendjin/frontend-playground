@@ -77,7 +77,7 @@ const GameStatus: RFC<{ winner: Square | null; squares: Square[]; nextValue: Squ
 const squaresInitial = (): Square[] => Array(9).fill(null);
 
 const TicTacToe: RFC<{ className?: string }> = ({ className }) => {
-  const [squares, setSquares] = useLocalStorageState<Square[]>('squares', squaresInitial());
+  const [squares, setSquares] = useLocalStorageState<Square[]>('squares', () => squaresInitial());
 
   const winner = calculateWinner(squares);
   const nextValue = calculateNextValue(squares);
@@ -134,7 +134,9 @@ const TicTacToe: RFC<{ className?: string }> = ({ className }) => {
 };
 
 const TicTacToeWithHistory: RFC = () => {
-  const [history, setHistory] = useLocalStorageState<Square[][]>('TicTacToeWithHistory:squares', [squaresInitial()]);
+  const [history, setHistory] = useLocalStorageState<Square[][]>('TicTacToeWithHistory:squares', () => [
+    squaresInitial(),
+  ]);
   const [currentStep, setCurrentStep] = useLocalStorageState<number>('TicTacToeWithHistory:step', 0);
   const currentSquares = history[currentStep];
 
