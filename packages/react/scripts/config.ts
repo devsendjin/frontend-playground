@@ -29,6 +29,7 @@ const paths = {
 // change here + tsconfig.json (+ jest.config.js)
 const alias = {
   '@': APP_SRC,
+  '@UI': path.resolve(APP_SRC, 'components/UI'),
   '@images': path.resolve(APP_SRC, 'assets/images'),
   '@styles': path.resolve(APP_SRC, 'assets/styles'),
 } as const;

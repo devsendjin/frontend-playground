@@ -2,8 +2,8 @@ import { setFeatureState } from './feature.actionCreators';
 
 export type TFeatureAction = ReturnType<typeof setFeatureState>;
 
-export type TAction = TFeatureAction;
+export type Action = TFeatureAction;
 
-export type TFeatureState = {
+export type FeatureState = {
   featureName: string;
 };

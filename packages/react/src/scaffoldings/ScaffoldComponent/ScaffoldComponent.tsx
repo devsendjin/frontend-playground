@@ -1,12 +1,11 @@
-import React from 'react';
 import cn from 'classnames';
 import styles from './ScaffoldComponent.module.scss';
 
-interface IScaffoldComponentProps {
+interface ScaffoldComponentProps {
   className?: string;
 }
 
-const ScaffoldComponent: React.FC<IScaffoldComponentProps> = ({ className }) => {
+const ScaffoldComponent: RFC<ScaffoldComponentProps> = ({ className }) => {
   return <div className={cn(styles['scaffold'], className)}>ScaffoldComponent</div>;
 };
 

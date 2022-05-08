@@ -1,13 +1,13 @@
-import { TAction, TFeatureState } from './feature.types';
+import { Action, FeatureState } from './feature.types';
 import { featureActionTypes } from './feature.actionTypes';
 
-const initialState: TFeatureState = {
+const initialState: FeatureState = {
   featureName: 'Some feature',
 };
 
-export const featureReducer = (state: TFeatureState = initialState, action: TAction) => {
+export const featureReducer = (state: FeatureState = initialState, action: Action) => {
   switch (action.type) {
-    case featureActionTypes.SET_FEWATURE_TEST_STATE:
+    case featureActionTypes.SET_FEATURE_TEST_STATE:
       return { ...state, featureName: action.payload };
     default:
       return state;

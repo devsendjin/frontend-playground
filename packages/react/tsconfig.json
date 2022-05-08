@@ -7,7 +7,7 @@
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"],
-      "@@/*": ["../"],
+      "@UI/*": ["components/UI/*"],
       "@styles/*": ["assets/styles/*"]
     },
     "typeRoots": ["src/types", "src/global.d.ts", "./node_modules/@types"]

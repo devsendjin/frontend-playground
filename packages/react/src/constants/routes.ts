@@ -13,6 +13,7 @@ import { IconsSample } from '@/components/samples/IconsSample';
 import { LocalStorageStateHook } from '@/components/hooks/LocalStorageStateHook';
 import { TicTacToeGame } from '@/components/samples/TicTacToeGame';
 import { UseTransitionHook } from '@/components/hooks/UseTransitionHook';
+import { UseTypedReducerHook } from '@/components/hooks/UseTypedReducerHook';
 
 /*
 const components = [
@@ -51,6 +52,7 @@ const features = {
 const hooks = {
   LocalStorageStateHook: `/${paramCase('LocalStorageStateHook')}`,
   UseTransitionHook: `/${paramCase('UseTransitionHook')}`,
+  UseTypedReducerHook: `/${paramCase('UseTypedReducerHook')}`,
 } as const;
 const coreKnowledge = {
   HookFlowSample: `/${paramCase('HookFlowSample')}`,
@@ -130,6 +132,11 @@ const routesMap: RouteMap[] = [
         url: ROUTES.UseTransitionHook,
         component: UseTransitionHook,
         name: 'UseTransitionHook',
+      },
+      {
+        url: ROUTES.UseTypedReducerHook,
+        component: UseTypedReducerHook,
+        name: 'UseTypedReducerHook',
       },
     ],
   },
