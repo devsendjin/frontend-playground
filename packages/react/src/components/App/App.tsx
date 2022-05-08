@@ -11,7 +11,7 @@ import styles from './App.module.scss';
 const App = () => {
   return (
     <HashRouter>
-      <button type="button" onClick={() => outline()} className={cn(styles['debug'], 'btn btn-primary')}>
+      <button type="button" onClick={() => outline()} className={cn(styles['debug'], 'btn btn-light')}>
         outline
       </button>
 

@@ -15,10 +15,10 @@ const LazyInitialStateSample: RFC = () => {
     <>
       <div>{JSON.stringify({ initializedOnce, initializedMultiple }, null, 2)}</div>
       <div className="btn-group">
-        <button type="button" className="btn btn-primary" onClick={() => setInitializedOnce((prev) => prev + 1)}>
+        <button type="button" className="btn btn-light" onClick={() => setInitializedOnce((prev) => prev + 1)}>
           initializedOnce
         </button>
-        <button type="button" className="btn btn-primary" onClick={() => setInitializedMultiple((prev) => prev + 1)}>
+        <button type="button" className="btn btn-light" onClick={() => setInitializedMultiple((prev) => prev + 1)}>
           initializedMultiple
         </button>
       </div>

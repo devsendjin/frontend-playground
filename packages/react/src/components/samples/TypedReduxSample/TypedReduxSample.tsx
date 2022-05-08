@@ -16,7 +16,7 @@ const TypedRedux: RFC = () => {
 
   return (
     <div className={styles['typed-redux']}>
-      <button type="button" className="btn btn-primary mt-0" onClick={() => setFeatureState(input)}>
+      <button type="button" className="btn btn-light mt-0" onClick={() => setFeatureState(input)}>
         Set redux feature state to value from input below
       </button>
 

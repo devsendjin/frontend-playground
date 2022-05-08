@@ -13,7 +13,7 @@ const ChildrenRerender: RFC = ({ children }) => {
   return (
     <div>
       <div>state {state}</div>
-      <button type="button" className="btn btn-primary" onClick={() => setState((prev) => !prev)}>
+      <button type="button" className="btn btn-light" onClick={() => setState((prev) => !prev)}>
         Trigger
       </button>
       {children}

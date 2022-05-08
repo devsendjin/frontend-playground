@@ -10,10 +10,10 @@ const PortalSample: RFC = () => {
   return (
     <div className={styles['portal']}>
       <div className={cn(styles['btn-box'], 'btn-group')}>
-        <button type="button" className="btn btn-primary" onClick={() => setToggle((prev) => !prev)}>
+        <button type="button" className="btn btn-light" onClick={() => setToggle((prev) => !prev)}>
           Toggle portal
         </button>
-        <button type="button" className="btn btn-primary" onClick={() => setToggleBodyPortal((prev) => !prev)}>
+        <button type="button" className="btn btn-light" onClick={() => setToggleBodyPortal((prev) => !prev)}>
           Toggle portal (mount in body)
         </button>
       </div>

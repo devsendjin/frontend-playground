@@ -8,23 +8,10 @@ const Localization = () => {
     <div>
       <div className="btn-group">
         {Object.values(ELanguages).map((langName) => (
-          <button
-            key={langName}
-            type="button"
-            className="btn btn-primary"
-            onClick={() => i18n.changeLanguage(langName)}
-          >
+          <button key={langName} type="button" className="btn btn-light" onClick={() => i18n.changeLanguage(langName)}>
             {langName}
           </button>
         ))}
-
-        {/*
-        <button type="button" className="btn btn-primary" onClick={() => i18n.changeLanguage('ger')}>
-          ger
-        </button>
-        <button type="button" className="btn btn-primary" onClick={() => i18n.changeLanguage('it')}>
-          it
-        </button> */}
       </div>
       <div>{t('some')}</div>
       <div>{t('other')}</div>

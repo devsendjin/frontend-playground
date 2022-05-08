@@ -11,7 +11,7 @@
   }
 
   .cell {
-    border: 1px solid $black;
+    border: 1px solid $gray-light;
     width: calc(100% / 3);
     position: relative;
     transition: background-color 0.2s;
@@ -24,7 +24,7 @@
     }
 
     &.with-value {
-      background-color: #ddd;
+      background-color: #333;
     }
   }
 }
@@ -33,6 +33,11 @@
   .game-panel {
     .button {
       @include resetBtn;
+      color: $gray-light;
+
+      &.disabled {
+        color: #575757;
+      }
     }
 
     .list-group {

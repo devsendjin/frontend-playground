@@ -122,7 +122,7 @@ const TicTacToe: RFC<{ className?: string }> = ({ className }) => {
       </div>
       <div>
         <div>
-          <button className="d-block btn btn-dark" onClick={restartGame}>
+          <button className="d-block btn btn-light" onClick={restartGame}>
             restart game
           </button>
           <b className="d-block me-1">Status:</b>
@@ -166,7 +166,11 @@ const TicTacToeWithHistory: RFC = () => {
     const isCurrentStep = step == currentStep;
     return (
       <li key={step} className={styles['list-group-item']}>
-        <button disabled={isCurrentStep} className={styles['button']} onClick={() => setCurrentStep(step)}>
+        <button
+          disabled={isCurrentStep}
+          className={cn(styles['button'], isCurrentStep && styles['disabled'])}
+          onClick={() => setCurrentStep(step)}
+        >
           <b>
             {step + 1}. {desc} {isCurrentStep ? '(current)' : null}
           </b>
@@ -198,7 +202,7 @@ const TicTacToeWithHistory: RFC = () => {
         })}
       </div>
       <div className={styles['game-panel']}>
-        <button className="btn btn-dark" onClick={restartGame}>
+        <button className="btn btn-light" onClick={restartGame}>
           restart game
         </button>
         <div className={styles['game-info']}>

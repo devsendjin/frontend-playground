@@ -44,10 +44,10 @@ const UseTransitionHook: RFC<UseTransitionHookProps> = ({ className }) => {
   return (
     <div className={cn(styles['use-transition-hook'], className)}>
       <ButtonGroup>
-        <button className="btn btn-primary" onClick={() => toggleTransition()}>
+        <button className="btn btn-light" onClick={() => toggleTransition()}>
           {isEntering ? 'Hide' : 'Show'}
         </button>
-        <button className="btn btn-primary" onClick={() => endTransition()}>
+        <button className="btn btn-light" onClick={() => endTransition()}>
           endTransition (immediately remove on "exiting")
         </button>
 

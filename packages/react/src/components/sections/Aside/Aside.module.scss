@@ -1,6 +1,11 @@
+.aside {
+  border-right: 1px solid $gray-light;
+}
+
 .top-link {
   text-align: center;
   display: block;
+  font-size: 20px;
 }
 
 .link-group {
@@ -17,7 +22,11 @@
   padding: 5px 0 5px 10px;
   transition: color 0.15s ease;
   text-decoration: none;
-  outline: 1px solid #ddd;
+  transition: color 0.1s;
+
+  &:hover {
+    color: $blue;
+  }
 
   &.is-active {
     color: $orange-light;
@@ -27,6 +36,7 @@
 
 .category {
   padding: 5px 0;
+  color: $orange;
 }
 
 .menu {
