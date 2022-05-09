@@ -63,3 +63,6 @@
 #### References:
 
 - [package.json fields with description](https://github.com/stereobooster/package.json)
+- react
+  - [react-use (hooks library)](https://github.com/streamich/react-use)
+  - [@umijs/hooks (hooks library)](https://github.com/alibaba/hooks/tree/master/packages/hooks/src)
