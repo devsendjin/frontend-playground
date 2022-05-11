@@ -100,7 +100,7 @@ class WebStorage implements IWebStorage {
       })
       .reduce((a, b) => {
         return a + b;
-      });
+      }, 0);
   }
 
   private matchToQuotaExceedError = (code: number): boolean => {
