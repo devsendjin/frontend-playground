@@ -41,8 +41,10 @@
   - [ ] nodejs online chat
 - react
   - [x] component with dynamic state using generics
+  - [ ] [Recoil](https://recoiljs.org/)
   - [ ] create custom select component
   - [ ] Hint component
+  - [ ] hook to manipulate dynamic array elements
   - [ ] do / undo feature
 
 #### Try to use/install:
@@ -66,3 +68,5 @@
 - react
   - [react-use (hooks library)](https://github.com/streamich/react-use)
   - [@umijs/hooks (hooks library)](https://github.com/alibaba/hooks/tree/master/packages/hooks/src)
+- common
+  - [async library (like <ins>lodash</ins>, but for callbacks)](https://caolan.github.io/async/v3/)
