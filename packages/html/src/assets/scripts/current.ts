@@ -1,5 +1,6 @@
-import { scope } from '@scripts/utils';
+import { scope, l } from '@scripts/utils';
 
 scope(() => {
-  console.log('current.ts');
+  const a = { b: 'Current ts' };
+  l(a);
 }, 'Current ts');

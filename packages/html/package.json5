@@ -11,12 +11,12 @@
     // eleventy
     "eleventy": "eleventy --config \"./scripts/eleventy.config.js\"",
     "eleventy:debug": "cross-env DEBUG=Eleventy* pnpm eleventy",
-    "eleventy:serve": "pnpm eleventy -- --serve",
-    "eleventy:help": "pnpm eleventy -- --help",
+    "eleventy:serve": "pnpm eleventy --serve",
+    "eleventy:help": "pnpm eleventy --help",
 
     // webpack
     "webpack": "webpack --config \"./scripts/webpack.config.ts\" --progress",
-    "webpack:watch": "pnpm webpack -- --watch",
+    "webpack:watch": "pnpm webpack --watch",
     "webpack:build": "pnpm webpack",
     "webpack:build:prod": "cross-env NODE_ENV=production pnpm webpack",
 

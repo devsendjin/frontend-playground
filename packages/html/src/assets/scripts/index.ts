@@ -11,6 +11,7 @@ import '@styles/index.scss';
 // import './samples/regexp';
 // import './samples/objects';
 // import './samples/callbacks';
+// import './samples/tasks';
 
 import './current';
 

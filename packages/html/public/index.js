@@ -1,1 +1,1 @@
-(()=>{"use strict";((o,e="Scope",{divider:r=""}={})=>{r&&console.log(r),console.group(e),o&&o(),console.groupEnd()})((()=>{console.log('current.ts')}),'Current ts')})();
+(()=>{"use strict";((o,e="Scope",{divider:r=""}={})=>{r&&console.log(r),console.group(e),o&&o(),console.groupEnd()})((()=>{(o=>{if(!o||Array.isArray(o))return console.log(o);const e=Object.entries(o).reduce(((o,[e,r],s)=>(0===s?o.push(`${e}: `,r):o.push(`\n${e}: `,r),o)),[]);console.log(...e)})({b:'Current ts'})}),'Current ts')})();
