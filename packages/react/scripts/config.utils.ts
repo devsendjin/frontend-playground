@@ -9,13 +9,13 @@ import Postcss from 'postcss';
 
 import { TConfiguration } from './config';
 
-type TResolvePath = (params: {
+type ResolvePath = (params: {
   folderToLookup: string;
   onLookupSuccess?: (resolvedPath: string) => string;
   onLookupFailed?: () => string;
   recursionMaxLevel?: number;
 }) => string;
-const resolvePath: TResolvePath = ({ folderToLookup, onLookupSuccess, onLookupFailed, recursionMaxLevel = 10 }) => {
+const resolvePath: ResolvePath = ({ folderToLookup, onLookupSuccess, onLookupFailed, recursionMaxLevel = 10 }) => {
   let directories = [];
   let directoryDepth = 0;
   let pathToLookup = './';
@@ -55,15 +55,15 @@ const resolvePath: TResolvePath = ({ folderToLookup, onLookupSuccess, onLookupFa
   return resolvedPath;
 };
 
-type TGetLoadersReturn<TRuleSetUseItem = RuleSetUseItem> = {
+type GetLoadersReturn<TRuleSetUseItem = RuleSetUseItem> = {
   postCss: () => TRuleSetUseItem;
   sass: () => TRuleSetUseItem;
   css: () => TRuleSetUseItem;
   cssModules: () => TRuleSetUseItem;
   styleOrExtractCss: () => TRuleSetUseItem;
 };
-type TGetLoaders = (config: TConfiguration) => TGetLoadersReturn;
-const getLoaders: TGetLoaders = (config) => {
+type GetLoaders = (config: TConfiguration) => GetLoadersReturn;
+const getLoaders: GetLoaders = (config) => {
   return {
     // if any postcss error happens
     // https://github.com/postcss/postcss/wiki/PostCSS-8-for-end-users
