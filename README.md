@@ -31,6 +31,7 @@
       - Toolbar
       - Copy to Clipboard Button
       - Match braces
+  - [faker](https://fakerjs.dev/guide/)
 
 #### TODO:
 
@@ -41,7 +42,6 @@
   - [ ] nodejs online chat
 - react
   - [x] component with dynamic state using generics
-  - [ ] [Recoil](https://recoiljs.org/)
   - [ ] create custom select component
   - [ ] Hint component
   - [ ] hook to manipulate dynamic array elements
@@ -49,18 +49,21 @@
 
 #### Try to use/install:
 
-- effects:
-  - html:
-    - [x] [jumping link hovers](https://codepen.io/devsendjin/pen/ExyWYwz)
-    - [ ] [floating paralax headers](https://codepen.io/amit_sheen/pen/BaJmWWj)
-    - [ ] [css black-white text v1](https://codepen.io/havardob/pen/PoPaWaE)
-    - [ ] [css black-white text v2](https://codepen.io/RickyMarou/pen/dyoMXYR)
-    - [ ] [text undeline](https://codepen.io/iam_aspencer/pen/qvNPBv)
-    - [ ] [text reveal animation](https://codepen.io/sedran/pen/GYPevV)
-    - [ ] [letters show/hide animation effect](https://codepen.io/esse/pen/qxmqPQ)
-    - [ ] [peeled text transformation](https://codepen.io/Moiety/pen/OPPKMr)
-    - [ ] [neon text hover](https://codepen.io/primaapriansyah/pen/DjEFq/)
-    - [ ] [skewed blockquote](https://codepen.io/mkstix6/pen/ERLLvb)
+- html:
+  - [x] [jumping link hovers](https://codepen.io/devsendjin/pen/ExyWYwz)
+  - [ ] [floating paralax headers](https://codepen.io/amit_sheen/pen/BaJmWWj)
+  - [ ] [css black-white text v1](https://codepen.io/havardob/pen/PoPaWaE)
+  - [ ] [css black-white text v2](https://codepen.io/RickyMarou/pen/dyoMXYR)
+  - [ ] [text undeline](https://codepen.io/iam_aspencer/pen/qvNPBv)
+  - [ ] [text reveal animation](https://codepen.io/sedran/pen/GYPevV)
+  - [ ] [letters show/hide animation effect](https://codepen.io/esse/pen/qxmqPQ)
+  - [ ] [peeled text transformation](https://codepen.io/Moiety/pen/OPPKMr)
+  - [ ] [neon text hover](https://codepen.io/primaapriansyah/pen/DjEFq/)
+  - [ ] [skewed blockquote](https://codepen.io/mkstix6/pen/ERLLvb)
+- react:
+  - [ ] [Recoil](https://recoiljs.org/)
+  - [ ] [socket.io](https://socket.io/)
+  - [ ] [Cleave.js (format input text)](https://github.com/nosir/cleave.js)
 
 #### References:
 
