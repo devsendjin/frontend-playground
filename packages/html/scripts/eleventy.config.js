@@ -13,6 +13,7 @@ const pug = require('pug');
 const beautifyHtml = require('js-beautify').html;
 const htmlmin = require('html-minifier');
 const util = require('util'); // debugger
+const { faker } = require('@faker-js/faker');
 
 const config = require('./config');
 
@@ -82,6 +83,7 @@ module.exports = function (eleventyConfig) {
       return Array.from({ length: amount }, () => '&nbsp;').join('');
     };
   });
+  eleventyConfig.addGlobalData('_faker', () => faker);
 
   // folder assets with keeping the same directory structure
   eleventyConfig.addPassthroughCopy('src/pages/**/*.(jpg|jpeg|png)');

@@ -1,7 +1,6 @@
 import path from 'path';
-import fs from 'fs';
 
-import webpack, { Configuration, Compiler } from 'webpack';
+import webpack, { Configuration } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import CssoWebpackPlugin from 'csso-webpack-plugin';
@@ -10,122 +9,9 @@ import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
 import postcss from 'postcss';
 import sass from 'sass';
 
+import { OmitGeneratingFilesPlugin } from './plugins'; // custom plugin
 import config from './config';
-
-// plugin help
-// https://www.mo4tech.com/webpack-5-compilation-processassets-hook.html
-type TOptions = {
-  deleteByAssetPath?: (assetPath: string) => boolean;
-  deleteByAssetContent?: (assetContent: string | Buffer) => boolean;
-  debug?: boolean;
-};
-const PLUGIN_NAME = 'omit-generating-files';
-
-class OmitGeneratingFilesPlugin {
-  constructor(private options?: TOptions) {
-    const defaultOptions: TOptions = {
-      debug: false,
-      deleteByAssetPath: () => false,
-      deleteByAssetContent: () => false,
-    }
-    this.options = {
-      ...defaultOptions,
-      ...options
-    };
-  }
-
-  apply = (compiler: Compiler) => {
-    compiler.hooks.thisCompilation.tap(PLUGIN_NAME, (compilation) => {
-      if (this.options?.deleteByAssetPath) {
-        compilation.hooks.processAssets.tapAsync(
-          {
-            name: PLUGIN_NAME,
-            stage: compiler.webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL,
-          },
-          (assetsObj, callback) => {
-            const assets = Object.keys(assetsObj);
-
-            if (this.options?.debug) {
-              console.log('\n\ncompiler.webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL\n', { assets });
-            }
-            assets.forEach((assetPath) => {
-              if (
-                (this.options?.deleteByAssetPath && this.options.deleteByAssetPath(assetPath)) ||
-                (this.options?.deleteByAssetContent && this.options.deleteByAssetContent(assetPath))
-              ) {
-                compilation.deleteAsset(assetPath);
-              }
-            });
-            callback();
-          }
-        );
-      }
-
-      if (this.options?.deleteByAssetContent) {
-        compilation.hooks.processAssets.tapAsync(
-          {
-            name: PLUGIN_NAME,
-            stage: compiler.webpack.Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
-          },
-          (assetsObj, callback) => {
-            const assets = Object.keys(assetsObj);
-
-            if (this.options?.debug) {
-              console.log('\n\ncompiler.webpack.Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING\n', { assets });
-            }
-
-            assets.forEach((assetPath) => {
-              if (this.options?.deleteByAssetContent && this.options.deleteByAssetContent(assetsObj[assetPath].source())) {
-                compilation.deleteAsset(assetPath);
-              }
-            });
-            callback();
-          }
-        );
-      }
-    });
-  };
-}
-
-const getSourceFiles = (templatesDir: string, options: { generateFileNamesOnly?: boolean } = {}) => {
-  const { generateFileNamesOnly = false } = options;
-  const accumulator: string[] = [];
-
-  const templatesDirExists = fs.existsSync(templatesDir);
-
-  if (!templatesDirExists) {
-    console.error('SRC directory not found!');
-    return accumulator;
-  }
-
-  return fs.readdirSync(templatesDir).reduce<string[]>((acc, currentPath) => {
-    const srcFile = path.join(`${templatesDir}/${currentPath}`);
-
-    const stat = fs.statSync(srcFile);
-    const isDirectory = stat && stat.isDirectory();
-
-    if (isDirectory) {
-      const innerPaths = getSourceFiles(path.join(templatesDir, currentPath));
-      if (innerPaths.length) {
-        if (generateFileNamesOnly) {
-          acc = acc.concat(innerPaths);
-        } else {
-          acc = acc.concat(innerPaths.map((innerPath) => path.join(currentPath, innerPath)));
-        }
-      }
-    }
-
-    if (!isDirectory) {
-      acc.push(currentPath);
-    }
-
-    return acc;
-  }, accumulator);
-};
-
-const trimExtension = (filePath: string) => {
-  return filePath.replace(/\.\w*$/gim, '');
-};
+import utils from './utils';
 
 const loaders = {
   css: {
@@ -154,8 +40,12 @@ const loaders = {
   },
 };
 
-const SOURCE_FILES = getSourceFiles(config.PAGES_SRC);
-const TYPESCRIPT_FILES = SOURCE_FILES.filter((file) => file.endsWith('.ts'));
+const SOURCE_FILES = utils.getSourceFiles(config.PAGES_SRC);
+const TYPESCRIPT_FILES = SOURCE_FILES.filter((file) => {
+  return file.endsWith('.ts') && utils.isDirnameMatchFilename(file);
+});
+
+console.log({ SOURCE_FILES, TYPESCRIPT_FILES }, config);
 
 const webpackConfig: Configuration = {
   mode: config.MODE as Configuration['mode'],
@@ -165,7 +55,7 @@ const webpackConfig: Configuration = {
     playground: path.join(config.APP_SRC, 'assets/styles/playground.scss'),
     ...config.vendorEntries,
     ...TYPESCRIPT_FILES.reduce<{ [key: string]: string }>((acc, filePath) => {
-      acc[trimExtension(filePath)] = path.join(config.PAGES_SRC, filePath);
+      acc[utils.trimExtension(filePath)] = path.join(config.PAGES_SRC, filePath);
       return acc;
     }, {}),
   },

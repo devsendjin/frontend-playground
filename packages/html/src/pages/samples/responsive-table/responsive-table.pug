@@ -14,19 +14,18 @@ append content
     thead
       tr
         th Thumbnail
-        th Model
+        th Title
         th Price
-        th Size
+        th Material
+        th Color
     tbody
-      tr
-        td.view-table-photo
-          img(alt='Product 1' src=randomImageUrl(100, 100) width='100' height='100' onload='this.classList.add("visible")')
-        td(data-label='Title') Товар 1
-        td(data-label='Price') 690 000
-        td(data-label='Size') 2300
-      tr
-        td.view-table-photo
-          img(alt='Product 2' src=randomImageUrl(100, 100) width='100' height='100' onload='this.classList.add("visible")')
-        td(data-label='Title') Товар 2
-        td(data-label='Price') 700 000
-        td(data-label='Size') 2900
+      - let i = 0;
+      while i < 10
+        - i++
+        tr
+          td.view-table-photo
+            img(alt='Product 1' src=randomImageUrl(100, 100) width='100' height='100' onload='this.classList.add("visible")')
+          td(data-label='Title')= _faker.commerce.product()
+          td(data-label='Price')= `${_faker.commerce.price(100, 2000, 0)} $`
+          td(data-label='Material')= _faker.commerce.productAdjective()
+          td(data-label='Color')= _faker.color.human()
