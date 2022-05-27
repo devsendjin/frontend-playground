@@ -81,6 +81,12 @@ const webpackConfig: Configuration = {
 
   stats: config.__DEV__ ? 'errors-warnings' : 'none', // none | detailed | verbose
 
+  ignoreWarnings: [
+    {
+      message: /color-adjust/, // ignore deprecated css function (appears in bootstrap)
+    },
+  ],
+
   optimization: config.__PROD__
     ? {
         nodeEnv: config.MODE,
