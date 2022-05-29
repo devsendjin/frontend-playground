@@ -14,6 +14,7 @@ import { LocalStorageStateHook } from '@/components/hooks/LocalStorageStateHook'
 import { TicTacToeGame } from '@/components/samples/TicTacToeGame';
 import { UseTransitionHook } from '@/components/hooks/UseTransitionHook';
 import { UseTypedReducerHook } from '@/components/hooks/UseTypedReducerHook';
+import { FlexGridSample } from '@/components/samples/FlexGridSample';
 // import { UseSafeDispatchHook } from '@/components/hooks/UseSafeDispatchHook';
 
 /*
@@ -42,6 +43,7 @@ const ui = {
   Dropdown: `/${paramCase('Dropdown')}`,
   AccordionSample: `/${paramCase('AccordionSample')}`,
   IconsSample: `/${paramCase('IconsSample')}`,
+  FlexGridSample: `/${paramCase('FlexGridSample')}`,
 } as const;
 const features = {
   DynamicStateControllerSample: `/${paramCase('DynamicStateControllerSample')}`,
@@ -153,6 +155,7 @@ const routesMap: RouteMap[] = [
       { url: ROUTES.Dropdown, component: Dropdown, name: 'Dropdown' },
       { url: ROUTES.AccordionSample, component: AccordionSample, name: 'Accordion' },
       { url: ROUTES.IconsSample, component: IconsSample, name: 'Icons' },
+      { url: ROUTES.FlexGridSample, component: FlexGridSample, name: 'Flex Grid' },
     ],
   },
   {

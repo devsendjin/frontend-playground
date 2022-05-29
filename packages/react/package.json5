@@ -11,10 +11,10 @@
     "watch": "pnpm webpack:watch",
 
     // webpack
-    "webpack-tool": "webpack --config \"./scripts/webpack.config.ts\" --progress",
+    "webpack": "webpack --config \"./scripts/webpack.config.ts\" --progress",
     "webpack:serve": "webpack serve --open-app-name 'google chrome' --config \"./scripts/webpack.config.ts\" --progress",
-    "webpack:watch": "pnpm webpack-tool --watch",
-    "webpack:build": "pnpm webpack-tool",
+    "webpack:watch": "pnpm webpack --watch",
+    "webpack:build": "pnpm webpack",
     "webpack:config:test": "webpack configtest \"./scripts/webpack.config.ts\"",
 
     // prettier

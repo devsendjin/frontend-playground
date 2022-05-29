@@ -4,8 +4,8 @@ type TScaffoldContext = {};
 
 const ScaffoldContext = createContext(null as unknown as TScaffoldContext);
 
-const ScaffoldProvider: RFC = ({ children }) => {
-  return <ScaffoldContext.Provider value={{}}>{children}</ScaffoldContext.Provider>;
+const ScaffoldProvider: RFC<{ value: TScaffoldContext }> = ({ value, children }) => {
+  return <ScaffoldContext.Provider value={value}>{children}</ScaffoldContext.Provider>;
 };
 ScaffoldProvider.displayName = ScaffoldProvider.name;
 

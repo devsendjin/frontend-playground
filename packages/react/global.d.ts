@@ -75,6 +75,6 @@ declare global {
 
   type RFC<Props = {}> = {
     (props: PropsWithChildren<Props>): ReactElement<any, any> | null;
-    displayName?: string | undefined;
+    displayName?: string;
   };
 }

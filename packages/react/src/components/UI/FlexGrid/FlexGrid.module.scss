@@ -1,0 +1,21 @@
+$default-gap: 15px;
+
+.col {
+  // margin-left: calc(var(--col-gap, #{$default-gap}) / 2);
+  // margin-right: calc(var(--col-gap, #{$default-gap}) / 2);
+  padding-left: calc(var(--col-gap, #{$default-gap}) / 2);
+  padding-right: calc(var(--col-gap, #{$default-gap}) / 2);
+
+  // width: calc(100% / var(--cols, 12) * var(--col, 2) - var(--offset, #{$default-gap})); // if spaced with margin
+  width: calc(100% / var(--cols, 12) * var(--col, 2)); // if spaced with padding
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+
+  row-gap: var(--row-gap, #{$default-gap});
+
+  margin-left: calc(var(--col-gap, #{$default-gap}) / -2);
+  margin-right: calc(var(--col-gap, #{$default-gap}) / -2);
+}
