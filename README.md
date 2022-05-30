@@ -69,7 +69,9 @@
 
 - [package.json fields with description](https://github.com/stereobooster/package.json)
 - react
-  - [react-use (hooks library)](https://github.com/streamich/react-use)
-  - [@umijs/hooks (hooks library)](https://github.com/alibaba/hooks/tree/master/packages/hooks/src)
+  - hooks
+    - [react-use (hooks library)](https://github.com/streamich/react-use)
+    - [@umijs/hooks (hooks library)](https://github.com/alibaba/hooks/tree/master/packages/hooks/src)
+    - [use-deep-compare-effect](https://github.com/kentcdodds/use-deep-compare-effect)
 - common
   - [async library (like <ins>lodash</ins>, but for callbacks)](https://caolan.github.io/async/v3/)
