@@ -1,8 +1,8 @@
 import cn from 'classnames';
 import { useLocalStorageState } from '@/hooks/useLocalStorageState';
+import { Button } from '@/vendors/bootstrap';
 import { CrossIcon, CircleIcon } from './Icons';
 import styles from './TicTacToe.module.scss';
-import { useState } from 'react';
 
 type Square = 'X' | 'O';
 
@@ -122,9 +122,9 @@ const TicTacToe: RFC<{ className?: string }> = ({ className }) => {
       </div>
       <div>
         <div>
-          <button className="d-block btn btn-light" onClick={restartGame}>
+          <Button className="d-block btn btn-light" onClick={restartGame}>
             restart game
-          </button>
+          </Button>
           <b className="d-block me-1">Status:</b>
           <GameStatus winner={winner} squares={squares} nextValue={nextValue} />
         </div>
@@ -166,15 +166,16 @@ const TicTacToeWithHistory: RFC = () => {
     const isCurrentStep = step == currentStep;
     return (
       <li key={step} className={styles['list-group-item']}>
-        <button
+        <Button
           disabled={isCurrentStep}
           className={cn(styles['button'], isCurrentStep && styles['disabled'])}
           onClick={() => setCurrentStep(step)}
+          variant="light"
         >
           <b>
             {step + 1}. {desc} {isCurrentStep ? '(current)' : null}
           </b>
-        </button>
+        </Button>
       </li>
     );
   });
@@ -202,9 +203,9 @@ const TicTacToeWithHistory: RFC = () => {
         })}
       </div>
       <div className={styles['game-panel']}>
-        <button className="btn btn-light" onClick={restartGame}>
+        <Button className="btn btn-light" onClick={restartGame} variant="light">
           restart game
-        </button>
+        </Button>
         <div className={styles['game-info']}>
           <div className="d-flex mt-2">
             <b className="me-1">Status:</b>

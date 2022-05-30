@@ -1,4 +1,4 @@
-import { Form } from 'react-bootstrap';
+import { Form } from '@/vendors/bootstrap';
 import { DynamicStateController } from '@/components/features/DynamicStateController';
 
 const DynamicStateControllerSample: RFC = () => {

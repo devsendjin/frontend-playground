@@ -1,5 +1,6 @@
 import { HashRouter } from 'react-router-dom';
 import cn from 'classnames';
+import { Button } from '@/vendors/bootstrap';
 import { outline } from '@/utils';
 // import { Debug } from 'react-utils';
 import { Aside } from '../sections/Aside';
@@ -11,9 +12,9 @@ import styles from './App.module.scss';
 const App = () => {
   return (
     <HashRouter>
-      <button type="button" onClick={() => outline()} className={cn(styles['debug'], 'btn btn-light')}>
+      <Button type="button" onClick={() => outline()} className={styles['debug']} variant="light">
         outline
-      </button>
+      </Button>
 
       {/* <Debug data={{ some: 'other' }} /> */}
 

@@ -1,6 +1,6 @@
 import { CSSProperties, useState } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
 import cn from 'classnames';
+import { Button, ButtonGroup, Form } from '@/vendors/bootstrap';
 import { useTransition } from '@/hooks/useTransition';
 import styles from './UseTransitionHook.module.scss';
 
@@ -44,12 +44,12 @@ const UseTransitionHook: RFC<UseTransitionHookProps> = ({ className }) => {
   return (
     <div className={cn(styles['use-transition-hook'], className)}>
       <ButtonGroup>
-        <button className="btn btn-light" onClick={() => toggleTransition()}>
+        <Button className="btn btn-light" onClick={() => toggleTransition()} variant="light">
           {isEntering ? 'Hide' : 'Show'}
-        </button>
-        <button className="btn btn-light" onClick={() => endTransition()}>
+        </Button>
+        <Button className="btn btn-light" onClick={() => endTransition()} variant="light">
           endTransition (immediately remove on "exiting")
-        </button>
+        </Button>
 
         <div className="d-flex align-items-center">
           <div className="form-check ms-3" style={{ whiteSpace: 'nowrap' }}>
@@ -65,9 +65,10 @@ const UseTransitionHook: RFC<UseTransitionHookProps> = ({ className }) => {
               unmountOnExit
             </label>
           </div>
-          <input
+          <Form.Control
             type="number"
-            className="form-control ms-3"
+            placeholder="Enter text"
+            className="ms-3"
             value={delay}
             onChange={(e) => {
               const value = parseInt(e.target.value, 10);

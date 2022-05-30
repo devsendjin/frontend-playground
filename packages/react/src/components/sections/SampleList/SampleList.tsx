@@ -1,4 +1,4 @@
-import { Container } from 'react-bootstrap';
+import { Container } from '@/vendors/bootstrap';
 import cn from 'classnames';
 import { BsCard } from '@/components/UI/BsCard';
 import { routesMap } from '@/constants/routes';

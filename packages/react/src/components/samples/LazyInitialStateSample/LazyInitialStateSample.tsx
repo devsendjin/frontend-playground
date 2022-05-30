@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import React from 'react';
+import { Button } from '@/vendors/bootstrap';
 
 const calc = (text: string) => {
   console.group('LazyInitialStateSample');
@@ -8,19 +9,29 @@ const calc = (text: string) => {
 };
 
 const LazyInitialStateSample: RFC = () => {
-  const [initializedOnce, setInitializedOnce] = useState(() => calc('initializedOnce'));
-  const [initializedMultiple, setInitializedMultiple] = useState(calc('initializedMultiple'));
+  const [initializedOnce, setInitializedOnce] = React.useState(() => calc('initializedOnce'));
+  const [initializedMultiple, setInitializedMultiple] = React.useState(calc('initializedMultiple'));
 
   return (
     <>
       <div>{JSON.stringify({ initializedOnce, initializedMultiple }, null, 2)}</div>
       <div className="btn-group">
-        <button type="button" className="btn btn-light" onClick={() => setInitializedOnce((prev) => prev + 1)}>
+        <Button
+          type="button"
+          className="btn btn-light"
+          onClick={() => setInitializedOnce((prev) => prev + 1)}
+          variant="light"
+        >
           initializedOnce
-        </button>
-        <button type="button" className="btn btn-light" onClick={() => setInitializedMultiple((prev) => prev + 1)}>
+        </Button>
+        <Button
+          type="button"
+          className="btn btn-light"
+          onClick={() => setInitializedMultiple((prev) => prev + 1)}
+          variant="light"
+        >
           initializedMultiple
-        </button>
+        </Button>
       </div>
     </>
   );

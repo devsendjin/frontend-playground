@@ -4,15 +4,16 @@ import {
   ErrorBoundaryPropsWithRender,
   ErrorBoundaryPropsWithComponent,
 } from 'react-error-boundary';
+import { Button } from '@/vendors/bootstrap';
 
 const ErrorFallback: ErrorBoundaryPropsWithComponent['FallbackComponent'] = ({ error, resetErrorBoundary }) => {
   return (
     <div role="alert">
       <p>Something went wrong:</p>
       <pre>{error.message}</pre>
-      <button className="btn btn-light" onClick={resetErrorBoundary}>
+      <Button onClick={resetErrorBoundary} variant="light">
         Try again
-      </button>
+      </Button>
     </div>
   );
 };
@@ -34,15 +35,15 @@ const defaultFallbackRender: TFallbackRender = ({ error, resetErrorBoundary, res
     <div role="alert">
       <div>Oh no</div>
       <pre>{error.message}</pre>
-      <button
-        className="btn btn-light"
+      <Button
         onClick={() => {
           resetState();
           resetErrorBoundary();
         }}
+        variant="light"
       >
         Try again
-      </button>
+      </Button>
     </div>
   );
 };
@@ -57,15 +58,15 @@ const ErrorBoundaryFirst: RFC = ({ children }) => {
   return (
     <div>
       <h3 className="h3">With fallbackRender</h3>
-      <button
+      <Button
         type="button"
-        className="btn btn-light"
         onClick={() => {
           setToggle(true);
         }}
+        variant="light"
       >
         Show component with error 1
-      </button>
+      </Button>
       <ReactErrorBoundary fallbackRender={(fallbackData) => defaultFallbackRender({ ...fallbackData, resetState })}>
         {children}
         {!toggle && <div>component without error 1</div>}

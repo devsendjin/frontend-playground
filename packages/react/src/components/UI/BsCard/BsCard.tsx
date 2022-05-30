@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
+import { Card } from '@/vendors/bootstrap';
 
 const BsCard: RFC<{ to?: string }> = ({ to, children }) => {
   return (

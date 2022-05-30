@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import React from 'react';
+import { Button } from '@/vendors/bootstrap';
 
 const Child: RFC = () => {
   console.group('ChildrenRerenderSample');
@@ -8,14 +9,14 @@ const Child: RFC = () => {
 };
 
 const ChildrenRerender: RFC = ({ children }) => {
-  const [state, setState] = useState<boolean>(false);
+  const [state, setState] = React.useState<boolean>(false);
 
   return (
     <div>
       <div>state {state}</div>
-      <button type="button" className="btn btn-light" onClick={() => setState((prev) => !prev)}>
+      <Button type="button" onClick={() => setState((prev) => !prev)} variant="light">
         Trigger
-      </button>
+      </Button>
       {children}
     </div>
   );

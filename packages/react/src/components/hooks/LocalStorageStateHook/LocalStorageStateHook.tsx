@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from 'react-bootstrap';
+import { Form } from '@/vendors/bootstrap';
 import { useLocalStorageState } from '@/hooks/useLocalStorageState';
 
 const LocalStorageStateHook: RFC = () => {

@@ -1,7 +1,7 @@
 import { Reducer, useReducer, useState } from 'react';
 import cn from 'classnames';
 import { SampleTitle } from '@UI/playground/Title';
-import { Button } from '@UI/playground/Button';
+import { Button, Form } from '@/vendors/bootstrap';
 import styles from './UseTypedReducerHook.module.scss';
 
 interface State {
@@ -52,10 +52,16 @@ const Counter: RFC<{ initialCount?: number; step?: number }> = ({ initialCount =
 
   return (
     <div className="btn-group">
-      <Button onClick={decrement}>-</Button>
+      <Button onClick={decrement} variant="light">
+        -
+      </Button>
       <span className="btn btn-light">{state.count}</span>
-      <Button onClick={increment}>+</Button>
-      <Button onClick={reset}>reset</Button>
+      <Button onClick={increment} variant="light">
+        +
+      </Button>
+      <Button onClick={reset} variant="light">
+        reset
+      </Button>
     </div>
   );
 };
@@ -69,9 +75,10 @@ const UseTypedReducerHook: RFC<UseTypedReducerHookProps> = ({ className }) => {
   return (
     <div className={cn(styles['use-reducer-hook'], className)}>
       <SampleTitle>Counter with useReducer</SampleTitle>
-      <input
+      <Form.Control
         type="number"
-        className="form-control mb-2"
+        placeholder="Enter text"
+        className="mb-2"
         style={{ width: 'auto' }}
         value={step}
         onChange={(e) => {
