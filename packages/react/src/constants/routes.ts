@@ -14,6 +14,7 @@ import { LocalStorageStateHook } from '@/components/hooks/LocalStorageStateHook'
 import { TicTacToeGame } from '@/components/samples/TicTacToeGame';
 import { UseTransitionHook } from '@/components/hooks/UseTransitionHook';
 import { UseTypedReducerHook } from '@/components/hooks/UseTypedReducerHook';
+import { UseAsyncHook } from '@/components/hooks/UseAsyncHook';
 import { FlexGridSample } from '@/components/samples/FlexGridSample';
 // import { UseSafeDispatchHook } from '@/components/hooks/UseSafeDispatchHook';
 
@@ -56,6 +57,7 @@ const hooks = {
   LocalStorageStateHook: `/${paramCase('LocalStorageStateHook')}`,
   UseTransitionHook: `/${paramCase('UseTransitionHook')}`,
   UseTypedReducerHook: `/${paramCase('UseTypedReducerHook')}`,
+  UseAsyncHook: `/${paramCase('UseAsyncHook')}`,
   // UseSafeDispatchHook: `/${paramCase('UseSafeDispatchHook')}`,
 } as const;
 const coreKnowledge = {
@@ -141,6 +143,11 @@ const routesMap: RouteMap[] = [
         url: ROUTES.UseTypedReducerHook,
         component: UseTypedReducerHook,
         name: 'UseTypedReducerHook',
+      },
+      {
+        url: ROUTES.UseAsyncHook,
+        component: UseAsyncHook,
+        name: 'UseAsync | UseSafeDispatch',
       },
       // {
       //   url: ROUTES.UseSafeDispatchHook,

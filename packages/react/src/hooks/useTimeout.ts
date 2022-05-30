@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { useSafeSetState } from './useSafeSetState';
+import { useSafeState } from './useSafeState';
 
 const useTimeout = (ms = 0, key = '') => {
-  const [ready, setReady] = useSafeSetState(false);
+  const [ready, setReady] = useSafeState(false);
 
   useEffect(() => {
     setReady(false);

@@ -55,7 +55,7 @@ const Counter: RFC<{ initialCount?: number; step?: number }> = ({ initialCount =
       <Button onClick={decrement} variant="light">
         -
       </Button>
-      <span className="btn btn-light">{state.count}</span>
+      <Button variant="light">{state.count}</Button>
       <Button onClick={increment} variant="light">
         +
       </Button>
