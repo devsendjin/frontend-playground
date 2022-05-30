@@ -1,0 +1,502 @@
+@use 'sass:math';
+
+// https://www.toptal.com/sass/css3-flexbox-sass-grid-tutorial
+
+// @mixin grid-row($offset: $offset) {
+//   display: flex;
+//   flex-wrap: wrap;
+//   margin-left: div($offset, -2);
+//   margin-right: div($offset, -2);
+// }
+
+// @mixin grid-col($offset: $offset) {
+//   margin-left: div($offset, 2);
+//   margin-right: div($offset, 2);
+// }
+
+// @mixin grid-size($n, $columns: $columns, $offset: $offset) {
+//   width: #{calc(100% / #{$columns} * #{$n} - #{$offset})};
+// }
+
+// @use 'sass:math';
+
+// @function divide($dividend, $divisor, $precision: 10) {
+//   $sign: if($dividend > 0 and $divisor > 0 or $dividend < 0 and $divisor < 0, 1, -1);
+//   $dividend: abs($dividend);
+//   $divisor: abs($divisor);
+//   @if $dividend == 0 {
+//     @return 0;
+//   }
+//   @if $divisor == 0 {
+//     @error "Cannot divide by 0";
+//   }
+//   $remainder: $dividend;
+//   $result: 0;
+//   $factor: 10;
+//   @while ($remainder > 0 and $precision >= 0) {
+//     $quotient: 0;
+//     @while ($remainder >= $divisor) {
+//       $remainder: $remainder - $divisor;
+//       $quotient: $quotient + 1;
+//     }
+//     $result: $result * 10 + $quotient;
+//     $factor: $factor * .1;
+//     $remainder: $remainder * 10;
+//     $precision: $precision - 1;
+//     @if ($precision < 0 and $remainder >= $divisor * 5) {
+//       $result: $result + 1;
+//     }
+//   }
+//   $result: $result * $factor * $sign;
+//   $dividend-unit: unit($dividend);
+//   $divisor-unit: unit($divisor);
+//   $unit-map: (
+//     "px": 1px,
+//     "rem": 1rem,
+//     "em": 1em,
+//     "%": 1%
+//   );
+//   @if ($dividend-unit != $divisor-unit and map-has-key($unit-map, $dividend-unit)) {
+//     $result: $result * map-get($unit-map, $dividend-unit);
+//   }
+//   @return $result;
+// }
+
+// Media of at most the maximum breakpoint width. No query for the largest breakpoint.
+// Makes the @content apply to the given breakpoint and narrower.
+// @mixin media-breakpoint-down($breakpoint) {
+//   @media (max-width: $breakpoint) {
+//     @content;
+//   }
+// }
+
+.custom-grid-css-classes {}
+  // .test {
+    // width: math.div(100%, 3);
+    // width: divide(100%, 3);
+  // }
+
+  // .container {
+  //   display: grid;
+  //   grid-template-columns: repeat(12, 1fr); /* This creates 12 equally width columns */
+  //   /* Note that one line (the outer left one) is always there → only 12 have to be created */
+  // }
+
+  // .item {
+  //   border: 1px solid black;
+  // }
+
+  // .r1 {grid-column: 1 / 2}
+  // .r2 {grid-column: 2 / 3}
+  // .r3 {grid-column: 3 / 4}
+  // .r4 {grid-column: 4 / 5}
+  // .r5 {grid-column: 5 / 6}
+  // .r6 {grid-column: 6 / 7}
+  // .r7 {grid-column: 7 / 8}
+  // .r8 {grid-column: 8 / 9}
+  // .r9 {grid-column: 9 / 10}
+  // .r10 {grid-column: 10/ 11}
+  // .r11 {grid-column: 11/ 12}
+  // .r12 {grid-column: 12/ 13}
+
+  // .grid {
+  //   margin: 1em;
+  //   border: solid lightgray;
+  //   background: lightgray;
+  //   display: grid;
+  //   grid-template-columns: repeat(12, 1fr);
+  //   grid-gap: 2px;
+  //   counter-reset: div;
+  // }
+
+  // .grid div {
+  //   border: solid;
+  //   text-align: center;
+  // }
+
+  // .grid div:before {
+  //   counter-increment: div;
+  //   content: 'N°' counter(div);
+  // }
+
+  // .grid div[class]:after {
+  //   display: block;
+  //   text-align: center;
+  //   background: lightblue;
+  //   content: "Class applied : "attr(class);
+  //   color: crimson;
+  // }
+
+
+  // /* spanning cols, complete values missing */
+
+
+  // @for $v from 1 to 13 {
+  //   .col-#{$v} {
+  //     grid-column: span $v;
+  //   }
+
+  //   .offset-left-#{$v} {
+  //     grid-column: unquote("#{$v}/#{$v+$v}");
+  //   }
+  //   // .row-#{$v} {
+  //   //   grid-row: auto/span $v;
+  //   // }
+  // }
+
+
+  // /* spanning rows , complete values missing*/
+
+  // /* Full Width below 768 pixels */
+  // @media only screen and (max-width: 768px) {
+  //   .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12{
+  //      grid-column: auto/span 12;
+  //   }
+  // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// TRY 1
+// $grid-breakpoint-sm: 576 !default;
+// $grid-breakpoint-md: 768 !default;
+// $grid-breakpoint-lg: 992 !default;
+// $grid-breakpoint-xl: 1200 !default;
+// $grid-offset: 15 !default;
+// $grid-gutter: 40 !default;
+// $grid-cols: 12 !default;
+
+
+// $map-grid-props: (
+//   'sm': $grid-breakpoint-sm,
+//   'md': $grid-breakpoint-md,
+//   'lg': $grid-breakpoint-lg,
+//   'xl': $grid-breakpoint-xl
+// );
+
+// @function toPixel($unitlessValue) {
+//   @return $unitlessValue * 1px;
+// }
+
+// @function toPersent($unitlessValue) {
+//   @return $unitlessValue * 1%;
+// }
+
+// @mixin create-mq($breakpoint, $min-or-max) {
+//   @media (#{$min-or-max}-width: #{toPixel($breakpoint)}) {
+//     @content;
+//   }
+// }
+
+// @mixin generate-container-class() {
+//   .container {
+//     margin: 0 auto;
+//     width: 100%;
+//     max-width: toPixel($grid-breakpoint-xl);
+//     padding-left: toPixel($grid-offset);
+//     padding-right: toPixel($grid-offset);
+
+//     &-fluid {
+//       margin: 0;
+//       max-width: 100%;
+//     }
+//   }
+// }
+
+// @mixin generate-row-class() {
+//   .row {
+//     display: flex;
+//     flex-wrap: wrap;
+//     // margin-left: toPixel(math.div($grid-offset, -2));
+//     // margin-right: toPixel(math.div($grid-offset, -2));
+//     // $v: toPixel(-$grid-offset);
+//     // margin-right: $v;
+//     // margin-left: $v;
+//   }
+// }
+
+// @mixin generate-col-offset-classes($modifier: '') {
+//   @for $i from 1 through $grid-cols {
+//     // $flex-basis: toPersent(math.div(100, math.div($grid-cols, $i)));
+//     $flex-basis: calc(toPersent(math.div(100, math.div($grid-cols, $i))) - toPixel($grid-offset));
+
+
+//     @if ($modifier == '') {
+//       .col-#{$i} {
+//         flex-basis: $flex-basis;
+//         // margin-left: toPixel(math.div($grid-offset, 2));
+//         // margin-right: toPixel(math.div($grid-offset, 2));
+//       }
+//       .offset-#{$i} {
+//         margin-left: $flex-basis;
+//       }
+//     } @else {
+//       .col-#{$modifier}-#{$i} {
+//         flex-basis: $flex-basis;
+//         // margin-left: toPixel(math.div($grid-offset, 2));
+//         // margin-right: toPixel(math.div($grid-offset, 2));
+//       }
+
+//       .offset-#{$modifier}-#{$i} {
+//         margin-left: $flex-basis;
+//       }
+//     }
+//   }
+// }
+
+// .container {
+//   border: 1px solid #fff;
+
+//   .row {
+//     column-gap: toPixel($grid-offset);
+//     // $v: calc(100% - toPixel($grid-offset));
+//     // margin-left: $v;
+//     // margin-right: $v;
+//     // row-gap: toPixel($grid-offset);
+//   }
+
+//   .item {
+//     border: 1px solid #f00;
+//   }
+// }
+
+// @include generate-container-class();
+// @include generate-row-class();
+// @include generate-col-offset-classes('');
+// @each $modifier, $breakpoint in $map-grid-props {
+//   @include create-mq($breakpoint, 'max') {
+//     @include generate-col-offset-classes($modifier);
+//   }
+// }
+
+// // @each $modifier , $breakpoint in $map-grid-props {
+// //   @include create-mq($breakpoint - 1, 'max') {
+// //     .hidden#{$modifier}-down {
+// //       display: none !important;
+// //     }
+// //   }
+// //   @include create-mq($breakpoint, 'min') {
+// //     .hidden#{$modifier}-up {
+// //       display: none !important;
+// //     }
+// //   }
+// // }
+
+
+
+
+
+
+// TRY 2
+// $grid-breakpoint-sm: 576 !default;
+// $grid-breakpoint-md: 768 !default;
+// $grid-breakpoint-lg: 992 !default;
+// $grid-breakpoint-xl: 1200 !default;
+// $grid-offset: 15 !default;
+// $grid-gutter: 40 !default;
+// $grid-cols: 12 !default;
+
+
+// $map-grid-breakpoints: (
+//   'sm': $grid-breakpoint-sm,
+//   'md': $grid-breakpoint-md,
+//   'lg': $grid-breakpoint-lg,
+//   'xl': $grid-breakpoint-xl
+// );
+
+// @function toPixel($unitlessValue) {
+//   @return $unitlessValue * 1px;
+// }
+
+// @mixin grid-row($offset) {
+//   display: flex;
+//   flex-wrap: wrap;
+//   margin-left: toPixel(math.div($offset, -2));
+//   margin-right: toPixel(math.div($offset, -2));
+// }
+
+// @mixin grid-col($offset) {
+//   margin-left: toPixel(math.div($offset, 2));
+//   margin-right: toPixel(math.div($offset, 2));
+// }
+
+// @function grid-size($n, $columns, $offset) {
+//   @return #{calc(100% / #{$columns} * #{$n} - #{$offset})};
+// }
+
+// @mixin grid-size($n, $columns, $offset) {
+//   width: #{calc(100% / #{$columns} * #{$n} - #{$offset})};
+// }
+
+// @mixin media-query($breakpoint, $min-or-max) {
+//   @media (#{$min-or-max}-width: #{toPixel($breakpoint)}) {
+//     @content;
+//   }
+// }
+
+// @mixin generate-grid-col-and-offset-classes($modifier, $breakpoint) {
+
+//   @for $i from 1 through $grid-cols {
+//     // $flex-basis: calc(toPersent(math.div(100, math.div($grid-cols, $i))) - toPixel($grid-offset));
+//     $width: grid-size($i, $grid-cols, toPixel($grid-offset));
+
+
+//     @if ($modifier == '') {
+//       .col-#{$i} {
+//         width: $width;
+//       }
+//       .offset-#{$i} {
+//         margin-left: $width;
+//       }
+//     } @else {
+//       .col-#{$modifier}-#{$i} {
+//         width: $width;
+//       }
+
+//       .offset-#{$modifier}-#{$i} {
+//         margin-left: $width;
+//       }
+//     }
+//   }
+// }
+
+// @mixin generate-classes($modifier: '') {
+//   @for $i from 1 through $grid-cols {
+//     $width: grid-size($i, $grid-cols, toPixel($grid-offset));
+
+//     @if ($modifier == '') {
+//       .col-#{$i} {
+//         width: $width;
+//       }
+//       .offset-#{$i} {
+//         margin-left: $width;
+//       }
+//     } @else {
+//       .col-#{$modifier}-#{$i} {
+//         width: $width;
+//       }
+
+//       .offset-#{$modifier}-#{$i} {
+//         margin-left: $width;
+//       }
+//     }
+//   }
+// }
+
+// @mixin create-grid($map-grid-breakpoints) {
+//   .container {
+//     margin: 0 auto;
+//     width: 100%;
+//     max-width: toPixel($grid-breakpoint-xl);
+//     padding-left: toPixel($grid-offset);
+//     padding-right: toPixel($grid-offset);
+
+//     &-fluid {
+//       margin: 0;
+//       max-width: 100%;
+//     }
+//   }
+
+//   .row {
+//     @include grid-row($grid-offset);
+
+//     > [class~=col] {
+//       @include grid-col($grid-offset);
+//     }
+//   }
+
+//   @include generate-classes();
+//   @each $modifier, $breakpoint in $map-grid-breakpoints {
+//     @include media-query($breakpoint, 'max') {
+//       @include generate-classes($modifier);
+//     }
+//   }
+// }
+
+// @include create-grid($map-grid-breakpoints);
+
+// .container {
+//   border: 1px solid #fff;
+// }
+
+// .row {
+//   border: 1px solid #f00;
+// }
+
+// .item {
+//   border: 1px solid #0f0;
+// }
+
+
+
+
+
+
+
+
+// TRY 3
+// $screen-breakpoint-sm: 576 !default;
+// $screen-breakpoint-md: 768 !default;
+// $screen-breakpoint-lg: 992 !default;
+// $screen-breakpoint-xl: 1200 !default;
+// $grid-offset: 15 !default;
+// $grid-gutter: 40 !default;
+// $grid-cols: 12 !default;
+
+// @function toPixel($unitlessValue) {
+//   @return $unitlessValue * 1px;
+// }
+
+// :root {
+//   --screen-breakpoint-sm: #{toPixel($screen-breakpoint-sm)};
+//   --screen-breakpoint-md: #{toPixel($screen-breakpoint-md)};
+//   --screen-breakpoint-lg: #{toPixel($screen-breakpoint-lg)};
+//   --screen-breakpoint-xl: #{toPixel($screen-breakpoint-xl)};
+
+//   --grid-offset: #{toPixel($grid-offset)};
+//   --grid-gutter: #{toPixel($grid-gutter)};
+//   --grid-cols: #{toPixel($grid-cols)};
+// }
+
+// .container-fluid, .container {
+//   margin-right: auto;
+//   margin-left: auto;
+// }
+
+// .container-fluid {
+//   padding-right: var(--grid-offset);
+//   padding-left: var(--grid-offset);
+// }
+
+// .row {
+//   display: flex;
+//   flex: 0 1 auto;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   margin-right: calc(var(--grid-offset) * -0.5);
+//   margin-left: calc(var(--grid-offset) * -0.5);
+// }
+
+// .row.reverse {
+//   flex-direction: row-reverse;
+// }
+
+// .col.reverse {
+//   flex-direction: column-reverse;
+// }
+
+// @for $i from 1 through $grid-cols {
+
+// }

@@ -1,0 +1,48 @@
+---
+tags: ["samples"]
+date: Last Modified
+title: "Custom grid css classes"
+---
+
+extends /playground
+
+append config
+  - config.contentAttributes = { class: 'custom-grid-css-classes' }
+
+append content
+  h1 custom-grid-css-classes
+
+  .test Lorem ipsum dolor sit amet.
+  .container
+    .row
+      .item.col.col-6.col-lg-2 item
+      .item.col.col-6.col-lg-2 item
+      .item.col.col-6.col-lg-2 item
+
+
+  //- .
+    <div class="grid">
+      <div class="col-2 offset-left-1"></div>
+      <div class="col-11"></div>
+      <div class="col-6"></div>
+      <div class="col-7"></div>
+      <div class="col-12"></div>
+    </div>
+
+  //- .container
+    .item item
+    .item.r4 item
+    .item.r4 item
+    .item.r4 item
+    .item.r4 item
+    .item item
+    .item item
+    .item item
+    .item item
+    .item item
+    .item item
+    .item item
+    //- - let i = 0;
+    //- while i < 12
+      - i++;
+      .item item
