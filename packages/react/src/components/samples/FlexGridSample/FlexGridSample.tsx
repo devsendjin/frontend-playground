@@ -12,7 +12,7 @@ const FlexGridSample: RFC<FlexGridSampleProps> = ({ className }) => {
       <div className={styles['container']}>
         <Row className={styles['row']} colGap={15} rowGap={30}>
           {Array.from({ length: 12 }).map((_, index) => (
-            <Col className={styles['col']} size={index + 1}>
+            <Col key={index} className={styles['col']} size={index + 1}>
               <div>Col {index + 1}</div>
             </Col>
           ))}
@@ -20,7 +20,7 @@ const FlexGridSample: RFC<FlexGridSampleProps> = ({ className }) => {
 
         <Row className={styles['row']} colGap={15}>
           {Array.from({ length: 12 }).map((_, index) => (
-            <Col className={styles['col']} size={2}>
+            <Col key={index} className={styles['col']} size={2}>
               <div>Col {index + 1}</div>
             </Col>
           ))}

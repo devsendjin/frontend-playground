@@ -59,10 +59,11 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7", // hot-reload, requires react-refresh to be present
     "@types/circular-dependency-plugin": "^5.0.5",
     "circular-dependency-plugin": "^5.2.2",
-    "csso-webpack-plugin": "^2.0.0-beta.3",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.0",
     "terser-webpack-plugin": "^5.3.1",
+    "css-minimizer-webpack-plugin": "^4.0.0",
+    // "csso-webpack-plugin": "^2.0.0-beta.3",
     // loaders
     "style-loader": "^3.3.1", // css
     "css-loader": "^6.7.1", // css

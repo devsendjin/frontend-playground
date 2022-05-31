@@ -7,7 +7,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
-import CssoWebpackPlugin from 'csso-webpack-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
 import config from './config';
 import utils from './config.utils';
@@ -69,6 +69,18 @@ const webpackConfig: Configuration & { devServer: DevServerConfiguration } = {
         nodeEnv: config.MODE,
         minimize: true,
         minimizer: [
+          new CssMinimizerPlugin({
+            minimizerOptions: {
+              preset: [
+                'default',
+                {
+                  discardComments: {
+                    removeAll: true,
+                  },
+                },
+              ],
+            },
+          }),
           new TerserPlugin({
             exclude: /node_modules/,
             extractComments: false,
@@ -227,11 +239,6 @@ const webpackConfig: Configuration & { devServer: DevServerConfiguration } = {
     (config.__PROD__ || (config.__DEV__ && !config.isServerRunning)) &&
       new MiniCssExtractPlugin({ filename: `${config.paths.css}/[contenthash].css` }),
     // new MiniCssExtractPlugin({ filename: `${config.paths.css}/index.css` }),
-
-    config.__PROD__ &&
-      new CssoWebpackPlugin({
-        comments: false,
-      }),
   ].filter(Boolean),
 };
 
