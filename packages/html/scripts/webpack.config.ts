@@ -3,7 +3,7 @@ import path from 'path';
 import webpack, { Configuration } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
-import CssoWebpackPlugin from 'csso-webpack-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
 import postcss from 'postcss';
@@ -92,6 +92,18 @@ const webpackConfig: Configuration = {
         nodeEnv: config.MODE,
         minimize: true,
         minimizer: [
+          new CssMinimizerPlugin({
+            minimizerOptions: {
+              preset: [
+                'default',
+                {
+                  discardComments: {
+                    removeAll: true,
+                  },
+                },
+              ],
+            },
+          }),
           new TerserPlugin({
             exclude: /node_modules/,
             extractComments: false,
@@ -186,8 +198,6 @@ const webpackConfig: Configuration = {
     new MiniCssExtractPlugin({
       filename: () => '[name].css',
     }),
-
-    config.__PROD__ && new CssoWebpackPlugin({ comments: false }),
   ].filter(Boolean),
 };
 
