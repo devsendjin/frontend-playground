@@ -13,11 +13,37 @@ append content
   h1 custom-grid-css-classes
 
   .test Lorem ipsum dolor sit amet.
-  .container
+  //- .container
     .row
       .item.col.col-6.col-lg-2 item
       .item.col.col-6.col-lg-2 item
       .item.col.col-6.col-lg-2 item
+
+  .container
+    //- .row
+      .item.col.col-2.offset-2 item 1
+      .item.col.col-2.offset-3 item 2
+      .item.col.col-2 item 3
+      .item.col.col-2 item 4
+      .item.col.col-2.offset-5 item 5
+      .item.col.col-2 item 6
+      .item.col.col-2 item
+      .item.col.col-2 item
+      .item.col.col-2 item
+      .item.col.col-2 item
+      .item.col.col-2 item
+      .item.col.col-2 item
+      .item.col.col-2.offset-6 item
+      .item.col.col-2 item
+
+    .row
+      - let i = 0;
+      while i < 14
+        if i === 3
+          .item.col.col-2.offset-5 item #{++i}
+        else
+          .item.col.col-1 item #{++i}
+
 
 
   //- .

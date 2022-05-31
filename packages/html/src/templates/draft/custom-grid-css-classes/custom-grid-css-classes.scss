@@ -2,6 +2,8 @@
 
 // https://www.toptal.com/sass/css3-flexbox-sass-grid-tutorial
 
+.custom-grid-css-classes {
+
 // @mixin grid-row($offset: $offset) {
 //   display: flex;
 //   flex-wrap: wrap;
@@ -70,7 +72,7 @@
 //   }
 // }
 
-.custom-grid-css-classes {}
+
   // .test {
     // width: math.div(100%, 3);
     // width: divide(100%, 3);
@@ -500,3 +502,52 @@
 // @for $i from 1 through $grid-cols {
 
 // }
+
+
+
+
+
+
+
+
+
+  .container{
+    max-width: 1340px;
+    margin: 0 auto;
+    border: 1px solid #fff;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 15px;
+  }
+
+  .item {
+    border: 1px solid #f00;
+  }
+
+  .col-1 {
+    grid-column: auto/span 1;
+  }
+
+  .col-2 {
+    grid-column: auto/span 2;
+  }
+
+  .offset-2 {
+    grid-column-start: 2;
+  }
+
+  .offset-3 {
+    grid-column-start: 3;
+  }
+
+  .offset-5 {
+    grid-column-start: 5;
+  }
+
+  .offset-6 {
+    grid-column: 5 / 6;
+  }
+}
