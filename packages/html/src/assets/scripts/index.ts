@@ -5,13 +5,13 @@ import '@styles/index.scss';
 // import './learn/classes';
 // import './learn/mixins';
 // import './learn/decorators';
-//
-// import './samples/numbers';
-// import './samples/arrays';
-// import './samples/regexp';
-// import './samples/objects';
-// import './samples/callbacks';
-// import './samples/tasks';
+
+// import './samples/numbers.sample';
+// import './samples/arrays.sample';
+// import './samples/regexp.sample';
+// import './samples/objects.sample';
+// import './samples/callbacks.sample';
+// import './samples/tasks.sample';
 
 import './current';
 

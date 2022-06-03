@@ -1,5 +1,4 @@
-import { isFloat, isInt } from '@scripts/utils';
-import { scope } from '@scripts/utils/playground';
+import { isFloat, isInt, scope } from '@scripts/utils';
 
 scope(() => {
   scope(() => {

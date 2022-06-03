@@ -1,4 +1,4 @@
-import { scope, l } from '@scripts/utils/playground';
+import { scope, l } from '@scripts/utils';
 
 scope(() => {
   const template = `

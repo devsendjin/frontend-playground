@@ -5,3 +5,8 @@ export const uuid = (): string => {
     return v.toString(16);
   });
 };
+
+export const sleepBlocker = (time: number = 0) => {
+  const wakeUpTime = Date.now() + time;
+  while (Date.now() < wakeUpTime) {}
+};
