@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form } from '@/vendors/bootstrap';
-import { useLocalStorageState } from '@/hooks/useLocalStorageState';
+import { useLocalStorageState } from '@/hooks/utils/useLocalStorageState';
 
 const LocalStorageStateHook: RFC = () => {
   const [value, setValue] = useLocalStorageState<string>('LocalStorageStateHook_value', 'some default value');

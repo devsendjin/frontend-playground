@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const usePrevious = <T>(value: T) => {
+const usePreviousState = <T>(value: T) => {
   const ref = useRef<T>();
   useEffect(() => {
     ref.current = value;
@@ -8,4 +8,4 @@ const usePrevious = <T>(value: T) => {
   return ref.current;
 };
 
-export { usePrevious };
+export { usePreviousState };

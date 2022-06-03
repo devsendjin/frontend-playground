@@ -4,12 +4,14 @@ const useSafeState = <T>(initialState: T | (() => T)): [T, React.Dispatch<React.
   const [state, setState] = React.useState(initialState);
 
   const mountedRef = React.useRef(false);
+
   React.useEffect(() => {
     mountedRef.current = true;
     return () => {
       mountedRef.current = false;
     };
   }, []);
+
   const safeSetState = React.useCallback(
     (args: React.SetStateAction<T>) => {
       if (mountedRef.current) {

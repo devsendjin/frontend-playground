@@ -1,4 +1,5 @@
 import { paramCase } from 'change-case';
+// samples
 import { ChildrenRerenderSample } from '@/components/samples/ChildrenRerenderSample';
 import { DynamicStateControllerSample } from '@/components/samples/DynamicStateControllerSample';
 import { LazyInitialStateSample } from '@/components/samples/LazyInitialStateSample';
@@ -12,11 +13,12 @@ import { Dropdown } from '@/components/UI/_draft/Dropdown';
 import { IconsSample } from '@/components/samples/IconsSample';
 import { LocalStorageStateHook } from '@/components/hooks/LocalStorageStateHook';
 import { TicTacToeGame } from '@/components/samples/TicTacToeGame';
+import { FlexGridSample } from '@/components/samples/FlexGridSample';
+// hooks
 import { UseTransitionHook } from '@/components/hooks/UseTransitionHook';
 import { UseTypedReducerHook } from '@/components/hooks/UseTypedReducerHook';
 import { UseAsyncHook } from '@/components/hooks/UseAsyncHook';
-import { FlexGridSample } from '@/components/samples/FlexGridSample';
-// import { UseSafeDispatchHook } from '@/components/hooks/UseSafeDispatchHook';
+import { UseImperativeHandle } from '@/components/hooks/UseImperativeHandle';
 
 /*
 const components = [
@@ -58,6 +60,7 @@ const hooks = {
   UseTransitionHook: `/${paramCase('UseTransitionHook')}`,
   UseTypedReducerHook: `/${paramCase('UseTypedReducerHook')}`,
   UseAsyncHook: `/${paramCase('UseAsyncHook')}`,
+  UseImperativeHandle: `/${paramCase('UseImperativeHandle')}`,
   // UseSafeDispatchHook: `/${paramCase('UseSafeDispatchHook')}`,
 } as const;
 const coreKnowledge = {
@@ -149,11 +152,11 @@ const routesMap: RouteMap[] = [
         component: UseAsyncHook,
         name: 'UseAsync | UseSafeDispatch',
       },
-      // {
-      //   url: ROUTES.UseSafeDispatchHook,
-      //   component: UseSafeDispatchHook,
-      //   name: 'UseSafeDispatchHook',
-      // },
+      {
+        url: ROUTES.UseImperativeHandle,
+        component: UseImperativeHandle,
+        name: 'UseImperativeHandle',
+      },
     ],
   },
   {

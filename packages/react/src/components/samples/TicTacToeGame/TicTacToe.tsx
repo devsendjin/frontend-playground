@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { useLocalStorageState } from '@/hooks/useLocalStorageState';
+import { useLocalStorageState } from '@/hooks/utils/useLocalStorageState';
 import { Button } from '@/vendors/bootstrap';
 import { CrossIcon, CircleIcon } from './Icons';
 import styles from './TicTacToe.module.scss';
