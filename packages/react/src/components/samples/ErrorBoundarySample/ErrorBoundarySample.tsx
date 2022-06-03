@@ -23,11 +23,11 @@ const ComponentThatMayError: RFC = () => {
 };
 ComponentThatMayError.displayName = ComponentThatMayError.name;
 
-interface FallbackProps {
+type FallbackProps = {
   error: Error;
   resetErrorBoundary: (...args: Array<unknown>) => void;
   resetState: () => void;
-}
+};
 
 type TFallbackRender = (props: FallbackProps) => ReturnType<ErrorBoundaryPropsWithRender['fallbackRender']>;
 const defaultFallbackRender: TFallbackRender = ({ error, resetErrorBoundary, resetState }) => {

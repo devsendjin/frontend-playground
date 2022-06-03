@@ -1,5 +1,5 @@
 // @ts-nocheck
-interface IWebStorage {
+type IWebStorage = {
   get(key: string): void;
 
   set(key: string, payload: any): void;
@@ -11,7 +11,7 @@ interface IWebStorage {
   clear(): void;
 
   softClear(): void;
-}
+};
 
 // localStorage | sessionStorage | CacheStorage?
 class WebStorage implements IWebStorage {}

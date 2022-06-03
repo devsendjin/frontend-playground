@@ -1,4 +1,4 @@
-interface IWebStorage {
+type IWebStorage = {
   get(key: string): void;
 
   set(key: string, payload: any): void;
@@ -12,7 +12,7 @@ interface IWebStorage {
   softClear(): void;
 
   addToExcludes(keys: string[]): void;
-}
+};
 
 enum QUOTA_EXCEEDED_ERROR_STATUS_CODES {
   CHROME = 22,

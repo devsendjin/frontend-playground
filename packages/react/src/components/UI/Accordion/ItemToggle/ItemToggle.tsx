@@ -1,11 +1,11 @@
 import { useAccordionContext } from '../Accordion.context';
 import styles from '../Accordion.module.scss';
 
-interface IItemToggleProps {
+type ItemToggleProps = {
   itemKey: number;
-}
+};
 
-const ItemToggle: RFC<IItemToggleProps> = ({ itemKey, children }) => {
+const ItemToggle: RFC<ItemToggleProps> = ({ itemKey, children }) => {
   // console.log('ItemToggle itemKey: ', itemKey);
   const { setActiveIndex } = useAccordionContext();
 

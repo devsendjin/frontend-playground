@@ -12,7 +12,7 @@ enum TransitionStates {
 export type State = 'preEnter' | 'entering' | 'entered' | 'preExit' | 'exiting' | 'exited' | 'unmounted';
 type TimeoutId = ReturnType<typeof window.setTimeout>;
 type TimeoutIdMutable = MutableRefObject<TimeoutId | undefined>;
-interface UseTransitionImperativeParams {
+type UseTransitionImperativeParams = {
   enter?: boolean;
   exit?: boolean;
   preEnter?: boolean;
@@ -22,12 +22,12 @@ interface UseTransitionImperativeParams {
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
   onChange?: (params: { state: State }) => void;
-}
-interface UseTransitionImperativeReturn {
+};
+type UseTransitionImperativeReturn = {
   transitionState: State;
   toggleTransition: (toEnter?: boolean) => void;
   endTransition: () => void;
-}
+};
 
 const STATES: ReadonlyArray<State> = ['preEnter', 'entering', 'entered', 'preExit', 'exiting', 'exited', 'unmounted'];
 
@@ -164,7 +164,7 @@ const useTransitionImperative = ({
   };
 };
 
-interface UseTransitionReturn extends UseTransitionImperativeReturn {
+type UseTransitionReturn = UseTransitionImperativeReturn & {
   isPreEntered: boolean;
   isEntering: boolean;
   isEntered: boolean;
@@ -173,14 +173,14 @@ interface UseTransitionReturn extends UseTransitionImperativeReturn {
   isUnmounted: boolean;
   isMounted: boolean;
   transitionClassname: string;
-}
+};
 type MappedTransitionStateToClassnameKey = State;
 type MappedTransitionStateToClassname = {
   [key in MappedTransitionStateToClassnameKey]?: string;
 };
-interface UseTransitionParams extends UseTransitionImperativeParams {
+type UseTransitionParams = UseTransitionImperativeParams & {
   customClassnames?: MappedTransitionStateToClassname;
-}
+};
 
 const transitionClassNames = STATES.reduce<MappedTransitionStateToClassname>((acc, state) => {
   acc[state] = state;

@@ -1,9 +1,9 @@
 import cn from 'classnames';
 import styles from './Flex.module.scss';
 
-interface FlexProps {
+type FlexProps = {
   className?: string;
-}
+};
 
 // fdc
 // flexDiractionColumn

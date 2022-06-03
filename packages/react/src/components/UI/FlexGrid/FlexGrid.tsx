@@ -8,10 +8,10 @@ const defaultProps = {
   cols: 12,
 };
 
-interface RowProps extends FlexGridContextProps {
+type RowProps = FlexGridContextProps & {
   className?: string;
   style?: React.CSSProperties;
-}
+};
 const Row: RFC<RowProps> = ({
   colGap = defaultProps.colGap,
   rowGap = colGap,
@@ -30,10 +30,10 @@ const Row: RFC<RowProps> = ({
   );
 };
 
-interface ColProps {
+type ColProps = {
   className?: string;
   size: number;
-}
+};
 const Col: RFC<ColProps> = ({ size, className, children }) => {
   const { cols, colGap } = useFlexGridContext();
 

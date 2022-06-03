@@ -4,11 +4,11 @@ const svgIconMap = {
   github: GithubIcon,
 } as const;
 
-interface ISvgIconProps extends React.SVGProps<SVGSVGElement> {
+type SvgIconProps = React.SVGProps<SVGSVGElement> & {
   type: keyof typeof svgIconMap;
-}
+};
 
-const SvgIcon: RFC<ISvgIconProps> = ({ type, ...restProps }) => {
+const SvgIcon: RFC<SvgIconProps> = ({ type, ...restProps }) => {
   if (!type) return null;
   const Component = svgIconMap[type];
   return <Component {...restProps} />;

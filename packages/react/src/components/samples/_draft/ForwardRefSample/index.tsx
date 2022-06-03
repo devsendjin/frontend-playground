@@ -1,16 +1,16 @@
 import React from 'react';
 
-interface InputCommon extends React.InputHTMLAttributes<HTMLInputElement> {}
+type InputCommonProps = React.InputHTMLAttributes<HTMLInputElement>;
 
-interface IInput extends InputCommon {
+type InputProps = InputCommonProps & {
   styleType?: 'default' | 'white';
   error?: boolean;
-}
+};
 
-interface InputWithLabel extends InputCommon {
+type InputWithLabelProps = InputCommonProps & {
   withLabel: boolean;
   labelText: string;
-}
+};
 
 // type IOverload = {
 //   (props: React.ForwardRefRenderFunction<HTMLInputElement, IInput>): any;
@@ -20,8 +20,8 @@ interface InputWithLabel extends InputCommon {
 // };
 
 type IOverload = {
-  (props: React.ForwardRefRenderFunction<HTMLInputElement, IInput>): any;
-  (props: React.ForwardRefRenderFunction<HTMLInputElement, InputWithLabel>): any;
+  (props: React.ForwardRefRenderFunction<HTMLInputElement, InputProps>): any;
+  (props: React.ForwardRefRenderFunction<HTMLInputElement, InputWithLabelProps>): any;
 };
 
 // type IOverload<T, P = {}> = typeof React.forwardRef;

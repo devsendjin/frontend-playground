@@ -4,19 +4,19 @@ import { SampleTitle } from '@UI/playground/Title';
 import { Button, Form } from '@/vendors/bootstrap';
 import styles from './UseTypedReducerHook.module.scss';
 
-interface State {
+type State = {
   count: number;
-}
+};
 
-interface IncDecAction {
+type IncDecAction = {
   type: 'INCREMENT' | 'DECREMENT';
   payload: { step: number };
-}
+};
 
-interface ResetAction {
+type ResetAction = {
   type: 'RESET';
   payload: { count: number };
-}
+};
 
 type Action = IncDecAction | ResetAction;
 
@@ -66,9 +66,9 @@ const Counter: RFC<{ initialCount?: number; step?: number }> = ({ initialCount =
   );
 };
 
-interface UseTypedReducerHookProps {
+type UseTypedReducerHookProps = {
   className?: string;
-}
+};
 
 const UseTypedReducerHook: RFC<UseTypedReducerHookProps> = ({ className }) => {
   const [step, setStep] = useState<number>(1);

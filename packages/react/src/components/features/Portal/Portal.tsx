@@ -7,14 +7,14 @@ type TPortalElement = Element;
 type TPortalNode = TPortalElement | null | undefined;
 type TContainerIdentifier = string | TPortalNode;
 type TUsePortalNodeReturn = MutableRefObject<TPortalNode>;
-interface IPortalProps {
+type PortalProps = {
   onMount?: () => void;
   containerIdentifier?: TContainerIdentifier;
   style?: React.CSSProperties;
   className?: string;
   id?: string;
   prependToBody?: boolean;
-}
+};
 
 const cssPropertiesToString = (cssProperties: React.CSSProperties) => {
   return Object.entries(cssProperties).reduce((acc, [prop, value]) => {
@@ -51,7 +51,7 @@ const Portal = ({
   containerIdentifier,
   onMount,
   children,
-}: PropsWithChildren<IPortalProps>): ReactPortal => {
+}: PropsWithChildren<PortalProps>): ReactPortal => {
   const portalNodeRef = usePortalNode(containerIdentifier);
   const [dynamicPortalNode] = useState<TPortalElement>(document.createElement('div'));
 

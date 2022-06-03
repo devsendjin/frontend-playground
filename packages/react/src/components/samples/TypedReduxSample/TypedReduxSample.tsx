@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Provider } from 'react-redux';
 import { store } from '@/store';
 import { Button, Form } from '@/vendors/bootstrap';
-import { useActions } from '@/hooks/useActions';
-import { useTypedSelector } from '@/hooks/useTypedSelector';
+import { useActions } from '@/hooks/redux/useActions';
+import { useTypedSelector } from '@/hooks/redux/useTypedSelector';
 import styles from './TypedReduxSample.module.scss';
 
 const TypedRedux: RFC = () => {

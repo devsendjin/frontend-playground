@@ -2,9 +2,9 @@ import cn from 'classnames';
 import styles from './FlexSample.module.scss';
 import { Flex } from '@/components/UI/_draft/Flex';
 
-interface FlexSampleProps {
+type FlexSampleProps = {
   className?: string;
-}
+};
 
 const FlexSample: RFC<FlexSampleProps> = ({ className }) => {
   return (

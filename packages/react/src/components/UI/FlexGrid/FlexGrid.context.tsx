@@ -1,10 +1,10 @@
 import { createContext, useContext } from 'react';
 
-interface FlexGridContextProps {
+type FlexGridContextProps = {
   colGap?: number;
   rowGap?: number;
   cols?: number;
-}
+};
 
 const FlexGridContext = createContext(null as unknown as FlexGridContextProps);
 

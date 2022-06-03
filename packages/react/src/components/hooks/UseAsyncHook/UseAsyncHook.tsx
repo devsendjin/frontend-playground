@@ -3,9 +3,9 @@ import { Button } from '@/vendors/bootstrap';
 import { useAsync } from '@/hooks/useAsync';
 import styles from './UseAsyncHook.module.scss';
 
-interface UseAsyncHookProps {
+type UseAsyncHookProps = {
   className?: string;
-}
+};
 
 const fakerRequest = (ms: number = 1000, throwError: boolean = false) => {
   return new Promise<RequestSuccessData>((resolve, reject) => {
@@ -22,15 +22,15 @@ const fakerRequest = (ms: number = 1000, throwError: boolean = false) => {
   });
 };
 
-interface RequestSuccessData {
+type RequestSuccessData = {
   question: string;
   answer: string;
-}
+};
 
-interface RequestErrorData {
+type RequestErrorData = {
   code: string;
   message: string;
-}
+};
 
 const UseAsyncHook: RFC<UseAsyncHookProps> = ({ className }) => {
   const {

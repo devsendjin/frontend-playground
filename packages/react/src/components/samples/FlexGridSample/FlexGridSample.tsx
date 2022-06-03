@@ -2,9 +2,9 @@ import cn from 'classnames';
 import { Col, Row } from '@/components/UI/FlexGrid';
 import styles from './FlexGridSample.module.scss';
 
-interface FlexGridSampleProps {
+type FlexGridSampleProps = {
   className?: string;
-}
+};
 
 const FlexGridSample: RFC<FlexGridSampleProps> = ({ className }) => {
   return (

@@ -26,21 +26,21 @@ type State<TData, TError> = {
   data?: TData;
   error?: TError;
 };
-interface BaseAction<S extends Status> {
+type BaseAction<S extends Status> = {
   type: S;
-}
-interface PendingAction extends BaseAction<Status.pending> {
+};
+type PendingAction = BaseAction<Status.pending> & {
   type: Status.pending;
   payload?: {};
-}
-interface RejectedAction extends BaseAction<Status.rejected> {
+};
+type RejectedAction = BaseAction<Status.rejected> & {
   type: Status.rejected;
   payload: { error: Error | undefined };
-}
-interface ResolvedAction<TData> extends BaseAction<Status.resolved> {
+};
+type ResolvedAction<TData> = BaseAction<Status.resolved> & {
   type: Status.resolved;
   payload: { data: TData | undefined };
-}
+};
 type Action<TData> = ResolvedAction<TData> | RejectedAction | PendingAction;
 
 const asyncReducer = <TData, TError>(state: State<TData, TError>, action: Action<TData>) => {
@@ -61,10 +61,10 @@ const asyncReducer = <TData, TError>(state: State<TData, TError>, action: Action
   }
 };
 
-interface UseAsyncParams<TData, TError> {
-  initialState?: State<TData, TError>;
+type UseAsyncParams<TData, TError> = {
+  initialState?: State<TData, TError> | (() => State<TData, TError>);
   requestFn: () => Promise<TData>;
-}
+};
 
 const useAsync = <TData = unknown, TError = unknown>({ initialState, requestFn }: UseAsyncParams<TData, TError>) => {
   const [state, unsafeDispatch] = React.useReducer<React.Reducer<State<TData, TError>, Action<TData>>>(
@@ -73,7 +73,7 @@ const useAsync = <TData = unknown, TError = unknown>({ initialState, requestFn }
       status: Status.idle,
       data: undefined,
       error: undefined,
-      ...initialState,
+      ...(typeof initialState === 'function' ? initialState() : initialState),
     }
   );
 

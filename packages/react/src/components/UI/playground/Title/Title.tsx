@@ -1,10 +1,10 @@
 import cn from 'classnames';
 import styles from './Title.module.scss';
-import { DynamicTag, IDynamicTagNameProps } from '@UI/DynamicTag';
+import { DynamicTag, DynamicTagNameProps } from '@UI/DynamicTag';
 
-interface SampleTitleProps extends Partial<IDynamicTagNameProps> {
+type SampleTitleProps = Partial<DynamicTagNameProps> & {
   className?: string;
-}
+};
 
 const SampleTitle: RFC<SampleTitleProps> = ({ tagName = 'h4', className, children }) => {
   return (

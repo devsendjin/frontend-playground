@@ -1,10 +1,10 @@
 import React from 'react';
 
-export interface IDynamicTagNameProps {
+export type DynamicTagNameProps = {
   tagName: keyof JSX.IntrinsicElements;
-}
+};
 
-const DynamicTag: RFC<IDynamicTagNameProps & React.HTMLAttributes<HTMLOrSVGElement>> = ({
+const DynamicTag: RFC<DynamicTagNameProps & React.HTMLAttributes<HTMLOrSVGElement>> = ({
   tagName,
   children,
   ...restProps

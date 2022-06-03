@@ -4,9 +4,9 @@ import { Button, ButtonGroup, Form } from '@/vendors/bootstrap';
 import { useTransition } from '@/hooks/useTransition';
 import styles from './UseTransitionHook.module.scss';
 
-interface UseTransitionHookProps {
+type UseTransitionHookProps = {
   className?: string;
-}
+};
 
 const defaultDelay = 1000;
 const UseTransitionHook: RFC<UseTransitionHookProps> = ({ className }) => {

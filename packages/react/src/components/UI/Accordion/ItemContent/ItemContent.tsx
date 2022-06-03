@@ -2,11 +2,11 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import { useAccordionContext } from '../Accordion.context';
 import styles from '../Accordion.module.scss';
 
-interface IItemContentProps {
+type ItemContentProps = {
   itemKey: number;
-}
+};
 
-const ItemContent: RFC<IItemContentProps> = ({ itemKey, children }) => {
+const ItemContent: RFC<ItemContentProps> = ({ itemKey, children }) => {
   const { activeIndex } = useAccordionContext();
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [style, setStyle] = useState<React.CSSProperties | undefined>(undefined);
