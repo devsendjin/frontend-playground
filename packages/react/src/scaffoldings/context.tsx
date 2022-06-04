@@ -3,6 +3,7 @@ import { createContext, useContext } from 'react';
 type TScaffoldContext = {};
 
 const ScaffoldContext = createContext(null as unknown as TScaffoldContext);
+ScaffoldContext.displayName = 'ScaffoldContext';
 
 const ScaffoldProvider: RFC<{ value: TScaffoldContext }> = ({ value, children }) => {
   return <ScaffoldContext.Provider value={value}>{children}</ScaffoldContext.Provider>;
