@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import cn from 'classnames';
 import { Button } from '@/vendors/bootstrap';
-import { Portal } from '@/components/features/Portal';
+import { Portal } from '@/components/categories/features/Portal';
 import styles from './PortalSample.module.scss';
 
 const PortalSample: RFC = () => {

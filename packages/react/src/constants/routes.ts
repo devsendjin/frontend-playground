@@ -1,24 +1,26 @@
 import { paramCase } from 'change-case';
 // samples
-import { ChildrenRerenderSample } from '@/components/samples/ChildrenRerenderSample';
-import { DynamicStateControllerSample } from '@/components/samples/DynamicStateControllerSample';
-import { LazyInitialStateSample } from '@/components/samples/LazyInitialStateSample';
-import { LocalizationSample } from '@/components/samples/LocalizationSample';
-import { AccordionSample } from '@/components/samples/AccordionSample';
-import { PortalSample } from '@/components/samples/PortalSample';
-import { TypedReduxSample } from '@/components/samples/TypedReduxSample';
-import { ErrorBoundarySample } from '@/components/samples/ErrorBoundarySample';
-import { HookFlowSample } from '@/components/samples/HookFlowSample';
+import { ChildrenRerenderSample } from '@/components/categories/samples/ChildrenRerenderSample';
+import { DynamicStateControllerSample } from '@/components/categories/samples/DynamicStateControllerSample';
+import { LazyInitialStateSample } from '@/components/categories/samples/LazyInitialStateSample';
+import { LocalizationSample } from '@/components/categories/samples/LocalizationSample';
+import { AccordionSample } from '@/components/categories/samples/AccordionSample';
+import { PortalSample } from '@/components/categories/samples/PortalSample';
+import { TypedReduxSample } from '@/components/categories/samples/TypedReduxSample';
+import { ErrorBoundarySample } from '@/components/categories/samples/ErrorBoundarySample';
+import { HookFlowSample } from '@/components/categories/samples/HookFlowSample';
 import { Dropdown } from '@/components/UI/_draft/Dropdown';
-import { IconsSample } from '@/components/samples/IconsSample';
-import { LocalStorageStateHook } from '@/components/hooks/LocalStorageStateHook';
-import { TicTacToeGame } from '@/components/samples/TicTacToeGame';
-import { FlexGridSample } from '@/components/samples/FlexGridSample';
+import { IconsSample } from '@/components/categories/samples/IconsSample';
+import { LocalStorageStateHook } from '@/components/categories/hooks/LocalStorageStateHook';
+import { TicTacToeGame } from '@/components/categories/samples/TicTacToeGame';
+import { FlexGridSample } from '@/components/categories/samples/FlexGridSample';
+// patterns
+import { PropCollectionsGetters } from '@/components/categories/patterns/PropCollectionsGetters';
 // hooks
-import { UseTransitionHook } from '@/components/hooks/UseTransitionHook';
-import { UseTypedReducerHook } from '@/components/hooks/UseTypedReducerHook';
-import { UseAsyncHook } from '@/components/hooks/UseAsyncHook';
-import { UseImperativeHandle } from '@/components/hooks/UseImperativeHandle';
+import { UseTransitionHook } from '@/components/categories/hooks/UseTransitionHook';
+import { UseTypedReducerHook } from '@/components/categories/hooks/UseTypedReducerHook';
+import { UseAsyncHook } from '@/components/categories/hooks/UseAsyncHook';
+import { UseImperativeHandle } from '@/components/categories/hooks/UseImperativeHandle';
 
 /*
 const components = [
@@ -70,6 +72,9 @@ const performance = {
   ChildrenRerenderSample: `/${paramCase('ChildrenRerenderSample')}`,
   LazyInitialStateSample: `/${paramCase('LazyInitialStateSample')}`,
 } as const;
+const patterns = {
+  PropCollectionsGetters: `/${paramCase('PropCollectionsGetters')}`,
+} as const;
 const games = {
   TicTacToeGame: `/${paramCase('TicTacToeGame')}`,
 } as const;
@@ -79,6 +84,7 @@ const ROUTES = {
   combined: '/combined',
   ...features,
   ...hooks,
+  ...patterns,
   ...ui,
   ...coreKnowledge,
   ...performance,
@@ -115,7 +121,7 @@ const routesMap: RouteMap[] = [
     ],
   },
   {
-    category: 'hooks',
+    category: 'Hooks',
     routes: [
       {
         url: ROUTES.LocalStorageStateHook,
@@ -156,6 +162,16 @@ const routesMap: RouteMap[] = [
         url: ROUTES.UseImperativeHandle,
         component: UseImperativeHandle,
         name: 'UseImperativeHandle',
+      },
+    ],
+  },
+  {
+    category: 'Patterns',
+    routes: [
+      {
+        url: ROUTES.PropCollectionsGetters,
+        component: PropCollectionsGetters,
+        name: 'PropCollectionsGetters',
       },
     ],
   },

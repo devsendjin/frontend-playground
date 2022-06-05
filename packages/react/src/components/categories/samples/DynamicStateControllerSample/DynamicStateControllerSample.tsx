@@ -1,5 +1,5 @@
 import { Form } from '@/vendors/bootstrap';
-import { DynamicStateController } from '@/components/features/DynamicStateController';
+import { DynamicStateController } from '@/components/categories/features/DynamicStateController';
 
 const DynamicStateControllerSample: RFC = () => {
   return (
