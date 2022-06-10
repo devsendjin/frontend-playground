@@ -64,6 +64,7 @@
   - [ ] [Recoil](https://recoiljs.org/)
   - [ ] [socket.io](https://socket.io/)
   - [ ] [Cleave.js (format input text)](https://github.com/nosir/cleave.js)
+  - [ ] [Virtuoso (virtualized scroll)](https://virtuoso.dev/)
 
 #### References:
 
