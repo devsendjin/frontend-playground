@@ -68,7 +68,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addGlobalData('_config', config);
   // functions/utils
   eleventyConfig.addGlobalData('_getVendors', () => (vendorName, type) => {
-    if (!config.vendors || !Array.isArray(config.vendors)) return [];
+    if (!Array.isArray(config.vendors)) return [];
     return config.vendors.filter((vendor) => vendor.endsWith(`.${type}`) && new RegExp(vendorName, 'gmi').test(vendor));
   });
   eleventyConfig.addGlobalData('_log', () => util.inspect);
