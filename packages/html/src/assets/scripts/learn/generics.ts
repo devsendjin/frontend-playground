@@ -55,4 +55,28 @@ type RemoveByType<T, E> = {
 
 const user: RemoveByType<IUser, string> = 'age';
  */
+
+  // ====================================== Nullable tuples ======================================
+  // https://stackoverflow.com/questions/54607400/typescript-remove-entries-from-tuple-type
+  /*
+type FilterNullable<T extends any[]> = T extends [] ? [] :
+    T extends [infer H, ...infer R] ?
+    H extends undefined | null ? FilterNullable<R> : [H, ...FilterNullable<R>] : T; // works
+
+type NullableTuple<T extends any[]> = T extends [] ? [] :
+    T extends [infer H, ...infer R] ?
+    H extends undefined | null ? [H, ...R] : NullableTuple<R> : T; // incorrect
+    // H extends undefined | null ? FilterNullable<R> : [H, ...FilterNullable<R>] : T;
+
+type M = { a: number }
+type NumsUndefinedNull = [number | null | undefined, number | null]
+type Filtered = FilterNullable<NumsUndefinedNull>
+const a: Filtered = [1 ,2]
+//    ^?
+
+type Nums = [number, number]
+type WithNull = NullableTuple<Nums>
+const b: WithNull = [1 ,2]
+//    ^?
+*/
 }, 'generics');
