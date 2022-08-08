@@ -47,6 +47,11 @@
   - [ ] hook to manipulate dynamic array elements
   - [ ] do / undo feature
 
+#### Research
+
+- scss
+  - [ ] [adaptive value](https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/)
+
 #### Try to use/install:
 
 - html:
