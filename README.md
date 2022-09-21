@@ -74,6 +74,14 @@
 #### References:
 
 - [package.json fields with description](https://github.com/stereobooster/package.json)
+- typescript
+  - type utilities
+    - [type-fest](https://github.com/sindresorhus/type-fest)
+    - [ts-toolbelt](https://github.com/millsp/ts-toolbelt)
+    - [tsdef](https://github.com/joonhocho/tsdef)
+    - [template-literal-types](https://github.com/ghoullier/awesome-template-literal-types)
+  - data structures
+    - [typescript-collections](https://github.com/basarat/typescript-collections)
 - react
   - hooks
     - [react-use (hooks library)](https://github.com/streamich/react-use)
