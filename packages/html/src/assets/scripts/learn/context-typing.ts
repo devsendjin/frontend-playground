@@ -1,4 +1,4 @@
-import { scope } from '@scripts/utils';
+import { scope } from "scripts/utils";
 
 scope(() => {
   function getFullName(this: { name: string; surname: string }): string {
@@ -6,12 +6,12 @@ scope(() => {
   }
 
   const account = {
-    name: 'Bar',
-    surname: 'Baz',
+    name: "Bar",
+    surname: "Baz",
     getFullName,
   };
 
   console.log(account.getFullName());
-}, 'context-typing');
+}, "context-typing");
 
 export {};

@@ -1,4 +1,4 @@
-import { scope } from '@scripts/utils';
+import { scope } from "scripts/utils";
 
 scope(() => {
   type Constructable = new (...args: any[]) => any;
@@ -11,7 +11,7 @@ scope(() => {
 
   function Tagged<BaseClass extends Constructable>(BC: BaseClass) {
     return class extends BC {
-      public tags = ['TS', 'JS'];
+      public tags = ["TS", "JS"];
     };
   }
 
@@ -21,11 +21,11 @@ scope(() => {
 
   class User extends Timestamp(Tagged(Subject)) {}
 
-  const user = new User('Bar Bazovi4');
+  const user = new User("Bar Bazovi4");
 
-  console.log('user.timestamp', user.timestamp);
-  console.log('user.tags', user.tags);
-  console.log('user.teacher', user.teacher);
-}, 'mixins');
+  console.log("user.timestamp", user.timestamp);
+  console.log("user.tags", user.tags);
+  console.log("user.teacher", user.teacher);
+}, "mixins");
 
 export {};

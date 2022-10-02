@@ -1,18 +1,18 @@
-import { scope } from '@scripts/utils';
-import 'reflect-metadata';
+import { scope } from "scripts/utils";
+import "reflect-metadata";
 
 // ====================================== Decorators ======================================
 scope(() => {
   scope(() => {
     const LogEventValue = (target: Object, key: string, descriptor: PropertyDescriptor): PropertyDescriptor => {
-      console.log('LogEventValue', { target, key, descriptor });
+      console.log("LogEventValue", { target, key, descriptor });
 
       const originalFn = descriptor.value;
       return {
         ...descriptor,
         value: (e: Event) => {
           const inputRef = e.target as HTMLInputElement;
-          console.log('LogEventValue:', inputRef.value);
+          console.log("LogEventValue:", inputRef.value);
           originalFn(e);
         },
       };
@@ -20,7 +20,7 @@ scope(() => {
 
     class Search {
       constructor(private readonly inputElement: HTMLInputElement) {
-        this.inputElement.addEventListener('input', this.onSearch.bind(this));
+        this.inputElement.addEventListener("input", this.onSearch.bind(this));
       }
 
       @LogEventValue
@@ -30,12 +30,12 @@ scope(() => {
       }
     }
 
-    const input = document.createElement('input');
-    input.classList.add('decorator-input');
-    document.querySelector('main')!.append(input);
+    const input = document.createElement("input");
+    input.classList.add("decorator-input");
+    document.querySelector("main")!.append(input);
 
     new Search(input);
-  }, 'LogEventValue');
+  }, "LogEventValue");
 
   /*
   scope(() => {
@@ -81,6 +81,6 @@ scope(() => {
     }, 5000);
   }, 'Validation');
    */
-}, 'decorators');
+}, "decorators");
 
 export {};

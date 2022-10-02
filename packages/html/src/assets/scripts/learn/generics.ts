@@ -1,4 +1,4 @@
-import { scope } from '@scripts/utils';
+import { scope } from "scripts/utils";
 
 scope(() => {
   function getPropertyObj<Obj, Key extends keyof Obj>(obj: Obj, key: Key): Obj[Key] {
@@ -79,4 +79,4 @@ type WithNull = NullableTuple<Nums>
 const b: WithNull = [1 ,2]
 //    ^?
 */
-}, 'generics');
+}, "generics");

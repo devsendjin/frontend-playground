@@ -1,6 +1,6 @@
-import { scope, l } from '@scripts/utils';
+import { scope, l } from "scripts/utils";
 
 scope(() => {
-  const a = { b: 'Current ts' };
+  const a = { b: "Current ts" };
   l(a);
-}, 'Current ts');
+}, "Current ts");

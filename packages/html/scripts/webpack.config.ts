@@ -1,21 +1,21 @@
-import path from 'path';
+import path from "path";
 
-import webpack, { Configuration } from 'webpack';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import TerserPlugin from 'terser-webpack-plugin';
-import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
-import autoprefixer from 'autoprefixer';
-import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
-import postcss from 'postcss';
-import sass from 'sass';
+import webpack, { Configuration } from "webpack";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import TerserPlugin from "terser-webpack-plugin";
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
+import autoprefixer from "autoprefixer";
+import postcssFlexbugsFixes from "postcss-flexbugs-fixes";
+import postcss from "postcss";
+import sass from "sass";
 
-import { OmitGeneratingFilesPlugin } from './plugins'; // custom plugin
-import config from './config';
-import utils from './utils';
+import { OmitGeneratingFilesPlugin } from "./plugins"; // custom plugin
+import config from "./config";
+import { readDirectory, isDirnameMatchFilename, trimExtension } from "./utils";
 
 const loaders = {
   css: {
-    loader: 'css-loader',
+    loader: "css-loader",
     options: {
       sourceMap: config.__DEV__,
       url: false,
@@ -23,16 +23,16 @@ const loaders = {
     },
   },
   postCss: {
-    loader: 'postcss-loader',
+    loader: "postcss-loader",
     options: {
       implementation: postcss,
       postcssOptions: {
-        plugins: [['postcss-preset-env', { stage: 4 }], postcssFlexbugsFixes, autoprefixer],
+        plugins: [["postcss-preset-env", { stage: 4 }], postcssFlexbugsFixes, autoprefixer],
       },
     },
   },
   sass: {
-    loader: 'sass-loader',
+    loader: "sass-loader",
     options: {
       sourceMap: config.__DEV__,
       implementation: sass,
@@ -40,46 +40,47 @@ const loaders = {
   },
 };
 
-const SOURCE_FILES = utils.getSourceFiles(config.PAGES_SRC);
+const SOURCE_FILES = readDirectory(config.PAGES_SRC);
 const TYPESCRIPT_FILES = SOURCE_FILES.filter((file) => {
-  return file.endsWith('.ts') && utils.isDirnameMatchFilename(file);
+  return file.endsWith(".ts") && isDirnameMatchFilename(file);
 });
 
 console.log({ SOURCE_FILES, TYPESCRIPT_FILES }, config);
 
 const webpackConfig: Configuration = {
-  mode: config.MODE as Configuration['mode'],
+  mode: config.MODE as Configuration["mode"],
 
   entry: {
-    index: path.join(config.APP_SRC, 'assets/scripts/index.ts'),
-    playground: path.join(config.APP_SRC, 'assets/styles/playground.scss'),
+    index: path.join(config.APP_SRC, "assets/scripts/index.ts"),
+    playground: path.join(config.APP_SRC, "assets/styles/playground.scss"),
     ...config.vendorEntries,
     ...TYPESCRIPT_FILES.reduce<{ [key: string]: string }>((acc, filePath) => {
-      acc[utils.trimExtension(filePath)] = path.join(config.PAGES_SRC, filePath);
+      acc[trimExtension(filePath)] = path.join(config.PAGES_SRC, filePath);
       return acc;
     }, {}),
   },
 
   output: {
-    filename: '[name].js',
+    filename: "[name].js",
     path: path.join(config.APP_ROOT, config.distFolder),
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.sass', '.scss', '.json'],
-    alias: {
-      '@': config.APP_SRC,
-      '@scripts': path.resolve(config.APP_SRC, 'assets/scripts'),
-      '@styles': path.resolve(config.APP_SRC, 'assets/styles'),
-    },
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".css", ".sass", ".scss", ".json"],
+    alias: config.alias,
+    // alias: {
+    //   "@": config.APP_SRC,
+    //   "@scripts": path.resolve(config.APP_SRC, "assets/scripts"),
+    //   "@styles": path.resolve(config.APP_SRC, "assets/styles"),
+    // },
   },
 
-  target: 'web',
+  target: "web",
 
   // devtool: config.__DEV__ ? 'inline-source-map' : false,
-  devtool: config.__DEV__ ? 'eval-cheap-module-source-map' : false,
+  devtool: config.__DEV__ ? "eval-cheap-module-source-map" : false,
 
-  stats: config.__DEV__ ? 'errors-warnings' : 'none', // none | detailed | verbose
+  stats: config.__DEV__ ? "errors-warnings" : "none", // none | detailed | verbose
 
   ignoreWarnings: [
     {
@@ -95,7 +96,7 @@ const webpackConfig: Configuration = {
           new CssMinimizerPlugin({
             minimizerOptions: {
               preset: [
-                'default',
+                "default",
                 {
                   discardComments: {
                     removeAll: true,
@@ -121,7 +122,7 @@ const webpackConfig: Configuration = {
               },
               format: {
                 comments: false, // "some" by default
-                preamble: '', // null by default. When passed it must be a string and it will be prepended to the output literally. The source map will adjust for this text. Can be used to insert a comment containing licensing information, for example.
+                preamble: "", // null by default. When passed it must be a string and it will be prepended to the output literally. The source map will adjust for this text. Can be used to insert a comment containing licensing information, for example.
                 quote_style: 3, // 0 by default. 3 - always use the original quotes.
                 preserve_annotations: false, // false by default.
                 ecma: 2020, // 5 by default. Desired EcmaScript standard version for output.
@@ -141,24 +142,24 @@ const webpackConfig: Configuration = {
       {
         test: /\.ts$/i,
         exclude: /node_modules/,
-        use: ['ts-loader'],
+        use: ["ts-loader"],
       },
       {
         test: /\.js$/i,
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader',
+            loader: "babel-loader",
             options: {
               presets: [
                 [
-                  '@babel/preset-env',
+                  "@babel/preset-env",
                   {
                     bugfixes: true,
                     debug: false,
                     spec: false,
                     loose: false,
-                    modules: 'auto',
+                    modules: "auto",
                     useBuiltIns: false,
                   },
                 ],
@@ -183,7 +184,7 @@ const webpackConfig: Configuration = {
   // @ts-ignore
   plugins: [
     new OmitGeneratingFilesPlugin({
-      deleteByAssetContent: (assetContent) => assetContent === '', // filter empty js files
+      deleteByAssetContent: (assetContent) => assetContent === "", // filter empty js files
       // deleteByAssetPath: (assetPath) => {
       //   return /404\.js$/gi.test(assetPath);
       // },
@@ -196,7 +197,7 @@ const webpackConfig: Configuration = {
     }),
 
     new MiniCssExtractPlugin({
-      filename: () => '[name].css',
+      filename: () => "[name].css",
     }),
   ].filter(Boolean),
 };

@@ -1,4 +1,4 @@
-import { scope, invokeUntil } from '@scripts/utils';
+import { scope, invokeUntil } from "scripts/utils";
 
 scope(() => {
   scope(() => {
@@ -20,5 +20,5 @@ scope(() => {
         shouldInvoke: () => i < 6,
       }
     );
-  }, 'invokeUntil');
-}, 'Objects');
+  }, "invokeUntil");
+}, "Objects");

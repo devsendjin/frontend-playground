@@ -1,4 +1,4 @@
-import { scope } from '@scripts/utils';
+import { scope } from "scripts/utils";
 
 scope(() => {
   // ====================================== Singleton ======================================
@@ -19,9 +19,9 @@ scope(() => {
   const inst1 = Singleton.instance;
   const inst2 = Singleton.instance;
 
-  console.log('Singleton', {
-    'inst === inst1': inst === inst1,
-    'inst === inst2': inst === inst2,
+  console.log("Singleton", {
+    "inst === inst1": inst === inst1,
+    "inst === inst2": inst === inst2,
   });
 
   // ====================================== Abstract classes ======================================
@@ -38,7 +38,7 @@ scope(() => {
     value: string;
   };
   class Dropdown extends AbstractControl<TDropdownModel> {
-    public model: TDropdownModel = { name: '', value: '' };
+    public model: TDropdownModel = { name: "", value: "" };
 
     public constructor() {
       super();
@@ -47,13 +47,13 @@ scope(() => {
     getValue(): TDropdownModel {
       // some logic
 
-      return { name: '', value: '' };
+      return { name: "", value: "" };
     }
     public onFocus(): void {}
     public onBlur(): void {}
   }
 
-  console.log('new Dropdown()', new Dropdown());
-}, 'classes');
+  console.log("new Dropdown()", new Dropdown());
+}, "classes");
 
 export {};

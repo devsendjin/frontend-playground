@@ -1,4 +1,4 @@
-import { scope, l } from '@scripts/utils';
+import { scope, l } from "scripts/utils";
 
 scope(() => {
   const template = `
@@ -25,26 +25,26 @@ scope(() => {
   const regexp = /^-------[\n]\s*((.+\w):(.*))[\n]-------$/gim;
   const test = regexp.exec(template);
 
-  l({ template, regexp, 'test exec': test });
-}, 'Regexp exec');
+  l({ template, regexp, "test exec": test });
+}, "Regexp exec");
 
 scope(() => {
   // const str = '11111111111111111111';
-  const regexp = new RegExp('^(-?\\d{0,4}-?)+$', 'g');
+  const regexp = new RegExp("^(-?\\d{0,4}-?)+$", "g");
 
   // const result = regexp.test(str);
 
   const validate = (value: any, length: any, regexp: any) => {
-    l({ value, length, 'value.length > length': value.length > length, 'regexp.test(value)': regexp.test(value) });
+    l({ value, length, "value.length > length": value.length > length, "regexp.test(value)": regexp.test(value) });
     const isMatchLength = value.length > length;
     const isMatchPattern = regexp.test(value);
     return isMatchLength || isMatchPattern;
   };
 
-  document.querySelector('#validate-with-regexp')?.addEventListener('input', (e: any) => {
+  document.querySelector("#validate-with-regexp")?.addEventListener("input", (e: any) => {
     l({ validate: validate(e.target.value, 19, regexp) });
     if (!validate(e.target.value, 19, regexp)) return;
   });
-}, 'Validate with Regexp');
+}, "Validate with Regexp");
 
 export {};

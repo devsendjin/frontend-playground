@@ -3,7 +3,6 @@
 
 .DS_*
 .idea/
-.vscode/
 node_modules/
 .yarn/*
 !.yarn/plugins

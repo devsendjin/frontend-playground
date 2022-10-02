@@ -9,9 +9,9 @@
     "types": [],
     "baseUrl": "src",
     "paths": {
-      "@/*": ["*"],
-      "@scripts/*": ["assets/scripts/*"],
-      "@styles/*": ["assets/styles/*"]
+      // "@/*": ["*"],
+      "scripts/*": ["assets/scripts/*"],
+      "styles/*": ["assets/styles/*"]
     },
     "typeRoots": ["node_modules/@types"]
   },

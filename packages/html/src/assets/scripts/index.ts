@@ -1,4 +1,4 @@
-import '@styles/index.scss';
+import "styles/index.scss";
 
 // import './learn/generics';
 // import './learn/context-typing';
@@ -13,6 +13,6 @@ import '@styles/index.scss';
 // import './samples/callbacks.sample';
 // import './samples/tasks.sample';
 
-import './current';
+import "./current";
 
 // write safe number converter (implemented in pug-template utils)
