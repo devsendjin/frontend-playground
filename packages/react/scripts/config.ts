@@ -1,6 +1,7 @@
-import path from 'path';
-import sharedConfig from './config.shared';
-import utils from './config.utils';
+import path from "path";
+import fs from "fs";
+import sharedConfig from "./config.shared";
+// import utils from "./config.utils";
 
 const MODE = sharedConfig.MODE as TMode;
 const __PROD__ = sharedConfig.__PROD__;
@@ -8,30 +9,33 @@ const __DEV__ = sharedConfig.__DEV__;
 const isServerRunning: boolean = sharedConfig.isServerRunning;
 const isDistributed: boolean = sharedConfig.isDistributed;
 
-const APP_ROOT: string = utils.resolvePath({
-  folderToLookup: 'scripts',
-  onLookupFailed: () => {
-    throw new Error('APP_ROOT can not be resolved');
-  },
-});
-const APP_SRC: string = path.resolve(APP_ROOT, 'src');
-const APP_PUBLIC: string = path.resolve(APP_ROOT, isDistributed ? 'dist/react-playground' : 'public');
+const APP_ROOT = fs.realpathSync(process.cwd());
 
-const publicUrlOrPath = isDistributed ? '/react-playground/' : '/';
+// const APP_ROOT: string = utils.resolvePath({
+//   folderToLookup: 'scripts',
+//   onLookupFailed: () => {
+//     throw new Error('APP_ROOT can not be resolved');
+//   },
+// });
+const APP_SRC: string = path.resolve(APP_ROOT, "src");
+const APP_PUBLIC: string = path.resolve(APP_ROOT, isDistributed ? "dist/react-playground" : "public");
+
+const publicUrlOrPath = isDistributed ? "/react-playground/" : "/";
 
 const paths = {
-  js: 'js',
-  css: 'css',
-  images: 'images',
-  svg: 'images/icon',
+  js: "js",
+  css: "css",
+  images: "images",
+  svg: "images/icon",
 } as const;
 
 // change here + tsconfig.json (+ jest.config.js)
 const alias = {
-  '@': APP_SRC,
-  '@UI': path.resolve(APP_SRC, 'components/UI'),
-  '@images': path.resolve(APP_SRC, 'assets/images'),
-  '@styles': path.resolve(APP_SRC, 'assets/styles'),
+  "@": APP_SRC,
+  "@UI": path.resolve(APP_SRC, "components/UI"),
+  "@images": path.resolve(APP_SRC, "assets/images"),
+  "@styles": path.resolve(APP_SRC, "assets/styles"),
+  react: path.resolve(APP_ROOT, "node_modules/react"),
 } as const;
 
 const configuration = {
@@ -56,6 +60,6 @@ const configuration = {
 
 console.log(configuration);
 
-export type TMode = 'production' | 'development';
+export type TMode = "production" | "development";
 export type TConfiguration = typeof configuration;
 export default configuration;
