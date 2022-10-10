@@ -46,6 +46,7 @@
   - [ ] Hint component
   - [ ] hook to manipulate dynamic array elements
   - [ ] do / undo feature
+  - [ ] "hover", "active", "focus" states ([idea](https://exogen.github.io/blog/focus-state/))
 
 #### Research
 
@@ -65,29 +66,9 @@
   - [ ] [peeled text transformation](https://codepen.io/Moiety/pen/OPPKMr)
   - [ ] [neon text hover](https://codepen.io/primaapriansyah/pen/DjEFq/)
   - [ ] [skewed blockquote](https://codepen.io/mkstix6/pen/ERLLvb)
+  - [Paralax on mouse move](https://codepen.io/Johnmuir2001/pen/rNWWegg)
 - react:
   - [ ] [Recoil](https://recoiljs.org/)
   - [ ] [socket.io](https://socket.io/)
   - [ ] [Cleave.js (format input text)](https://github.com/nosir/cleave.js)
   - [ ] [Virtuoso (virtualized scroll)](https://virtuoso.dev/)
-
-#### References:
-
-- [package.json fields with description](https://github.com/stereobooster/package.json)
-- typescript
-  - type utilities
-    - [type-fest](https://github.com/sindresorhus/type-fest)
-    - [ts-toolbelt](https://github.com/millsp/ts-toolbelt)
-    - [tsdef](https://github.com/joonhocho/tsdef)
-    - [template-literal-types](https://github.com/ghoullier/awesome-template-literal-types)
-  - data structures
-    - [typescript-collections](https://github.com/basarat/typescript-collections)
-- react
-  - hooks
-    - [react-use (hooks library)](https://github.com/streamich/react-use)
-    - [@umijs/hooks (hooks library)](https://github.com/alibaba/hooks/tree/master/packages/hooks/src)
-    - [use-deep-compare-effect](https://github.com/kentcdodds/use-deep-compare-effect)
-    - [often used simple hooks | JS / TS](https://usehooks.com/)
-    - [often used simple hooks | written in TS](https://usehooks-ts.com/)
-- common
-  - [async library (like <ins>lodash</ins>, but for callbacks)](https://caolan.github.io/async/v3/)
