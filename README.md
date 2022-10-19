@@ -55,6 +55,8 @@
 
 #### Try to use/install:
 
+- html/react
+  - [ ] [lightGallery](https://www.lightgalleryjs.com/)
 - html:
   - [x] [jumping link hovers](https://codepen.io/devsendjin/pen/ExyWYwz)
   - [ ] [floating paralax headers](https://codepen.io/amit_sheen/pen/BaJmWWj)

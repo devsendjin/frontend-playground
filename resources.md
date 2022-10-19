@@ -1,4 +1,4 @@
-#### References:
+# References:
 
 - [package.json fields with description](https://github.com/stereobooster/package.json)
 - typescript
@@ -19,6 +19,12 @@
 - common
   - [async library (like <ins>lodash</ins>, but for callbacks)](https://caolan.github.io/async/v3/)
 
-#### Common errors
+# Real-world exmaples
+
+## `pnpm` monorepos:
+
+- [swr (React Hooks library for data fetching)](https://github.com/vercel/swr)
+
+# Common errors
 
 - [ts css/scss typings](https://xomino.com/2019/08/19/cannot-find-scss-module-error-enabling-sass-integration-with-your-sharepoint-framework-code/)
