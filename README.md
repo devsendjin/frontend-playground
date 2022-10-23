@@ -74,3 +74,4 @@
   - [ ] [socket.io](https://socket.io/)
   - [ ] [Cleave.js (format input text)](https://github.com/nosir/cleave.js)
   - [ ] [Virtuoso (virtualized scroll)](https://virtuoso.dev/)
+  - [ ] [plop.js (component scaffold generator)](https://github.com/plopjs/plop)
