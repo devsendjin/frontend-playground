@@ -1,5 +1,7 @@
 @forward 'sass:math';
 
+// https://systemfontstack.com/
+// https://markdotto.com/2018/02/07/github-system-fonts/
 $default-ui-common-fonts:
   "Apple Color Emoji", // macOS emoji
   "Segoe UI Emoji", // Windows emoji
@@ -7,34 +9,22 @@ $default-ui-common-fonts:
   "Noto Color Emoji"; // Linux emoji
 
 $default-ui-monospaced-fonts:
-  "Menlo", // macOS 10.10+
-  "Fira Code",
-  "Cascadia Code",
-  "Consolas", // Windows 6+
-  "Inconsolata",
+  "Menlo",
+  "Consolas",
   "Monaco",
-  "Roboto Mono", // Android 4+
-  "Droid Sans Mono",
-  "Ubuntu Mono",
-  "Ubuntu Monospace", // Ubuntu 10.10+
-  "Source Code Pro",
-  "Noto Mono", // KDE Plasma 5+
-  "Oxygen Mono", // KDE Plasma 4+
-  "Liberation Mono", // Linux/OpenOffice fallback
-  "DejaVu Sans Mono",
-  "Bitstream Vera Sans Mono",
-  monospace, // fallback
+  "Liberation Mono",
+  "Lucida Console",
+  monospace,
   $default-ui-common-fonts;
 
 $default-ui-system-fonts:
   system-ui,
-  -apple-system, // macOS 10.11-10.12
-  "Segoe UI", // Windows 6+
-  "Roboto", // Android 4+
-  "Ubuntu", // Ubuntu 10.10+
-  "Cantarell", // Gnome 3+
-  "Noto Sans", // KDE Plasma 5+
-  sans-serif, // fallback
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  "Helvetica",
+  "Arial",
+  sans-serif,
   $default-ui-common-fonts;
 
 $primary-font: "Montserrat", $default-ui-system-fonts;
