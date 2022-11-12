@@ -1,26 +1,28 @@
-import { paramCase } from 'change-case';
+import { paramCase } from "change-case";
 // samples
-import { ChildrenRerenderSample } from '@/components/categories/samples/ChildrenRerenderSample';
-import { DynamicStateControllerSample } from '@/components/categories/samples/DynamicStateControllerSample';
-import { LazyInitialStateSample } from '@/components/categories/samples/LazyInitialStateSample';
-import { LocalizationSample } from '@/components/categories/samples/LocalizationSample';
-import { AccordionSample } from '@/components/categories/samples/AccordionSample';
-import { PortalSample } from '@/components/categories/samples/PortalSample';
-import { TypedReduxSample } from '@/components/categories/samples/TypedReduxSample';
-import { ErrorBoundarySample } from '@/components/categories/samples/ErrorBoundarySample';
-import { HookFlowSample } from '@/components/categories/samples/HookFlowSample';
-import { Dropdown } from '@/components/UI/_draft/Dropdown';
-import { IconsSample } from '@/components/categories/samples/IconsSample';
-import { LocalStorageStateHook } from '@/components/categories/hooks/LocalStorageStateHook';
-import { TicTacToeGame } from '@/components/categories/samples/TicTacToeGame';
-import { FlexGridSample } from '@/components/categories/samples/FlexGridSample';
+import { ChildrenRerenderSample } from "@/components/categories/samples/ChildrenRerenderSample";
+import { DynamicStateControllerSample } from "@/components/categories/samples/DynamicStateControllerSample";
+import { LazyInitialStateSample } from "@/components/categories/samples/LazyInitialStateSample";
+import { LocalizationSample } from "@/components/categories/samples/LocalizationSample";
+import { AccordionSample } from "@/components/categories/samples/AccordionSample";
+import { PortalSample } from "@/components/categories/samples/PortalSample";
+import { TypedReduxSample } from "@/components/categories/samples/TypedReduxSample";
+import { ErrorBoundarySample } from "@/components/categories/samples/ErrorBoundarySample";
+import { HookFlowSample } from "@/components/categories/samples/HookFlowSample";
+import { Dropdown } from "@/components/UI/_draft/Dropdown";
+import { IconsSample } from "@/components/categories/samples/IconsSample";
+import { LocalStorageStateHook } from "@/components/categories/hooks/LocalStorageStateHook";
+import { FlexGridSample } from "@/components/categories/samples/FlexGridSample";
+// apps
+import { PasswordGeneratorApp } from "@/components/categories/samples/PasswordGeneratorApp";
+import { TicTacToeGame } from "@/components/categories/samples/TicTacToeGame";
 // patterns
-import { PropCollectionsGetters } from '@/components/categories/patterns/PropCollectionsGetters';
+import { PropCollectionsGetters } from "@/components/categories/patterns/PropCollectionsGetters";
 // hooks
-import { UseTransitionHook } from '@/components/categories/hooks/UseTransitionHook';
-import { UseTypedReducerHook } from '@/components/categories/hooks/UseTypedReducerHook';
-import { UseAsyncHook } from '@/components/categories/hooks/UseAsyncHook';
-import { UseImperativeHandle } from '@/components/categories/hooks/UseImperativeHandle';
+import { UseTransitionHook } from "@/components/categories/hooks/UseTransitionHook";
+import { UseTypedReducerHook } from "@/components/categories/hooks/UseTypedReducerHook";
+import { UseAsyncHook } from "@/components/categories/hooks/UseAsyncHook";
+import { UseImperativeHandle } from "@/components/categories/hooks/UseImperativeHandle";
 
 /*
 const components = [
@@ -45,50 +47,51 @@ const _routes = components.reduce<{ [route: string]: `/${string}` }[]>((acc, ite
 */
 
 const ui = {
-  Dropdown: `/${paramCase('Dropdown')}`,
-  AccordionSample: `/${paramCase('AccordionSample')}`,
-  IconsSample: `/${paramCase('IconsSample')}`,
-  FlexGridSample: `/${paramCase('FlexGridSample')}`,
+  Dropdown: `/${paramCase("Dropdown")}`,
+  AccordionSample: `/${paramCase("AccordionSample")}`,
+  IconsSample: `/${paramCase("IconsSample")}`,
+  FlexGridSample: `/${paramCase("FlexGridSample")}`,
 } as const;
 const features = {
-  DynamicStateControllerSample: `/${paramCase('DynamicStateControllerSample')}`,
-  LocalizationSample: `/${paramCase('LocalizationSample')}`,
-  PortalSample: `/${paramCase('PortalSample')}`,
-  TypedReduxSample: `/${paramCase('TypedReduxSample')}`,
-  ErrorBoundarySample: `/${paramCase('ErrorBoundarySample')}`,
+  DynamicStateControllerSample: `/${paramCase("DynamicStateControllerSample")}`,
+  LocalizationSample: `/${paramCase("LocalizationSample")}`,
+  PortalSample: `/${paramCase("PortalSample")}`,
+  TypedReduxSample: `/${paramCase("TypedReduxSample")}`,
+  ErrorBoundarySample: `/${paramCase("ErrorBoundarySample")}`,
 } as const;
 const hooks = {
-  LocalStorageStateHook: `/${paramCase('LocalStorageStateHook')}`,
-  UseTransitionHook: `/${paramCase('UseTransitionHook')}`,
-  UseTypedReducerHook: `/${paramCase('UseTypedReducerHook')}`,
-  UseAsyncHook: `/${paramCase('UseAsyncHook')}`,
-  UseImperativeHandle: `/${paramCase('UseImperativeHandle')}`,
+  LocalStorageStateHook: `/${paramCase("LocalStorageStateHook")}`,
+  UseTransitionHook: `/${paramCase("UseTransitionHook")}`,
+  UseTypedReducerHook: `/${paramCase("UseTypedReducerHook")}`,
+  UseAsyncHook: `/${paramCase("UseAsyncHook")}`,
+  UseImperativeHandle: `/${paramCase("UseImperativeHandle")}`,
   // UseSafeDispatchHook: `/${paramCase('UseSafeDispatchHook')}`,
 } as const;
 const coreKnowledge = {
-  HookFlowSample: `/${paramCase('HookFlowSample')}`,
+  HookFlowSample: `/${paramCase("HookFlowSample")}`,
 } as const;
 const performance = {
-  ChildrenRerenderSample: `/${paramCase('ChildrenRerenderSample')}`,
-  LazyInitialStateSample: `/${paramCase('LazyInitialStateSample')}`,
+  ChildrenRerenderSample: `/${paramCase("ChildrenRerenderSample")}`,
+  LazyInitialStateSample: `/${paramCase("LazyInitialStateSample")}`,
 } as const;
 const patterns = {
-  PropCollectionsGetters: `/${paramCase('PropCollectionsGetters')}`,
+  PropCollectionsGetters: `/${paramCase("PropCollectionsGetters")}`,
 } as const;
-const games = {
-  TicTacToeGame: `/${paramCase('TicTacToeGame')}`,
+const apps = {
+  TicTacToeGame: `/${paramCase("TicTacToeGame")}`,
+  PasswordGeneratorApp: `/${paramCase("PasswordGeneratorApp")}`,
 } as const;
 
 const ROUTES = {
-  root: '/',
-  combined: '/combined',
+  root: "/",
+  combined: "/combined",
   ...features,
   ...hooks,
   ...patterns,
   ...ui,
   ...coreKnowledge,
   ...performance,
-  ...games,
+  ...apps,
 } as const;
 
 export type Route = Readonly<{
@@ -107,26 +110,26 @@ export type RouteMap = Readonly<{
 
 const routesMap: RouteMap[] = [
   {
-    category: 'Features',
+    category: "Features",
     routes: [
       {
         url: ROUTES.DynamicStateControllerSample,
         component: DynamicStateControllerSample,
-        name: 'Dynamic state controller',
+        name: "Dynamic state controller",
       },
-      { url: ROUTES.LocalizationSample, component: LocalizationSample, name: 'Localization (i18next)' },
-      { url: ROUTES.PortalSample, component: PortalSample, name: 'Portal' },
-      { url: ROUTES.TypedReduxSample, component: TypedReduxSample, name: 'Typed Redux' },
-      { url: ROUTES.ErrorBoundarySample, component: ErrorBoundarySample, name: 'Error Boundary' },
+      { url: ROUTES.LocalizationSample, component: LocalizationSample, name: "Localization (i18next)" },
+      { url: ROUTES.PortalSample, component: PortalSample, name: "Portal" },
+      { url: ROUTES.TypedReduxSample, component: TypedReduxSample, name: "Typed Redux" },
+      { url: ROUTES.ErrorBoundarySample, component: ErrorBoundarySample, name: "Error Boundary" },
     ],
   },
   {
-    category: 'Hooks',
+    category: "Hooks",
     routes: [
       {
         url: ROUTES.LocalStorageStateHook,
         component: LocalStorageStateHook,
-        name: 'LocalStorageStateHook',
+        name: "LocalStorageStateHook",
         /*next: {
           category: 'hooks 1',
           routes: [
@@ -146,62 +149,65 @@ const routesMap: RouteMap[] = [
       {
         url: ROUTES.UseTransitionHook,
         component: UseTransitionHook,
-        name: 'UseTransitionHook',
+        name: "UseTransitionHook",
       },
       {
         url: ROUTES.UseTypedReducerHook,
         component: UseTypedReducerHook,
-        name: 'UseTypedReducerHook',
+        name: "UseTypedReducerHook",
       },
       {
         url: ROUTES.UseAsyncHook,
         component: UseAsyncHook,
-        name: 'UseAsync | UseSafeDispatch',
+        name: "UseAsync | UseSafeDispatch",
       },
       {
         url: ROUTES.UseImperativeHandle,
         component: UseImperativeHandle,
-        name: 'UseImperativeHandle',
+        name: "UseImperativeHandle",
       },
     ],
   },
   {
-    category: 'Patterns',
+    category: "Patterns",
     routes: [
       {
         url: ROUTES.PropCollectionsGetters,
         component: PropCollectionsGetters,
-        name: 'PropCollectionsGetters',
+        name: "PropCollectionsGetters",
       },
     ],
   },
   {
-    category: 'UI',
+    category: "UI",
     routes: [
-      { url: ROUTES.Dropdown, component: Dropdown, name: 'Dropdown' },
-      { url: ROUTES.AccordionSample, component: AccordionSample, name: 'Accordion' },
-      { url: ROUTES.IconsSample, component: IconsSample, name: 'Icons' },
-      { url: ROUTES.FlexGridSample, component: FlexGridSample, name: 'Flex Grid' },
+      { url: ROUTES.Dropdown, component: Dropdown, name: "Dropdown" },
+      { url: ROUTES.AccordionSample, component: AccordionSample, name: "Accordion" },
+      { url: ROUTES.IconsSample, component: IconsSample, name: "Icons" },
+      { url: ROUTES.FlexGridSample, component: FlexGridSample, name: "Flex Grid" },
     ],
   },
   {
-    category: 'Core knowledge',
-    routes: [{ url: ROUTES.HookFlowSample, component: HookFlowSample, name: 'Hook Flow' }],
+    category: "Core knowledge",
+    routes: [{ url: ROUTES.HookFlowSample, component: HookFlowSample, name: "Hook Flow" }],
   },
   {
-    category: 'Performance',
+    category: "Performance",
     routes: [
-      { url: ROUTES.ChildrenRerenderSample, component: ChildrenRerenderSample, name: 'Children rerender' },
-      { url: ROUTES.LazyInitialStateSample, component: LazyInitialStateSample, name: 'Lazy initial state' },
+      { url: ROUTES.ChildrenRerenderSample, component: ChildrenRerenderSample, name: "Children rerender" },
+      { url: ROUTES.LazyInitialStateSample, component: LazyInitialStateSample, name: "Lazy initial state" },
     ],
   },
   {
-    category: 'Games',
-    routes: [{ url: ROUTES.TicTacToeGame, component: TicTacToeGame, name: 'Tic Tac Toe' }],
+    category: "Apps",
+    routes: [
+      { url: ROUTES.TicTacToeGame, component: TicTacToeGame, name: "Tic Tac Toe" },
+      { url: ROUTES.PasswordGeneratorApp, component: PasswordGeneratorApp, name: "Password generator" },
+    ],
   },
 ];
 
-const flatRoutes = (arr: RouteMap['routes']): Route[] => {
+const flatRoutes = (arr: RouteMap["routes"]): Route[] => {
   const result: Route[] = [];
   for (const item of arr) {
     result.push(item);
