@@ -446,7 +446,11 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
     </label> */}
 
       <label className={styles.label}>
-        <button type='submit' ref={generateBtnRef} disabled={Number(getValues().passwordLength) === 0}>
+        <button
+          type='submit'
+          ref={generateBtnRef}
+          // disabled={Number(getValues().passwordLength) === 0 || formState.errors.passwordLength?.type === "max"}>
+          disabled={!formState.isValid}>
           Generate
         </button>
         {/* {getValues().passwordLength<= 0 && <Error>{formState.errors.passwordLength.message}</Error>} */}
