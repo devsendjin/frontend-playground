@@ -10,6 +10,7 @@ type FormValues = {
   includeUppercaseChars: boolean;
 
   // userSymbols: string;
+  excludeSymbols: string;
 
   // noSimilarCharacters: boolean,// noSequentialCharacters: boolean,
   autoGenerateOnTheFirstCall: boolean;
@@ -68,18 +69,18 @@ class PasswordBuilder {
   //   this.chars = [...new Set(this.chars.concat(this.formData.userSymbols.split("")))];
   // }
 
-  // private excludeSymbols() {
-  //   const excludeSymbolsSet = this.formData.excludeSymbols.length ? new Set<string>(this.formData.excludeSymbols) : new Set<string>();
-  //   this.chars = this.chars.filter(char => !excludeSymbolsSet.has(char));
-  // }
+  private excludeSymbols() {
+    const excludeSymbolsSet = this.formData.excludeSymbols.length ? new Set<string>(this.formData.excludeSymbols) : new Set<string>();
+    this.chars = this.chars.filter(char => !excludeSymbolsSet.has(char));
+  }
 
   private prepareCharacterSet() {
     if (this.formData.includeSymbols) this.includeSymbols();
     if (this.formData.includeNumber) this.includeNumber();
     if (this.formData.includeLowercaseChars) this.includeLowercaseChars();
     if (this.formData.includeUppercaseChars) this.includeUppercaseChars();
+    if (this.formData.excludeSymbols.length) this.excludeSymbols();
     // if (this.formData.userSymbols.length) this.includeUserSymbols();
-    // if (this.formData.excludeSymbols.length) this.excludeSymbols();
   }
 
   private generatePassword() {
@@ -117,11 +118,11 @@ class PasswordBuilder {
     if (this.formData.includeNumber) value = value.concat(this.numbersList);
     if (this.formData.includeLowercaseChars) value = value.concat(this.lowercaseCharsList);
     if (this.formData.includeUppercaseChars) value = value.concat(this.uppercaseCharsList);
+    if (this.formData.excludeSymbols.length) {
+      const excludeSymbolsSet = new Set(this.formData.excludeSymbols);
+      value = value.split("").filter(char => !excludeSymbolsSet.has(char)).join("")
+    };
     // if (this.formData.userSymbols.length) value = value.concat(this.userSymbols);
-    // if (this.formData.excludeSymbols.length) {
-    //   const excludeSymbolsSet = new Set(this.formData.excludeSymbols);
-    //   value = value.split("").filter(char => !excludeSymbolsSet.has(char)).join("")
-    // };
 
     // console.log({value, '[...new Set(value)].length':[...new Set(value)].length});
 
@@ -207,7 +208,7 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
         includeLowercaseChars: false,
         includeUppercaseChars: false,
         // userSymbols: "",
-        // excludeSymbols: "",
+        excludeSymbols: "",
         // noSimilarCharacters: false,
         noDuplicateCharacters: false,
         // noSequentialCharacters: false,
@@ -315,13 +316,13 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
         <span className={styles.labelText}>Your character set:</span>
         <input type='text' {...register("userSymbols")} />
         <span className={styles.hint}>( additional your character set )</span>
-      </label>
+      </label> */}
 
       <label className={styles.label}>
         <span className={styles.labelText}>Exclude characters from generation:</span>
         <input type='text' {...register("excludeSymbols")} />
         <span className={styles.hint}>( this symbols will not be included into generation )</span>
-      </label> */}
+      </label>
 
       {/* <label className={styles.label}>
       <span className={styles.labelText}>No Similar Characters:</span>
