@@ -1,31 +1,45 @@
 import React, { useEffect, useRef } from "react";
-import { useForm, SubmitHandler, UseFormGetValues, Controller } from "react-hook-form";
+import { useForm, SubmitHandler, DefaultValues, Controller } from "react-hook-form";
+import { copyTextToClipboard } from "./PasswordGeneratorApp.utils";
 import cn from "classnames";
 import styles from "./PasswordGeneratorApp.module.scss";
 
-type FormValues = {
-  includeSymbols: boolean;
-  includeNumber: boolean;
-  includeLowercaseChars: boolean;
-  includeUppercaseChars: boolean;
+enum FieldNames {
+  includeSymbols = "includeSymbols",
+  includeNumber = "includeNumber",
+  includeLowercaseChars = "includeLowercaseChars",
+  includeUppercaseChars = "includeUppercaseChars",
 
-  // userSymbols: string;
-  excludeSymbols: string;
+  // userSymbols = "userSymbols",
+  excludeSymbols = "excludeSymbols",
 
-  // noSimilarCharacters: boolean,// noSequentialCharacters: boolean,
-  autoGenerateOnTheFirstCall: boolean;
-  // excludeSimilarCharacters: boolean,
-  noDuplicateCharacters: boolean;
-  // excludeAmbiguousCharacters: boolean,
+  // noSimilarCharacters: boolean,// noSequentialCharacters = "noSimilarCharacters",
+  autoGenerateOnTheFirstCall = "autoGenerateOnTheFirstCall",
+  // excludeSimilarCharacters = "excludeSimilarCharacters",
+  noDuplicateCharacters = "noDuplicateCharacters",
+  // excludeAmbiguousCharacters = "excludeAmbiguousCharacters",
   // autoSelect: boolean,
-  // savePreference: boolean,
-  passwordLength: number;
-  password: string;
-};
+  savePreference = "savePreference",
+  passwordLength = "passwordLength",
+  password = "password",
+}
 
-export type Negatives = null | undefined;
+type FieldType<K extends string, V extends string | boolean | number> = Record<K, V>;
 
-export type Primitives = number | string | boolean | bigint | Negatives;
+type FormValues = FieldType<FieldNames.includeSymbols, boolean> &
+  FieldType<FieldNames.includeNumber, boolean> &
+  FieldType<FieldNames.includeLowercaseChars, boolean> &
+  FieldType<FieldNames.includeUppercaseChars, boolean> &
+  FieldType<FieldNames.excludeSymbols, string> &
+  FieldType<FieldNames.autoGenerateOnTheFirstCall, boolean> &
+  FieldType<FieldNames.noDuplicateCharacters, boolean> &
+  FieldType<FieldNames.savePreference, boolean> &
+  FieldType<FieldNames.passwordLength, number> &
+  FieldType<FieldNames.password, string>;
+
+// export type Negatives = null | undefined;
+
+// export type Primitives = number | string | boolean | bigint | Negatives;
 
 const shuffle = <T extends unknown>(arr: T[]): T[] => arr.slice().sort(() => Math.random() - 0.5);
 
@@ -37,11 +51,11 @@ class PasswordBuilder {
   private chars: string[] = [];
   private password: string = "";
 
-  // private symbolsList: string = "!@#$%^&*-_+=.?";
-  private symbolsList: string = "~`!@#$%^&*)-_+=}]|\\/:;<>,.?";
-  private numbersList: string = "0123456789";
-  private lowercaseCharsList: string = "abcdefghijklmnopqrstuvwxyz";
-  private uppercaseCharsList: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  // private symbolList: string = "!@#$%^&*-_+=.?";
+  private symbolList: string = "~`!@#$%^&*)-_+=}]|\\/:;<>,.?";
+  private numberList: string = "0123456789";
+  private lowercaseCharList: string = "abcdefghijklmnopqrstuvwxyz";
+  private uppercaseCharList: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
   constructor(private formData: FormValues) {}
 
@@ -49,20 +63,91 @@ class PasswordBuilder {
   //   return [...new Set(this.formData.userSymbols)].join("");
   // }
 
+  public getSymbolList() {
+    return this.symbolList;
+  }
+
+  public getNumberList() {
+    return this.numberList;
+  }
+
+  public getLowercaseCharList() {
+    return this.lowercaseCharList;
+  }
+
+  public getUppercaseCharList() {
+    return this.uppercaseCharList;
+  }
+
+  public get uniqueMaxAllowedLength(): number {
+    if (!this.formData.noDuplicateCharacters) return Infinity;
+
+    let value = "";
+    if (this.formData.includeSymbols) value = value.concat(this.symbolList);
+    if (this.formData.includeNumber) value = value.concat(this.numberList);
+    if (this.formData.includeLowercaseChars) value = value.concat(this.lowercaseCharList);
+    if (this.formData.includeUppercaseChars) value = value.concat(this.uppercaseCharList);
+    if (this.formData.excludeSymbols.length) {
+      const excludeSymbolsSet = new Set(this.formData.excludeSymbols);
+      value = value
+        .split("")
+        .filter((char) => !excludeSymbolsSet.has(char))
+        .join("");
+    }
+    // if (this.formData.userSymbols.length) value = value.concat(this.userSymbols);
+
+    // console.log({value, '[...new Set(value)].length':[...new Set(value)].length});
+
+    return [...new Set(value)].length;
+  }
+
+  public build(): this {
+    this.buildInternal();
+
+    // if (this.formData.noDuplicateCharacters) {
+    //   if (this.password.length !== Array.from(new Set(this.password)).length) {
+    //     const unique = new Set(this.password);
+    //     // console.log("not unique, repeated chars: ", this.password.split("").filter(v => unique.has(v)));
+
+    //     console.log({
+    //       "this.password.length":this.password.length,
+    //       "Array.from(new Set(this.password)).length":Array.from(new Set(this.password)).length,
+    //       'this.password.split("")':this.password.split(""),
+    //       unique,
+    //       'this.password.split("").filter(v => unique.has(v))': this.password.split("").filter(v => unique.has(v))
+    //     });
+    //   }
+    //   // do {
+    //   //   this.buildInternal();
+    //   // } while (this.password.length !== Array.from(new Set(this.password)).length)
+    // }
+
+    return this;
+  }
+
+  public setBuilderData(data: FormValues): this {
+    this.formData = data;
+    return this;
+  }
+
+  public getPassword(): string {
+    return this.password;
+  }
+
   private includeSymbols() {
-    this.chars = this.chars.concat(this.symbolsList.split(""));
+    this.chars = this.chars.concat(this.symbolList.split(""));
   }
 
   private includeNumber() {
-    this.chars = this.chars.concat(this.numbersList.split(""));
+    this.chars = this.chars.concat(this.numberList.split(""));
   }
 
   private includeLowercaseChars() {
-    this.chars = this.chars.concat(this.lowercaseCharsList.split(""));
+    this.chars = this.chars.concat(this.lowercaseCharList.split(""));
   }
 
   private includeUppercaseChars() {
-    this.chars = this.chars.concat(this.uppercaseCharsList.split(""));
+    this.chars = this.chars.concat(this.uppercaseCharList.split(""));
   }
 
   // private includeUserSymbols() {
@@ -70,8 +155,10 @@ class PasswordBuilder {
   // }
 
   private excludeSymbols() {
-    const excludeSymbolsSet = this.formData.excludeSymbols.length ? new Set<string>(this.formData.excludeSymbols) : new Set<string>();
-    this.chars = this.chars.filter(char => !excludeSymbolsSet.has(char));
+    const excludeSymbolsSet = this.formData.excludeSymbols.length
+      ? new Set<string>(this.formData.excludeSymbols)
+      : new Set<string>();
+    this.chars = this.chars.filter((char) => !excludeSymbolsSet.has(char));
   }
 
   private prepareCharacterSet() {
@@ -110,33 +197,9 @@ class PasswordBuilder {
     return arr[Math.floor(Math.random() * arr.length)];
   }
 
-  public get uniqueMaxAllowedLength(): number {
-    if (!this.formData.noDuplicateCharacters) return Infinity;
-
-    let value = "";
-    if (this.formData.includeSymbols) value = value.concat(this.symbolsList);
-    if (this.formData.includeNumber) value = value.concat(this.numbersList);
-    if (this.formData.includeLowercaseChars) value = value.concat(this.lowercaseCharsList);
-    if (this.formData.includeUppercaseChars) value = value.concat(this.uppercaseCharsList);
-    if (this.formData.excludeSymbols.length) {
-      const excludeSymbolsSet = new Set(this.formData.excludeSymbols);
-      value = value.split("").filter(char => !excludeSymbolsSet.has(char)).join("")
-    };
-    // if (this.formData.userSymbols.length) value = value.concat(this.userSymbols);
-
-    // console.log({value, '[...new Set(value)].length':[...new Set(value)].length});
-
-    return [...new Set(value)].length;
-  }
-
   private resetBuilderData() {
     this.password = "";
     this.chars = [];
-  }
-
-  public setBuilderData(data: FormValues): this {
-    this.formData = data;
-    return this;
   }
 
   private buildInternal() {
@@ -160,66 +223,57 @@ class PasswordBuilder {
 
     // const unique = Array.from(new Set(this.password));
   }
-
-  public build(): this {
-    this.buildInternal();
-
-    // if (this.formData.noDuplicateCharacters) {
-    //   if (this.password.length !== Array.from(new Set(this.password)).length) {
-    //     const unique = new Set(this.password);
-    //     // console.log("not unique, repeated chars: ", this.password.split("").filter(v => unique.has(v)));
-
-    //     console.log({
-    //       "this.password.length":this.password.length,
-    //       "Array.from(new Set(this.password)).length":Array.from(new Set(this.password)).length,
-    //       'this.password.split("")':this.password.split(""),
-    //       unique,
-    //       'this.password.split("").filter(v => unique.has(v))': this.password.split("").filter(v => unique.has(v))
-    //     });
-    //   }
-    //   // do {
-    //   //   this.buildInternal();
-    //   // } while (this.password.length !== Array.from(new Set(this.password)).length)
-    // }
-
-    return this;
-  }
-
-  public getPassword(): string {
-    return this.password;
-  }
 }
 
-const charSetFieldNames: (keyof FormValues)[] = ["includeSymbols", "includeNumber", "includeLowercaseChars", "includeUppercaseChars"];
+const localStorageKey = "password-generator-preferences";
+
+const charSetFieldNames: (keyof FormValues)[] = [
+  FieldNames.includeSymbols,
+  FieldNames.includeNumber,
+  FieldNames.includeLowercaseChars,
+  FieldNames.includeUppercaseChars,
+];
 
 const Error: RFC<{ className?: string }> = ({ className, children }) => {
   return <span className={cn(styles.error, className)}>{children}</span>;
 };
 
+const getDefaultFormValues = (initialDefaultValues: DefaultValues<FormValues>): DefaultValues<FormValues> => {
+  const savedDefaultValues = localStorage.getItem(localStorageKey);
+  if (savedDefaultValues) {
+    return {
+      ...initialDefaultValues,
+      ...JSON.parse(savedDefaultValues),
+    };
+  }
+  return initialDefaultValues;
+};
+
 const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => {
-  const { register, getValues, handleSubmit, watch, setValue, setError, formState, resetField, control } =
+  const { register, getValues, handleSubmit, watch, setValue, setError, formState, resetField, trigger, control } =
     useForm<FormValues>({
       mode: "onChange",
-      defaultValues: {
-        password: "",
-        passwordLength: 30,
-        includeSymbols: false,
-        includeNumber: true,
-        includeLowercaseChars: false,
-        includeUppercaseChars: false,
-        // userSymbols: "",
-        excludeSymbols: "",
-        // noSimilarCharacters: false,
-        noDuplicateCharacters: false,
-        // noSequentialCharacters: false,
-        autoGenerateOnTheFirstCall: false,
-        // excludeSimilarCharacters: false,
-        // excludeAmbiguousCharacters: false,
-        // autoSelect: false,
-        // savePreference: false,
-      },
+      defaultValues: getDefaultFormValues({
+        [FieldNames.password]: "",
+        [FieldNames.passwordLength]: 123,
+        [FieldNames.includeSymbols]: false,
+        [FieldNames.includeNumber]: true,
+        [FieldNames.includeLowercaseChars]: true,
+        [FieldNames.includeUppercaseChars]: true,
+        // [FieldNames.userSymbols]: "",
+        [FieldNames.excludeSymbols]: "",
+        // [FieldNames.noSimilarCharacters]: false,
+        [FieldNames.noDuplicateCharacters]: true,
+        // [FieldNames.noSequentialCharacters]: false,
+        [FieldNames.autoGenerateOnTheFirstCall]: false,
+        // [FieldNames.excludeSimilarCharacters]: false,
+        // [FieldNames.excludeAmbiguousCharacters]: false,
+        // [FieldNames.autoSelect]: false,
+        [FieldNames.savePreference]: false,
+      }),
     });
   const passwordBuilder = useRef(new PasswordBuilder(getValues())).current;
+  const passwordInputRef = useRef<HTMLInputElement>(null);
   const generateBtnRef = useRef<HTMLButtonElement>(null);
 
   const characterSet = getValues(charSetFieldNames);
@@ -233,23 +287,36 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
     }
   }, []);
 
+  useEffect(() => {
+    if (getValues().savePreference && formState.isValid) {
+      const valuesToSave = (
+        Object.entries(getValues()) as [k: keyof FormValues, v: string | number | boolean][]
+      ).filter(([key]) => key !== FieldNames.password);
+
+      localStorage.setItem(localStorageKey, JSON.stringify(Object.fromEntries(valuesToSave)));
+    } else if (!getValues().savePreference && localStorage.getItem(localStorageKey)) {
+      localStorage.removeItem(localStorageKey);
+    }
+  }, [getValues(), formState.isValid]);
+
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     const pwd = passwordBuilder.setBuilderData(data).build().getPassword();
 
-    setValue("password", pwd);
+    setValue(FieldNames.password, pwd);
   };
 
   useEffect(() => {
     if (!hasOneOfCharacterSet) {
-      setValue("passwordLength", 0);
+      setValue(FieldNames.passwordLength, 0);
+      trigger(FieldNames.passwordLength);
       return;
     }
 
-    if (getValues().noDuplicateCharacters && (getValues().passwordLength > passwordBuilder.uniqueMaxAllowedLength)) {
-      setValue("passwordLength", passwordBuilder.uniqueMaxAllowedLength);
+    if (getValues().noDuplicateCharacters && getValues().passwordLength > passwordBuilder.uniqueMaxAllowedLength) {
+      setValue(FieldNames.passwordLength, passwordBuilder.uniqueMaxAllowedLength);
+      trigger(FieldNames.passwordLength);
     }
-  }, [...characterSet, getValues().noDuplicateCharacters]);
-
+  }, [...characterSet, ...getValues(["noDuplicateCharacters", "excludeSymbols"])]);
 
   // console.log(getValues().passwordLength, formState.errors.passwordLength?.type, passwordBuilder.uniqueMaxAllowedLength);
 
@@ -258,7 +325,7 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
       <label className={styles.label}>
         <span className={styles.labelText}>Password Length:</span>
         <Controller
-          name='passwordLength'
+          name={FieldNames.passwordLength}
           control={control}
           rules={{
             min: {
@@ -282,32 +349,33 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
             />
           )}
         />
-        {formState.errors.passwordLength?.type === "max" && <Error>{formState.errors.passwordLength.message}</Error>}
+        {formState.errors.passwordLength && <Error>{formState.errors.passwordLength.message}</Error>}
+        {/* <Error>{formState.errors.passwordLength.message}</Error> */}
       </label>
 
       <div className={cn(styles.characterSet, { [styles.noCharacterSet]: !hasOneOfCharacterSet })}>
         <label className={styles.label}>
           <span className={styles.labelText}>Include Symbols:</span>
-          <input type='checkbox' {...register("includeSymbols")} />
-          <span className={styles.hint}>( e.g. @#$% )</span>
+          <input type='checkbox' className={styles.checkbox} {...register(FieldNames.includeSymbols)} />
+          <span className={styles.hint}>( e.g. {passwordBuilder.getSymbolList()} )</span>
         </label>
 
         <label className={styles.label}>
           <span className={styles.labelText}>Include Numbers:</span>
-          <input type='checkbox' {...register("includeNumber")} />
-          <span className={styles.hint}>( e.g. 123456 )</span>
+          <input type='checkbox' className={styles.checkbox} {...register(FieldNames.includeNumber)} />
+          <span className={styles.hint}>( e.g. {passwordBuilder.getNumberList()} )</span>
         </label>
 
         <label className={styles.label}>
           <span className={styles.labelText}>Include Lowercase Characters:</span>
-          <input type='checkbox' {...register("includeLowercaseChars")} />
-          <span className={styles.hint}>( e.g. abcdefgh )</span>
+          <input type='checkbox' className={styles.checkbox} {...register(FieldNames.includeLowercaseChars)} />
+          <span className={styles.hint}>( e.g. {passwordBuilder.getLowercaseCharList()} )</span>
         </label>
 
         <label className={styles.label}>
           <span className={styles.labelText}>Include Uppercase Characters:</span>
-          <input type='checkbox' {...register("includeUppercaseChars")} />
-          <span className={styles.hint}>( e.g. ABCDEFGH )</span>
+          <input type='checkbox' className={styles.checkbox} {...register(FieldNames.includeUppercaseChars)} />
+          <span className={styles.hint}>( e.g. {passwordBuilder.getUppercaseCharList()} )</span>
         </label>
         {!hasOneOfCharacterSet && <Error>One of character sets should be chosen</Error>}
       </div>
@@ -320,7 +388,7 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
 
       <label className={styles.label}>
         <span className={styles.labelText}>Exclude characters from generation:</span>
-        <input type='text' {...register("excludeSymbols")} />
+        <input type='text' {...register(FieldNames.excludeSymbols)} />
         <span className={styles.hint}>( this symbols will not be included into generation )</span>
       </label>
 
@@ -332,7 +400,7 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
 
       <label className={styles.label}>
         <span className={styles.labelText}>No Duplicate Characters:</span>
-        <input type='checkbox' {...register("noDuplicateCharacters")} />
+        <input type='checkbox' {...register(FieldNames.noDuplicateCharacters)} />
         <span className={styles.hint}>( don't use the same character more than once )</span>
       </label>
 
@@ -344,7 +412,7 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
 
       <label className={styles.label}>
         <span className={styles.labelText}>Auto Generate On The First Call:</span>
-        <input type='checkbox' {...register("autoGenerateOnTheFirstCall")} />
+        <input type='checkbox' {...register(FieldNames.autoGenerateOnTheFirstCall)} />
         <span className={styles.hint}>( generate passwords automatically when you open this page )</span>
       </label>
 
@@ -366,11 +434,11 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
       <span className={styles.hint}>( select the password automatically )</span>
     </label> */}
 
-      {/* <label className={styles.label}>
-      <span className={styles.labelText}>Save My Preference:</span>
-      <input type="checkbox" {...register('savePreference')} />
-      <span className={styles.hint}>( save all the settings above for later use )</span>
-    </label> */}
+      <label className={styles.label}>
+        <span className={styles.labelText}>Save My Preference:</span>
+        <input type='checkbox' {...register(FieldNames.savePreference)} />
+        <span className={styles.hint}>( save all the settings above for later use )</span>
+      </label>
 
       {/* <label className={styles.label}>
       <span className={styles.labelText}>Quantity:</span>
@@ -381,15 +449,27 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
         <button type='submit' ref={generateBtnRef} disabled={Number(getValues().passwordLength) === 0}>
           Generate
         </button>
+        {/* {getValues().passwordLength<= 0 && <Error>{formState.errors.passwordLength.message}</Error>} */}
       </label>
 
       <label className={`${styles.label} ${styles.labelPassword}`}>
         <span className={styles.labelText}>Your new password:</span>
         <div>
-          <input type='text' {...register("password")} />
-          <button type='button'>Copy</button>
+          <Controller
+            name={FieldNames.password}
+            control={control}
+            render={({ field }) => <input type='text' className={styles.input} {...field} ref={passwordInputRef} />}
+          />
+          <button
+            type='button'
+            onClick={() => {
+              passwordInputRef.current?.select();
+              copyTextToClipboard(getValues().password);
+            }}>
+            Copy
+          </button>
         </div>
-        <span className={styles.hint}>( save all the settings above for later use )</span>
+        {/* <span className={styles.hint}>( save all the settings above for later use )</span> */}
       </label>
 
       {/* <div className={styles.metric}>Password Strength:</div>
