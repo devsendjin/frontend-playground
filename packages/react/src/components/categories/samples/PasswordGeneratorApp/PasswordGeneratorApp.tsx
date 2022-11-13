@@ -53,7 +53,9 @@ class PasswordBuilder {
   private password: string = "";
 
   // private symbolList: string = "!@#$%^&*-_+=.?";
-  private symbolList: string = "~`!@#$%^&*)-_+=}]|\\/:;<>,.?";
+  // private symbolList: string = "~`!@#$%^&*)-_+=}]|\\/:;<>,.?";
+  // private symbolList: string = "`~!@#$%^&*()-=_+[{]}|;':\",.<>/?";
+  private symbolList: string = "~!@#$%^&*()-=_+[{]}|;:,.<>?";
   private numberList: string = "0123456789";
   private lowercaseCharList: string = "abcdefghijklmnopqrstuvwxyz";
   private uppercaseCharList: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -256,7 +258,7 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
       mode: "onChange",
       defaultValues: getDefaultFormValues({
         [FieldNames.password]: "",
-        [FieldNames.passwordLength]: 20,
+        [FieldNames.passwordLength]: 16,
         [FieldNames.includeSymbols]: false,
         [FieldNames.includeNumber]: true,
         [FieldNames.includeLowercaseChars]: true,
@@ -344,7 +346,7 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
 
   return (
     <form className={cn(styles["password-generator"], className)} onSubmit={handleSubmit(onSubmit)}>
-      <label className={styles.label}>
+      <label className={cn(styles.label, styles.labelPasswordLength)}>
         <span className={styles.labelText}>Password Length:</span>
         <Controller
           name={FieldNames.passwordLength}
@@ -354,10 +356,6 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
             required: {
               value: true,
               message: "Password Length is required",
-            },
-            min: {
-              value: 1,
-              message: `Min password length should be 1`,
             },
             max: {
               value: passwordBuilder.uniqueMaxAllowedLength,
@@ -376,8 +374,24 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
             />
           )}
         />
-        {formState.errors.passwordLength && <Error>{formState.errors.passwordLength.message}</Error>}
-        {/* <Error>{formState.errors.passwordLength.message}</Error> */}
+        {formState.errors.passwordLength && (
+          <div className={styles.errorWrapper}>
+            {formState.errors.passwordLength.type === "required" && <Error>{formState.errors.passwordLength.message}</Error>}
+            {getValues().noDuplicateCharacters && formState.errors.passwordLength.type === "max" && (
+              <>
+              <Error>{formState.errors.passwordLength.message}</Error>
+              <button
+              type='button'
+              onClick={() => {
+                setValue(FieldNames.passwordLength, passwordBuilder.uniqueMaxAllowedLength);
+                trigger(FieldNames.passwordLength);
+              }}>
+              Set {passwordBuilder.uniqueMaxAllowedLength} length
+            </button>
+            </>
+            )}
+          </div>
+        )}
       </label>
 
       <div className={cn(styles.characterSet, { [styles.noCharacterSet]: !hasOneOfCharacterSet })}>
@@ -409,7 +423,7 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
 
       {/* <label className={styles.label}>
         <span className={styles.labelText}>Your character set:</span>
-        <input type='text' {...register("userSymbols")} />
+        <input type="text" {...register("userSymbols")} />
         <span className={styles.hint}>( additional your character set )</span>
       </label> */}
 
@@ -427,7 +441,7 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
 
       <label className={styles.label}>
         <span className={styles.labelText}>No Duplicate Characters:</span>
-        {/* <input type='checkbox' {...register(FieldNames.noDuplicateCharacters)} /> */}
+        {/* <input type="checkbox" {...register(FieldNames.noDuplicateCharacters)} /> */}
         <Controller
           name={FieldNames.noDuplicateCharacters}
           control={control}
@@ -436,7 +450,10 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
             <input
               type='checkbox'
               name={name}
-              onChange={onChange}
+              onChange={(e) => {
+                trigger(FieldNames.passwordLength);
+                onChange(e);
+              }}
               onBlur={onBlur}
               checked={value}
               ref={ref}
@@ -489,10 +506,7 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
     </label> */}
 
       <label className={styles.label}>
-        <button
-          type='submit'
-          ref={generateBtnRef}
-          disabled={!isValid}>
+        <button type='submit' ref={generateBtnRef} disabled={!isValid}>
           Generate
         </button>
       </label>
