@@ -1,5 +1,5 @@
-import cn from 'classnames';
-import styles from './Flex.module.scss';
+import cn from "classnames";
+import styles from "./Flex.module.scss";
 
 type FlexProps = {
   className?: string;
@@ -18,7 +18,7 @@ type FlexProps = {
 // ...
 
 const Flex: RFC<FlexProps> = ({ className }) => {
-  return <div className={cn(styles['flex'], className)}>Flex</div>;
+  return <div className={cn(styles["flex"], className)}>Flex</div>;
 };
 
 export { Flex };

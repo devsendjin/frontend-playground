@@ -1,16 +1,16 @@
-import { Form } from '@/vendors/bootstrap';
-import { DynamicStateController } from '@/components/categories/features/DynamicStateController';
+import { Form } from "@/vendors/bootstrap";
+import { DynamicStateController } from "@/components/categories/features/DynamicStateController";
 
 const DynamicStateControllerSample: RFC = () => {
   return (
     <DynamicStateController<string>
-      defaultState=""
+      defaultState=''
       render={({ state: [value, setValue] }) => (
         <>
           <p>DynamicStateController sample | {value}</p>
           <Form.Control
-            type="text"
-            placeholder="Enter text"
+            type='text'
+            placeholder='Enter text'
             value={value}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.currentTarget.value)}
           />
@@ -20,6 +20,6 @@ const DynamicStateControllerSample: RFC = () => {
   );
 };
 
-DynamicStateControllerSample.displayName = 'DynamicStateControllerSample';
+DynamicStateControllerSample.displayName = "DynamicStateControllerSample";
 
 export { DynamicStateControllerSample };

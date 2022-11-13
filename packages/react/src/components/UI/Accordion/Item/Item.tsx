@@ -1,7 +1,7 @@
-import cn from 'classnames';
-import { useAccordionContext } from '../Accordion.context';
-import styles from '../Accordion.module.scss';
-import { ReactNode } from 'react';
+import cn from "classnames";
+import { useAccordionContext } from "../Accordion.context";
+import styles from "../Accordion.module.scss";
+import { ReactNode } from "react";
 
 type ItemProps = {
   itemKey: number | string;
@@ -15,7 +15,7 @@ const Item: RFC<ItemProps> = ({ itemKey, children }) => {
 
   const isActive = itemKey === activeIndex;
 
-  return <div className={cn(styles['item'], isActive && styles['is-active'])}>{children}</div>;
+  return <div className={cn(styles["item"], isActive && styles["is-active"])}>{children}</div>;
 };
 
 export { Item };

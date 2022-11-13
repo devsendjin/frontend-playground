@@ -1,9 +1,9 @@
-import React from 'react';
-import { Form } from '@/vendors/bootstrap';
-import { useLocalStorageState } from '@/hooks/utils/useLocalStorageState';
+import React from "react";
+import { Form } from "@/vendors/bootstrap";
+import { useLocalStorageState } from "@/hooks/utils/useLocalStorageState";
 
 const LocalStorageStateHook: RFC = () => {
-  const [value, setValue] = useLocalStorageState<string>('LocalStorageStateHook_value', 'some default value');
+  const [value, setValue] = useLocalStorageState<string>("LocalStorageStateHook_value", "some default value");
 
   return (
     <div>
@@ -11,8 +11,8 @@ const LocalStorageStateHook: RFC = () => {
         <b>LocalStorageStateHook value:</b> {value}
       </p>
       <Form.Control
-        type="text"
-        placeholder="Enter text"
+        type='text'
+        placeholder='Enter text'
         value={value}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.currentTarget.value)}
       />

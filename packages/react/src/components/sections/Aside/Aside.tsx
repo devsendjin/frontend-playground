@@ -1,7 +1,7 @@
-import { Route, RouteMap, ROUTES, routesMap } from '@/constants/routes';
-import { Menu, MenuItem, NestedMenu } from './NestedMenu';
-import { EnhancedNavLink } from './Link';
-import styles from './Aside.module.scss';
+import { Route, RouteMap, ROUTES, routesMap } from "@/constants/routes";
+import { Menu, MenuItem, NestedMenu } from "./NestedMenu";
+import { EnhancedNavLink } from "./Link";
+import styles from "./Aside.module.scss";
 
 const mapRoutesToNavigation = (routesMaps: RouteMap[]): Menu[] => {
   const handler = (routes: Route[]): MenuItem[] => {
@@ -25,31 +25,30 @@ const mapRoutesToNavigation = (routesMaps: RouteMap[]): Menu[] => {
     });
   };
 
-  return routesMaps.map<Menu>((routeMap) => {
-    return {
+  return routesMaps.map<Menu>(
+    (routeMap) => ({
       category: routeMap.category,
       items: routeMap.routes && routeMap.routes.length > 0 ? handler(routeMap.routes) : [],
-    };
-  }, []);
+    }),
+    []
+  );
 };
 
 const mappedRoutes = mapRoutesToNavigation(routesMap);
 
 const Aside: RFC = () => {
   return (
-    <aside className={styles['aside']}>
-      <div className={styles['menu']}>
-        <EnhancedNavLink to={ROUTES.root} className={styles['top-link']}>
-          Playground
-        </EnhancedNavLink>
-        <EnhancedNavLink to={ROUTES.combined} className={styles['top-link']}>
-          All in one
-        </EnhancedNavLink>
+    <aside className={styles["aside"]}>
+      <EnhancedNavLink to={ROUTES.root} className={styles["top-link"]}>
+        Playground
+      </EnhancedNavLink>
+      <EnhancedNavLink to={ROUTES.combined} className={styles["top-link"]}>
+        All in one
+      </EnhancedNavLink>
 
-        {mappedRoutes.map((navBlock) => (
-          <NestedMenu key={navBlock.category} menu={navBlock} />
-        ))}
-      </div>
+      {mappedRoutes.map((navBlock) => (
+        <NestedMenu key={navBlock.category.name} menu={navBlock} />
+      ))}
     </aside>
   );
 };

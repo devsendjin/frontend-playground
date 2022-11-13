@@ -1,7 +1,7 @@
-import cn from 'classnames';
-import { Button } from '@/vendors/bootstrap';
-import { useAsync } from '@/hooks/useAsync';
-import styles from './UseAsyncHook.module.scss';
+import cn from "classnames";
+import { Button } from "@/vendors/bootstrap";
+import { useAsync } from "@/hooks/useAsync";
+import styles from "./UseAsyncHook.module.scss";
 
 type UseAsyncHookProps = {
   className?: string;
@@ -11,11 +11,11 @@ const fakerRequest = (ms: number = 1000, throwError: boolean = false) => {
   return new Promise<RequestSuccessData>((resolve, reject) => {
     setTimeout(() => {
       if (throwError) {
-        reject({ code: 503, message: '503 service temporarily unavailable' });
+        reject({ code: 503, message: "503 service temporarily unavailable" });
       } else {
         resolve({
-          question: 'Is GOlang awesome?',
-          answer: 'Sure, dude!)',
+          question: "Is GOlang awesome?",
+          answer: "Sure, dude!)",
         });
       }
     }, ms);
@@ -52,11 +52,11 @@ const UseAsyncHook: RFC<UseAsyncHookProps> = ({ className }) => {
   } = useAsync<RequestSuccessData, RequestErrorData>({ requestFn: () => fakerRequest(1000, true) });
 
   return (
-    <div className={cn(styles['use-async-hook'], className)}>
-      <Button variant="light" onClick={requestFakeFnSuccess}>
+    <div className={cn(styles["use-async-hook"], className)}>
+      <Button variant='light' onClick={requestFakeFnSuccess}>
         Perform success request
       </Button>
-      <pre className="mt-3">
+      <pre className='mt-3'>
         {JSON.stringify(
           {
             dataFakeFnSuccess,
@@ -70,10 +70,10 @@ const UseAsyncHook: RFC<UseAsyncHookProps> = ({ className }) => {
         )}
       </pre>
 
-      <Button className="mt-3" variant="light" onClick={requestFakeFnError}>
+      <Button className='mt-3' variant='light' onClick={requestFakeFnError}>
         Perform erorr request
       </Button>
-      <pre className="mt-3">
+      <pre className='mt-3'>
         {JSON.stringify(
           {
             dataFakeFnError,

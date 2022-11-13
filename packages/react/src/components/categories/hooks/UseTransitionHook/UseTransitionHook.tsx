@@ -1,8 +1,8 @@
-import { CSSProperties, useState } from 'react';
-import cn from 'classnames';
-import { Button, ButtonGroup, Form } from '@/vendors/bootstrap';
-import { useTransition } from '@/hooks/useTransition';
-import styles from './UseTransitionHook.module.scss';
+import { CSSProperties, useState } from "react";
+import cn from "classnames";
+import { Button, ButtonGroup, Form } from "@/vendors/bootstrap";
+import { useTransition } from "@/hooks/useTransition";
+import styles from "./UseTransitionHook.module.scss";
 
 type UseTransitionHookProps = {
   className?: string;
@@ -30,33 +30,33 @@ const UseTransitionHook: RFC<UseTransitionHookProps> = ({ className }) => {
     unmountOnExit,
     // initialEntered: true, // if need "mounted" as initial state
     customClassnames: {
-      preEnter: 'custom-preEnter',
-      entering: 'custom-entering',
-      entered: 'custom-entered',
-      exiting: 'custom-exiting',
-      exited: 'custom-exited',
+      preEnter: "custom-preEnter",
+      entering: "custom-entering",
+      entered: "custom-entered",
+      exiting: "custom-exiting",
+      exited: "custom-exited",
     },
     onChange: ({ state }) => {
-      console.log('UseTransitionHook onChange state: ', state);
+      console.log("UseTransitionHook onChange state: ", state);
     },
   });
 
   return (
-    <div className={cn(styles['use-transition-hook'], className)}>
+    <div className={cn(styles["use-transition-hook"], className)}>
       <ButtonGroup>
-        <Button className="btn btn-light" onClick={() => toggleTransition()} variant="light">
-          {isEntering ? 'Hide' : 'Show'}
+        <Button className='btn btn-light' onClick={() => toggleTransition()} variant='light'>
+          {isEntering ? "Hide" : "Show"}
         </Button>
-        <Button className="btn btn-light" onClick={() => endTransition()} variant="light">
+        <Button className='btn btn-light' onClick={() => endTransition()} variant='light'>
           endTransition (immediately remove on "exiting")
         </Button>
 
-        <div className="d-flex align-items-center">
-          <div className="form-check ms-3" style={{ whiteSpace: 'nowrap' }}>
-            <label className="form-check-label">
+        <div className='d-flex align-items-center'>
+          <div className='form-check ms-3' style={{ whiteSpace: "nowrap" }}>
+            <label className='form-check-label'>
               <input
-                className="form-check-input"
-                type="checkbox"
+                className='form-check-input'
+                type='checkbox'
                 checked={unmountOnExit}
                 onChange={(e) => {
                   setUnmountOnExit(e.target.checked);
@@ -66,9 +66,9 @@ const UseTransitionHook: RFC<UseTransitionHookProps> = ({ className }) => {
             </label>
           </div>
           <Form.Control
-            type="number"
-            placeholder="Enter text"
-            className="ms-3"
+            type='number'
+            placeholder='Enter text'
+            className='ms-3'
             value={delay}
             onChange={(e) => {
               const value = parseInt(e.target.value, 10);
@@ -99,9 +99,8 @@ const UseTransitionHook: RFC<UseTransitionHookProps> = ({ className }) => {
       </pre>
       {isMounted && (
         <div
-          className={cn(styles['transition-example'], styles[transitionState], transitionClassname)}
-          style={{ '--transition-duration': `${delay / 1000}s` } as CSSProperties}
-        >
+          className={cn(styles["transition-example"], styles[transitionState], transitionClassname)}
+          style={{ "--transition-duration": `${delay / 1000}s` } as CSSProperties}>
           React transition. transitionState: <ins>{transitionState}</ins>. <br />
           Custom transition classname: <ins>{transitionClassname}</ins>.
         </div>

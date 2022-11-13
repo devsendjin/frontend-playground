@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from "react";
 
 type FlexGridContextProps = {
   colGap?: number;
@@ -16,7 +16,7 @@ FlexGridProvider.displayName = FlexGridProvider.name;
 const useFlexGridContext = (): FlexGridContextProps => {
   const context = useContext(FlexGridContext);
   if (!context) {
-    throw new Error('No context found for FlexGrid');
+    throw new Error("No context found for FlexGrid");
   }
   return context;
 };

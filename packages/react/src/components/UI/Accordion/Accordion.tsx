@@ -2,17 +2,17 @@
 // https://www.youtube.com/watch?v=AiJ8tRRH0f8&t=148s
 // https://habr.com/ru/company/alfa/blog/647013/
 
-import { HTMLProps } from 'react';
-import cn from 'classnames';
-import { AccordionProvider, TSharedAccordionState } from './Accordion.context';
-import { Item } from './Item';
-import { ItemToggle } from './ItemToggle';
-import { ItemContent } from './ItemContent';
-import styles from './Accordion.module.scss';
+import { HTMLProps } from "react";
+import cn from "classnames";
+import { AccordionProvider, TSharedAccordionState } from "./Accordion.context";
+import { Item } from "./Item";
+import { ItemToggle } from "./ItemToggle";
+import { ItemContent } from "./ItemContent";
+import styles from "./Accordion.module.scss";
 
 type TAccordionProps = { defaultActiveIndex?: TSharedAccordionState; className?: string } & Omit<
   HTMLProps<HTMLDivElement>,
-  'className'
+  "className"
 >;
 type TAccordion = RFC<TAccordionProps> & {
   Item: typeof Item;
@@ -23,7 +23,7 @@ type TAccordion = RFC<TAccordionProps> & {
 const Accordion: TAccordion = ({ className, defaultActiveIndex, children, ...rest }) => {
   return (
     <AccordionProvider defaultActiveIndex={defaultActiveIndex}>
-      <div className={cn(styles['accordion'], className)} {...rest}>
+      <div className={cn(styles["accordion"], className)} {...rest}>
         {children}
       </div>
     </AccordionProvider>

@@ -1,5 +1,9 @@
 .aside {
   border-right: 1px solid $gray-light;
+  max-height: 100vh;
+  padding: 10px 10px 40px 10px;
+  overflow-y: auto;
+  @include invisibleScrollbar;
 }
 
 .top-link {
@@ -37,12 +41,4 @@
 .category {
   padding: 5px 0;
   color: $orange;
-}
-
-.menu {
-  padding: 10px 10px 40px 10px;
-  position: relative;
-  max-height: 100vh;
-  overflow: auto;
-  @include invisibleScrollbar;
 }

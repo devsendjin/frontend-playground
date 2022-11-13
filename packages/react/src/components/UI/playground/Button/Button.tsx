@@ -1,21 +1,20 @@
-import { ButtonHTMLAttributes } from 'react';
-import cn from 'classnames';
-import styles from './Button.module.scss';
+import { ButtonHTMLAttributes } from "react";
+import cn from "classnames";
+import styles from "./Button.module.scss";
 
-type ButtonProps = Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> & {
+type ButtonProps = Pick<ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> & {
   className?: string;
-  htmlProps?: Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'>;
+  htmlProps?: Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className">;
 };
 
 const Button: RFC<ButtonProps> = ({ htmlProps = {}, onClick, className, children }) => {
-  const { type = 'button', ...restHtmlProps } = htmlProps;
+  const { type = "button", ...restHtmlProps } = htmlProps;
   return (
     <button
       type={type}
-      className={cn(styles['button'], 'btn btn-light', className)}
+      className={cn(styles["button"], "btn btn-light", className)}
       onClick={onClick}
-      {...restHtmlProps}
-    >
+      {...restHtmlProps}>
       {children}
     </button>
   );

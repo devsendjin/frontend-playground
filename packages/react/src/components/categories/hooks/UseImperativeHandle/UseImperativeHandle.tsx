@@ -1,7 +1,7 @@
-import React from 'react';
-import cn from 'classnames';
-import { Button } from '@/vendors/bootstrap';
-import styles from './UseImperativeHandle.module.scss';
+import React from "react";
+import cn from "classnames";
+import { Button } from "@/vendors/bootstrap";
+import styles from "./UseImperativeHandle.module.scss";
 
 const allMessages = [
   `Leia: Aren't you a little short to be a stormtrooper?`,
@@ -35,7 +35,7 @@ const allMessages = [
   `Leia: Don't just stand there. Try to brace it with something.`,
   `Luke: Wait a minute!`,
   `Luke: Threepio! Come in Threepio! Threepio! Where could he be?`,
-].map((m, i) => ({ id: i, author: m.split(': ')[0], content: m.split(': ')[1] }));
+].map((m, i) => ({ id: i, author: m.split(": ")[0], content: m.split(": ")[1] }));
 
 type MessagesDisplayRef = {
   scrollToTop: () => void;
@@ -69,7 +69,7 @@ const MessagesDisplay = React.forwardRef<MessagesDisplayRef, { messages: Message
   }));
 
   return (
-    <div ref={containerRef} role="log" className={styles['messages-display']}>
+    <div ref={containerRef} role='log' className={styles["messages-display"]}>
       {messages.map((message, index, array) => (
         <div key={message.id}>
           <strong>{message.author}</strong>: <span>{message.content}</span>
@@ -95,24 +95,24 @@ const UseImperativeHandle: RFC<UseImperativeHandleProps> = ({ className }) => {
   const scrollToBottom = () => (messageDisplayRef.current as MessagesDisplayRef).scrollToBottom();
 
   return (
-    <div className={cn(styles['use-imperative-handle'], className)}>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Button onClick={addMessage} variant="light">
+    <div className={cn(styles["use-imperative-handle"], className)}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Button onClick={addMessage} variant='light'>
           add message
         </Button>
-        <Button onClick={removeMessage} variant="light">
+        <Button onClick={removeMessage} variant='light'>
           remove message
         </Button>
       </div>
       <hr />
       <div>
-        <Button onClick={scrollToTop} variant="light" style={{ marginBottom: 20 }}>
+        <Button onClick={scrollToTop} variant='light' style={{ marginBottom: 20 }}>
           scroll to top
         </Button>
       </div>
       <MessagesDisplay ref={messageDisplayRef as React.Ref<MessagesDisplayRef>} messages={messages} />
       <div>
-        <Button onClick={scrollToBottom} variant="light" style={{ marginTop: 20 }}>
+        <Button onClick={scrollToBottom} variant='light' style={{ marginTop: 20 }}>
           scroll to bottom
         </Button>
       </div>

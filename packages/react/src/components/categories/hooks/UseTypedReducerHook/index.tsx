@@ -1,1 +1,1 @@
-export * from './UseTypedReducerHook';
+export * from "./UseTypedReducerHook";

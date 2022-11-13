@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export type DynamicTagNameProps = {
   tagName: keyof JSX.IntrinsicElements;

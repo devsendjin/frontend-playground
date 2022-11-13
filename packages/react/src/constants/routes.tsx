@@ -1,3 +1,4 @@
+import React from "react";
 import { paramCase } from "change-case";
 // samples
 import { ChildrenRerenderSample } from "@/components/categories/samples/ChildrenRerenderSample";
@@ -10,7 +11,7 @@ import { TypedReduxSample } from "@/components/categories/samples/TypedReduxSamp
 import { ErrorBoundarySample } from "@/components/categories/samples/ErrorBoundarySample";
 import { HookFlowSample } from "@/components/categories/samples/HookFlowSample";
 import { Dropdown } from "@/components/UI/_draft/Dropdown";
-import { IconsSample } from "@/components/categories/samples/IconsSample";
+// import { IconsSample } from "@/components/categories/samples/IconsSample";
 import { LocalStorageStateHook } from "@/components/categories/hooks/LocalStorageStateHook";
 import { FlexGridSample } from "@/components/categories/samples/FlexGridSample";
 // apps
@@ -23,63 +24,44 @@ import { UseTransitionHook } from "@/components/categories/hooks/UseTransitionHo
 import { UseTypedReducerHook } from "@/components/categories/hooks/UseTypedReducerHook";
 import { UseAsyncHook } from "@/components/categories/hooks/UseAsyncHook";
 import { UseImperativeHandle } from "@/components/categories/hooks/UseImperativeHandle";
+import { ByCategoryView } from "@/components/views/ByCategoryView";
 
-/*
-const components = [
-  ChildrenRerenderSample,
-  DynamicStateControllerSample,
-  LazyInitialStateSample,
-  LocalizationSample,
-  AccordionSample,
-  PortalSample,
-  TypedReduxSample,
-  ErrorBoundarySample,
-  HookFlowSample,
-  Dropdown,
-  IconsSample,
-  LocalStorageStateHook,
-] as const;
-// can't type this correctly
-const _routes = components.reduce<{ [route: string]: `/${string}` }[]>((acc, item) => {
-  acc.push({ [item.name]: `/${paramCase(item.name)}` });
-  return acc;
-}, []);
-*/
+const createUrl = (input: string): string => `/${paramCase(input)}`;
 
 const ui = {
-  Dropdown: `/${paramCase("Dropdown")}`,
-  AccordionSample: `/${paramCase("AccordionSample")}`,
-  IconsSample: `/${paramCase("IconsSample")}`,
-  FlexGridSample: `/${paramCase("FlexGridSample")}`,
+  Dropdown: createUrl("Dropdown"),
+  AccordionSample: createUrl("AccordionSample"),
+  // IconsSample: createUrl("IconsSample"),
+  FlexGridSample: createUrl("FlexGridSample"),
 } as const;
 const features = {
-  DynamicStateControllerSample: `/${paramCase("DynamicStateControllerSample")}`,
-  LocalizationSample: `/${paramCase("LocalizationSample")}`,
-  PortalSample: `/${paramCase("PortalSample")}`,
-  TypedReduxSample: `/${paramCase("TypedReduxSample")}`,
-  ErrorBoundarySample: `/${paramCase("ErrorBoundarySample")}`,
+  DynamicStateControllerSample: createUrl("DynamicStateControllerSample"),
+  LocalizationSample: createUrl("LocalizationSample"),
+  PortalSample: createUrl("PortalSample"),
+  TypedReduxSample: createUrl("TypedReduxSample"),
+  ErrorBoundarySample: createUrl("ErrorBoundarySample"),
 } as const;
 const hooks = {
-  LocalStorageStateHook: `/${paramCase("LocalStorageStateHook")}`,
-  UseTransitionHook: `/${paramCase("UseTransitionHook")}`,
-  UseTypedReducerHook: `/${paramCase("UseTypedReducerHook")}`,
-  UseAsyncHook: `/${paramCase("UseAsyncHook")}`,
-  UseImperativeHandle: `/${paramCase("UseImperativeHandle")}`,
-  // UseSafeDispatchHook: `/${paramCase('UseSafeDispatchHook')}`,
+  LocalStorageStateHook: createUrl("LocalStorageStateHook"),
+  UseTransitionHook: createUrl("UseTransitionHook"),
+  UseTypedReducerHook: createUrl("UseTypedReducerHook"),
+  UseAsyncHook: createUrl("UseAsyncHook"),
+  UseImperativeHandle: createUrl("UseImperativeHandle"),
+  // UseSafeDispatchHook: createUrl('UseSafeDispatchHook'),
 } as const;
 const coreKnowledge = {
-  HookFlowSample: `/${paramCase("HookFlowSample")}`,
+  HookFlowSample: createUrl("HookFlowSample"),
 } as const;
 const performance = {
-  ChildrenRerenderSample: `/${paramCase("ChildrenRerenderSample")}`,
-  LazyInitialStateSample: `/${paramCase("LazyInitialStateSample")}`,
+  ChildrenRerenderSample: createUrl("ChildrenRerenderSample"),
+  LazyInitialStateSample: createUrl("LazyInitialStateSample"),
 } as const;
 const patterns = {
-  PropCollectionsGetters: `/${paramCase("PropCollectionsGetters")}`,
+  PropCollectionsGetters: createUrl("PropCollectionsGetters"),
 } as const;
 const apps = {
-  TicTacToeGame: `/${paramCase("TicTacToeGame")}`,
-  PasswordGeneratorApp: `/${paramCase("PasswordGeneratorApp")}`,
+  TicTacToeGame: createUrl("TicTacToeGame"),
+  PasswordGeneratorApp: createUrl("PasswordGeneratorApp"),
 } as const;
 
 const ROUTES = {
@@ -94,23 +76,44 @@ const ROUTES = {
   ...apps,
 } as const;
 
-export type Route = Readonly<{
+export enum Categories {
+  features = "Features",
+  hooks = "Hooks",
+  patterns = "Patterns",
+  ui = "UI",
+  coreKnowledge = "Core knowledge",
+  performance = "Performance",
+  apps = "Apps",
+}
+
+type RouteBase = {
   url: string;
-  component: RFC;
+  component: RFC | (() => ReturnType<RFC>);
   name: string;
+}
+
+type CategoryTitle = keyof typeof Categories
+export type CategoryType = {
+  name: string;
+  url: string;
+}
+export type Route = Readonly<RouteBase & {
   next?: {
-    category: string;
+    category: CategoryType;
     routes: Route[];
   };
 }>;
 export type RouteMap = Readonly<{
-  category: string;
+  category: CategoryType;
   routes: Route[];
 }>;
 
 const routesMap: RouteMap[] = [
   {
-    category: "Features",
+    category: {
+      name: Categories.features,
+      url: createUrl(Categories.features),
+    },
     routes: [
       {
         url: ROUTES.DynamicStateControllerSample,
@@ -124,7 +127,10 @@ const routesMap: RouteMap[] = [
     ],
   },
   {
-    category: "Hooks",
+    category: {
+      name: Categories.hooks,
+      url: createUrl(Categories.hooks),
+    },
     routes: [
       {
         url: ROUTES.LocalStorageStateHook,
@@ -169,7 +175,10 @@ const routesMap: RouteMap[] = [
     ],
   },
   {
-    category: "Patterns",
+    category: {
+      name: Categories.patterns,
+      url: createUrl(Categories.patterns),
+    },
     routes: [
       {
         url: ROUTES.PropCollectionsGetters,
@@ -179,33 +188,54 @@ const routesMap: RouteMap[] = [
     ],
   },
   {
-    category: "UI",
+    category: {
+      name: Categories.ui,
+      url: createUrl(Categories.ui),
+    },
     routes: [
       { url: ROUTES.Dropdown, component: Dropdown, name: "Dropdown" },
       { url: ROUTES.AccordionSample, component: AccordionSample, name: "Accordion" },
-      { url: ROUTES.IconsSample, component: IconsSample, name: "Icons" },
+      // { url: ROUTES.IconsSample, component: IconsSample, name: "Icons" },
       { url: ROUTES.FlexGridSample, component: FlexGridSample, name: "Flex Grid" },
     ],
   },
   {
-    category: "Core knowledge",
+    category: {
+      name: Categories.coreKnowledge,
+      url: createUrl(Categories.coreKnowledge),
+    },
     routes: [{ url: ROUTES.HookFlowSample, component: HookFlowSample, name: "Hook Flow" }],
   },
   {
-    category: "Performance",
+    category: {
+      name: Categories.performance,
+      url: createUrl(Categories.performance),
+    },
     routes: [
       { url: ROUTES.ChildrenRerenderSample, component: ChildrenRerenderSample, name: "Children rerender" },
       { url: ROUTES.LazyInitialStateSample, component: LazyInitialStateSample, name: "Lazy initial state" },
     ],
   },
   {
-    category: "Apps",
+    category: {
+      name: Categories.apps,
+      url: createUrl(Categories.apps),
+    },
     routes: [
       { url: ROUTES.TicTacToeGame, component: TicTacToeGame, name: "Tic Tac Toe" },
       { url: ROUTES.PasswordGeneratorApp, component: PasswordGeneratorApp, name: "Password generator" },
     ],
   },
 ];
+
+const byCategoryRoutesMap: ReadonlyArray<Omit<RouteBase, "name">> = (Object.keys(Categories) as unknown as CategoryTitle[])
+  .map(categoryKey => {
+    const url = createUrl(categoryKey);
+    return {
+      url,
+      component: () => <ByCategoryView url={url} title={Categories[categoryKey]} />
+    }
+  })
 
 const flatRoutes = (arr: RouteMap["routes"]): Route[] => {
   const result: Route[] = [];
@@ -221,4 +251,4 @@ const flatRoutes = (arr: RouteMap["routes"]): Route[] => {
 
 const componentMap = routesMap.flatMap((route) => flatRoutes(route.routes));
 
-export { ROUTES, routesMap, componentMap };
+export { ROUTES, routesMap, componentMap, byCategoryRoutesMap };

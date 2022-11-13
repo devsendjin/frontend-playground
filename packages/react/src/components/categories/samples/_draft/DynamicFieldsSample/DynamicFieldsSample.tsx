@@ -1,6 +1,6 @@
-import { useFields } from '@/hooks/_draft/useFields';
+import { useFields } from "@/hooks/_draft/useFields";
 
-const fields = [{ name: 'qwe', defaultValue: 'asd' }];
+const fields = [{ name: "qwe", defaultValue: "asd" }];
 
 const DynamicFieldsSample = () => {
   useFields<{ name: string; defaultValue: string | number }[]>({

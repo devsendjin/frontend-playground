@@ -1,4 +1,4 @@
-import React, { Dispatch, useContext, useState } from 'react';
+import React, { Dispatch, useContext, useState } from "react";
 
 export type TSharedAccordionState = number | null;
 type TAccordionContext = {
@@ -20,7 +20,7 @@ const AccordionProvider: RFC<{ defaultActiveIndex?: TSharedAccordionState }> = (
 const useAccordionContext = () => {
   const context = useContext(AccordionContext);
   if (!context) {
-    throw new Error('No context found for Accordion');
+    throw new Error("No context found for Accordion");
   }
   return context;
 };

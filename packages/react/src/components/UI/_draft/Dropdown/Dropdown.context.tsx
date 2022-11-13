@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 
 type TDropdownContext = {};
 
@@ -12,7 +12,7 @@ DropdownProvider.displayName = DropdownProvider.name;
 const useDropdownContext = () => {
   const context = useContext(DropdownContext);
   if (!context) {
-    throw new Error('No context found for Dropdown');
+    throw new Error("No context found for Dropdown");
   }
   return context;
 };

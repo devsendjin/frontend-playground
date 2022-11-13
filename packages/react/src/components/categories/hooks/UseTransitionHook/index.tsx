@@ -1,1 +1,1 @@
-export * from './UseTransitionHook';
+export * from "./UseTransitionHook";

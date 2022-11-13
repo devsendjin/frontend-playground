@@ -1,6 +1,6 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
-import { useAccordionContext } from '../Accordion.context';
-import styles from '../Accordion.module.scss';
+import React, { useLayoutEffect, useRef, useState } from "react";
+import { useAccordionContext } from "../Accordion.context";
+import styles from "../Accordion.module.scss";
 
 type ItemContentProps = {
   itemKey: number;
@@ -34,7 +34,7 @@ const ItemContent: RFC<ItemContentProps> = ({ itemKey, children }) => {
   }, [activeIndex]);
 
   return (
-    <div ref={contentRef} className={styles['content']} style={style}>
+    <div ref={contentRef} className={styles["content"]} style={style}>
       {children}
     </div>
   );

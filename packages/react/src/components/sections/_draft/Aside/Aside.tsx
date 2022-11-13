@@ -1,11 +1,11 @@
 // @ts-nocheck
-import React, { createRef, Ref, useEffect, useRef, useState } from 'react';
-import { NavLink, NavLinkProps } from 'react-router-dom';
-import cn from 'classnames';
-import { gsap } from 'gsap';
-import { randomItemFromArray } from '@/utils';
-import { ROUTES, routesMap, TRouteArray } from '@/constants/routes';
-import styles from './Aside.module.scss';
+import React, { createRef, Ref, useEffect, useRef, useState } from "react";
+import { NavLink, NavLinkProps } from "react-router-dom";
+import cn from "classnames";
+import { gsap } from "gsap";
+import { randomItemFromArray } from "@/utils";
+import { ROUTES, routesMap, TRouteArray } from "@/constants/routes";
+import styles from "./Aside.module.scss";
 
 // const colors = [
 //   '#2775fe',
@@ -20,10 +20,10 @@ import styles from './Aside.module.scss';
 //   '#89aeff',
 // ];
 
-const colors = ['#2196f3', '#03a9f4', '#00bcd4', '#009688'];
+const colors = ["#2196f3", "#03a9f4", "#00bcd4", "#009688"];
 
 const withActiveNavLink = (LinkComponent: typeof NavLink) => {
-  return React.forwardRef<HTMLAnchorElement, Omit<NavLinkProps, 'className'> & { className?: string }>(
+  return React.forwardRef<HTMLAnchorElement, Omit<NavLinkProps, "className"> & { className?: string }>(
     ({ className, onMouseOver, ...rest }, ref) => {
       // const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
 
@@ -37,7 +37,7 @@ const withActiveNavLink = (LinkComponent: typeof NavLink) => {
       return (
         <LinkComponent
           className={({ isActive }) =>
-            cn(isActive && styles['is-active'], isMouseOver && styles['is-mouseover'], className)
+            cn(isActive && styles["is-active"], isMouseOver && styles["is-mouseover"], className)
           }
           // onMouseOver={handleMouseOver}
           ref={ref}
@@ -59,7 +59,7 @@ const Aside = () => {
   const $root = useRef<HTMLDivElement | null>(null);
   const $indicator1 = useRef<HTMLDivElement | null>(null);
   const $indicator2 = useRef<HTMLDivElement | null>(null);
-  const [active, setActive] = useState<string>('00');
+  const [active, setActive] = useState<string>("00");
 
   const $linkRefs = useRef(
     routesMap.map(({ routes }) => {
@@ -70,7 +70,7 @@ const Aside = () => {
   const animate = () => {
     if (!$root.current) return;
     const menuOffset = $root.current.getBoundingClientRect();
-    const activeIndexes = active.split('').map(Number);
+    const activeIndexes = active.split("").map(Number);
 
     const activeItem = $linkRefs.current[activeIndexes[0]][activeIndexes[1]].current;
     if (!activeItem) return;
@@ -82,7 +82,7 @@ const Aside = () => {
       width,
       height,
       backgroundColor: randomItemFromArray(colors),
-      ease: 'elastic.out(.7, .7)',
+      ease: "elastic.out(.7, .7)",
       duration: 0.8,
     };
 
@@ -98,21 +98,21 @@ const Aside = () => {
 
   useEffect(() => {
     animate();
-    window.addEventListener('resize', animate);
+    window.addEventListener("resize", animate);
 
     return () => {
-      window.removeEventListener('resize', animate);
+      window.removeEventListener("resize", animate);
     };
   }, [active]);
 
   return (
-    <aside className={styles['aside']}>
-      <div ref={$root} className={styles['menu']}>
-        <EnhancedNavLink to={ROUTES.root} className={cn(styles['link'], styles['top-link'])}>
+    <aside className={styles["aside"]}>
+      <div ref={$root} className={styles["menu"]}>
+        <EnhancedNavLink to={ROUTES.root} className={cn(styles["link"], styles["top-link"])}>
           Playground
         </EnhancedNavLink>
 
-        <EnhancedNavLink to={ROUTES.combined} className={cn(styles['link'], styles['top-link'])}>
+        <EnhancedNavLink to={ROUTES.combined} className={cn(styles["link"], styles["top-link"])}>
           All in one
         </EnhancedNavLink>
 
@@ -122,7 +122,7 @@ const Aside = () => {
           return (
             <React.Fragment key={category}>
               <div>{category}</div>
-              <div className={styles['link-group']}>
+              <div className={styles["link-group"]}>
                 {routes.map((route, routeIndex) => {
                   const linkActiveIndex = `${sampleIndex}${routeIndex}`;
 
@@ -132,14 +132,13 @@ const Aside = () => {
                       ref={$linkRefs.current[sampleIndex][routeIndex] as Ref<HTMLAnchorElement>}
                       to={route.route}
                       className={cn(
-                        styles['link'],
-                        styles['link-group-item'],
-                        active === linkActiveIndex && styles['is-active-animated']
+                        styles["link"],
+                        styles["link-group-item"],
+                        active === linkActiveIndex && styles["is-active-animated"]
                       )}
                       onMouseEnter={() => {
                         setActive(linkActiveIndex);
-                      }}
-                    >
+                      }}>
                       {route.name}
                     </EnhancedNavLink>
                   );
@@ -148,8 +147,8 @@ const Aside = () => {
             </React.Fragment>
           );
         })}
-        <div ref={$indicator1} className={styles['indicator']} />
-        <div ref={$indicator2} className={styles['indicator']} />
+        <div ref={$indicator1} className={styles["indicator"]} />
+        <div ref={$indicator2} className={styles["indicator"]} />
       </div>
     </aside>
   );

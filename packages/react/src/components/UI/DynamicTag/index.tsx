@@ -1,1 +1,1 @@
-export * from './DynamicTag';
+export * from "./DynamicTag";

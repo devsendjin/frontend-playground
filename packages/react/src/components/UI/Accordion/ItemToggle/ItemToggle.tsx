@@ -1,5 +1,5 @@
-import { useAccordionContext } from '../Accordion.context';
-import styles from '../Accordion.module.scss';
+import { useAccordionContext } from "../Accordion.context";
+import styles from "../Accordion.module.scss";
 
 type ItemToggleProps = {
   itemKey: number;
@@ -14,7 +14,7 @@ const ItemToggle: RFC<ItemToggleProps> = ({ itemKey, children }) => {
   };
 
   return (
-    <div className={styles['toggle']} onClick={() => handleClick()}>
+    <div className={styles["toggle"]} onClick={() => handleClick()}>
       {children}
     </div>
   );

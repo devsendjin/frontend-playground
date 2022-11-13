@@ -1,1 +1,1 @@
-export * from './PropCollectionsGetters';
+export * from "./PropCollectionsGetters";

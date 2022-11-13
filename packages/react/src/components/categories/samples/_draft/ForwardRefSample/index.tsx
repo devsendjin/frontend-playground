@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 type InputCommonProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 type InputProps = InputCommonProps & {
-  styleType?: 'default' | 'white';
+  styleType?: "default" | "white";
   error?: boolean;
 };
 
@@ -28,7 +28,7 @@ type IOverload = {
 
 // export const Input: IOverload = React.forwardRef<HTMLInputElement, IInput & React.InputHTMLAttributes<HTMLInputElement>>(
 const ForwardRefSample: IOverload = React.forwardRef(
-  ({ styleType = 'default', error, className, withLabel = false, labelText = '', ...props }: any, ref) => {
+  ({ styleType = "default", error, className, withLabel = false, labelText = "", ...props }: any, ref) => {
     return withLabel ? (
       <label>
         <div>{labelText}</div>

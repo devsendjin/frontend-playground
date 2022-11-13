@@ -1,1 +1,1 @@
-export * from './PortalSample';
+export * from "./PortalSample";

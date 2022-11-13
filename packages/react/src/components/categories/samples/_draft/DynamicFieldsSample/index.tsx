@@ -1,1 +1,1 @@
-export * from './DynamicFieldsSample';
+export * from "./DynamicFieldsSample";

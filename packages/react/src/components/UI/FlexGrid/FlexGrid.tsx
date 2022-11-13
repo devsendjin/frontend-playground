@@ -1,7 +1,7 @@
-import React from 'react';
-import cn from 'classnames';
-import styles from './FlexGrid.module.scss';
-import { FlexGridProvider, useFlexGridContext, FlexGridContextProps } from './FlexGrid.context';
+import React from "react";
+import cn from "classnames";
+import styles from "./FlexGrid.module.scss";
+import { FlexGridProvider, useFlexGridContext, FlexGridContextProps } from "./FlexGrid.context";
 
 const defaultProps = {
   colGap: 15,
@@ -22,9 +22,8 @@ const Row: RFC<RowProps> = ({
 }) => {
   return (
     <div
-      className={cn(styles['row'], className)}
-      style={{ '--col-gap': `${colGap}px`, '--row-gap': `${rowGap}px`, ...style } as React.CSSProperties}
-    >
+      className={cn(styles["row"], className)}
+      style={{ "--col-gap": `${colGap}px`, "--row-gap": `${rowGap}px`, ...style } as React.CSSProperties}>
       <FlexGridProvider value={{ cols, colGap, rowGap }}>{children}</FlexGridProvider>
     </div>
   );
@@ -39,9 +38,8 @@ const Col: RFC<ColProps> = ({ size, className, children }) => {
 
   return (
     <div
-      className={cn(styles['col'], className)}
-      style={{ '--col-gap': `${colGap}px`, '--cols': cols, '--col': size } as React.CSSProperties}
-    >
+      className={cn(styles["col"], className)}
+      style={{ "--col-gap": `${colGap}px`, "--cols": cols, "--col": size } as React.CSSProperties}>
       {children}
     </div>
   );

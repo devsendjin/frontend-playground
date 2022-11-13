@@ -1,1 +1,1 @@
-export * from './LocalizationSample';
+export * from "./LocalizationSample";

@@ -1,7 +1,7 @@
 // sample
 // https://github.com/mui/material-ui/blob/master/packages/mui-base/src/Portal/Portal.js
-import React, { MutableRefObject, PropsWithChildren, ReactPortal, useLayoutEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+import React, { MutableRefObject, PropsWithChildren, ReactPortal, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 type TPortalElement = Element;
 type TPortalNode = TPortalElement | null | undefined;
@@ -20,7 +20,7 @@ const cssPropertiesToString = (cssProperties: React.CSSProperties) => {
   return Object.entries(cssProperties).reduce((acc, [prop, value]) => {
     acc = acc.concat(`${prop}: ${value};`);
     return acc;
-  }, '');
+  }, "");
 };
 
 const usePortalNode = (containerIdentifier?: TContainerIdentifier): TUsePortalNodeReturn => {
@@ -28,13 +28,13 @@ const usePortalNode = (containerIdentifier?: TContainerIdentifier): TUsePortalNo
   const portalNodeRef = useRef<TPortalNode>(null);
 
   useLayoutEffect(() => {
-    if (typeof containerIdentifier === 'string') {
+    if (typeof containerIdentifier === "string") {
       portalNodeRef.current = document.querySelector(containerIdentifier);
       setIsSelectorGrepped(true);
     }
   }, []);
 
-  if (typeof containerIdentifier === 'string') {
+  if (typeof containerIdentifier === "string") {
     return portalNodeRef;
   }
 
@@ -53,15 +53,15 @@ const Portal = ({
   children,
 }: PropsWithChildren<PortalProps>): ReactPortal => {
   const portalNodeRef = usePortalNode(containerIdentifier);
-  const [dynamicPortalNode] = useState<TPortalElement>(document.createElement('div'));
+  const [dynamicPortalNode] = useState<TPortalElement>(document.createElement("div"));
 
   useLayoutEffect(() => {
     if (!portalNodeRef.current) {
       if (portalId) {
-        dynamicPortalNode.setAttribute('id', portalId);
+        dynamicPortalNode.setAttribute("id", portalId);
       }
       if (style) {
-        dynamicPortalNode.setAttribute('style', cssPropertiesToString(style));
+        dynamicPortalNode.setAttribute("style", cssPropertiesToString(style));
       }
       if (className) {
         dynamicPortalNode.classList.add(className);

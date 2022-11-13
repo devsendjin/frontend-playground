@@ -1,1 +1,1 @@
-export * from './TypedReduxSample';
+export * from "./TypedReduxSample";

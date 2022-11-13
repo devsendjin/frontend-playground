@@ -1,17 +1,17 @@
-import { Accordion } from '@/components/UI/Accordion';
+import { Accordion } from "@/components/UI/Accordion";
 
 const content = [
   {
-    question: 'What is your name?',
-    answer: 'Sir Galahad of Camelot.',
+    question: "What is your name?",
+    answer: "Sir Galahad of Camelot.",
   },
   {
-    question: 'What is your quest?',
-    answer: 'I seek the Grail.',
+    question: "What is your quest?",
+    answer: "I seek the Grail.",
   },
   {
-    question: 'What is your favorite color?',
-    answer: 'Blue. No, yellooooow!',
+    question: "What is your favorite color?",
+    answer: "Blue. No, yellooooow!",
   },
 ];
 
@@ -28,6 +28,6 @@ const AccordionSample: RFC = () => {
   );
 };
 
-AccordionSample.displayName = 'AccordionSample';
+AccordionSample.displayName = "AccordionSample";
 
 export { AccordionSample };

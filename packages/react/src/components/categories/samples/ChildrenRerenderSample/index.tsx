@@ -1,1 +1,1 @@
-export * from './ChildrenRerenderSample';
+export * from "./ChildrenRerenderSample";

@@ -1,9 +1,9 @@
-import React from 'react';
-import { Button } from '@/vendors/bootstrap';
+import React from "react";
+import { Button } from "@/vendors/bootstrap";
 
 const Child: RFC = () => {
-  console.group('ChildrenRerenderSample');
-  console.log('Child render');
+  console.group("ChildrenRerenderSample");
+  console.log("Child render");
   console.groupEnd();
   return <div>Child</div>;
 };
@@ -14,7 +14,7 @@ const ChildrenRerender: RFC = ({ children }) => {
   return (
     <div>
       <div>state {state}</div>
-      <Button type="button" onClick={() => setState((prev) => !prev)} variant="light">
+      <Button type='button' onClick={() => setState((prev) => !prev)} variant='light'>
         Trigger
       </Button>
       {children}
@@ -30,6 +30,6 @@ const ChildrenRerenderSample: RFC = () => {
     </ChildrenRerender>
   );
 };
-ChildrenRerenderSample.displayName = 'ChildrenRerenderSample';
+ChildrenRerenderSample.displayName = "ChildrenRerenderSample";
 
 export { ChildrenRerenderSample };

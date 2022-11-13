@@ -255,7 +255,7 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
       mode: "onChange",
       defaultValues: getDefaultFormValues({
         [FieldNames.password]: "",
-        [FieldNames.passwordLength]: 123,
+        [FieldNames.passwordLength]: 20,
         [FieldNames.includeSymbols]: false,
         [FieldNames.includeNumber]: true,
         [FieldNames.includeLowercaseChars]: true,
@@ -281,12 +281,14 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
 
   passwordBuilder.setBuilderData(watch());
 
+  // autoGenerateOnTheFirstCall option
   useEffect(() => {
     if (getValues().autoGenerateOnTheFirstCall) {
       generateBtnRef.current?.click();
     }
   }, []);
 
+  // save to localStorage
   useEffect(() => {
     if (getValues().savePreference && formState.isValid) {
       const valuesToSave = (
@@ -316,9 +318,7 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
       setValue(FieldNames.passwordLength, passwordBuilder.uniqueMaxAllowedLength);
       trigger(FieldNames.passwordLength);
     }
-  }, [...characterSet, ...getValues(["noDuplicateCharacters", "excludeSymbols"])]);
-
-  // console.log(getValues().passwordLength, formState.errors.passwordLength?.type, passwordBuilder.uniqueMaxAllowedLength);
+  }, [...characterSet, ...getValues([FieldNames.noDuplicateCharacters, FieldNames.excludeSymbols])]);
 
   return (
     <form className={cn(styles["password-generator"], className)} onSubmit={handleSubmit(onSubmit)}>
@@ -328,6 +328,10 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
           name={FieldNames.passwordLength}
           control={control}
           rules={{
+            required: {
+              value: true,
+              message: "Password Length is required",
+            },
             min: {
               value: 1,
               message: `Min password length should be 1`,

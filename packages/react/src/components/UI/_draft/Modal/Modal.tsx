@@ -1,7 +1,7 @@
-import styles from './Modal.module.scss';
+import styles from "./Modal.module.scss";
 
 const Modal = () => {
-  return <div className={styles['modal']}>Modal</div>;
+  return <div className={styles["modal"]}>Modal</div>;
 };
 
 export { Modal };

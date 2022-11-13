@@ -1,4 +1,4 @@
-import { ReactComponent as GithubIcon } from '@images/svg/github.svg';
+import { ReactComponent as GithubIcon } from "@images/svg/github.svg";
 
 const svgIconMap = {
   github: GithubIcon,
@@ -13,6 +13,6 @@ const SvgIcon: RFC<SvgIconProps> = ({ type, ...restProps }) => {
   const Component = svgIconMap[type];
   return <Component {...restProps} />;
 };
-SvgIcon.displayName = 'SvgIcon';
+SvgIcon.displayName = "SvgIcon";
 
 export { svgIconMap, SvgIcon };
