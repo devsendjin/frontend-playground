@@ -18,7 +18,7 @@ enum FieldNames {
   // excludeSimilarCharacters = "excludeSimilarCharacters",
   noDuplicateCharacters = "noDuplicateCharacters",
   // excludeAmbiguousCharacters = "excludeAmbiguousCharacters",
-  // autoSelect: boolean,
+  autoSelect = "autoSelect",
   savePreference = "savePreference",
   passwordLength = "passwordLength",
   password = "password",
@@ -32,6 +32,7 @@ type FormValues = FieldType<FieldNames.includeSymbols, boolean> &
   FieldType<FieldNames.includeUppercaseChars, boolean> &
   FieldType<FieldNames.excludeSymbols, string> &
   FieldType<FieldNames.autoGenerateOnTheFirstCall, boolean> &
+  FieldType<FieldNames.autoSelect, boolean> &
   FieldType<FieldNames.noDuplicateCharacters, boolean> &
   FieldType<FieldNames.savePreference, boolean> &
   FieldType<FieldNames.passwordLength, number> &
@@ -262,35 +263,55 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
         [FieldNames.includeUppercaseChars]: true,
         // [FieldNames.userSymbols]: "",
         [FieldNames.excludeSymbols]: "",
-        // [FieldNames.noSimilarCharacters]: false,
-        [FieldNames.noDuplicateCharacters]: true,
-        // [FieldNames.noSequentialCharacters]: false,
+        [FieldNames.noDuplicateCharacters]: false,
         [FieldNames.autoGenerateOnTheFirstCall]: false,
+        [FieldNames.savePreference]: false,
+        // [FieldNames.noSimilarCharacters]: false,
+        // [FieldNames.noSequentialCharacters]: false,
         // [FieldNames.excludeSimilarCharacters]: false,
         // [FieldNames.excludeAmbiguousCharacters]: false,
-        // [FieldNames.autoSelect]: false,
-        [FieldNames.savePreference]: false,
+        [FieldNames.autoSelect]: false,
       }),
     });
   const passwordBuilder = useRef(new PasswordBuilder(getValues())).current;
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const generateBtnRef = useRef<HTMLButtonElement>(null);
+  const generateCount = useRef(0);
 
   const characterSet = getValues(charSetFieldNames);
   const hasOneOfCharacterSet = characterSet.some(Boolean);
 
+  const { isValid, isValidating } = formState;
+
   passwordBuilder.setBuilderData(watch());
 
-  // autoGenerateOnTheFirstCall option
   useEffect(() => {
-    if (getValues().autoGenerateOnTheFirstCall) {
-      generateBtnRef.current?.click();
-    }
+    trigger();
   }, []);
 
-  // save to localStorage
+  // autoGenerateOnTheFirstCall  option
   useEffect(() => {
-    if (getValues().savePreference && formState.isValid) {
+    if (isValid && generateCount.current < 2) {
+      if (getValues().autoGenerateOnTheFirstCall) {
+        generateBtnRef.current?.click();
+      }
+      if (getValues().autoSelect) {
+        setTimeout(() => {
+          passwordInputRef.current?.select();
+        }, 10);
+      }
+    }
+  }, [isValid]);
+
+  // autoSelect & savePreference options
+  useEffect(() => {
+    if (isValid && generateCount.current < 2) {
+      if (getValues().autoSelect) {
+        passwordInputRef.current?.select();
+      }
+    }
+
+    if (isValid && getValues().savePreference) {
       const valuesToSave = (
         Object.entries(getValues()) as [k: keyof FormValues, v: string | number | boolean][]
       ).filter(([key]) => key !== FieldNames.password);
@@ -299,12 +320,13 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
     } else if (!getValues().savePreference && localStorage.getItem(localStorageKey)) {
       localStorage.removeItem(localStorageKey);
     }
-  }, [getValues(), formState.isValid]);
+  }, [getValues(), isValid]);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     const pwd = passwordBuilder.setBuilderData(data).build().getPassword();
 
     setValue(FieldNames.password, pwd);
+    generateCount.current++;
   };
 
   useEffect(() => {
@@ -327,6 +349,7 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
         <Controller
           name={FieldNames.passwordLength}
           control={control}
+          defaultValue={formState.defaultValues?.passwordLength}
           rules={{
             required: {
               value: true,
@@ -404,7 +427,23 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
 
       <label className={styles.label}>
         <span className={styles.labelText}>No Duplicate Characters:</span>
-        <input type='checkbox' {...register(FieldNames.noDuplicateCharacters)} />
+        {/* <input type='checkbox' {...register(FieldNames.noDuplicateCharacters)} /> */}
+        <Controller
+          name={FieldNames.noDuplicateCharacters}
+          control={control}
+          defaultValue={formState.defaultValues?.noDuplicateCharacters}
+          render={({ field: { name, onBlur, onChange, ref, value } }) => (
+            <input
+              type='checkbox'
+              name={name}
+              onChange={onChange}
+              onBlur={onBlur}
+              checked={value}
+              ref={ref}
+              className={styles.input}
+            />
+          )}
+        />
         <span className={styles.hint}>( don't use the same character more than once )</span>
       </label>
 
@@ -432,11 +471,11 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
       <span className={styles.hint}>{"( { } [ ] ( ) / \\ ' \" ` ~ , ; : . < > )"}</span>
     </label> */}
 
-      {/* <label className={styles.label}>
-      <span className={styles.labelText}>Auto-Select:</span>
-      <input type="checkbox" {...register('autoSelect')} />
-      <span className={styles.hint}>( select the password automatically )</span>
-    </label> */}
+      <label className={styles.label}>
+        <span className={styles.labelText}>Auto-Select:</span>
+        <input type='checkbox' {...register(FieldNames.autoSelect)} />
+        <span className={styles.hint}>( select the password automatically )</span>
+      </label>
 
       <label className={styles.label}>
         <span className={styles.labelText}>Save My Preference:</span>
@@ -453,11 +492,9 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
         <button
           type='submit'
           ref={generateBtnRef}
-          // disabled={Number(getValues().passwordLength) === 0 || formState.errors.passwordLength?.type === "max"}>
-          disabled={!formState.isValid}>
+          disabled={!isValid}>
           Generate
         </button>
-        {/* {getValues().passwordLength<= 0 && <Error>{formState.errors.passwordLength.message}</Error>} */}
       </label>
 
       <label className={`${styles.label} ${styles.labelPassword}`}>
@@ -466,6 +503,7 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
           <Controller
             name={FieldNames.password}
             control={control}
+            defaultValue={formState.defaultValues?.password}
             render={({ field }) => <input type='text' className={styles.input} {...field} ref={passwordInputRef} />}
           />
           <button
@@ -477,7 +515,6 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
             Copy
           </button>
         </div>
-        {/* <span className={styles.hint}>( save all the settings above for later use )</span> */}
       </label>
 
       {/* <div className={styles.metric}>Password Strength:</div>
