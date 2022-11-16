@@ -120,6 +120,10 @@
 
     "change-case": "^4.1.2",
 
+    "react-hook-form": "^7.39.1",
+
+    "rxjs": "^7.5.7",
+
     // "@chakra-ui/react": "^2.1.2",
     // "framer-motion": "^6.3.4", // chakra-ui dependency
     // "@emotion/styled": "^11.8.1", // chakra-ui dependency
