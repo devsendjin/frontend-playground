@@ -1,3 +1,5 @@
-export type ObjectValues<T> = T[keyof T];
+export const isBoolean = (value: unknown): value is boolean => typeof value === "boolean";
 
-export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+export const isString = (value: unknown): value is string => typeof value === "string";
+
+export const isNumber = (value: unknown): value is number => typeof value === "number";
