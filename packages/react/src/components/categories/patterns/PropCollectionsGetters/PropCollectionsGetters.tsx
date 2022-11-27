@@ -1,7 +1,8 @@
 import React from "react";
 import cn from "classnames";
 import { Button } from "@/vendors/bootstrap";
-import { callAll, PartialBy } from "@/utils";
+import {  PartialBy } from "@/types";
+import { callAll } from "@/utils";
 import styles from "./PropCollectionsGetters.module.scss";
 import "./PropCollectionsGetters.scss";
 
