@@ -128,18 +128,19 @@ class WebStorage implements IWebStorage {
 
 export const LS = new WebStorage();
 
-const isLSPrimitive = (value: unknown) => isNumber(value) || isString(value) || isBoolean(value);
-
+type LSPrimitives = number | string | boolean;
 type LSPrimitiveKey = string | number;
 type LSObject = Record<LSPrimitiveKey, any>;
 
+const isLSPrimitive = (value: unknown) => isNumber(value) || isString(value) || isBoolean(value);
+
 export class LocalStorageManager<
-  Data extends LSObject | string | number | boolean,
+  Data extends LSObject | LSPrimitives,
   Entity = Data extends LSObject ? keyof Data : never
 > {
   constructor(private readonly storageKey: string) {}
 
-  get(entity: Entity): Data | null {
+  public get(entity: Entity): Data | null {
     const item = localStorage.getItem(this.storageKey);
     if (!item) return null;
     try {
@@ -154,7 +155,7 @@ export class LocalStorageManager<
     }
   }
 
-  getAll(): Data | null {
+  public getAll(): Data | null {
     const item = localStorage.getItem(this.storageKey);
     if (!item) return null;
     try {
@@ -168,7 +169,7 @@ export class LocalStorageManager<
     }
   }
 
-  set(entity: Entity, value: Data extends LSObject ? Data[keyof Data] : never): this {
+  public set(entity: Entity, value: Data extends LSObject ? Data[keyof Data] : never): this {
     try {
       const savedData = this.getAll();
       if (isLSPrimitive(savedData)) {
@@ -184,7 +185,7 @@ export class LocalStorageManager<
     }
   }
 
-  override(value: Data): this {
+  public override(value: Data): this {
     try {
       const dataToSet = isLSPrimitive(value) ? value.toString() : JSON.stringify(value);
       localStorage.setItem(this.storageKey, dataToSet);
@@ -195,13 +196,19 @@ export class LocalStorageManager<
     }
   }
 
-  remove(entity: Entity): this {
+  public remove(...entities: Entity[]): this {
     try {
       const savedData = this.getAll();
-      if (savedData && !isLSPrimitive(savedData) && entity in savedData) {
-        delete savedData[entity as unknown as keyof Data];
+      if (savedData && !isLSPrimitive(savedData) && entities.length) {
+        entities.forEach(entity => {
+          if (entity in savedData) {
+            delete savedData[entity as unknown as keyof Data];
+          }
+        })
+        localStorage.setItem(this.storageKey, JSON.stringify(savedData));
+      } else {
+        localStorage.setItem(this.storageKey, JSON.stringify(savedData));
       }
-      localStorage.setItem(this.storageKey, JSON.stringify(savedData));
     } catch (e) {
       console.error(e);
     } finally {
@@ -209,11 +216,11 @@ export class LocalStorageManager<
     }
   }
 
-  has(entity: Entity): boolean {
+  public has(entity: Entity): boolean {
     return !!this.get(entity);
   }
 
-  clear(): this {
+  public clear(): this {
     localStorage.removeItem(this.storageKey);
     return this;
   }
