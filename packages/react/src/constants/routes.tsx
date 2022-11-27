@@ -17,7 +17,7 @@ import { FlexGridSample } from "@/components/categories/samples/FlexGridSample";
 // apps
 import { PasswordGeneratorApp } from "@/components/categories/samples/PasswordGeneratorApp";
 import { TicTacToeGame } from "@/components/categories/samples/TicTacToeGame";
-import { HTMLDomWatcherApp } from "@/components/categories/samples/HTMLDomWatcherApp";
+// import { HTMLDomWatcherApp } from "@/components/categories/samples/HTMLDomWatcherApp";
 // patterns
 import { PropCollectionsGetters } from "@/components/categories/patterns/PropCollectionsGetters";
 // hooks
@@ -63,7 +63,7 @@ const patterns = {
 const apps = {
   TicTacToeGame: createUrl("TicTacToeGame"),
   PasswordGeneratorApp: createUrl("PasswordGeneratorApp"),
-  HTMLDomWatcherApp: createUrl("HTMLDomWatcherApp"),
+  // HTMLDomWatcherApp: createUrl("HTMLDomWatcherApp"),
 } as const;
 
 const ROUTES = {
@@ -225,7 +225,7 @@ const routesMap: RouteMap[] = [
     },
     routes: [
       { url: ROUTES.TicTacToeGame, component: TicTacToeGame, name: "Tic Tac Toe" },
-      { url: ROUTES.HTMLDomWatcherApp, component: HTMLDomWatcherApp, name: "HTML DOM watcher" },
+      // { url: ROUTES.HTMLDomWatcherApp, component: HTMLDomWatcherApp, name: "HTML DOM watcher" },
       { url: ROUTES.PasswordGeneratorApp, component: PasswordGeneratorApp, name: "Password generator" },
     ],
   },
