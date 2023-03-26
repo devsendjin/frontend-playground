@@ -55,6 +55,9 @@
 
 #### Try to use/install:
 
+- typescript
+  - [ ] [ts-reset](https://github.com/total-typescript/ts-reset)
+  - [ ] own compose func
 - html/react
   - [ ] [lightGallery](https://www.lightgalleryjs.com/)
 - html:
@@ -68,10 +71,14 @@
   - [ ] [peeled text transformation](https://codepen.io/Moiety/pen/OPPKMr)
   - [ ] [neon text hover](https://codepen.io/primaapriansyah/pen/DjEFq/)
   - [ ] [skewed blockquote](https://codepen.io/mkstix6/pen/ERLLvb)
-  - [Paralax on mouse move](https://codepen.io/Johnmuir2001/pen/rNWWegg)
+  - [ ] [Paralax on mouse move](https://codepen.io/Johnmuir2001/pen/rNWWegg)
 - react:
   - [ ] [Recoil](https://recoiljs.org/)
   - [ ] [socket.io](https://socket.io/)
   - [ ] [Cleave.js (format input text)](https://github.com/nosir/cleave.js)
   - [ ] [Virtuoso (virtualized scroll)](https://virtuoso.dev/)
   - [ ] [plop.js (component scaffold generator)](https://github.com/plopjs/plop)
+  - [ ] [kbar (browser CLI)](https://github.com/timc1/kbar)
+  - [ ] [color picker](https://github.com/casesandberg/react-color)
+  - [ ] [react-custom-scroll](https://github.com/rommguy/react-custom-scroll)
+  - [ ] [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels)
