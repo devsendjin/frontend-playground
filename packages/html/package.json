@@ -67,7 +67,8 @@
   },
   "dependencies": {
     "@frontend-playground/shared": "workspace:^1.0.0",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.5.7"
   },
   "browserslist": [
     "defaults"

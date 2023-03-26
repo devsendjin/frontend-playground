@@ -106,6 +106,7 @@
     // monorepo packages
     "@frontend-playground/shared": "workspace:^1.0.0",
     "reflect-metadata": "^0.1.13", // need for decorators sample (decorators.ts)
+    "rxjs": "^7.5.7",
     // "dayjs": "^1.11.0",
     // "highlight.js": "^11.5.0",
     // "gsap": "^3.9.1",

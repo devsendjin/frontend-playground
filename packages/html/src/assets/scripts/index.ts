@@ -5,6 +5,7 @@ import "styles/index.scss";
 // import './learn/classes';
 // import './learn/mixins';
 // import './learn/decorators';
+import './learn/rsxjs';
 
 // import './samples/numbers.sample';
 // import './samples/arrays.sample';
@@ -13,6 +14,6 @@ import "styles/index.scss";
 // import './samples/callbacks.sample';
 // import './samples/tasks.sample';
 
-import "./current";
+// import "./current";
 
 // write safe number converter (implemented in pug-template utils)
