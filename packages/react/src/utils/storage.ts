@@ -1,4 +1,4 @@
-import { isBoolean, isNumber, isString } from "./type.utils";
+import { isNull, isString } from "./types.utils";
 
 type IWebStorage = {
   get(key: string): void;
@@ -132,7 +132,7 @@ type LSPrimitives = number | string | boolean;
 type LSPrimitiveKey = string | number;
 type LSObject = Record<LSPrimitiveKey, any>;
 
-const isLSPrimitive = (value: unknown) => isNumber(value) || isString(value) || isBoolean(value);
+const isLSPrimitive = (value: unknown): value is string => isString(value) && (!value.startsWith("{") && !value.startsWith("["));
 
 export class LocalStorageManager<
   Data extends LSObject | LSPrimitives,
@@ -144,7 +144,7 @@ export class LocalStorageManager<
     const item = localStorage.getItem(this.storageKey);
     if (!item) return null;
     try {
-      if (item.startsWith("{")){
+      if (!isLSPrimitive(item)){
         const parsed = JSON.parse(item);
         return parsed[entity];
       }
@@ -159,7 +159,7 @@ export class LocalStorageManager<
     const item = localStorage.getItem(this.storageKey);
     if (!item) return null;
     try {
-      if (item.startsWith("{")){
+      if (!isLSPrimitive(item)){
         return JSON.parse(item) as Data;
       }
       return item as Data;
@@ -172,11 +172,9 @@ export class LocalStorageManager<
   public set(entity: Entity, value: Data extends LSObject ? Data[keyof Data] : never): this {
     try {
       const savedData = this.getAll();
-      if (isLSPrimitive(savedData)) {
+
+      if (!isLSPrimitive(savedData)) {
         localStorage.setItem(this.storageKey, JSON.stringify({[entity as unknown as keyof Data]: value}));
-      } else {
-        const updatedData = { ...(savedData as unknown as LSObject), [entity as unknown as keyof Data]: value };
-        localStorage.setItem(this.storageKey, JSON.stringify(updatedData));
       }
     } catch (e) {
       console.error(e);
@@ -187,7 +185,7 @@ export class LocalStorageManager<
 
   public override(value: Data): this {
     try {
-      const dataToSet = isLSPrimitive(value) ? value.toString() : JSON.stringify(value);
+      const dataToSet = isLSPrimitive(value) ? String.prototype.toString.call(value) : JSON.stringify(value);
       localStorage.setItem(this.storageKey, dataToSet);
     } catch (e) {
       console.error(e);
@@ -199,14 +197,12 @@ export class LocalStorageManager<
   public remove(...entities: Entity[]): this {
     try {
       const savedData = this.getAll();
-      if (savedData && !isLSPrimitive(savedData) && entities.length) {
+      if (!isNull(savedData) && !isLSPrimitive(savedData) && entities.length) {
         entities.forEach(entity => {
           if (entity in savedData) {
             delete savedData[entity as unknown as keyof Data];
           }
         })
-        localStorage.setItem(this.storageKey, JSON.stringify(savedData));
-      } else {
         localStorage.setItem(this.storageKey, JSON.stringify(savedData));
       }
     } catch (e) {

@@ -575,6 +575,41 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
         </div>
       </Row>
 
+            {/* <label className={styles.label}>
+        <span className={styles.labelText}>Your character set:</span>
+        <input type="text" {...register("userSymbols")} />
+        <span className={styles.hint}>( additional your character set )</span>
+      </label> */}
+
+      {/* <label className={styles.label}>
+      <span className={styles.labelText}>No Similar Characters:</span>
+      <input type="checkbox" {...register('noSimilarCharacters')} />
+      <span className={styles.hint}>( don't use characters like i, l, 1, L, o, 0, O, etc. )</span>
+    </label> */}
+
+     {/* <label className={styles.label}>
+      <span className={styles.labelText}>No Sequential Characters:</span>
+      <input type="checkbox" {...register('noSequentialCharacters')} />
+      <span className={styles.hint}>( don't use sequential characters, e.g. abc, 789 )</span>
+    </label> */}
+
+      {/* <label className={styles.label}>
+      <span className={styles.labelText}>Exclude Similar Characters:</span>
+      <input type="checkbox" {...register('excludeSimilarCharacters')} />
+      <span className={styles.hint}>( e.g. i, l, 1, L, o, 0, O )</span>
+    </label> */}
+
+      {/* <label className={styles.label}>
+      <span className={styles.labelText}>Exclude Ambiguous Characters:</span>
+      <input type="checkbox" {...register('excludeAmbiguousCharacters')} />
+      <span className={styles.hint}>{"( { } [ ] ( ) / \\ ' \" ` ~ , ; : . < > )"}</span>
+    </label> */}
+
+        {/* <label className={styles.label}>
+        <span className={styles.labelText}>Quantity:</span>
+        <input type="number" name="passwordLength" value={1} />
+      </label> */}
+
       {/* <div className={styles.metric}>Password Strength:</div>
     <div className={styles.metric}>Password Entropy:</div>
 
