@@ -40,8 +40,10 @@
   - [x] patch `console.log` for dev process | create cusom log
   - [ ] doodle jump
   - [ ] nodejs online chat
+  - [ ] transliteration app (ukr -> eng)
 - react
   - [x] component with dynamic state using generics
+  - [ ] `useEffectOnce`
   - [ ] create custom select component
   - [ ] Hint component
   - [ ] hook to manipulate dynamic array elements
@@ -58,6 +60,7 @@
 - typescript
   - [ ] [ts-reset](https://github.com/total-typescript/ts-reset)
   - [ ] own compose func
+  - [ ] [match-sorter](https://github.com/kentcdodds/match-sorter)
 - html/react
   - [ ] [lightGallery](https://www.lightgalleryjs.com/)
 - html:
@@ -82,3 +85,5 @@
   - [ ] [color picker](https://github.com/casesandberg/react-color)
   - [ ] [react-custom-scroll](https://github.com/rommguy/react-custom-scroll)
   - [ ] [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels)
+- browser API
+  - [ ] [localForage](https://github.com/localForage/localForage/tree/master)
