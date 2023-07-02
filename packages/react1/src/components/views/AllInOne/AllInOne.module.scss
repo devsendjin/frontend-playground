@@ -1,0 +1,21 @@
+$distanse: 100px;
+
+.category + .category {
+  margin-top: $distanse;
+}
+
+.sample + .sample {
+  margin-top: div($distanse, 2);
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: div($distanse, -4);
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: $dark;
+  }
+}

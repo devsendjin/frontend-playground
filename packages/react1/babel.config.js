@@ -13,7 +13,7 @@ module.exports = (api) => {
           spec: false,
           loose: false,
           modules: 'auto',
-          useBuiltIns: false,
+          useBuiltIns: true,
         },
       ],
     ],

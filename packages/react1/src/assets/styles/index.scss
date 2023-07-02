@@ -1,0 +1,27 @@
+// @import '~bootstrap/scss/bootstrap';
+
+$input-bg: $dark;
+$input-focus-bg: $dark;
+$input-color: $white;
+$input-focus-color: $white;
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+@import '~bootstrap/scss/root';
+@import '~bootstrap/scss/reboot';
+@import '~bootstrap/scss/type';
+@import '~bootstrap/scss/bootstrap-grid';
+@import '~bootstrap/scss/forms';
+
+@import '~bootstrap/scss/type';
+@import '~bootstrap/scss/button-group';
+@import '~bootstrap/scss/buttons';
+
+@import '@frontend-playground/shared/styles/core/reset';
+@import '@frontend-playground/shared/styles/core/base';
+
+body {
+  background-color: $dark;
+  color: $gray-light;
+}

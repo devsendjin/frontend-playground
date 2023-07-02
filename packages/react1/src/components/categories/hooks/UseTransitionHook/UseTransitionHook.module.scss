@@ -1,0 +1,22 @@
+.use-transition-hook {
+  .transition-example {
+    --transition-duration: 0.5s;
+
+    font-size: 25px;
+    font-weight: 600;
+    transition: transform var(--transition-duration), opacity var(--transition-duration);
+
+    &.entering,
+    &.entered {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    &.preEnter,
+    &.exiting,
+    &.exited {
+      opacity: 0;
+      transform: translate(245px, 158px);
+    }
+  }
+}

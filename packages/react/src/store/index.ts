@@ -1,12 +1,13 @@
 import { applyMiddleware, compose, createStore, Middleware } from 'redux';
 import { composeWithDevTools } from '@redux-devtools/extension';
+import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
 import { rootReducer } from './rootReducer';
 
 const middlewares: Middleware[] = [];
 
 if (__DEV__) {
-  middlewares.push(require('redux-immutable-state-invariant').default());
+  middlewares.push(reduxImmutableStateInvariant());
 }
 
 middlewares.push(thunk);

@@ -1,6 +1,33 @@
+// tsconfig in details
+// https://gist.github.com/KRostyslav/82a25c469ffa6652825d58537ac6bc22
+// https://basarat.gitbook.io/typescript/project/compilation-context/tsconfig
+// @docs http://json.schemastore.org/tsconfig
 {
-  "extends": "../../tsconfig.base.json",
+  // common
   "compilerOptions": {
+    "module": "ESNext",
+    "target": "ES6",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "moduleResolution": "node",
+    "declaration": false,
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "noEmitOnError": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowJs": true,
+    "noImplicitReturns": true,
+    "suppressImplicitAnyIndexErrors": false,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "importHelpers": true,
+
+    // react related
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "isolatedModules": true,
@@ -9,17 +36,33 @@
     "paths": {
       "@/*": ["*"],
       "@UI/*": ["components/UI/*"],
+      "@images": ["assets/images"],
       "@styles/*": ["assets/styles/*"]
     },
     "typeRoots": ["src/types", "src/global.d.ts", "./node_modules/@types"]
   },
   "include": ["./src/**/*.ts", "./src/**/*.tsx", "global.d.ts", "../shared/**/*.ts"],
   "exclude": ["node_modules"],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS",
-      "target": "es5",
-      "baseUrl": "scripts"
-    }
-  }
 }
+
+// {
+//   "compilerOptions": {
+//     "target": "ESNext",
+//     "useDefineForClassFields": true,
+//     "lib": ["DOM", "DOM.Iterable", "ESNext"],
+//     "allowJs": false,
+//     "skipLibCheck": true,
+//     "esModuleInterop": false,
+//     "allowSyntheticDefaultImports": true,
+//     "strict": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "module": "ESNext",
+//     "moduleResolution": "Node",
+//     "resolveJsonModule": true,
+//     "isolatedModules": true,
+//     "noEmit": true,
+//     "jsx": "react-jsx"
+//   },
+//   "include": ["src"],
+//   "references": [{ "path": "./tsconfig.node.json" }]
+// }

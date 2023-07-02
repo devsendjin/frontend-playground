@@ -1,0 +1,3 @@
+const ErrorBoundary = () => {};
+
+export { ErrorBoundary };

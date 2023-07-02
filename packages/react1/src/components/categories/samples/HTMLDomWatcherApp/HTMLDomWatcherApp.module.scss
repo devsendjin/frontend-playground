@@ -1,0 +1,140 @@
+$htmldomwatcher-z-index: 998;
+$properties-z-index: 997;
+$controls-z-index: -1;
+
+.htmldomwatcher {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  background-color: #fff;
+  z-index: $htmldomwatcher-z-index;
+  max-width: var(--panelMaxWidth, "400px");
+}
+
+.controlsWrap {
+  max-width: 350px;
+}
+
+.settings {
+  display: grid;
+  grid-template-columns: repeat(3, 145px);
+  grid-gap: 5px;
+
+  background-color: #fff;
+  padding: 10px;
+
+  transform: translateX(0);
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: $controls-z-index;
+
+  transition-property: transform, opacity;
+  transition-duration: 0.2s;
+
+  .input {
+    width: 100%;
+  }
+
+  &.isSettingsVisible {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+}
+
+.properties {
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: max-content auto;
+  grid-column-gap: 10px;
+
+  transition-property: padding;
+  transition-duration: 0.2s;
+
+  &.hasParsedProperties {
+    padding: 10px;
+  }
+
+  white-space: nowrap;
+  overflow: auto;
+  // @include invisibleScrollbar;
+}
+
+.propertyKey {
+  // display: flex;
+  // align-items: center;
+  // flex-direction: column;
+}
+
+.propertyValue {
+  .colorHighlight {
+    width: 10px;
+    height: 10px;
+    margin-left: 10px;
+    outline: 1px solid lighten($color: $green, $amount: 50);
+  }
+}
+
+.propertyValue,
+.propertyKey {
+  display: flex;
+  align-items: center;
+}
+
+// .propertyKeys {
+// flex-grow: 1;
+// width: 200px;
+// }
+
+// .propertyValues {
+// flex-grow: 0;
+// flex-shrink: 1;
+// }
+
+.arrayControls {
+  display: flex;
+  align-items: center;
+}
+
+.arrayBoxProp {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  @include resetBtn($green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition-property: background-color;
+  transition-duration: 0.2s;
+
+  &:hover {
+    background-color: $orange;
+  }
+}
+
+.buttonCopyArrayItem {
+  width: 15px;
+  height: 15px;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-right: 5px;
+}
+
+.buttonCopyPropertyKey {
+  width: 20px;
+  height: 20px;
+}
+
+.buttonSettings {
+  width: 100%;
+  padding: 3px;
+}
+
+.test {
+  color: #f00;
+}

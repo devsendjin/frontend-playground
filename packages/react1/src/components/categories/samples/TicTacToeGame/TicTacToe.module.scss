@@ -1,0 +1,58 @@
+.game {
+  display: flex;
+  align-items: flex-start;
+
+  .board {
+    width: 240px;
+    height: 240px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 20px;
+  }
+
+  .cell {
+    border: 1px solid $gray-light;
+    width: calc(100% / 3);
+    position: relative;
+    transition: background-color 0.2s;
+
+    .value {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &.with-value {
+      background-color: #333;
+    }
+  }
+}
+
+.game-with-history {
+  .game-panel {
+    .button {
+      @include resetBtn;
+      color: $gray-light;
+
+      &.disabled {
+        color: #575757;
+      }
+    }
+
+    .list-group {
+      padding: 0;
+      margin: 0;
+    }
+
+    .list-group-item {
+      display: flex;
+
+      .button {
+        padding: 6px 0;
+        flex-grow: 1;
+        text-align: left;
+      }
+    }
+  }
+}

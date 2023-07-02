@@ -1,0 +1,35 @@
+.flex-grid-sample {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    outline: 1px solid #000;
+  }
+
+  .row {
+    outline: 1px solid #f00;
+    position: relative;
+
+    &::before {
+      content: "row";
+      position: absolute;
+      left: 15px;
+      top: -25px;
+      color: $orange-light;
+    }
+
+    &:first-child {
+      margin-top: 20px;
+    }
+
+    + .row {
+      margin-top: 30px;
+    }
+  }
+
+  .col {
+    > div {
+      outline: 1px solid #0f0;
+      text-align: center;
+    }
+  }
+}

@@ -3,7 +3,7 @@ import { App } from '@/components/App';
 import '@styles/index.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const container = document.getElementById('app') as HTMLElement;
+  const container = document.getElementById('root') as HTMLElement;
 
   const root = createRoot(container);
 

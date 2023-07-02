@@ -1,0 +1,44 @@
+.aside {
+  border-right: 1px solid $gray-light;
+  max-height: 100vh;
+  padding: 10px 10px 40px 10px;
+  overflow-y: auto;
+  @include invisibleScrollbar;
+}
+
+.top-link {
+  text-align: center;
+  display: block;
+  font-size: 20px;
+}
+
+.link-group {
+  .link {
+    padding-left: 15px;
+  }
+}
+
+.link-group-item {
+  display: block;
+}
+
+.link {
+  padding: 5px 0 5px 10px;
+  transition: color 0.15s ease;
+  text-decoration: none;
+  transition: color 0.1s;
+
+  &:hover {
+    color: $blue;
+  }
+
+  &.is-active {
+    color: $orange-light;
+    font-weight: bold;
+  }
+}
+
+.category {
+  padding: 5px 0;
+  color: $orange;
+}

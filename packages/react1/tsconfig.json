@@ -1,0 +1,26 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"],
+      "@UI/*": ["components/UI/*"],
+      "@styles/*": ["assets/styles/*"]
+    },
+    "typeRoots": ["src/types", "src/global.d.ts", "./node_modules/@types"]
+  },
+  "include": ["./src/**/*.ts", "./src/**/*.tsx", "global.d.ts", "../shared/**/*.ts"],
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS",
+      "target": "es5",
+      "baseUrl": "scripts",
+      "moduleResolution": "node",
+    }
+  }
+}
