@@ -158,7 +158,7 @@ class PasswordBuilder {
     const shuffledChars = shuffle<string>(this.chars);
 
     if (this.formData.noDuplicateCharacters) {
-      const existingCharsMap: Set<string> = new Set();
+      const existingCharsMap = new Set<string>();
       for (let i = 0; i < this.formData.passwordLength; i++) {
         const randomChar = randomArrayItem(shuffledChars);
         if (existingCharsMap.has(randomChar)) {
@@ -279,7 +279,7 @@ const PasswordGeneratorApp: RFC<PasswordGeneratorAppProps> = ({ className }) => 
       ) as LSFormValues;
 
       passwordGeneratorLSManager.set("preferences", valuesToSave);
-    } else if (!getValues().savePreference && passwordGeneratorLSManager.has("preferences")) {
+    } else if (!getValues().savePreference) {
       passwordGeneratorLSManager.remove("preferences");
     }
   }, [getValues(), isValid]);
