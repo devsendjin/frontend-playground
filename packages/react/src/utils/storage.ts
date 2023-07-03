@@ -50,6 +50,7 @@ export class LocalStorageManager<Data extends LSPrimitive | LSPrimitive[] | LSOb
     const data = this.parse();
     if (isLSObject(data)) {
       const key = args[0];
+      if (!(key in data)) return;
       delete data[key];
       this.persist(data);
       return;
