@@ -1,90 +1,69 @@
-export const invokeUntil = (
-  callback: (options: { invokeLimit: number; invokeCount: number; isInvokeLimitReached: boolean }) => void,
-  {
-    invokeLimit = 3,
-    frequencyInMiliseconds = 1500,
-    immediateFirstInvoke = false,
-    shouldInvoke,
-  }: Partial<{
-    invokeLimit: number;
-    frequencyInMiliseconds: number;
-    immediateFirstInvoke: boolean;
-    shouldInvoke: () => boolean;
-  }> = {}
-) => {
-  let intervalId: any = null;
-  let invokeCount = 1;
+type InvokeUntilCallbackParams = {
+  invokeCount: number;
+  isInvokeLimitReached: boolean;
+};
 
-  if (immediateFirstInvoke && invokeCount === 1) {
+type InvokeUntilOptions = {
+  invokeLimit?: number;
+  shouldInvokeResolver?: (params: { invokeCount: number }) => boolean;
+  frequencyInMilliseconds?: number;
+  immediateFirstInvoke?: boolean;
+};
+
+type InvokeUntilReturnType = {
+  abortInvoker: () => void;
+};
+
+export const invoker = (
+  callback: (params: InvokeUntilCallbackParams) => void,
+  {
+    frequencyInMilliseconds = 300,
+    immediateFirstInvoke = false,
+    shouldInvokeResolver,
+    invokeLimit,
+  }: InvokeUntilOptions = {}
+): InvokeUntilReturnType => {
+  let invokeCount = 0;
+  let timeoutId: ReturnType<typeof window.setTimeout> | null = null;
+
+  const invokeLimitReached = (): boolean => invokeCount === invokeLimit;
+
+  const executeCallback = () => {
     callback({
-      invokeLimit,
       invokeCount,
-      isInvokeLimitReached: invokeCount === invokeLimit,
+      isInvokeLimitReached:
+        typeof invokeLimit !== "undefined" &&
+        invokeLimit - invokeCount === 1 /* because of "invokeCount" starts from index 0 */,
     });
     invokeCount++;
-  }
+  };
 
-  intervalId = setInterval(() => {
-    if (shouldInvoke && !shouldInvoke()) {
-      clearInterval(intervalId);
-      return;
-    } else if (invokeCount > invokeLimit) {
-      clearInterval(intervalId);
+  const invokeCallback = () => {
+    if (invokeLimitReached() && timeoutId !== null) {
+      clearTimeout(timeoutId);
       return;
     }
 
-    callback({
-      invokeLimit,
-      invokeCount,
-      isInvokeLimitReached: invokeCount === invokeLimit,
-    });
-    invokeCount++;
-  }, frequencyInMiliseconds);
+    const shouldInvokeResult = shouldInvokeResolver ? shouldInvokeResolver({ invokeCount }) : true;
+
+    if (shouldInvokeResult) {
+      executeCallback();
+      timeoutId = setTimeout(invokeCallback, frequencyInMilliseconds);
+    }
+  };
+
+  if (!invokeLimitReached()) {
+    if (immediateFirstInvoke) {
+      executeCallback();
+    }
+    timeoutId = setTimeout(invokeCallback, frequencyInMilliseconds);
+  }
+
+  return {
+    abortInvoker: () => {
+      if (timeoutId !== null) {
+        clearTimeout(timeoutId);
+      }
+    },
+  };
 };
-
-// type CallbackParams = { invokeLimit: number; invokeCount: number; isInvokeLimitReached: boolean };
-// type Callback = (params: CallbackParams) => void;
-// type Hanlders = Partial<{ onEvery: Callback; onSuccess: () => boolean; onError: () => boolean }>;
-// type Options = Partial<{
-//   invokeLimit: number;
-//   frequencyInMiliseconds: number;
-//   immediateInvoke: boolean;
-//   shouldInvoke: () => boolean;
-// }>;
-// export const invoker = (
-//   { onEvery, onSuccess, onError }: Hanlders,
-//   { invokeLimit = 3, frequencyInMiliseconds = 1500, immediateInvoke = false, shouldInvoke }: Options
-// ): void => {
-//   let intervalId: NodeJS.Timer | null = null;
-//   let invokeCount = 0;
-
-//   const callbackParams = (): CallbackParams => {
-//     return {
-//       invokeLimit,
-//       invokeCount,
-//       isInvokeLimitReached: invokeCount === invokeLimit,
-//     };
-//   };
-
-//   if (immediateInvoke && invokeCount === 1) {
-//     onEvery(callbackParams());
-//     invokeCount++;
-//   }
-
-//   intervalId = setInterval(() => {
-//     if (shouldInvoke && !shouldInvoke()) {
-//       clearInterval(intervalId);
-//       return;
-//     } else if (invokeCount === invokeLimit) {
-//       clearInterval(intervalId);
-//       return;
-//     }
-
-//     callback({
-//       invokeLimit,
-//       invokeCount,
-//       isInvokeLimitReached: invokeCount === invokeLimit,
-//     });
-//     invokeCount++;
-//   }, frequencyInMiliseconds);
-// };
