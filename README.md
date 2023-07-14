@@ -85,5 +85,6 @@
   - [ ] [color picker](https://github.com/casesandberg/react-color)
   - [ ] [react-custom-scroll](https://github.com/rommguy/react-custom-scroll)
   - [ ] [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels)
+  - [ ] winbox - [demo](https://nextapps-de.github.io/winbox/) | [github](https://github.com/nextapps-de/winbox) | [react](https://github.com/rickonono3/react-winbox)
 - browser API
   - [ ] [localForage](https://github.com/localForage/localForage/tree/master)
