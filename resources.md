@@ -3,10 +3,12 @@
 - [package.json fields with description](https://github.com/stereobooster/package.json)
 - typescript
   - type utilities
-    - [type-fest](https://github.com/sindresorhus/type-fest)
+    - [ts-toolbelt](https://github.com/millsp/ts-toolbelt)
+    - type-fest - [kentcdodds (fork)](https://github.com/sindresorhus/type-fest) | [sindresorhus (author)](https://github.com/sindresorhus/type-fest)
     - [ts-toolbelt](https://github.com/millsp/ts-toolbelt)
     - [tsdef](https://github.com/joonhocho/tsdef)
     - [template-literal-types](https://github.com/ghoullier/awesome-template-literal-types)
+    - [type-plus](https://github.com/unional/type-plus)
   - data structures
     - [typescript-collections](https://github.com/basarat/typescript-collections)
 - react
@@ -24,6 +26,7 @@
 ## `pnpm` monorepos:
 
 - [swr (React Hooks library for data fetching)](https://github.com/vercel/swr)
+- [monorepo.tools](https://monorepo.tools/)
 
 # Common errors
 
