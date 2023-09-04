@@ -36,7 +36,7 @@ export class LocalStorageManager<Data extends LSPrimitive | LSPrimitive[] | LSOb
 
   public get<
     Key extends Data extends LSObject ? keyof Data : never,
-    Value extends Data extends LSObject ? Data[keyof Data] : Data
+    Value extends Data extends LSObject ? Data[Key] : Data
   >(...args: Data extends LSObject ? [Key] : never): Value | null {
     const data = this.parse();
     if (isLSObject(data)) {
