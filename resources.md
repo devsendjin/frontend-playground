@@ -5,7 +5,6 @@
   - type utilities
     - [ts-toolbelt](https://github.com/millsp/ts-toolbelt)
     - type-fest - [kentcdodds (fork)](https://github.com/sindresorhus/type-fest) | [sindresorhus (author)](https://github.com/sindresorhus/type-fest)
-    - [ts-toolbelt](https://github.com/millsp/ts-toolbelt)
     - [tsdef](https://github.com/joonhocho/tsdef)
     - [template-literal-types](https://github.com/ghoullier/awesome-template-literal-types)
     - [type-plus](https://github.com/unional/type-plus)
@@ -31,3 +30,7 @@
 # Common errors
 
 - [ts css/scss typings](https://xomino.com/2019/08/19/cannot-find-scss-module-error-enabling-sass-integration-with-your-sharepoint-framework-code/)
+
+# Courses
+
+- [Asynchronous programming](https://github.com/HowProgrammingWorks/Index/blob/master/Courses/Asynchronous.md)

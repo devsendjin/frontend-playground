@@ -63,6 +63,22 @@
   - [ ] [match-sorter](https://github.com/kentcdodds/match-sorter)
   - [ ] [VeritasSoftware/ts.validator](https://github.com/VeritasSoftware/ts.validator)
   - [ ] TypedObject (like using Object.keys() but typed version)
+  - [ ] URL Builder (TS Class)
+  - [ ] CacheManager
+    ```ts
+    export interface Cache<T> {
+      get: (key: string) => T | undefined;
+      set: (key: string, value: T) => void;
+      clone: <U>(transform: (elem: T) => U) => Cache<U>;
+    }
+    ```
+  - [ ] implement a simple DOM wrapper to support method chaining like jQuery
+    ```ts
+    $('#button')
+      .css('color', '#fff')
+      .css('backgroundColor', '#000')
+      .css('fontWeight', 'bold')
+    ```
 - html/react
   - [ ] [lightGallery](https://www.lightgalleryjs.com/)
 - html:
