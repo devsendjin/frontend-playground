@@ -37,3 +37,39 @@
 
   @return $string;
 }
+
+/**
+ * Reverses the keys and values of a Sass map.
+ *
+ * @param {map} $map - The map to be reversed.
+ * @returns {map} The new map with keys and values reversed.
+ *
+ * @example
+ * // Usage example:
+ * $colors: (
+ *   red: #ff0000,
+ *   blue: #0000ff,
+ *   green: #00ff00
+ * );
+ *
+ * $reversed-colors: map-reverse-key-to-value($colors);
+ * // Output:
+ * // $reversed-colors: (
+ * //   #ff0000: red,
+ * //   #0000ff: blue,
+ * //   #00ff00: green
+ * // );
+ */
+ @function map-reverse-key-to-value($map) {
+  @if meta.type-of($map) != "map" {
+    @error '"#{$map}" is not a valid map';
+  }
+
+  $new-map: ();
+
+  @each $k, $v in $map {
+    $new-map: map.set($new-map, $v, $k);
+  }
+
+  @return $new-map;
+}
