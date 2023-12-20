@@ -14,7 +14,7 @@
     "typeRoots": ["src/types", "src/global.d.ts", "./node_modules/@types"]
   },
   "include": ["./src/**/*.ts", "./src/**/*.tsx", "global.d.ts", "../shared/**/*.ts"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "src/drafts"],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS",
