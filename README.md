@@ -54,6 +54,9 @@
 
 - scss
   - [ ] [adaptive value](https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/)
+- ideas
+  - [ ] [radix-ui](https://www.radix-ui.com/themes/docs/overview/getting-started)
+- [ ] [@headlessui-react -> hooks](https://github.com/tailwindlabs/headlessui/tree/main/packages/%40headlessui-react)
 
 ## Try to use / implement / install:
 
@@ -79,8 +82,20 @@
       .css('backgroundColor', '#000')
       .css('fontWeight', 'bold')
     ```
+  - [ ] create utils/time package
+    ```ts
+    export const Millisecond = 1;
+    export const Second = 1000 * Millisecond;
+    export const Minute = 60 * Second;
+    export const Hour = 60 * Minute;
+    export const Day = 24 * Hour;
+    export const Week = 7 * Day;
+    export const Month = 4 * Week;
+    ```
 - html/react
   - [ ] [lightGallery](https://www.lightgalleryjs.com/)
+  - [ ] [Swup - a versatile and extensible page transition library](https://github.com/swup/swup)
+  - [ ] "site screensaver"
 - html:
   - [x] [jumping link hovers](https://codepen.io/devsendjin/pen/ExyWYwz)
   - [ ] [floating paralax headers](https://codepen.io/amit_sheen/pen/BaJmWWj)
@@ -106,13 +121,18 @@
     - [ ] [kbar (browser CLI)](https://github.com/timc1/kbar)
     - [ ] winbox - [demo](https://nextapps-de.github.io/winbox/) | [github](https://github.com/nextapps-de/winbox) | [react](https://github.com/rickonono3/react-winbox)
     - [ ] [floating-ui](https://github.com/floating-ui/floating-ui)
+    - [ ] [muuri | JS layout engine | responsive, sortable, filterable, draggable and/or animated](https://github.com/haltu/muuri)
+    - [ ] [harryheman/react-gsap](https://github.com/harryheman/blog-posts/tree/master/react-gsap)
+    - [ ] dndkit - [dndkit](https://dndkit.com/) | [github](https://github.com/clauderic/dnd-kit)
   - tools:
     - [ ] [Recoil](https://recoiljs.org/)
     - [ ] [socket.io](https://socket.io/)
     - [ ] [plop.js (component scaffold generator)](https://github.com/plopjs/plop)
-    - [ ] [localForage](https://github.com/localForage/localForage/tree/master)
+    - [ ] [localForage](https://dndkit.com/)
 - tools / CLI:
   - [ ] [pre-commit](https://github.com/observing/pre-commit)
   - [ ] [commitizen/cz-cli](https://github.com/commitizen/cz-cli)
   - [ ] [nodegit](https://github.com/nodegit/nodegit)
   - [ ] [node-glob](https://github.com/isaacs/node-glob)
+  - [ ] [consola](https://github.com/unjs/consola)
+  - [ ] [single-spa](https://github.com/single-spa/single-spa)

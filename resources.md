@@ -14,6 +14,7 @@
   - hooks
     - [react-use (hooks library)](https://github.com/streamich/react-use)
     - [@umijs/hooks (hooks library)](https://github.com/alibaba/hooks/tree/master/packages/hooks/src)
+    - [React Hooks Lib](https://github.com/beizhedenglong/react-hooks-lib)
     - [use-deep-compare-effect](https://github.com/kentcdodds/use-deep-compare-effect)
     - [often used simple hooks | JS / TS](https://usehooks.com/)
     - [often used simple hooks | written in TS](https://usehooks-ts.com/)
