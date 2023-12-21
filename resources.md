@@ -18,6 +18,7 @@
     - [use-deep-compare-effect](https://github.com/kentcdodds/use-deep-compare-effect)
     - [often used simple hooks | JS / TS](https://usehooks.com/)
     - [often used simple hooks | written in TS](https://usehooks-ts.com/)
+    - [uidotdev/usehooks | written in JS, available .d.ts](https://github.com/uidotdev/usehooks)
 - common
   - [async library (like <ins>lodash</ins>, but for callbacks)](https://caolan.github.io/async/v3/)
 
