@@ -41,6 +41,7 @@
   - [ ] doodle jump
   - [ ] nodejs online chat
   - [ ] transliteration app (ukr -> eng)
+  - [ ] HistoryState (class implementation)
 - react
   - [x] component with dynamic state using generics
   - [ ] `useEffectOnce`
@@ -91,6 +92,16 @@
     export const Day = 24 * Hour;
     export const Week = 7 * Day;
     export const Month = 4 * Week;
+    ```
+  - [ ] abstract recursive function
+    ```ts
+    export const recursive = (options: {
+      data: unknown;
+      condition: (item: unknown) => boolean;
+      callback: (data: unknown) => void
+    }) => {
+      // ...
+    }
     ```
 - html/react
   - [ ] [lightGallery](https://www.lightgalleryjs.com/)
