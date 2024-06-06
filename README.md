@@ -37,7 +37,8 @@
 
 - common
   - [x] run `prettier` command only for changed files (maybe implement with bash)
-  - [x] patch `console.log` for dev process | create cusom log
+  - [ ] patch `console.log` for dev process | create cusom log
+    - [ ] option: `last` - if `true`, then clean prev console logs
   - [ ] doodle jump
   - [ ] nodejs online chat
   - [ ] transliteration app (ukr -> eng)
