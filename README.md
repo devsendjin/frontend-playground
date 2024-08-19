@@ -45,6 +45,7 @@
   - [ ] HistoryState (class implementation)
 - react
   - [x] component with dynamic state using generics
+  - [ ] AI password generator
   - [ ] `useEffectOnce`
   - [ ] create custom select component
   - [ ] Hint component
