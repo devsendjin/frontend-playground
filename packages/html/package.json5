@@ -4,7 +4,7 @@
   "description": "",
   "main": "./public/index.js",
   "scripts": {
-    "start": "run-p eleventy:serve webpack:watch",
+    "dev": "run-p eleventy:serve webpack:watch",
     "build": "pnpm clean && cross-env NODE_ENV=production run-s webpack:build eleventy",
     "refresh": "pnpm clean && run-s webpack:build eleventy",
 

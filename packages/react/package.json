@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/js/index.js",
   "scripts": {
-    "start": "pnpm webpack:serve",
+    "dev": "pnpm webpack:serve",
     "build": "run-p build:public build:dist",
     "build:public": "cross-env NODE_ENV=production run-s clean:public webpack:build",
     "build:dist": "cross-env NODE_ENV=production IS_DISTRIBUTED=true run-s clean:dist webpack:build",
